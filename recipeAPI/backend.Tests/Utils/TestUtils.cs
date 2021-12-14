@@ -12,7 +12,10 @@ namespace backend.Tests.Utils
 {
     public static class TestUtils
     {
-        public static readonly string RECIPE_NAME = "Fried Chicken";
+        public static readonly string RECIPE_NAME = "Filipino Chicken Adobo";
+        public static readonly string RECIPE_DESCRIPTION = "Intense in flavour, but so fast and easy to prepare!";
+        public static readonly int RECIPE_SERVING_SIZE = 4;
+        public static readonly string RECIPE_NOTES = "One of the most amazing Asian chicken thigh recipes I have ever come across.";
 
         public static Mock<HttpRequest> CreateMockRequest(string method, object body = null, Dictionary<string, string> querystring = null)
         {
@@ -54,7 +57,7 @@ namespace backend.Tests.Utils
             await db.Database.EnsureDeletedAsync();
             await db.Database.EnsureCreatedAsync();
 
-            var recipe = new Recipe(RECIPE_NAME);
+            var recipe = new Recipe(RECIPE_NAME, RECIPE_DESCRIPTION, RECIPE_SERVING_SIZE, RECIPE_NOTES);
             db.Recipes.Add(recipe);
             await db.SaveChangesAsync();
 

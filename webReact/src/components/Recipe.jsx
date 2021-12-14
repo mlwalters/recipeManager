@@ -2,29 +2,21 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const Recipe = () => {
-  const [name, setName] = useState('');
+  const [details, setDetails] = useState({});
   const [error, setError] = useState(null);
-  // const [loadingState, setLoadingState] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`);
-        setName(data.name);
+        setDetails(data);
       } catch (err) {
         setError(err);
       }
-      // setLoadingState(false);
     };
 
     fetchData();
   }, []);
-
-  // if (loadingState) {
-  //   return (
-  //     <div>Loading</div>
-  //   );
-  // }
 
   if (error) {
     return (
@@ -34,7 +26,12 @@ const Recipe = () => {
 
   return (
     <div>
-      {name}
+      <h2>{details.name}</h2>
+      <div>
+        <p>{details.description}</p>
+        <p>{details.servingSize}</p>
+        <p>{details.notes}</p>
+      </div>
     </div>
   );
 };

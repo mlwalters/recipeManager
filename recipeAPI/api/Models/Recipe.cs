@@ -10,9 +10,25 @@ namespace api.Models
 
         [MaxLength(100)]
         public string Name{ get; set; }
+
+        [MaxLength(150)]
+        public string Description{ get; set; }
+
+        [Range(0, 100)]
+        public int ServingSize{ get; set; }
+
+        [MaxLength(300)]
+        public string Notes{ get; set; }
         public Recipe (string name)
         {
             Name = name;
+        }
+        public Recipe (string name, string description, int servingSize, string notes)
+        {
+            Name = name;
+            Description = description;
+            ServingSize = servingSize;
+            Notes = notes;
         }
     }
 }
