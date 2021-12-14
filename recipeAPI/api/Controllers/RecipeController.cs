@@ -25,13 +25,22 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var recipe = await _context.Recipes.FirstOrDefaultAsync();
-
-            if (recipe == null)
+            try
             {
-                return NotFound();
+                var recipe = await _context.Recipes.FirstOrDefaultAsync();
+
+                // if (recipe == null)
+                // {
+                //     return NotFound();
+                // }
+                return Ok(recipe);
             }
-            return Ok(recipe);
+
+            catch (Exception e)
+            {
+                _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
+                throw;
+            }       
         }
     }
 }

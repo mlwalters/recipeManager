@@ -54,17 +54,17 @@ namespace backend.Tests.Controllers
             //     response.Should().BeOfType<NotFoundResult>();
             // }
 
-            // [Fact]
-            // public async void WhenAnErrorOccursUsingDataBase_ThrowsError()
-            // {
-            //     var mockDb = new Mock<AppDbContext>();
-            //     mockDb.Setup(x => x.Recipes).Throws(new Exception("Something Broke"));
-            //     var testObject = new RecipeController(mockDb.Object, new Mock<ILogger<RecipeController>>().Object);
+            [Fact]
+            public async void WhenAnErrorOccursUsingDataBase_ThrowsError()
+            {
+                var mockDb = new Mock<AppDbContext>();
+                mockDb.Setup(x => x.Recipes).Throws(new Exception("Something Broke"));
+                var testObject = new RecipeController(mockDb.Object, new Mock<ILogger<RecipeController>>().Object);
 
-            //     var exception = await Assert.ThrowsAsync<Exception>(() => testObject.Get());
+                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.Get());
 
-            //     exception.Message.Should().Be("Something Broke");
-            // }
+                exception.Message.Should().Be("Something Broke");
+            }
         }
     }
 }

@@ -5,14 +5,16 @@ namespace api.Models
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext() { }
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
-         protected override void OnModelCreating(ModelBuilder builder)
+        public virtual DbSet<Recipe> Recipes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
         }
-        public DbSet<Recipe> Recipes { get; set; }
     }
 }
