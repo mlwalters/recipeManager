@@ -9,7 +9,7 @@ const Recipe = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`);
-        setDetails(data);
+        setDetails(data[0]);
       } catch (err) {
         setError(err);
       }

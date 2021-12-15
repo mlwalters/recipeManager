@@ -58,7 +58,6 @@ namespace backend.Tests.Utils
             await db.Database.EnsureCreatedAsync();
 
             var recipe = new Recipe(RECIPE_NAME, RECIPE_DESCRIPTION, RECIPE_SERVING_SIZE, RECIPE_NOTES);
-            db.Recipes.Add(recipe);
             await db.SaveChangesAsync();
 
             return db;

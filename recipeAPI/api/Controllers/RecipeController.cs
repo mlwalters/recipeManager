@@ -27,13 +27,13 @@ namespace api.Controllers
         {
             try
             {
-                var recipe = await _context.Recipes.FirstOrDefaultAsync();
+                var recipes = await _context.Recipes.ToListAsync();
 
                 // if (recipe == null)
                 // {
                 //     return NotFound();
                 // }
-                return Ok(recipe);
+                return new OkObjectResult(recipes);
             }
 
             catch (Exception e)
