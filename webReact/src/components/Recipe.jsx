@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Card, Button } from 'react-bootstrap';
 
 const Recipe = () => {
   const [details, setDetails] = useState({});
@@ -25,14 +26,26 @@ const Recipe = () => {
   }
 
   return (
-    <div>
-      <h2>{details.name}</h2>
-      <div>
-        <p>{details.description}</p>
-        <p>{details.servingSize}</p>
-        <p>{details.notes}</p>
-      </div>
-    </div>
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Body>
+        <Card.Title>{details.name}</Card.Title>
+        <Card.Text>{details.description}</Card.Text>
+        <Card.Text>
+          Serving size:
+          {details.servingSize}
+        </Card.Text>
+        <Button variant="primary">Go to Recipe</Button>
+      </Card.Body>
+    </Card>
+    // <div>
+    //   <h2>{details.name}</h2>
+    //   <div>
+    //     <p>{details.description}</p>
+    //     <p>{details.servingSize}</p>
+    //     <p>{details.notes}</p>
+    //   </div>
+    // </div>
   );
 };
 

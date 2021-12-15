@@ -11,8 +11,8 @@ using api.Models;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211215180715_InitialCreateWithSeedData")]
-    partial class InitialCreateWithSeedData
+    [Migration("20211215221653_InsertSeedDataAppDbContext")]
+    partial class InsertSeedDataAppDbContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,7 +62,7 @@ namespace api.Migrations
                         new
                         {
                             Id = 2,
-                            Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level. ",
+                            Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
                             Name = "Lentil Soup",
                             Notes = "",
                             ServingSize = 6

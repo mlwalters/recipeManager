@@ -39,8 +39,8 @@ namespace backend.Tests.Controllers
 
                 response.Should().BeOfType<OkObjectResult>();
                 var result = (response as OkObjectResult).Value as List<Recipe>;
-                result[0].Name.Should().Be(TestUtils.RECIPE_NAME);
-                // result.Count.Should().Be(2);
+                result[2].Name.Should().Be(TestUtils.RECIPE_NAME);
+                result.Count.Should().Be(3);
             }
 
             // [Fact]

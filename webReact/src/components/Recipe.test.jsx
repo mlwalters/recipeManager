@@ -19,14 +19,14 @@ const recipeDetails = [{
   notes: '',
 }];
 
-test('renders recipe details', async () => {
+test('renders recipe details preview as a card on the dashboard', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, recipeDetails);
   render(<Recipe />);
   expect(await screen.findByText(recipeDetails[0].name)).toBeInTheDocument();
   expect(await screen.findByText(recipeDetails[0].description)).toBeInTheDocument();
-  expect(await screen.findByText(recipeDetails[0].servingSize)).toBeInTheDocument();
-  expect(await screen.findByText(recipeDetails[0].notes)).toBeInTheDocument();
+  // expect(await screen.findByText(recipeDetails[0].servingSize)).toBeInTheDocument();
+  // expect(await screen.findByText(recipeDetails[0].notes)).toBeInTheDocument();
 });
 
 test('renders error if fetching recipe fails', async () => {

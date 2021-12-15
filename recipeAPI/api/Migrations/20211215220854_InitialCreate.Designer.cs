@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Models;
 
@@ -10,9 +11,10 @@ using api.Models;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211215220854_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,24 +49,6 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.",
-                            Name = "Strawberry Cheesecake",
-                            Notes = "This is my favorite cheesecake recipe.",
-                            ServingSize = 12
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
-                            Name = "Lentil Soup",
-                            Notes = "",
-                            ServingSize = 6
-                        });
                 });
 #pragma warning restore 612, 618
         }
