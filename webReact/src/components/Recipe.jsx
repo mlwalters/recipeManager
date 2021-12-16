@@ -37,6 +37,9 @@ const Recipe = () => {
         <Typography variant="h6" color="primary">
           Meal Planner
         </Typography>
+        <Typography variant="h6" color="primary">
+          Shopping List
+        </Typography>
       </Grid>
       <Grid xs={10}>
         <Grid item>
@@ -58,7 +61,7 @@ const Recipe = () => {
             </CardContent>
             <CardActions>
               <Button variant="contained" size="small" color="secondary">View Recipe</Button>
-              <Button size="small">Learn More</Button>
+              <Button variant="outlined" size="small" color="secondary">Add to meal planner</Button>
             </CardActions>
           </Card>
         </Grid>
@@ -69,20 +72,20 @@ const Recipe = () => {
               component="img"
               height="140"
               width="100"
-              image="https://images.unsplash.com/photo-1621955511667-e2c316e4575d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2hlZXNlY2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
+              image="https://images.unsplash.com/photo-1552298013-de2af4b94854?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
               alt="lentil soup"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {details.name}
+                Lentil Soup
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {details.description}
+                The touch of spices finishing it off with lemon lifts this soup to the next level
               </Typography>
             </CardContent>
             <CardActions>
               <Button variant="contained" size="small" color="secondary">View Recipe</Button>
-              <Button size="small">Learn More</Button>
+              <Button variant="outlined" size="small" color="secondary">Add to meal planner</Button>
             </CardActions>
           </Card>
         </Grid>
