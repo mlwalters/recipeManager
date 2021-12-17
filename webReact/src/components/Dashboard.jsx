@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import RecipeCard from './RecipeCard';
 
-const Recipe = () => (
+const Dashboard = () => (
   <Grid container>
     <Grid item xs={2}>
       <Typography variant="h6" color="primary">
@@ -27,4 +27,4 @@ const Recipe = () => (
   </Grid>
 );
 
-export default Recipe;
+export default Dashboard;
