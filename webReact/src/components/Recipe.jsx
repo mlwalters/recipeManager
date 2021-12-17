@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import RecipeCard from './RecipeCard';
 
 const Recipe = () => {
   const [details, setDetails] = useState({});
@@ -67,27 +68,7 @@ const Recipe = () => {
         </Grid>
 
         <Grid item>
-          <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
-              component="img"
-              height="140"
-              width="100"
-              image="https://images.unsplash.com/photo-1552298013-de2af4b94854?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-              alt="lentil soup"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Lentil Soup
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                The touch of spices finishing it off with lemon lifts this soup to the next level
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button variant="contained" size="small" color="secondary">View Recipe</Button>
-              <Button variant="outlined" size="small" color="secondary">Add to meal planner</Button>
-            </CardActions>
-          </Card>
+          <RecipeCard />
         </Grid>
       </Grid>
     </Grid>
