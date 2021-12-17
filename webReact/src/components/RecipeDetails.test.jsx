@@ -14,7 +14,7 @@ const recipeDetails = {
 
 test('renders details on the recipe details page', async () => {
   const mockApi = new MockAdapter(axios);
-  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, recipeDetails);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe/2`).reply(200, recipeDetails);
   render(<RecipeDetails />);
   expect(await screen.findByText(recipeDetails.name)).toBeInTheDocument();
   expect(await screen.findByText(recipeDetails.description)).toBeInTheDocument();

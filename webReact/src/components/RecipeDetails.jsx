@@ -9,14 +9,14 @@ import Container from '@material-ui/core/Container';
 // import Button from '@material-ui/core/Button';
 // import Typography from '@material-ui/core/Typography';
 
-const RecipeCard = () => {
+const RecipeDetails = () => {
   const [details, setDetails] = useState({});
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/{details.id}`);
         setDetails(data[1]);
       } catch (err) {
         setError(err);
@@ -37,4 +37,4 @@ const RecipeCard = () => {
   );
 };
 
-export default RecipeCard;
+export default RecipeDetails;
