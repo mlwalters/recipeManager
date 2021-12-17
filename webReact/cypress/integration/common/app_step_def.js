@@ -6,6 +6,10 @@ Given('I am on the app', () => {
   cy.visit('/');
 });
 
+Given('I am on the recipe details page', () => {
+  cy.visit('/recipe/2');
+});
+
 Then('I see {string}', (label) => {
   cy.get('body')
     .contains(label)

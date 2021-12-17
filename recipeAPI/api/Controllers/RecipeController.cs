@@ -42,5 +42,13 @@ namespace api.Controllers
                 throw;
             }       
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var recipe = await _context.Recipes.FirstOrDefaultAsync(recipe => recipe.Id == id);
+
+            return new OkObjectResult(recipe);
+        }
     }
 }
