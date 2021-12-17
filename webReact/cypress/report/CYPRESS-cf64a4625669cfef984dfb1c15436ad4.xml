@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.1720" tests="2" failures="1">
+  <testsuite name="Root Suite" timestamp="2021-12-17T19:26:22" tests="0" file="cypress/integration/recipe.feature" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Recipe" timestamp="2021-12-17T19:26:22" tests="2" time="0.1720" failures="1">
+    <testcase name="Recipe I can see the recipe card" time="0.0000" classname="I can see the recipe card">
+      <failure message="Timed out retrying after 4000ms: Expected to find content: &apos;12&apos; within the element: &lt;body&gt; but never did." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: Expected to find content: '12' within the element: <body> but never did.
+    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/recipe.feature:10:34)
+    at Context.resolveAndRunStepDefinition (http://localhost:3000/__cypress/tests?p=cypress/integration/recipe.feature:12303:29)
+    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/recipe.feature:11624:35)]]></failure>
+    </testcase>
+    <testcase name="Recipe I can see the left panel" time="0.1720" classname="I can see the left panel">
+    </testcase>
+  </testsuite>
+</testsuites>
