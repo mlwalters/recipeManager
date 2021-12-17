@@ -30,14 +30,14 @@ namespace backend.Tests.Controllers
             await db.DisposeAsync();
         }
 
-        public class GetAllRecipe : RecipeControllerTest
+        public class GetRecipes : RecipeControllerTest
         {
             [Fact]
-            public async void WhenRecipesExist_ReturnsOkObjectContainingRecipe()
+            public async void WhenRecipesExist_ReturnsOkObjectContainingListOfRecipes()
             {
-                var response = await testObject.Get();
-
+                var response = await testObject.GetRecipes();
                 response.Should().BeOfType<OkObjectResult>();
+
                 var result = (response as OkObjectResult).Value as IEnumerable<Recipe>;
                 result.Count().Should().Be(db.Recipes.Count());
                 result.Count(recipe => recipe.Name == TestUtils.RECIPE_NAME).Should().Be(1);
@@ -55,29 +55,29 @@ namespace backend.Tests.Controllers
             // }
 
             [Fact]
-            public async void WhenAnErrorOccursUsingDataBase_ThrowsError()
+            public async void WhenAnErrorOccursGettingRecipesUsingDataBase_ThrowsError()
             {
                 var mockDb = new Mock<AppDbContext>();
                 mockDb.Setup(x => x.Recipes).Throws(new Exception("Something Broke"));
                 var testObject = new RecipeController(mockDb.Object, new Mock<ILogger<RecipeController>>().Object);
 
-                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.Get());
+                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.GetRecipes());
 
                 exception.Message.Should().Be("Something Broke");
             }
         }
-        public class GetById : RecipeControllerTest
+        public class GetRecipe : RecipeControllerTest
         {
             [Fact]
             public async void WhenRecipeExists_ReturnsOkObjectContainingRecipe()
             {
                 var testId = db.Recipes.First(r => r.Name == TestUtils.RECIPE_NAME).Id;
-                var response = await testObject.GetById(testId);
-
+                var response = await testObject.GetRecipe(testId);
                 response.Should().BeOfType<OkObjectResult>();
-                var recipeResult = (response as OkObjectResult).Value as Recipe;
-                recipeResult.Name.Should().Be(TestUtils.RECIPE_NAME);
-                recipeResult.ServingSize.Should().Be(TestUtils.RECIPE_SERVING_SIZE);
+
+                var result = (response as OkObjectResult).Value as Recipe;
+                result.Name.Should().Be(TestUtils.RECIPE_NAME);
+                result.ServingSize.Should().Be(TestUtils.RECIPE_SERVING_SIZE);
             }
         }
     }
