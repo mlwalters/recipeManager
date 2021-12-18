@@ -9,6 +9,16 @@ const recipeDetails = {
   name: 'Lentil Soup',
   description: 'The touch of spices with lemon really lifts this soup to the next level.',
   servingSize: 6,
+  instructions: [
+    {
+      stepNumber: 1,
+      step: 'Preheat oven to 160C/320F (standard) or 140C/295F (fan/convection)',
+    },
+    {
+      stepNumber: 2,
+      step: 'Butter and line the side of the pan.',
+    },
+  ],
   notes: '',
 };
 
@@ -19,6 +29,7 @@ test('renders details on the recipe details page', async () => {
   expect(await screen.findByText(recipeDetails.name)).toBeInTheDocument();
   expect(await screen.findByText(recipeDetails.description)).toBeInTheDocument();
   expect(await screen.findByText(recipeDetails.servingSize)).toBeInTheDocument();
+  expect(await screen.findByText(recipeDetails.instructions[0].step)).toBeInTheDocument();
   expect(await screen.findByText(recipeDetails.notes)).toBeInTheDocument();
 });
 

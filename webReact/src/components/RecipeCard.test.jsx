@@ -25,8 +25,7 @@ test('renders recipe details preview as a card on the dashboard', async () => {
   render(<RecipeCard />);
   expect(await screen.findByText(recipeCardDetails[0].name)).toBeInTheDocument();
   expect(await screen.findByText(recipeCardDetails[0].description)).toBeInTheDocument();
-  // expect(await screen.findByText(recipeDetails[0].servingSize)).toBeInTheDocument();
-  // expect(await screen.findByText(recipeDetails[0].notes)).toBeInTheDocument();
+  expect(await screen.findByText(recipeCardDetails[0].category)).toBeInTheDocument();
 });
 
 test('renders error if fetching recipe card fails', async () => {

@@ -43,7 +43,7 @@ const RecipeCard = () => {
         <Typography gutterBottom variant="h5" component="div">
           {details.name}
         </Typography>
-        <Typography variant="body2" color="secondary">
+        <Typography variant="body2" color="text.secondary">
           {details.description}
         </Typography>
       </CardContent>
