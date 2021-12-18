@@ -36,7 +36,6 @@ const RecipeCard = () => {
       <CardMedia
         component="img"
         height="140"
-        width="100"
         image="https://images.unsplash.com/photo-1621955511667-e2c316e4575d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2hlZXNlY2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
         alt="strawberry cheesecake"
       />

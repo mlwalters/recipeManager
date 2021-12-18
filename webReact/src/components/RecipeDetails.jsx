@@ -17,7 +17,8 @@ const RecipeDetails = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/{details.id}`);
-        setDetails(data[1]);
+        // console.log(data);
+        setDetails(data);
       } catch (err) {
         setError(err);
       }

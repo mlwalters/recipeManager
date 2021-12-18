@@ -1,2 +1,22 @@
+######################
+# Front-end files #
+######################
 .env
 node_modules
+######################
+# Logs and databases #
+######################
+*.log
+*.sqlite
+###############
+# Directories #
+###############
+bin/
+obj/
+###################
+# Compiled source #
+###################
+*.dll
+*.pdb
+*.cache
+*.suo

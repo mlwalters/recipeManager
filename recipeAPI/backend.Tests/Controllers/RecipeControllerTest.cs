@@ -43,16 +43,17 @@ namespace backend.Tests.Controllers
                 result.Count(recipe => recipe.Name == TestUtils.RECIPE_NAME).Should().Be(1);
             }
 
-            // [Fact]
-            // public async void WhenNoRecipe_ReturnsNotFound()
-            // {
-            //     db.Recipes.Remove(db.Recipes.First());
-            //     await db.SaveChangesAsync();
+            [Fact]
+            public async void WhenNoProfiles_ReturnsEmptyList()
+            {
+                db.Recipes.RemoveRange(db.Recipes);
+                await db.SaveChangesAsync();
 
-            //     var response = await testObject.Get();
-
-            //     response.Should().BeOfType<NotFoundResult>();
-            // }
+                var response = await testObject.GetRecipes();
+                response.Should().BeOfType<OkObjectResult>();
+                var result = (response as OkObjectResult).Value as IEnumerable<Recipe>;
+                result.Any().Should().BeFalse();
+            }
 
             [Fact]
             public async void WhenAnErrorOccursGettingRecipesUsingDataBase_ThrowsError()
@@ -78,6 +79,27 @@ namespace backend.Tests.Controllers
                 var result = (response as OkObjectResult).Value as Recipe;
                 result.Name.Should().Be(TestUtils.RECIPE_NAME);
                 result.ServingSize.Should().Be(TestUtils.RECIPE_SERVING_SIZE);
+            }
+
+            [Fact]
+            public async void WhenNoProfile_ReturnsNotFound()
+            {
+                var testId = 888999;
+                var response = await testObject.GetRecipe(testId);
+                response.Should().BeOfType<NotFoundResult>();
+            }
+
+            [Fact]
+            public async void WhenAnErrorOccursGettingARecipeUsingDataBase_ThrowsError()
+            {
+                var testId = 888999;
+                var mockDb = new Mock<AppDbContext>();
+                mockDb.Setup(x => x.Recipes).Throws(new Exception("Something Broke"));
+                var testObject = new RecipeController(mockDb.Object, new Mock<ILogger<RecipeController>>().Object);
+
+                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.GetRecipe(testId));
+
+                exception.Message.Should().Be("Something Broke");
             }
         }
     }

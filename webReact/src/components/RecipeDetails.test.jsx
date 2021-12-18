@@ -22,9 +22,9 @@ test('renders details on the recipe details page', async () => {
   expect(await screen.findByText(recipeDetails.notes)).toBeInTheDocument();
 });
 
-// test('renders error if fetching recipe card fails', async () => {
-//   const mockApi = new MockAdapter(axios);
-//   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(500);
-//   render(<RecipeCard />);
-//   expect(await screen.findByText('Oops! Could not fetch recipe card.')).toBeInTheDocument();
-// });
+test('renders error if fetching recipe card fails', async () => {
+  const mockApi = new MockAdapter(axios);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe/2`).reply(500);
+  render(<RecipeDetails />);
+  expect(await screen.findByText('Oops! Could not fetch recipe details.')).toBeInTheDocument();
+});
