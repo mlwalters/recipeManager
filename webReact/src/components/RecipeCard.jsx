@@ -16,7 +16,7 @@ const RecipeCard = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`);
-        setDetails(data[0]);
+        setDetails(data);
       } catch (err) {
         setError(err);
       }
@@ -43,7 +43,7 @@ const RecipeCard = () => {
         <Typography gutterBottom variant="h5" component="div">
           {details.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="textSecondary">
           {details.description}
         </Typography>
       </CardContent>
@@ -52,6 +52,26 @@ const RecipeCard = () => {
         <Button variant="outlined" size="small" color="secondary">Add to meal planner</Button>
       </CardActions>
     </Card>
+  //   <Card sx={{ maxWidth: 345 }}>
+  //   <CardMedia
+  //     component="img"
+  //     height="140"
+  //     image="https://images.unsplash.com/photo-1621955511667-e2c316e4575d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2hlZXNlY2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
+  //     alt="lentil soup"
+  //   />
+  //   <CardContent>
+  //     <Typography gutterBottom variant="h5" component="div">
+  //       {details[1].name}
+  //     </Typography>
+  //     <Typography variant="body2" color="textSecondary">
+  //       {details[1].description}
+  //     </Typography>
+  //   </CardContent>
+  //   <CardActions>
+  //     <Button variant="contained" size="small" color="secondary">View Recipe</Button>
+  //     <Button variant="outlined" size="small" color="secondary">Add to meal planner</Button>
+  //   </CardActions>
+  // </Card>
   );
 };
 

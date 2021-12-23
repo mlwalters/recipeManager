@@ -23,9 +23,9 @@ test('renders recipe details preview as a card on the dashboard', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, recipeCardDetails);
   render(<RecipeCard />);
-  expect(await screen.findByText(recipeCardDetails[0].name)).toBeInTheDocument();
-  expect(await screen.findByText(recipeCardDetails[0].description)).toBeInTheDocument();
-  expect(await screen.findByText(recipeCardDetails[0].category)).toBeInTheDocument();
+  expect(await screen.findByText(recipeCardDetails[1].name)).toBeInTheDocument();
+  expect(await screen.findByText(recipeCardDetails[1].description)).toBeInTheDocument();
+  expect(await screen.findByText(recipeCardDetails[1].category)).toBeInTheDocument();
 });
 
 test('renders error if fetching recipe card fails', async () => {
