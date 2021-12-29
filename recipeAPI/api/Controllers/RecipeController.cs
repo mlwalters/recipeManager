@@ -27,7 +27,7 @@ namespace api.Controllers
         {
             try
             {
-                var recipes = await _context.Recipes.ToListAsync();
+                var recipes = await _context.Recipes.Include(ins => ins.Instructions).ToListAsync();
                 return Ok(recipes);
             }
             catch (Exception e)

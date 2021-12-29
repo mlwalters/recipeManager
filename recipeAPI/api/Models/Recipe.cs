@@ -5,7 +5,6 @@ namespace api.Models
 {
     public class Recipe
     {
-        [Key]
         public int Id { get; set; }
 
         [MaxLength(100)]
@@ -19,6 +18,8 @@ namespace api.Models
 
         [MaxLength(300)]
         public string Notes{ get; set; }
+
+        public List<Instruction> Instructions { get; set; }
         public Recipe (string name)
         {
             Name = name;

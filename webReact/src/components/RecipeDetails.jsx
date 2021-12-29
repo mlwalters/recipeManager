@@ -35,7 +35,11 @@ const RecipeDetails = () => {
   }
 
   return (
-    <Container maxWidth="sm">{details.name}</Container>
+    <Container maxWidth="sm">
+      <div>
+        {details.name}
+      </div>
+    </Container>
   );
 };
 
