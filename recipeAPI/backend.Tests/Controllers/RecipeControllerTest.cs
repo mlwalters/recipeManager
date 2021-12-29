@@ -41,7 +41,6 @@ namespace backend.Tests.Controllers
                 var result = (response as OkObjectResult).Value as IEnumerable<Recipe>;
                 result.Count().Should().Be(db.Recipes.Count());
                 result.Count(recipe => recipe.Name == TestUtils.RECIPE_NAME).Should().Be(1);
-                // result.Instructions.Count.Should().Be(TestUtils.INSTRUCTIONS_STEP.Count);
             }
 
             [Fact]
@@ -80,6 +79,7 @@ namespace backend.Tests.Controllers
                 var result = (response as OkObjectResult).Value as Recipe;
                 result.Name.Should().Be(TestUtils.RECIPE_NAME);
                 result.ServingSize.Should().Be(TestUtils.RECIPE_SERVING_SIZE);
+                result.Instructions.Count().Should().Be(TestUtils.INSTRUCTIONS_STEP.Count());
             }
 
             [Fact]

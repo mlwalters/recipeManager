@@ -1,13 +1,9 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Moq;
-using Newtonsoft.Json;
 
 namespace backend.Tests.Utils
 {
@@ -29,12 +25,12 @@ namespace backend.Tests.Utils
             await db.Database.EnsureDeletedAsync();
             await db.Database.EnsureCreatedAsync();
 
-            // var instructions = INSTRUCTIONS_STEP.Select(ins => new Instruction { StepNumber = ins.Key, Step = ins.Value }).ToList();
-            // db.Instructions.AddRange(instructions);
+            // var instruction = new Instruction(INSTRUCTIONS_STEP.Key, INSTRUCTIONS_STEP.Value);
+            var instructions = INSTRUCTIONS_STEP.Select(ps => new Instruction(ps.Value, ps.Key)).ToList();
 
             var recipe = new Recipe(RECIPE_NAME, RECIPE_DESCRIPTION, RECIPE_SERVING_SIZE, RECIPE_NOTES);
             
-            // recipe.Instructions = new List<Instruction> {instructions};
+            recipe.Instructions = instructions;
             db.Recipes.Add(recipe);
             await db.SaveChangesAsync();
 
