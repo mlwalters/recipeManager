@@ -8,7 +8,5 @@ Feature: Dashboard
     And I see 'Shopping List'
 
   Scenario: I can see the recipe card
-    Then I see 'Strawberry Cheesecake'
-    Then I see 'A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.'
     Then I see 'View Recipe'
     And I see 'Add to meal planner'

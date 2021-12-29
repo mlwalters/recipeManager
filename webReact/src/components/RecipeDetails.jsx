@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import Container from '@material-ui/core/Container';
+import { useParams } from 'react-router-dom';
 // import Card from '@material-ui/core/Card';
 // import CardActions from '@material-ui/core/CardActions';
 // import CardContent from '@material-ui/core/CardContent';
@@ -12,12 +13,12 @@ import Container from '@material-ui/core/Container';
 const RecipeDetails = () => {
   const [details, setDetails] = useState({});
   const [error, setError] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/{details.id}`);
-        // console.log(data);
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
         setDetails(data);
       } catch (err) {
         setError(err);

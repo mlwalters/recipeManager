@@ -7,7 +7,7 @@ import RecipeDetails from './RecipeDetails';
 const recipeDetails = {
   id: 2,
   name: 'Lentil Soup',
-  description: 'The touch of spices with lemon really lifts this soup to the next level.',
+  description: 'The touch of spices and finishing it off with lemon really lifts this soup to the next level.',
   servingSize: 6,
   instructions: [
     {
