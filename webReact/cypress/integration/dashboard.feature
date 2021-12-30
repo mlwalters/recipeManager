@@ -8,5 +8,5 @@ Feature: Dashboard
     And I see 'Shopping List'
 
   Scenario: I can see the recipe card
-    Then I see 'View Recipe'
-    And I see 'Add to meal planner'
+    Then I see 'Strawberry Cheesecake'
+    And I see 'Lentil Soup'

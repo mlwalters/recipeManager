@@ -1,8 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-import Container from '@mui/material/Container';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
 import { useParams } from 'react-router-dom';
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 const RecipeDetails = () => {
   const [details, setDetails] = useState({});
@@ -29,9 +40,22 @@ const RecipeDetails = () => {
   }
 
   return (
-    <Container maxWidth="sm">
-      {details.name}
-    </Container>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={3}>
+        <Grid item xs="10">
+          <Item>
+            <Typography variant="h2" color="#263238">{details.name}</Typography>
+            <Typography variant="body2" color="text.secondary">{details.description}</Typography>
+            <Typography variant="body2" color="text.secondary">
+              Serving size:
+              {' '}
+              {details.servingSize}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
