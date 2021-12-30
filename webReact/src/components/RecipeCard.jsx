@@ -16,7 +16,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const RecipeCard = () => {
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -39,33 +39,37 @@ const RecipeCard = () => {
   }
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">R</Avatar>}
-        action={<IconButton aria-label="settings"><MoreVertIcon /></IconButton>}
-        title="Strawberry Cheesecake"
-        subheader="October 28, 2021"
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://images.unsplash.com/photo-1621955511667-e2c316e4575d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2hlZXNlY2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {details.description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+    <>
+      {details.map(({ id, name, description }) => (
+        <Card sx={{ maxWidth: 345 }} key={id}>
+          <CardHeader
+            avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">R</Avatar>}
+            action={<IconButton aria-label="settings"><MoreVertIcon /></IconButton>}
+            title={name}
+            subheader="October 28, 2021"
+          />
+          <CardMedia
+            component="img"
+            height="194"
+            image="https://images.unsplash.com/photo-1621955511667-e2c316e4575d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2hlZXNlY2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
+            alt="Strawberry cheesecake"
+          />
+          <CardContent>
+            <Typography variant="body2" color="text.secondary">
+              {description}
+            </Typography>
+          </CardContent>
+          <CardActions disableSpacing>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </CardActions>
+        </Card>
+      ))}
+    </>
   );
 };
 

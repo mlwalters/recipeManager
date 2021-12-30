@@ -20,9 +20,6 @@ const Dashboard = () => (
       <Grid item>
         <RecipeCard />
       </Grid>
-      <Grid item>
-        <RecipeCard />
-      </Grid>
     </Grid>
   </Grid>
 );

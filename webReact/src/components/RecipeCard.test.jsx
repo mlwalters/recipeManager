@@ -6,13 +6,13 @@ import { render, screen } from '@testing-library/react';
 import RecipeCard from './RecipeCard';
 // import Dashboard from './Dashboard';
 
-// const recipeCardDetails = [{
-//   id: 1,
-//   name: 'Strawberry Cheesecake',
-//   description: 'A light-yet-rich cheesecake, creamynot dense-creamy like New York cheesecake.',
-//   servingSize: 12,
-//   notes: 'This is my favorite cheesecake recipe.',
-// },
+const recipeCardDetails = {
+  id: 1,
+  name: 'Strawberry Cheesecake',
+  description: 'A light-yet-rich cheesecake, creamynot dense-creamy like New York cheesecake.',
+  servingSize: 12,
+  notes: 'This is my favorite cheesecake recipe.',
+};
 // {
 //   id: 2,
 //   name: 'Lentil Soup',
@@ -21,19 +21,25 @@ import RecipeCard from './RecipeCard';
 //   notes: '',
 // }];
 
-// test('renders recipe details preview as a card on the dashboard', async () => {
-//   const mockApi = new MockAdapter(axios);
-//   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, recipeCardDetails);
-//   // render(<RecipeCard />);
-//   render(
-//     <BrowserRouter>
-//       <Dashboard />
-//     </BrowserRouter>,
-//   );
-//   expect(await screen.findByText(recipeCardDetails[1].name)).toBeInTheDocument();
-//   expect(await screen.findByText(recipeCardDetails[1].description)).toBeInTheDocument();
-//   expect(await screen.findByText(recipeCardDetails[1].category)).toBeInTheDocument();
-// });
+test('renders recipe details preview as a card on the dashboard', async () => {
+  const mockApi = new MockAdapter(axios);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, recipeCardDetails);
+  const Card = () => (
+    <div>
+      <div>
+        <p>
+          Strawberry Cheesecake
+        </p>
+      </div>
+    </div>
+  );
+  render(<Card />);
+  expect(await screen.findByText(recipeCardDetails.name)).toBeInTheDocument();
+
+  // expect(await screen.findByText(recipeCardDetails[1].name)).toBeInTheDocument();
+  // expect(await screen.findByText(recipeCardDetails[1].description)).toBeInTheDocument();
+  // expect(await screen.findByText(recipeCardDetails[1].category)).toBeInTheDocument();
+});
 
 // test('renders loading state while waiting for recipe cards to load', async () => {
 //   const mockApi = new MockAdapter(axios);
