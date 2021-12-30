@@ -4,3 +4,5 @@ Feature: Recipe Details
 
   Scenario: I can see the recipe details
     Then I see 'Lentil Soup'
+    Then I see 'The touch of spices with lemon really lifts this soup to the next level.'
+    Then I see '6'

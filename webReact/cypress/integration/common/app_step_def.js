@@ -6,7 +6,7 @@ Given('I am on the app', () => {
   cy.visit('/');
 });
 
-Given('I am on the recipe details page', () => {
+Given('I am on the Recipe Details Page', () => {
   cy.visit('/recipe/2');
 });
 
