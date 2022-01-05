@@ -16,6 +16,11 @@ const details = {
       step: 'Heat oil in a large pot over medium heat. Add garlic and onion, cook for 2 minutes.',
       stepNumber: 1,
     },
+    {
+      id: 4,
+      step: 'Add celery and carrot. Cook for 7-10 minutes or until softened and the onion is sweet.',
+      stepNumber: 2,
+    },
   ],
 };
 
@@ -30,11 +35,10 @@ test('renders details on the recipe details page', async () => {
       <p>
         {details.description}
       </p>
-      <p>
-        {details.instructions[0].step}
-      </p>
       <div>
-        {details.instructions[0].step}
+        <p>
+          {details.instructions[0].step}
+        </p>
       </div>
     </div>
   );
@@ -42,7 +46,7 @@ test('renders details on the recipe details page', async () => {
   expect(await screen.findByText(details.name)).toBeInTheDocument();
   expect(await screen.findByText(details.description)).toBeInTheDocument();
   // expect(await screen.findByText(details.servingSize)).toBeInTheDocument();
-  expect(await screen.findAllByText(details.instructions[0].step)).toBeInTheDocument();
+  expect(await screen.findByText(details.instructions[0].step)).toBeInTheDocument();
   // expect(await screen.findByText(recipeDetails.notes)).toBeInTheDocument();
 });
 
