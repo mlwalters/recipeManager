@@ -24,16 +24,25 @@ test('renders details on the recipe details page', async () => {
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe/2`).reply(200, details);
   const DetailsTest = () => (
     <div>
+      <h2>
+        {details.name}
+      </h2>
+      <p>
+        {details.description}
+      </p>
+      <p>
+        {details.instructions[0].step}
+      </p>
       <div>
-        Lentil Soup
+        {details.instructions[0].step}
       </div>
     </div>
   );
   render(<DetailsTest />);
   expect(await screen.findByText(details.name)).toBeInTheDocument();
-  // expect(await screen.findByText(recipeDetails.description)).toBeInTheDocument();
-  // expect(await screen.findByText(recipeDetails.servingSize)).toBeInTheDocument();
-  // expect(await screen.findByText(recipeDetails.instructions[0].step)).toBeInTheDocument();
+  expect(await screen.findByText(details.description)).toBeInTheDocument();
+  // expect(await screen.findByText(details.servingSize)).toBeInTheDocument();
+  expect(await screen.findAllByText(details.instructions[0].step)).toBeInTheDocument();
   // expect(await screen.findByText(recipeDetails.notes)).toBeInTheDocument();
 });
 

@@ -42,7 +42,7 @@ namespace api.Controllers
         {
             try
             {
-                var recipe = await _context.Recipes.FirstOrDefaultAsync(recipe => recipe.Id == id);
+                var recipe = await _context.Recipes.Include(ins => ins.Instructions).FirstOrDefaultAsync(recipe => recipe.Id == id);
 
                 if (recipe == null)
                 {

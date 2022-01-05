@@ -16,6 +16,7 @@ namespace api.Models
              
         [ForeignKey("RecipeId")]
         public int RecipeId { get; set; }
+        
         public Instruction (string step, int stepNumber)
         {
             Step = step;
