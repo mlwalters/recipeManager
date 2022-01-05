@@ -10,6 +10,13 @@ const details = {
   description: 'The touch of spices with lemon really lifts this soup to the next level.',
   servingSize: 6,
   notes: '',
+  instructions: [
+    {
+      id: 3,
+      step: 'Heat oil in a large pot over medium heat. Add garlic and onion, cook for 2 minutes.',
+      stepNumber: 1,
+    },
+  ],
 };
 
 test('renders details on the recipe details page', async () => {

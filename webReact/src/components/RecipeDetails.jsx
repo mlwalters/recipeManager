@@ -16,7 +16,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const RecipeDetails = () => {
-  const [details, setDetails] = useState({});
+  // const [details, setDetails] = useState({});
+  const [details, setDetails] = useState({
+    name: '', description: '', notes: '', servingSize: 0, instructions: [],
+  });
   const [error, setError] = useState(null);
   const { id } = useParams();
 
@@ -52,6 +55,7 @@ const RecipeDetails = () => {
               {details.servingSize}
             </Typography>
             <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
+            <Typography variant="body2" color="text.secondary">{details.instructions.name}</Typography>
           </Item>
         </Grid>
       </Grid>
