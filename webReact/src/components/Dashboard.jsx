@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import RecipeCard from './RecipeCard';
+import RecipeCardList from './RecipeCardList';
 
 const Dashboard = () => (
   <Grid container>
@@ -18,7 +18,7 @@ const Dashboard = () => (
     </Grid>
     <Grid item xs={10}>
       <Grid item>
-        <RecipeCard />
+        <RecipeCardList />
       </Grid>
     </Grid>
   </Grid>

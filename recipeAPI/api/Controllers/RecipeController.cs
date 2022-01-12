@@ -23,10 +23,11 @@ namespace api.Controllers
         }
 
         [HttpGet]
-         public async Task<IActionResult> GetRecipes()
+        public async Task<IActionResult> GetRecipes()
         {
             try
             {
+                // var recipes = await _context.Recipes.ToListAsync();
                 var recipes = await _context.Recipes.Include(ins => ins.Instructions).ToListAsync();
                 return Ok(recipes);
             }
@@ -34,7 +35,7 @@ namespace api.Controllers
             {
                 _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
                 throw;
-            }       
+            }
         }
 
         [HttpGet("{id}")]
@@ -55,7 +56,7 @@ namespace api.Controllers
             {
                 _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
                 throw;
-            }  
+            }
         }
     }
 }

@@ -15,15 +15,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const RecipeCard = () => {
-  const [details, setDetails] = useState([]);
+const RecipeCardList = () => {
+  const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`);
-        setDetails(data);
+        setRecipes(data);
       } catch (err) {
         setError(err);
       }
@@ -39,8 +39,8 @@ const RecipeCard = () => {
   }
 
   return (
-    <>
-      {details.map(({ id, name, description }) => (
+    <div>
+      {recipes.map(({ id, name, description }) => (
         <Card sx={{ maxWidth: 345 }} key={id}>
           <CardHeader
             avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">R</Avatar>}
@@ -69,8 +69,8 @@ const RecipeCard = () => {
           </CardActions>
         </Card>
       ))}
-    </>
+    </div>
   );
 };
 
-export default RecipeCard;
+export default RecipeCardList;

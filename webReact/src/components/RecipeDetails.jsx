@@ -16,7 +16,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const RecipeDetails = () => {
-  // const [details, setDetails] = useState({});
   const [details, setDetails] = useState({
     id: 0, name: '', description: '', notes: '', servingSize: 0, instructions: [],
   });
@@ -45,7 +44,7 @@ const RecipeDetails = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
-        <Grid item xs="10">
+        <Grid item xs={10}>
           <Item>
             <Typography variant="h2" color="#263238">{details.name}</Typography>
             <Typography variant="body2" color="text.secondary">{details.description}</Typography>
@@ -58,7 +57,7 @@ const RecipeDetails = () => {
           </Item>
           <Item>
             {details.instructions.map(({ step, stepNumber }) => (
-              <div>
+              <div key={stepNumber}>
                 <Typography variant="body2" color="text.secondary">
                   {stepNumber}
                 </Typography>
