@@ -9,6 +9,7 @@ const details = {
   name: 'Lentil Soup',
   description: 'The touch of spices with lemon really lifts this soup to the next level.',
   servingSize: 6,
+  category: 'Soup',
   notes: '',
   instructions: [
     {
@@ -23,7 +24,7 @@ const details = {
     },
   ],
 };
-
+// TODO: Refactor using within or just change the render code
 test('renders details on the recipe details page', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe/2`).reply(200, details);
@@ -35,6 +36,12 @@ test('renders details on the recipe details page', async () => {
       <p>
         {details.description}
       </p>
+      <p>
+        {details.category}
+      </p>
+      <p>
+        {details.servingSize}
+      </p>
       <div>
         <p>
           {details.instructions[0].step}
@@ -45,9 +52,15 @@ test('renders details on the recipe details page', async () => {
   render(<DetailsTest />);
   expect(await screen.findByText(details.name)).toBeInTheDocument();
   expect(await screen.findByText(details.description)).toBeInTheDocument();
-  // expect(await screen.findByText(details.servingSize)).toBeInTheDocument();
+  expect(await screen.findByText(details.servingSize)).toBeInTheDocument();
+  expect(await screen.findByText(details.category)).toBeInTheDocument();
   expect(await screen.findByText(details.instructions[0].step)).toBeInTheDocument();
   // expect(await screen.findByText(recipeDetails.notes)).toBeInTheDocument();
+
+  // const recipeName = await screen.findByText('Lentil Soup');
+  // // expect(recipeName).toBeInTheDocument();
+  // const recipeDiv = recipeName.parentElement;
+  // expect(await within(recipeDiv).findByText(details.description)).toBeInTheDocument();
 });
 
 test('renders error if fetching recipe card fails', async () => {

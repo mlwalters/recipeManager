@@ -53,6 +53,11 @@ const RecipeDetails = () => {
               {' '}
               {details.servingSize}
             </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Category:
+              {' '}
+              {details.category}
+            </Typography>
             <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
           </Item>
           <Item>
