@@ -23,6 +23,7 @@ namespace api.Models
                     Name = "Strawberry Cheesecake",
                     Description = "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.",
                     ServingSize = 12,
+                    RecipeType = Category.Dessert,
                     Notes = "This is my favorite cheesecake recipe."
                 },
                 new
@@ -30,6 +31,7 @@ namespace api.Models
                     Id = 2,  
                     Name = "Lentil Soup",
                     Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
+                    RecipeType = Category.Poultry,
                     ServingSize = 6,
                     Notes = ""
                 }

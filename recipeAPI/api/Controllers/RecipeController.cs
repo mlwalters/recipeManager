@@ -27,8 +27,8 @@ namespace api.Controllers
         {
             try
             {
-                // var recipes = await _context.Recipes.ToListAsync();
                 var recipes = await _context.Recipes.Include(ins => ins.Instructions).ToListAsync();
+
                 return Ok(recipes);
             }
             catch (Exception e)
@@ -50,7 +50,16 @@ namespace api.Controllers
                     return NotFound();
                 }
 
-                return Ok(recipe);
+                var recipeResponse = new RecipeResponse
+                {
+                    Id = recipe.Id,
+                    Name = recipe.Name,
+                    Description = recipe.Description,
+                    ServingSize = recipe.ServingSize,
+                    Notes = recipe.Notes,
+                    RecipeType = recipe.RecipeType,
+                };
+                return Ok(recipeResponse);
             }
             catch (Exception e)
             {

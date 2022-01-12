@@ -1,5 +1,5 @@
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace api.Models
 {
@@ -7,19 +7,23 @@ namespace api.Models
     {
         public int Id { get; set; }
 
-        [MaxLength(100)]
         public string Name { get; set; }
 
-        [MaxLength(150)]
         public string Description { get; set; }
 
-        [Range(0, 100)]
         public int ServingSize { get; set; }
 
-        [MaxLength(300)]
+        // public int? CategoryId { get; set; }
+
+        // public virtual Category Category { get; set; }
+        public virtual Category RecipeType { get; set; }
+
+        // [NotMapped]
+        // public CategoryId? RecipeType { get { return (CategoryId?)CategoryId; } }
         public string Notes { get; set; }
 
-        public List<Instruction> Instructions { get; set; } = new List<Instruction>();
+        [JsonIgnore]
+        public virtual ICollection<Instruction> Instructions { get; set; } //= new List<Instruction>();
         public Recipe(string name)
         {
             Name = name;
