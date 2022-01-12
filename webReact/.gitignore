@@ -3,6 +3,8 @@
 ######################
 .env
 node_modules
+/cypress/report 
+/cypress/screenshots 
 ######################
 # Logs and databases #
 ######################
