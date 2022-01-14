@@ -79,6 +79,7 @@ namespace backend.Tests.Controllers
                 var result = (response as OkObjectResult).Value as Recipe;
                 result.Name.Should().Be(TestUtils.RECIPE_NAME);
                 result.ServingSize.Should().Be(TestUtils.RECIPE_SERVING_SIZE);
+                // result.RecipeType.Should().Be(TestUtils.RECIPE_CATEGORY);
                 result.Instructions.Count().Should().Be(TestUtils.INSTRUCTIONS_STEP.Count());
             }
 

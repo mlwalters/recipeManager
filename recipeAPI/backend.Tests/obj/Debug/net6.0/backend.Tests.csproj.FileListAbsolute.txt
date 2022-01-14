@@ -370,3 +370,4 @@
 /Users/walterma/capstone-project/recipeAPI/backend.Tests/obj/Debug/net6.0/ref/backend.Tests.dll
 /Users/walterma/capstone-project/recipeAPI/backend.Tests/obj/Debug/net6.0/backend.Tests.pdb
 /Users/walterma/capstone-project/recipeAPI/backend.Tests/obj/Debug/net6.0/backend.Tests.genruntimeconfig.cache
+/Users/walterma/capstone-project/recipeAPI/backend.Tests/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Proxies.dll
