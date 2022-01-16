@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -45,7 +46,7 @@ const RecipeCardList = () => {
           <CardHeader
             avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">R</Avatar>}
             action={<IconButton aria-label="settings"><MoreVertIcon /></IconButton>}
-            title={name}
+            title={<Link to={`/recipe/${id}`}>{name}</Link>}
             subheader="October 28, 2021"
           />
           <CardMedia
