@@ -27,7 +27,7 @@ namespace api.Controllers
         {
             try
             {
-                var recipes = await _context.Recipes.Include(ins => ins.Instructions).ToListAsync();
+                var recipes = await _context.Recipes.Include(ins => ins.Instructions).Include(ing => ing.Ingredients).ToListAsync();
 
                 return Ok(recipes);
             }
@@ -58,19 +58,18 @@ namespace api.Controllers
                     ServingSize = recipe.ServingSize,
                     Notes = recipe.Notes,
                     RecipeType = recipe.RecipeType,
-                    Instructions = recipe.Instructions.Select(instruction => new Instruction
+                    Instructions = recipe.Instructions.Select(instruction => new InstructionResponse
                     {
                         Id = instruction.Id,
                         Step = instruction.Step,
                         StepNumber = instruction.StepNumber
                     }),
-                    Ingredients = recipe.Ingredients.Select(ingredient => new Ingredient
+                    Ingredients = recipe.Ingredients.Select(ingredient => new IngredientResponse
                     {
                         Id = ingredient.Id,
                         Name = ingredient.Item.ItemName,
                         Amount = ingredient.Amount
-                    }
-                    )
+                    })
                 };
                 return Ok(recipeResponse);
             }
