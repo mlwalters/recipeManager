@@ -20,7 +20,7 @@ namespace api.Models
         DipsAndSauces,
         Sides,
         Bread,
-        Vegetarian,
+        VegetarianOrVegan,
         Snack
     }
 }

@@ -46,7 +46,7 @@ const RecipeDetails = () => {
       <Grid container spacing={3}>
         <Grid item xs={10}>
           <Item>
-            <Typography variant="h2" color="#263238">{details.name}</Typography>
+            <Typography variant="h3" color="#263238">{details.name}</Typography>
             <Typography variant="body2" color="text.secondary">{details.description}</Typography>
             <Typography variant="body2" color="text.secondary">
               Serving size:
@@ -64,6 +64,12 @@ const RecipeDetails = () => {
                   case 3: return 'Poultry';
                   case 4: return 'Soup';
                   case 5: return 'Dessert';
+                  case 6: return 'Salad';
+                  case 7: return 'Dips and Sauces';
+                  case 8: return 'Sides';
+                  case 9: return 'Bread';
+                  case 10: return 'Vegetarian or Vegan';
+                  case 11: return 'Snack';
                   default: return 'Uncategorized';
                 }
               })()}
@@ -71,6 +77,7 @@ const RecipeDetails = () => {
             <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
           </Item>
           <Item>
+            <Typography variant="h6" color="#263238">Ingredients</Typography>
             {details.ingredients.map(({ ingredientId, amount, name }) => (
               <div key={ingredientId}>
                 <p variant="body2" color="text.secondary">
@@ -82,6 +89,7 @@ const RecipeDetails = () => {
             ))}
           </Item>
           <Item>
+            <Typography variant="h6" color="#263238">Instructions:</Typography>
             {details.instructions.map(({ step, stepNumber }) => (
               <div key={stepNumber}>
                 <p variant="body2" color="text.secondary">

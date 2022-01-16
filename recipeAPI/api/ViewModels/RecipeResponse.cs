@@ -17,6 +17,8 @@ namespace api.Models
 
         [Range(0, 100)]
         public int ServingSize { get; set; }
+        
+        [Column(TypeName = "nvarchar(24)")]
         public virtual Category RecipeType { get; set; }
 
         [MaxLength(300)]
