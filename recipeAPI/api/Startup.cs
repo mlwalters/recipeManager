@@ -6,8 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Net.Http.Headers;
-using System;
 
 namespace api
 {
@@ -31,16 +29,9 @@ namespace api
 
             services.AddDbContext<AppDbContext>(b =>
             {
-                b.UseSqlServer(Configuration.GetConnectionString("SqlDbConnection")); ;
-            }, ServiceLifetime.Transient);
-            // services.AddHttpClient();
-            // services.AddHttpClient("TheNewsAPI", httpClient =>
-            // {
-            //     // var api_token = "mv6Cgn7X9oFlCJNZ7FkEE22A7TVJKoZzdxnWvRW7";
-            //     // httpClient.BaseAddress = new Uri($"https://api.thenewsapi.com/v1/news/all?api_token={api_token}");
-            //     httpClient.BaseAddress = new Uri($"https://api.thenewsapi.com/v1/news/");
-            //     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            // });     
+                b.UseLazyLoadingProxies();
+                b.UseSqlServer(Configuration.GetConnectionString("SqlDbConnection"));
+            }, ServiceLifetime.Transient);    
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

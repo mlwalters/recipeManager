@@ -12,6 +12,8 @@ namespace api.Models
         }
         public virtual DbSet<Recipe> Recipes { get; set; }
         public virtual DbSet<Instruction> Instructions { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<Ingredient> Ingredients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,7 +30,7 @@ namespace api.Models
                 },
                 new
                 {
-                    Id = 2,  
+                    Id = 2,
                     Name = "Lentil Soup",
                     Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
                     RecipeType = Category.Poultry,
@@ -36,6 +38,12 @@ namespace api.Models
                     Notes = ""
                 }
             );
+            // modelBuilder.Entity<Recipe>()
+            // .Property(r => r.RecipeType)
+            // .HasConversion(
+            //     c => c.ToString(),
+            //     c => (Category).Enum.Parse(typeof(Category), c))
+            // );
             modelBuilder.Entity<Instruction>()
             .HasData(
                 new
@@ -64,6 +72,55 @@ namespace api.Models
                     Id = 4,
                     Step = "Add celery and carrot. Cook for 7-10 minutes or until softened and the onion is sweet.",
                     StepNumber = 2,
+                    RecipeId = 2
+                }
+            );
+            modelBuilder.Entity<Item>()
+            .HasData(
+                new
+                {
+                    Id = 1,
+                    ItemName = "salt",
+                },
+                new
+                {
+                    Id = 2,
+                    ItemName = "sugar",
+                },
+                new
+                {
+                    Id = 3,
+                    ItemName = "brown lentils",
+                }
+            );
+            modelBuilder.Entity<Ingredient>()
+            .HasData(
+                new
+                {
+                    Id = 1,
+                    Amount = "1/2 tsp",
+                    ItemId = 1,
+                    RecipeId = 1
+                },
+                new
+                {
+                    Id = 2,
+                    Amount = "1 cup",
+                    ItemId = 2,
+                    RecipeId = 1
+                },
+                new
+                {
+                    Id = 3,
+                    Amount = "3 cups",
+                    ItemId = 3,
+                    RecipeId = 2
+                },
+                new
+                {
+                    Id = 4,
+                    Amount = "1 tsp",
+                    ItemId = 1,
                     RecipeId = 2
                 }
             );
