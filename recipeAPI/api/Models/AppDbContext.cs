@@ -33,7 +33,7 @@ namespace api.Models
                     Id = 2,
                     Name = "Lentil Soup",
                     Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
-                    RecipeType = Category.Poultry,
+                    RecipeType = Category.Soup,
                     ServingSize = 6,
                     Notes = ""
                 }

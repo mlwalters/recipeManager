@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const RecipeDetails = () => {
   const [details, setDetails] = useState({
-    id: 0, name: '', description: '', notes: '', servingSize: 0, instructions: [],
+    id: 0, name: '', recipeType: 0, description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
   });
   const [error, setError] = useState(null);
   const { id } = useParams();
@@ -56,17 +56,39 @@ const RecipeDetails = () => {
             <Typography variant="body2" color="text.secondary">
               Category:
               {' '}
-              {details.category}
+              {(() => {
+                switch (details.recipeType) {
+                  case 0: return 'Seafood';
+                  case 1: return 'Beef';
+                  case 2: return 'Pork';
+                  case 3: return 'Poultry';
+                  case 4: return 'Soup';
+                  case 5: return 'Dessert';
+                  default: return 'Uncategorized';
+                }
+              })()}
             </Typography>
             <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
           </Item>
           <Item>
+            {details.ingredients.map(({ ingredientId, amount, name }) => (
+              <div key={ingredientId}>
+                <p variant="body2" color="text.secondary">
+                  <span>{amount}</span>
+                  {' '}
+                  <span>{name}</span>
+                </p>
+              </div>
+            ))}
+          </Item>
+          <Item>
             {details.instructions.map(({ step, stepNumber }) => (
               <div key={stepNumber}>
-                <Typography variant="body2" color="text.secondary">
-                  {stepNumber}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">{step}</Typography>
+                <p variant="body2" color="text.secondary">
+                  <span>{stepNumber}</span>
+                  {' '}
+                  <span>{step}</span>
+                </p>
               </div>
             ))}
           </Item>
