@@ -13,7 +13,7 @@ namespace api.Models
         public virtual DbSet<Recipe> Recipes { get; set; }
         public virtual DbSet<Instruction> Instructions { get; set; }
         public virtual DbSet<Item> Items { get; set; }
-        public virtual DbSet<Ingredient> Ingredients { get; set; }
+        // public virtual DbSet<Ingredient> Ingredients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -93,37 +93,37 @@ namespace api.Models
                     ItemName = "brown lentils",
                 }
             );
-            modelBuilder.Entity<Ingredient>()
-            .HasData(
-                new
-                {
-                    Id = 1,
-                    Amount = "1/2 tsp",
-                    ItemId = 1,
-                    RecipeId = 1
-                },
-                new
-                {
-                    Id = 2,
-                    Amount = "1 cup",
-                    ItemId = 2,
-                    RecipeId = 1
-                },
-                new
-                {
-                    Id = 3,
-                    Amount = "3 cups",
-                    ItemId = 3,
-                    RecipeId = 2
-                },
-                new
-                {
-                    Id = 4,
-                    Amount = "1 tsp",
-                    ItemId = 1,
-                    RecipeId = 2
-                }
-            );
+            // modelBuilder.Entity<Ingredient>()
+            // .HasData(
+            //     new
+            //     {
+            //         Id = 1,
+            //         Amount = "1/2 tsp",
+            //         ItemId = 1,
+            //         RecipeId = 1
+            //     },
+            //     new
+            //     {
+            //         Id = 2,
+            //         Amount = "1 cup",
+            //         ItemId = 2,
+            //         RecipeId = 1
+            //     },
+            //     new
+            //     {
+            //         Id = 3,
+            //         Amount = "3 cups",
+            //         ItemId = 3,
+            //         RecipeId = 2
+            //     },
+            //     new
+            //     {
+            //         Id = 4,
+            //         Amount = "1 tsp",
+            //         ItemId = 1,
+            //         RecipeId = 2
+            //     }
+            // );
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,14 +12,14 @@ namespace api.Models
 
         [MaxLength(30)]
         public int StepNumber { get; set; }
-             
-        [ForeignKey("RecipeId")]
         public int RecipeId { get; set; }
+        public virtual Recipe Recipe { get; set; }
         
         public Instruction (string step, int stepNumber)
         {
             Step = step;
             StepNumber = stepNumber;
         }
+        public Instruction (){}
     }
 }

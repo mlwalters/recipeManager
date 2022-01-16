@@ -58,6 +58,12 @@ namespace api.Controllers
                     ServingSize = recipe.ServingSize,
                     Notes = recipe.Notes,
                     RecipeType = recipe.RecipeType,
+                    Instructions = recipe.Instructions.Select(instruction => new Instruction
+                    {
+                        Id = instruction.Id,
+                        Step = instruction.Step,
+                        StepNumber = instruction.StepNumber
+                    }),
                 };
                 return Ok(recipeResponse);
             }
