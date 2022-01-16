@@ -64,6 +64,13 @@ namespace api.Controllers
                         Step = instruction.Step,
                         StepNumber = instruction.StepNumber
                     }),
+                    Ingredients = recipe.Ingredients.Select(ingredient => new Ingredient
+                    {
+                        Id = ingredient.Id,
+                        Name = ingredient.Item.ItemName,
+                        Amount = ingredient.Amount
+                    }
+                    )
                 };
                 return Ok(recipeResponse);
             }

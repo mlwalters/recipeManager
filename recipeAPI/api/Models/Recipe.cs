@@ -16,8 +16,8 @@ namespace api.Models
         [JsonIgnore]
         public virtual ICollection<Instruction> Instructions { get; set; } //= new List<Instruction>();
 
-        // [JsonIgnore]
-        // public virtual ICollection<Ingredient> Ingredients { get; set; } //= new List<Instruction>();
+        [JsonIgnore]
+        public virtual ICollection<Ingredient> Ingredients { get; set; } //= new List<Instruction>();
         public Recipe(string name)
         {
             Name = name;

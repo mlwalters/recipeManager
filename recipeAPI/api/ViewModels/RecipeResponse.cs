@@ -23,7 +23,7 @@ namespace api.Models
         public string Notes { get; set; }
 
         public virtual IEnumerable<Instruction> Instructions { get; set; } //= new List<Instruction>();
-        // public virtual IEnumerable<Ingredient> Ingredients { get; set; } //= new List<Instruction>();
+        public virtual IEnumerable<Ingredient> Ingredients { get; set; } //= new List<Instruction>();
         public RecipeResponse(string name)
         {
             Name = name;
@@ -44,4 +44,20 @@ namespace api.Models
         // [NotMapped]
         // public CategoryId? RecipeType { get { return (CategoryId?)CategoryId; } }
     }
+    // public class IngredientResponse
+    // {
+    //     public int Id { get; set; }
+    //     public string Amount { get; set; }
+    //     public string Name { get; set; }
+    // }
+    // public class InstructionResponse
+    // {
+    //     public int Id { get; set; }
+    //     public string Step { get; set; }
+    //     public int StepNumber { get; set; }
+    // }
+    // public class ItemResponse
+    // {
+
+    // }
 }
