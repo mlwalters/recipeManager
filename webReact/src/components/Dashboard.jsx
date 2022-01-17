@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import RecipeCardList from './RecipeCardList';
@@ -6,6 +7,9 @@ import RecipeCardList from './RecipeCardList';
 const Dashboard = () => (
   <Grid container>
     <Grid item xs={2}>
+      <Typography variant="h6" color="primary">
+        <Link to="/recipe/add">Add a Recipe</Link>
+      </Typography>
       <Typography variant="h6" color="primary">
         Favorites
       </Typography>
