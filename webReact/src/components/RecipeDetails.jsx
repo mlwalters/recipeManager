@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import { useParams } from 'react-router-dom';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -54,7 +55,7 @@ const RecipeDetails = () => {
               {details.servingSize}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Category:
+              <RestaurantIcon />
               {' '}
               {(() => {
                 switch (details.recipeType) {
