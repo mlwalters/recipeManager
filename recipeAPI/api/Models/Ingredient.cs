@@ -13,5 +13,12 @@ namespace api.Models
         public virtual Recipe Recipe { get; set; }
         public virtual Item Item { get; set; }
 
+        public Ingredient(int id, string amount, Item item)
+        {
+            Id = id;
+            Amount = amount;
+            Name = Item.ItemName;
+        }
+        public Ingredient(){}
     }
 }

@@ -79,5 +79,34 @@ namespace api.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Recipe>> PostRecipe([FromBody] AddRecipe addRecipe)
+        {
+            Recipe newRecipe = new Recipe()
+            {
+                Name = addRecipe.Name,
+                Description = addRecipe.Description,
+                ServingSize = addRecipe.ServingSize,
+                RecipeType = addRecipe.RecipeType,
+                Notes = addRecipe.Notes,
+                Instructions = (ICollection<Instruction>)addRecipe.Instructions.Select(instruction => new InstructionResponse
+                {
+                    Id = instruction.Id,
+                    Step = instruction.Step,
+                    StepNumber = instruction.StepNumber
+                }),
+                // Ingredients = (ICollection<Ingredient>)addRecipe.Ingredients.Select(ingredient => new AddIngredient
+                // {
+                //     Id = ingredient.Id,
+                //     Name = ingredient.Item.ItemName,
+                //     Amount = ingredient.Amount
+                // })
+            };
+            _context.Recipes.Add(newRecipe);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRecipe", new { id = newRecipe.Id }, newRecipe);
+        }
     }
 }
