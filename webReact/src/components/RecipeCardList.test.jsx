@@ -11,12 +11,14 @@ const recipeCardDetails = [{
   name: 'Strawberry Cheesecake',
   description: 'A light-yet-rich cheesecake, creamynot dense-creamy like New York cheesecake.',
   servingSize: 12,
+  category: 'Dessert',
 },
 {
   id: 2,
   name: 'Lentil Soup',
   description: 'The touch of spices with lemon really lifts this soup to the next level.',
   servingSize: 6,
+  category: 'Soup',
 }];
 
 test('renders recipe details preview as a card on the dashboard', async () => {
@@ -25,6 +27,7 @@ test('renders recipe details preview as a card on the dashboard', async () => {
   render(<RecipeCardList />);
   expect(await screen.findByText(recipeCardDetails[0].name)).toBeInTheDocument();
   expect(await screen.findByText(recipeCardDetails[0].description)).toBeInTheDocument();
+  expect(await screen.findByText(recipeCardDetails[0].category)).toBeInTheDocument();
 });
 
 test('renders error if fetching recipe card fails', async () => {

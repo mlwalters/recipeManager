@@ -29,21 +29,7 @@ namespace api.Models
         {
             Name = name;
         }
-        // public RecipeResponse(string name, string description, int servingSize, string notes)
-        // {
-        //     Name = name;
-        //     Description = description;
-        //     ServingSize = servingSize;
-        //     Notes = notes;
-        // }
         public RecipeResponse() { }
-
-        // public int? CategoryId { get; set; }
-
-        // public virtual Category Category { get; set; }
-
-        // [NotMapped]
-        // public CategoryId? Category { get { return (CategoryId?)CategoryId; } }
     }
     public class AddRecipe
     {

@@ -22,17 +22,6 @@ namespace api.Models
         {
             Name = name;
         }
-        public Recipe(string name, string description, int servingSize, string notes)
-        {
-            Name = name;
-            Description = description;
-            ServingSize = servingSize;
-            Notes = notes;
-        }
         public Recipe() { }
-        // public int? CategoryId { get; set; }
-        // public virtual Category Category { get; set; }
-        // [NotMapped]
-        // public CategoryId? RecipeType { get { return (CategoryId?)CategoryId; } }
     }
 }

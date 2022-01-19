@@ -12,7 +12,7 @@ namespace backend.Tests.Utils
         public static readonly string RECIPE_NAME = "Filipino Chicken Adobo";
         public static readonly string RECIPE_DESCRIPTION = "Intense in flavour, but so fast and easy to prepare!";
         public static readonly int RECIPE_SERVING_SIZE = 4;
-        // public static readonly Category RECIPE_CATEGORY = CategoryId.Poultry;
+        // public static readonly string RECIPE_CATEGORY = CategoryId.Poultry;
         public static readonly string RECIPE_NOTES = "One of the most amazing Asian chicken thigh recipes I have ever come across.";
         public static readonly Dictionary<int, string> INSTRUCTIONS_STEP = new Dictionary<int, string>
         {
@@ -29,7 +29,7 @@ namespace backend.Tests.Utils
             // var instruction = new Instruction(INSTRUCTIONS_STEP.Key, INSTRUCTIONS_STEP.Value);
             var instructions = INSTRUCTIONS_STEP.Select(ps => new Instruction(ps.Value, ps.Key)).ToList();
 
-            var recipe = new Recipe(RECIPE_NAME, RECIPE_DESCRIPTION, RECIPE_SERVING_SIZE, RECIPE_NOTES);
+            var recipe = new Recipe { Name = RECIPE_NAME, Description = RECIPE_DESCRIPTION, ServingSize = RECIPE_SERVING_SIZE, Notes = RECIPE_NOTES};
             
             recipe.Instructions = instructions;
             db.Recipes.Add(recipe);

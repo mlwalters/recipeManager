@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const RecipeDetails = () => {
   const [details, setDetails] = useState({
-    id: 0, name: '', category: 0, description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
+    id: 0, name: '', category: '', description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
   });
   const [error, setError] = useState(null);
   const { id } = useParams();
@@ -57,23 +57,7 @@ const RecipeDetails = () => {
             <Typography variant="body2" color="text.secondary">
               <RestaurantIcon />
               {' '}
-              {(() => {
-                switch (details.category) {
-                  case 0: return 'Seafood';
-                  case 1: return 'Beef';
-                  case 2: return 'Pork';
-                  case 3: return 'Poultry';
-                  case 4: return 'Soup';
-                  case 5: return 'Dessert';
-                  case 6: return 'Salad';
-                  case 7: return 'Dips and Sauces';
-                  case 8: return 'Sides';
-                  case 9: return 'Bread';
-                  case 10: return 'Vegetarian or Vegan';
-                  case 11: return 'Snack';
-                  default: return 'Uncategorized';
-                }
-              })()}
+              {details.category}
             </Typography>
             <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
           </Item>

@@ -41,13 +41,15 @@ const RecipeCardList = () => {
 
   return (
     <div>
-      {recipes.map(({ id, name, description }) => (
+      {recipes.map(({
+        id, name, description, category,
+      }) => (
         <Card sx={{ maxWidth: 345 }} key={id}>
           <CardHeader
             avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">R</Avatar>}
             action={<IconButton aria-label="settings"><MoreVertIcon /></IconButton>}
             title={<Link to={`/recipe/${id}`}>{name}</Link>}
-            subheader="October 28, 2021"
+            subheader={category}
           />
           <CardMedia
             component="img"
