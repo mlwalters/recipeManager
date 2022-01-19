@@ -8,7 +8,7 @@ const Dashboard = () => (
   <Grid container>
     <Grid item xs={2}>
       <Typography variant="h6" color="primary">
-        <Link to="/recipe/add">Add a Recipe</Link>
+        <Link to="/recipe/add">Add Recipe</Link>
       </Typography>
       <Typography variant="h6" color="primary">
         Favorites
@@ -20,7 +20,7 @@ const Dashboard = () => (
         Shopping List
       </Typography>
     </Grid>
-    <Grid item xs={10}>
+    <Grid item>
       <Grid item>
         <RecipeCardList />
       </Grid>

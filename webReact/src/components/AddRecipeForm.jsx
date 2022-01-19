@@ -3,23 +3,68 @@
 import React from 'react';
 
 import Box from '@mui/material/Box';
-import Input from '@mui/material/Input';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import { Button } from '@mui/material';
 
-const ariaLabel = { 'aria-label': 'description' };
+// const ariaLabel = { 'aria-label': 'description' };
 
 const AddRecipeForm = () => (
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //  setNewRecipe(e.target.value);
+  // };
   <Box
     component="form"
     sx={{
-      '& .MuiTextField-root': { m: 1, width: '25ch' },
+      '& .MuiTextField-root': { m: 2, p: 1, width: '60ch' },
     }}
     noValidate
     autoComplete="off"
+    // onSubmit={handleSubmit}
   >
-    <Input placeholder="Recipe name" inputProps={ariaLabel} />
-    <Input placeholder="Serving size" inputProps={ariaLabel} type="number" />
-    <Input placeholder="Description" inputProps={ariaLabel} />
-    <Input placeholder="Notes" inputProps={ariaLabel} multiline="true" />
+    <InputLabel>Add a new recipe</InputLabel>
+    <TextField
+      label="Recipe name"
+      variant="outlined"
+      required
+    />
+    <TextField
+      label="Category"
+      variant="outlined"
+    />
+    <TextField
+      // id="outlined-select-category"
+      select
+      label="Category"
+      // value={category}
+      // onChange={handleChange}
+      helperText="Please select the recipe type"
+    />
+    <TextField
+      label="Serving Size"
+      variant="outlined"
+      type="number"
+    />
+    <TextField
+      label="Description"
+      variant="outlined"
+      multiline
+      rows={2}
+    />
+    <TextField
+      label="Notes"
+      variant="outlined"
+      multiline
+      rows={3}
+    />
+    <Button
+      type="submit"
+      color="secondary"
+      variant="contained"
+    >
+      Add recipe
+    </Button>
   </Box>
 );
 
