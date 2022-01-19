@@ -12,7 +12,7 @@ namespace backend.Tests.Utils
         public static readonly string RECIPE_NAME = "Filipino Chicken Adobo";
         public static readonly string RECIPE_DESCRIPTION = "Intense in flavour, but so fast and easy to prepare!";
         public static readonly int RECIPE_SERVING_SIZE = 4;
-        public static readonly Category RECIPE_CATEGORY = Category.Poultry;
+        // public static readonly Category RECIPE_CATEGORY = CategoryId.Poultry;
         public static readonly string RECIPE_NOTES = "One of the most amazing Asian chicken thigh recipes I have ever come across.";
         public static readonly Dictionary<int, string> INSTRUCTIONS_STEP = new Dictionary<int, string>
         {

@@ -14,18 +14,40 @@ namespace api.Models
         public virtual DbSet<Instruction> Instructions { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Recipe>()
+            .Property(e => e.CategoryId)
+            .HasConversion<int>();
+
+            modelBuilder
+            .Entity<Category>()
+            .Property(e => e.CategoryId)
+            .HasConversion<int>();
+
+            modelBuilder
+            .Entity<Category>().HasData(
+                Enum.GetValues(typeof(CategoryId))
+                    .Cast<CategoryId>()
+                    .Select(e => new Category()
+                    {
+                        CategoryId = e,
+                        Name = e.ToString()
+                    })
+            );
+
+            modelBuilder.Entity<Recipe>()
             .HasData(
-                new
+                new Recipe
                 {
                     Id = 1,
                     Name = "Strawberry Cheesecake",
                     Description = "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.",
                     ServingSize = 12,
-                    RecipeType = Category.Dessert,
+                    // Category = "Dessert",
+                    CategoryId = CategoryId.Dessert,
                     Notes = "This is my favorite cheesecake recipe."
                 },
                 new
@@ -33,17 +55,12 @@ namespace api.Models
                     Id = 2,
                     Name = "Lentil Soup",
                     Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
-                    RecipeType = Category.Soup,
+                    CategoryId = CategoryId.Soup,
                     ServingSize = 6,
                     Notes = ""
                 }
             );
-            // modelBuilder.Entity<Recipe>()
-            // .Property(r => r.RecipeType)
-            // .HasConversion(
-            //     c => c.ToString(),
-            //     c => (Category).Enum.Parse(typeof(Category), c))
-            // );
+           
             modelBuilder.Entity<Instruction>()
             .HasData(
                 new

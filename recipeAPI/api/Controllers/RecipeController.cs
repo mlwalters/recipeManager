@@ -57,7 +57,7 @@ namespace api.Controllers
                     Description = recipe.Description,
                     ServingSize = recipe.ServingSize,
                     Notes = recipe.Notes,
-                    RecipeType = recipe.RecipeType,
+                    Category = recipe.Category,
                     Instructions = recipe.Instructions.Select(instruction => new InstructionResponse
                     {
                         Id = instruction.Id,
@@ -96,7 +96,7 @@ namespace api.Controllers
                 Name = addRecipe.Name,
                 Description = addRecipe.Description,
                 ServingSize = addRecipe.ServingSize,
-                RecipeType = addRecipe.RecipeType,
+                Category = addRecipe.Category,
                 Notes = addRecipe.Notes,
                 // Instructions = newInstructions,
                 // Ingredients = (ICollection<Ingredient>)addRecipe.Ingredients.Select(ingredient => new AddIngredient

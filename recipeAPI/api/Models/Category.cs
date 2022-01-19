@@ -1,26 +1,26 @@
 
 namespace api.Models
 {
-    // public class Category
-    // {
-    //     public int Id { get; set; }
-    //     public string Name { get; set; }
-    // }
-
-    // public enum CategoryId
-    public enum Category
+    public class Category
     {
-        Seafood,
-        Beef,
-        Pork,
-        Poultry,
-        Soup,
-        Dessert,
-        Salad,
-        DipsAndSauces,
-        Sides,
-        Bread,
-        VegetarianOrVegan,
-        Snack
+        public CategoryId CategoryId { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Recipe> Recipes { get; set; }
+    }
+
+    public enum CategoryId : int
+    {
+        Seafood = 0,
+        Beef = 1,
+        Pork = 2,
+        Poultry = 3,
+        Soup = 4,
+        Dessert = 5,
+        Salad = 6,
+        DipsAndSauces = 7,
+        Sides = 8,
+        Bread = 9,
+        VegetarianOrVegan = 10,
+        Snack = 11
     }
 }

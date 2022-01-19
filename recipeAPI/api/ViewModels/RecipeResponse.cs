@@ -19,7 +19,7 @@ namespace api.Models
         public int ServingSize { get; set; }
         
         [Column(TypeName = "nvarchar(24)")]
-        public virtual Category RecipeType { get; set; }
+        public virtual Category Category { get; set; }
 
         [MaxLength(300)]
         public string Notes { get; set; }
@@ -44,7 +44,7 @@ namespace api.Models
         // public virtual Category Category { get; set; }
 
         // [NotMapped]
-        // public CategoryId? RecipeType { get { return (CategoryId?)CategoryId; } }
+        // public CategoryId? Category { get { return (CategoryId?)CategoryId; } }
     }
     public class AddRecipe
     {
@@ -60,7 +60,7 @@ namespace api.Models
         public int ServingSize { get; set; }
         
         [Column(TypeName = "nvarchar(24)")]
-        public virtual Category RecipeType { get; set; }
+        public virtual Category Category { get; set; }
 
         [MaxLength(300)]
         public string Notes { get; set; }
@@ -80,35 +80,4 @@ namespace api.Models
         }
         public AddRecipe() { }
     }
-    public class IngredientResponse
-    {
-        public int Id { get; set; }
-        public string Amount { get; set; }
-        public string Name { get; set; }
-    }
-    public class AddIngredient
-    {
-        public int Id { get; set; }
-        public string Amount { get; set; }
-        public string Name { get; set; }
-        public int ItemId { get; set; }
-        public virtual Item Item { get; set; }
-        public AddIngredient(int id, string amount, Item item)
-        {
-            Id = id;
-            Amount = amount;
-            Name = Item.ItemName;
-        }
-        public AddIngredient(){}
-    }
-    public class InstructionResponse
-    {
-        public int Id { get; set; }
-        public string Step { get; set; }
-        public int StepNumber { get; set; }
-    }
-    // public class ItemResponse
-    // {
-
-    // }
 }

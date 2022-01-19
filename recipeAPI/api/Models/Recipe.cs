@@ -9,7 +9,8 @@ namespace api.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int ServingSize { get; set; }
-        public virtual Category RecipeType { get; set; }
+        public virtual Category Category { get; set; }
+        public CategoryId CategoryId { get; set; }
 
         public string Notes { get; set; }
 
