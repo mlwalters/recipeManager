@@ -27,9 +27,32 @@ namespace api.Controllers
         {
             try
             {
-                var recipes = await _context.Recipes.Include(ins => ins.Instructions).Include(ing => ing.Ingredients).ToListAsync();
+                var recipes = await _context.Recipes.Include(ins => ins.Instructions).Include(ing => ing.Ingredients).Include(r => r.Category).ToListAsync();
 
-                return Ok(recipes);
+                var recipeResponses = recipes.Select(recipe =>
+                    new RecipeResponse
+                    {
+                        Id = recipe.Id,
+                        Name = recipe.Name,
+                        Description = recipe.Description,
+                        ServingSize = recipe.ServingSize,
+                        Notes = recipe.Notes,
+                        Category = recipe.Category.Name,
+                        Instructions = recipe.Instructions.Select(instruction => new InstructionResponse
+                        {
+                            Id = instruction.Id,
+                            Step = instruction.Step,
+                            StepNumber = instruction.StepNumber
+                        }),
+                        Ingredients = recipe.Ingredients.Select(ingredient => new IngredientResponse
+                        {
+                            Id = ingredient.Id,
+                            Name = ingredient.Item.ItemName,
+                            Amount = ingredient.Amount
+                        })
+                    }
+                );
+                return Ok(recipeResponses);
             }
             catch (Exception e)
             {
@@ -43,7 +66,7 @@ namespace api.Controllers
         {
             try
             {
-                var recipe = await _context.Recipes.Include(ins => ins.Instructions).Include(r => r.Category).FirstOrDefaultAsync(recipe => recipe.Id == id);
+                var recipe = await _context.Recipes.Include(ins => ins.Instructions).Include(ing => ing.Ingredients).Include(r => r.Category).FirstOrDefaultAsync(recipe => recipe.Id == id);
 
                 if (recipe == null)
                 {
