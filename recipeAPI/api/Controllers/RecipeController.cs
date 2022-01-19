@@ -114,14 +114,20 @@ namespace api.Controllers
             //         StepNumber = instruction.StepNumber
             //     });
 
+            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == addRecipe.Category);
+            var addCategoryToRecipe = new CategoryRequest { Id = category.Id, Name = category.Name};
+            
+            // var instructions = 
             Recipe newRecipe = new()
             {
                 Name = addRecipe.Name,
                 Description = addRecipe.Description,
                 ServingSize = addRecipe.ServingSize,
-                Category = addRecipe.Category,
+                // CategoryId = category.Id,
+                CategoryId = addCategoryToRecipe.Id,
                 Notes = addRecipe.Notes,
-                // Instructions = newInstructions,
+                // Instructions = addRecipe.Instructions,
+                // Ingredients = addRecipe.Ingredients,
                 // Ingredients = (ICollection<Ingredient>)addRecipe.Ingredients.Select(ingredient => new AddIngredient
                 // {
                 //     Id = ingredient.Id,
@@ -129,6 +135,7 @@ namespace api.Controllers
                 //     Amount = ingredient.Amount
                 // })
             };
+
             _context.Recipes.Add(newRecipe);
             await _context.SaveChangesAsync();
 

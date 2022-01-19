@@ -23,4 +23,10 @@ namespace api.Models
         VegetarianOrVegan = 10,
         Snack = 11
     }
+
+    public class CategoryRequest
+    {
+        public CategoryId Id { get; set; }
+        public string Name { get; set; }
+    }
 }
