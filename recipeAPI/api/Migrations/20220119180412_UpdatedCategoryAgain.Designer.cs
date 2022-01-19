@@ -25,75 +25,75 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
-                            CategoryId = 0,
+                            Id = 0,
                             Name = "Seafood"
                         },
                         new
                         {
-                            CategoryId = 1,
+                            Id = 1,
                             Name = "Beef"
                         },
                         new
                         {
-                            CategoryId = 2,
+                            Id = 2,
                             Name = "Pork"
                         },
                         new
                         {
-                            CategoryId = 3,
+                            Id = 3,
                             Name = "Poultry"
                         },
                         new
                         {
-                            CategoryId = 4,
+                            Id = 4,
                             Name = "Soup"
                         },
                         new
                         {
-                            CategoryId = 5,
+                            Id = 5,
                             Name = "Dessert"
                         },
                         new
                         {
-                            CategoryId = 6,
+                            Id = 6,
                             Name = "Salad"
                         },
                         new
                         {
-                            CategoryId = 7,
+                            Id = 7,
                             Name = "DipsAndSauces"
                         },
                         new
                         {
-                            CategoryId = 8,
+                            Id = 8,
                             Name = "Sides"
                         },
                         new
                         {
-                            CategoryId = 9,
+                            Id = 9,
                             Name = "Bread"
                         },
                         new
                         {
-                            CategoryId = 10,
+                            Id = 10,
                             Name = "VegetarianOrVegan"
                         },
                         new
                         {
-                            CategoryId = 11,
+                            Id = 11,
                             Name = "Snack"
                         });
                 });

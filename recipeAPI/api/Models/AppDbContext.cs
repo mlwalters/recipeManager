@@ -24,7 +24,7 @@ namespace api.Models
 
             modelBuilder
             .Entity<Category>()
-            .Property(e => e.CategoryId)
+            .Property(e => e.Id)
             .HasConversion<int>();
 
             modelBuilder
@@ -33,7 +33,7 @@ namespace api.Models
                     .Cast<CategoryId>()
                     .Select(e => new Category()
                     {
-                        CategoryId = e,
+                        Id = e,
                         Name = e.ToString()
                     })
             );
@@ -46,7 +46,6 @@ namespace api.Models
                     Name = "Strawberry Cheesecake",
                     Description = "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.",
                     ServingSize = 12,
-                    // Category = "Dessert",
                     CategoryId = CategoryId.Dessert,
                     Notes = "This is my favorite cheesecake recipe."
                 },

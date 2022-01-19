@@ -43,13 +43,13 @@ namespace api.Controllers
         {
             try
             {
-                var recipe = await _context.Recipes.Include(ins => ins.Instructions).FirstOrDefaultAsync(recipe => recipe.Id == id);
+                var recipe = await _context.Recipes.Include(ins => ins.Instructions).Include(r => r.Category).FirstOrDefaultAsync(recipe => recipe.Id == id);
 
                 if (recipe == null)
                 {
                     return NotFound();
                 }
-
+                // var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == recipe.CategoryId);
                 var recipeResponse = new RecipeResponse
                 {
                     Id = recipe.Id,
@@ -57,7 +57,7 @@ namespace api.Controllers
                     Description = recipe.Description,
                     ServingSize = recipe.ServingSize,
                     Notes = recipe.Notes,
-                    Category = recipe.Category,
+                    Category = recipe.Category.Name, //.category.Name,
                     Instructions = recipe.Instructions.Select(instruction => new InstructionResponse
                     {
                         Id = instruction.Id,

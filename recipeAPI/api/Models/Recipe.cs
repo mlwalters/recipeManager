@@ -11,7 +11,6 @@ namespace api.Models
         public int ServingSize { get; set; }
         public virtual Category Category { get; set; }
         public CategoryId CategoryId { get; set; }
-
         public string Notes { get; set; }
 
         [JsonIgnore]

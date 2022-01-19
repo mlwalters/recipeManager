@@ -17,17 +17,17 @@ namespace api.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "CategoryId", "Name" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
                     { 0, "Seafood" },
@@ -54,7 +54,7 @@ namespace api.Migrations
                 table: "Recipes",
                 column: "CategoryId",
                 principalTable: "Categories",
-                principalColumn: "CategoryId",
+                principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
 

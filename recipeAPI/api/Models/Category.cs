@@ -3,7 +3,7 @@ namespace api.Models
 {
     public class Category
     {
-        public CategoryId CategoryId { get; set; }
+        public CategoryId Id { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Recipe> Recipes { get; set; }
     }

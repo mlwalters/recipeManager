@@ -18,8 +18,7 @@ namespace api.Models
         [Range(0, 100)]
         public int ServingSize { get; set; }
         
-        [Column(TypeName = "nvarchar(24)")]
-        public virtual Category Category { get; set; }
+        public string Category { get; set; }
 
         [MaxLength(300)]
         public string Notes { get; set; }
@@ -30,13 +29,13 @@ namespace api.Models
         {
             Name = name;
         }
-        public RecipeResponse(string name, string description, int servingSize, string notes)
-        {
-            Name = name;
-            Description = description;
-            ServingSize = servingSize;
-            Notes = notes;
-        }
+        // public RecipeResponse(string name, string description, int servingSize, string notes)
+        // {
+        //     Name = name;
+        //     Description = description;
+        //     ServingSize = servingSize;
+        //     Notes = notes;
+        // }
         public RecipeResponse() { }
 
         // public int? CategoryId { get; set; }
