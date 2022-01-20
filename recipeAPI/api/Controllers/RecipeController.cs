@@ -130,8 +130,8 @@ namespace api.Controllers
                 ServingSize = addRecipe.ServingSize,
                 CategoryId = addCategoryToRecipe.Id,
                 Notes = addRecipe.Notes,
-                Instructions = instructions,
-                Ingredients = ingredients
+                // Instructions = instructions,
+                // Ingredients = ingredients
             };
 
             _context.Recipes.Add(newRecipe);
