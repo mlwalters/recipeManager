@@ -6,10 +6,5 @@ namespace api.Models
         public string Step { get; set; }
         public int StepNumber { get; set; }
     }
-
-    public class InstructionRequest
-    {        
-        public ICollection<InstructionResponse> Instructions { get; set; }
-    }
 }
     

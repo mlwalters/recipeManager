@@ -4,7 +4,7 @@ import React from 'react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
+// import FormControl from '@mui/material/FormControl';
 import { Button } from '@mui/material';
 
 // const ariaLabel = { 'aria-label': 'description' };
@@ -23,7 +23,6 @@ const AddRecipeForm = () => (
     autoComplete="off"
     // onSubmit={handleSubmit}
   >
-    <InputLabel>Add a new recipe</InputLabel>
     <TextField
       label="Recipe name"
       variant="outlined"
@@ -52,6 +51,12 @@ const AddRecipeForm = () => (
       multiline
       rows={2}
     />
+    {/* <FormControl>
+      <TextField
+        label="Step"
+        variant="outlined"
+      />
+    </FormControl> */}
     <TextField
       label="Notes"
       variant="outlined"

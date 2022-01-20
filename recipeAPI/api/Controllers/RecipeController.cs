@@ -72,7 +72,7 @@ namespace api.Controllers
                 {
                     return NotFound();
                 }
-                // var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == recipe.CategoryId);
+
                 var recipeResponse = new RecipeResponse
                 {
                     Id = recipe.Id,
@@ -106,34 +106,32 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult<Recipe>> PostRecipe([FromBody] AddRecipe addRecipe)
         {
-            // var newIngredients = new AddIngredient
-            // var newInstructions = (ICollection<Instruction>)addRecipe.Instructions.Select(instruction => new InstructionResponse
-            //     {
-            //         Id = instruction.Id,
-            //         Step = instruction.Step,
-            //         StepNumber = instruction.StepNumber
-            //     });
-
             var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == addRecipe.Category);
             var addCategoryToRecipe = new CategoryRequest { Id = category.Id, Name = category.Name};
             
-            // var instructions = 
+            var instructions = addRecipe.Instructions.Select(ins => new InstructionResponse
+                {
+                    Id = ins.Id,
+                    Step = ins.Step,
+                    StepNumber = ins.StepNumber
+                }).ToList();
+
+            var ingredients = addRecipe.Ingredients.Select(ing => new AddIngredient
+                {
+                    Id = ing.Id,
+                    ItemId = ing.Item.Id,
+                    Amount = ing.Amount,
+                }).ToList();
+
             Recipe newRecipe = new()
             {
                 Name = addRecipe.Name,
                 Description = addRecipe.Description,
                 ServingSize = addRecipe.ServingSize,
-                // CategoryId = category.Id,
                 CategoryId = addCategoryToRecipe.Id,
                 Notes = addRecipe.Notes,
-                // Instructions = addRecipe.Instructions,
-                // Ingredients = addRecipe.Ingredients,
-                // Ingredients = (ICollection<Ingredient>)addRecipe.Ingredients.Select(ingredient => new AddIngredient
-                // {
-                //     Id = ingredient.Id,
-                //     Name = ingredient.Item.ItemName,
-                //     Amount = ingredient.Amount
-                // })
+                Instructions = instructions,
+                Ingredients = ingredients
             };
 
             _context.Recipes.Add(newRecipe);
