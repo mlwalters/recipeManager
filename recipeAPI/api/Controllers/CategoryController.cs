@@ -29,7 +29,15 @@ namespace api.Controllers
             {
                 var categories = await _context.Categories.ToListAsync();
 
-                return Ok(categories);
+                var categoriesResponse = categories.Select(cat =>
+                    new CategoryRequest
+                    {
+                        Id = cat.Id,
+                        Name = cat.Name
+                    }
+                );
+
+                return Ok(categoriesResponse);
             }
             catch (Exception e)
             {
