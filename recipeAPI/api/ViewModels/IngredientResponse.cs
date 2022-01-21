@@ -1,4 +1,3 @@
-
 namespace api.Models
 {
     public class IngredientResponse
@@ -7,8 +6,6 @@ namespace api.Models
         public string Amount { get; set; }
         public string Name { get; set; }
     }
-
-    // Remember: This is a request/post
     public class AddIngredient
     {
         public int Id { get; set; }

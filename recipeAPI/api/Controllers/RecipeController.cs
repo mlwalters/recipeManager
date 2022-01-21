@@ -80,7 +80,7 @@ namespace api.Controllers
                     Description = recipe.Description,
                     ServingSize = recipe.ServingSize,
                     Notes = recipe.Notes,
-                    Category = recipe.Category.Name, //.category.Name,
+                    Category = recipe.Category.Name,
                     Instructions = recipe.Instructions.Select(instruction => new InstructionResponse
                     {
                         Id = instruction.Id,
