@@ -11,13 +11,13 @@ import MenuItem from '@mui/material/MenuItem';
 
 const AddRecipeForm = () => {
   const [recipeFormValues, setRecipeFormValues] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([{}]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
       const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Category`);
-      console.log(data);
+      // console.log(data);
       setCategories(data);
     };
 
@@ -66,13 +66,6 @@ const AddRecipeForm = () => {
         onChange={handleOnChange}
       />
       <TextField
-        label="Category"
-        variant="outlined"
-        name="category"
-        value={recipeFormValues.category}
-        onChange={handleOnChange}
-      />
-      <TextField
         // id="outlined-select-category"
         select
         label="Category"
@@ -81,14 +74,14 @@ const AddRecipeForm = () => {
         onChange={handleOnChange}
         helperText="Please select the recipe type"
       >
-        {categories.map((id, name) => (
-          <MenuItem key={id.value} value={name.value}>
-            {name}
+        {categories.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.name}
           </MenuItem>
         ))}
       </TextField>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-label">Category</InputLabel>
         <Select
           // labelId="demo-simple-select-label"
           // id="demo-simple-select"
@@ -98,7 +91,7 @@ const AddRecipeForm = () => {
         >
           {categories.map((option) => (
             <MenuItem key={option.value} value={option.value}>
-              {option.label}
+              {option.name}
             </MenuItem>
           ))}
         </Select>
