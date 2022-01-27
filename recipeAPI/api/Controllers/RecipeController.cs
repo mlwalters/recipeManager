@@ -106,34 +106,39 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult<Recipe>> PostRecipe([FromBody] AddRecipe addRecipe)
         {
-            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == addRecipe.Category);
-            var addCategoryToRecipe = new CategoryRequest { Id = category.Id, Name = category.Name};
-            
-            var instructions = addRecipe.Instructions.Select(ins => new InstructionResponse
+            // var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == addRecipe.Category);
+            // var addCategoryToRecipe = new CategoryRequest { Id = category.Id, Name = category.Name};
+            var items = await _context.Items.ToListAsync();
+            var instructions = addRecipe.Instructions.Select(ins => new Instruction
                 {
                     Id = ins.Id,
                     Step = ins.Step,
-                    StepNumber = ins.StepNumber
+                    StepNumber = ins.StepNumber,
+                    RecipeId = addRecipe.Id
                 }).ToList();
 
-            var ingredients = addRecipe.Ingredients.Select(ing => new AddIngredient
+            var ingredients = addRecipe.Ingredients.Select(ing => new Ingredient
                 {
                     Id = ing.Id,
-                    ItemId = ing.Item.Id,
+                    //Item = items.First(i => i.ItemId == ing.ItemId, new Item { ItemName = ing.Item}), // OTHER OPTION IS TERNARY --> ? items.First(i => i.ItemName.ToLower() == ing.Item.ToLower()) : new Item { ItemName = ing.Item}, //save as a function
+                    Item = items.FirstOrDefault(i => i.ItemName.ToLower().Trim() == ing.Item.ToLower().Trim(), new Item { ItemName = ing.Item}), //? items.First(i => i.ItemName.ToLower() == ing.Item.ToLower()) : new Item { ItemName = ing.Item}, //save as a function
                     Amount = ing.Amount,
+                    RecipeId = addRecipe.Id
                 }).ToList();
 
-            Recipe newRecipe = new()
+            Recipe newRecipe = new Recipe()
             {
                 Name = addRecipe.Name,
                 Description = addRecipe.Description,
                 ServingSize = addRecipe.ServingSize,
-                CategoryId = addCategoryToRecipe.Id,
+                CategoryId = addRecipe.Category,
                 Notes = addRecipe.Notes,
                 // Instructions = instructions,
                 // Ingredients = ingredients
             };
 
+            _context.Instructions.AddRange(instructions);
+            _context.Ingredients.AddRange(ingredients);
             _context.Recipes.Add(newRecipe);
             await _context.SaveChangesAsync();
 

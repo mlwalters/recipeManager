@@ -41,12 +41,12 @@ namespace api.Models
 
         public int ServingSize { get; set; }
         
-        public string Category { get; set; }
+        public CategoryId Category { get; set; } // Change to int?
 
         public string Notes { get; set; }
 
-        public ICollection<Instruction> Instructions { get; set; }
-        public ICollection<Ingredient> Ingredients { get; set; }
+        public ICollection<AddInstruction> Instructions { get; set; }
+        public ICollection<AddIngredient> Ingredients { get; set; }
         public AddRecipe(string name)
         {
             Name = name;

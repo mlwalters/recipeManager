@@ -10,7 +10,7 @@ namespace api.Models
     {
         public int Id { get; set; }
         public string Amount { get; set; }
-        public int ItemId { get; set; }
-        public virtual Item Item { get; set; }
+        public string Item { get; set; }
+        public int RecipeId { get; set;}
     }
 }
