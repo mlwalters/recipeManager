@@ -3,14 +3,11 @@ import React, { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
 const AddRecipeForm = () => {
-  const [recipeFormValues, setRecipeFormValues] = useState([]);
+  const [recipeFormValues, setRecipeFormValues] = useState({});
   const [categories, setCategories] = useState([{}]);
   const [error, setError] = useState(null);
 
@@ -31,11 +28,12 @@ const AddRecipeForm = () => {
       [name]: value,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setRecipeFormValues(recipeFormValues); // or e.target.value?
+    setRecipeFormValues(recipeFormValues);
     try {
-      axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
+      // await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
+      console.log(recipeFormValues);
     } catch (err) {
       setError(err);
     }
@@ -75,27 +73,11 @@ const AddRecipeForm = () => {
         helperText="Please select the recipe type"
       >
         {categories.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
+          <MenuItem key={option.value} value={option.id}>
             {option.name}
           </MenuItem>
         ))}
       </TextField>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Category</InputLabel>
-        <Select
-          // labelId="demo-simple-select-label"
-          // id="demo-simple-select"
-          value={recipeFormValues.category}
-          label="category"
-          onChange={handleOnChange}
-        >
-          {categories.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
       <TextField
         label="Serving Size"
         variant="outlined"
@@ -115,12 +97,6 @@ const AddRecipeForm = () => {
         value={recipeFormValues.description}
         onChange={handleOnChange}
       />
-      {/* <FormControl>
-        <TextField
-          label="Step"
-          variant="outlined"
-        />
-      </FormControl> */}
       <TextField
         label="Notes"
         variant="outlined"
