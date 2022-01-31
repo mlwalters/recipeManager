@@ -106,8 +106,6 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult<Recipe>> PostRecipe([FromBody] AddRecipe addRecipe)
         {
-            // var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == addRecipe.Category);
-            // var addCategoryToRecipe = new CategoryRequest { Id = category.Id, Name = category.Name};
             var items = await _context.Items.ToListAsync();
             var instructions = addRecipe.Instructions.Select(ins => new Instruction
                 {
@@ -133,12 +131,10 @@ namespace api.Controllers
                 ServingSize = addRecipe.ServingSize,
                 CategoryId = addRecipe.Category,
                 Notes = addRecipe.Notes,
-                // Instructions = instructions,
-                // Ingredients = ingredients
+                Instructions = instructions,
+                Ingredients = ingredients
             };
 
-            _context.Instructions.AddRange(instructions);
-            _context.Ingredients.AddRange(ingredients);
             _context.Recipes.Add(newRecipe);
             await _context.SaveChangesAsync();
 

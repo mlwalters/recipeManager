@@ -1,10 +1,14 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+// import { Redirect } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+// import {
+//   FormGroup, FormLabel, // FormControl, FormHelperText, InputLabel, Input,
+// } from '@mui/material';
 
 const AddRecipeForm = () => {
   const [recipeFormValues, setRecipeFormValues] = useState({});
@@ -32,8 +36,9 @@ const AddRecipeForm = () => {
     e.preventDefault();
     setRecipeFormValues(recipeFormValues);
     try {
-      // await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
+      await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
       console.log(recipeFormValues);
+      // <Redirect to="/" />
     } catch (err) {
       setError(err);
     }
@@ -97,6 +102,31 @@ const AddRecipeForm = () => {
         value={recipeFormValues.description}
         onChange={handleOnChange}
       />
+      {/* <FormGroup>
+        <FormLabel>Ingredients</FormLabel>
+        <TextField
+          label="Amount"
+          variant="standard"
+          name="amount"
+          value={recipeFormValues.description}
+          onChange={handleOnChange}
+        />
+        <TextField
+          label="Ingredient"
+          variant="standard"
+          name="ingredient"
+          value={recipeFormValues.description}
+          onChange={handleOnChange}
+        />
+        <Button
+          // type="submit"
+          size="small"
+          color="secondary"
+          variant="contained"
+        >
+          Add ingredient
+        </Button>
+      </FormGroup> */}
       <TextField
         label="Notes"
         variant="outlined"

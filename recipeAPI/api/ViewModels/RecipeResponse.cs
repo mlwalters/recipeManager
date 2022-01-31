@@ -45,8 +45,8 @@ namespace api.Models
 
         public string Notes { get; set; }
 
-        public ICollection<AddInstruction> Instructions { get; set; }
-        public ICollection<AddIngredient> Ingredients { get; set; }
+        public ICollection<AddInstruction> Instructions { get; set; } = new List<AddInstruction>();
+        public ICollection<AddIngredient> Ingredients { get; set; } = new List<AddIngredient>();
         public AddRecipe(string name)
         {
             Name = name;
