@@ -18,7 +18,6 @@ const AddRecipeForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Category`);
-      // console.log(data);
       setCategories(data);
     };
 
@@ -37,8 +36,6 @@ const AddRecipeForm = () => {
     setRecipeFormValues(recipeFormValues);
     try {
       await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
-      console.log(recipeFormValues);
-      // <Redirect to="/" />
     } catch (err) {
       setError(err);
     }

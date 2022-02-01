@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-// import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -15,9 +13,11 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import LoadingDisplay from './sharedComponents/LoadingDisplay';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
+  const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -28,10 +28,16 @@ const RecipeCardList = () => {
       } catch (err) {
         setError(err);
       }
+      setLoadingState(false);
     };
-
     fetchData();
   }, []);
+
+  if (loadingState) {
+    return (
+      <LoadingDisplay />
+    );
+  }
 
   if (error) {
     return (
