@@ -38,7 +38,7 @@ namespace backend.Tests.Controllers
                 var response = await testObject.GetRecipes();
                 response.Should().BeOfType<OkObjectResult>();
 
-                var result = (response as OkObjectResult).Value as IEnumerable<Recipe>;
+                var result = (response as OkObjectResult).Value as IEnumerable<RecipeResponse>;
                 result.Count().Should().Be(db.Recipes.Count());
                 result.Count(recipe => recipe.Name == TestUtils.RECIPE_NAME).Should().Be(1);
             }
@@ -51,7 +51,7 @@ namespace backend.Tests.Controllers
 
                 var response = await testObject.GetRecipes();
                 response.Should().BeOfType<OkObjectResult>();
-                var result = (response as OkObjectResult).Value as IEnumerable<Recipe>;
+                var result = (response as OkObjectResult).Value as IEnumerable<RecipeResponse>;
                 result.Any().Should().BeFalse();
             }
 
@@ -76,10 +76,11 @@ namespace backend.Tests.Controllers
                 var response = await testObject.GetRecipe(testId);
                 response.Should().BeOfType<OkObjectResult>();
 
-                var result = (response as OkObjectResult).Value as Recipe;
+                var result = (response as OkObjectResult).Value as RecipeResponse;
+                Console.WriteLine(result);
                 result.Name.Should().Be(TestUtils.RECIPE_NAME);
                 result.ServingSize.Should().Be(TestUtils.RECIPE_SERVING_SIZE);
-                // result.RecipeType.Should().Be(TestUtils.RECIPE_CATEGORY);
+                // result.Category.Should().Be(TestUtils.RECIPE_CATEGORY);
                 result.Instructions.Count().Should().Be(TestUtils.INSTRUCTIONS_STEP.Count());
             }
 
