@@ -30,7 +30,7 @@ namespace backend.Tests.Controllers
             await db.DisposeAsync();
         }
 
-        public class GetRecipes : RecipeControllerTest
+        public class GetAll : RecipeControllerTest
         {
             [Fact]
             public async void WhenRecipesExist_ReturnsOkObjectContainingListOfRecipes()
@@ -38,13 +38,17 @@ namespace backend.Tests.Controllers
                 var response = await testObject.GetRecipes();
                 response.Should().BeOfType<OkObjectResult>();
 
-                var result = (response as OkObjectResult).Value as IEnumerable<RecipeResponse>;
-                result.Count().Should().Be(db.Recipes.Count());
-                result.Count(recipe => recipe.Name == TestUtils.RECIPE_NAME).Should().Be(1);
+                var recipeList = (response as OkObjectResult).Value as IEnumerable<RecipeResponse>;
+                recipeList.Count().Should().Be(db.Recipes.Count());
+                recipeList.Count(recipe => recipe.Name == TestData.RECIPE_NAME).Should().Be(1);
+                // var recipe = recipeList.First(p => p.Name == TestData.RECIPE_NAME);
+
+                // recipe.Name.Should().Be(TestData.RECIPE_NAME);
+                
             }
 
             [Fact]
-            public async void WhenNoProfiles_ReturnsEmptyList()
+            public async void WhenNoRecipes_ReturnsEmptyList()
             {
                 db.Recipes.RemoveRange(db.Recipes);
                 await db.SaveChangesAsync();
@@ -67,25 +71,25 @@ namespace backend.Tests.Controllers
                 exception.Message.Should().Be("Something Broke");
             }
         }
-        public class GetRecipe : RecipeControllerTest
+        public class GetById : RecipeControllerTest
         {
             [Fact]
             public async void WhenRecipeExists_ReturnsOkObjectContainingRecipe()
             {
-                var testId = db.Recipes.First(r => r.Name == TestUtils.RECIPE_NAME).Id;
+                var testId = db.Recipes.First(r => r.Name == TestData.RECIPE_NAME).Id;
                 var response = await testObject.GetRecipe(testId);
                 response.Should().BeOfType<OkObjectResult>();
 
                 var result = (response as OkObjectResult).Value as RecipeResponse;
                 Console.WriteLine(result);
-                result.Name.Should().Be(TestUtils.RECIPE_NAME);
-                result.ServingSize.Should().Be(TestUtils.RECIPE_SERVING_SIZE);
-                // result.Category.Should().Be(TestUtils.RECIPE_CATEGORY);
-                result.Instructions.Count().Should().Be(TestUtils.INSTRUCTIONS_STEP.Count());
+                result.Name.Should().Be(TestData.RECIPE_NAME);
+                result.ServingSize.Should().Be(TestData.SERVING_SIZE);
+                // result.Category.Should().Be(TestData.RECIPE_CATEGORY);
+                result.Instructions.Count().Should().Be(TestData.INSTRUCTIONS.Count());
             }
 
             [Fact]
-            public async void WhenNoProfile_ReturnsNotFound()
+            public async void WhenNoRecipe_ReturnsNotFound()
             {
                 var testId = 888999;
                 var response = await testObject.GetRecipe(testId);
