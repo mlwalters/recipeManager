@@ -1,14 +1,13 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-// import { Redirect } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-// import {
-//   FormGroup, FormLabel, // FormControl, FormHelperText, InputLabel, Input,
-// } from '@mui/material';
+import {
+  FormGroup, FormLabel, // FormControl, FormHelperText, InputLabel, Input,
+} from '@mui/material';
 
 const AddRecipeForm = () => {
   const [recipeFormValues, setRecipeFormValues] = useState({});
@@ -99,20 +98,20 @@ const AddRecipeForm = () => {
         value={recipeFormValues.description}
         onChange={handleOnChange}
       />
-      {/* <FormGroup>
+      <FormGroup>
         <FormLabel>Ingredients</FormLabel>
         <TextField
           label="Amount"
           variant="standard"
           name="amount"
-          value={recipeFormValues.description}
+          value={recipeFormValues.ingredients}
           onChange={handleOnChange}
         />
         <TextField
           label="Ingredient"
           variant="standard"
           name="ingredient"
-          value={recipeFormValues.description}
+          value={recipeFormValues.ingredients}
           onChange={handleOnChange}
         />
         <Button
@@ -123,7 +122,7 @@ const AddRecipeForm = () => {
         >
           Add ingredient
         </Button>
-      </FormGroup> */}
+      </FormGroup>
       <TextField
         label="Notes"
         variant="outlined"
