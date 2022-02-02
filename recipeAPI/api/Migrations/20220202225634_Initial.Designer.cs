@@ -11,8 +11,8 @@ using api.Models;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220116032347_AddIngredients")]
-    partial class AddIngredients
+    [Migration("20220202225634_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,81 @@ namespace api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("api.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 0,
+                            Name = "Seafood"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Name = "Beef"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Pork"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Poultry"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Soup"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Dessert"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Salad"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "DipsAndSauces"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Sides"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Bread"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "VegetarianOrVegan"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Snack"
+                        });
+                });
 
             modelBuilder.Entity("api.Models.Ingredient", b =>
                 {
@@ -36,9 +111,6 @@ namespace api.Migrations
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
@@ -179,6 +251,9 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -188,13 +263,12 @@ namespace api.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RecipeType")
-                        .HasColumnType("int");
-
                     b.Property<int>("ServingSize")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Recipes");
 
@@ -202,19 +276,19 @@ namespace api.Migrations
                         new
                         {
                             Id = 1,
+                            CategoryId = 5,
                             Description = "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.",
                             Name = "Strawberry Cheesecake",
                             Notes = "This is my favorite cheesecake recipe.",
-                            RecipeType = 4,
                             ServingSize = 12
                         },
                         new
                         {
                             Id = 2,
+                            CategoryId = 4,
                             Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
                             Name = "Lentil Soup",
                             Notes = "",
-                            RecipeType = 3,
                             ServingSize = 6
                         });
                 });
@@ -222,7 +296,7 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.Ingredient", b =>
                 {
                     b.HasOne("api.Models.Item", "Item")
-                        .WithMany()
+                        .WithMany("Ingredients")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -247,6 +321,27 @@ namespace api.Migrations
                         .IsRequired();
 
                     b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("api.Models.Recipe", b =>
+                {
+                    b.HasOne("api.Models.Category", "Category")
+                        .WithMany("Recipes")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("api.Models.Category", b =>
+                {
+                    b.Navigation("Recipes");
+                });
+
+            modelBuilder.Entity("api.Models.Item", b =>
+                {
+                    b.Navigation("Ingredients");
                 });
 
             modelBuilder.Entity("api.Models.Recipe", b =>
