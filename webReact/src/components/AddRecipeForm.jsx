@@ -36,24 +36,25 @@ const AddRecipeForm = () => {
     });
   };
 
-  const handleChangeInput = (id, event) => {
+  const handleChangeInput = (item, event) => {
     const newInputFields = ingredientInputFields.map((i) => {
       const ing = i;
-      if (id === ing.id) {
+      if (item === ing.item) {
         ing[event.target.name] = event.target.value;
       }
       return ing;
     });
     setIngredientInputFields(newInputFields);
+    console.log(newInputFields);
   };
 
   const handleAddFields = () => {
     setIngredientInputFields([...ingredientInputFields, { amount: '', item: '' }]);
   };
 
-  const handleRemoveFields = (id) => {
+  const handleRemoveFields = (item) => {
     const values = [...ingredientInputFields];
-    values.splice(values.findIndex((value) => value.id === id), 1);
+    values.splice(values.findIndex((value) => value.item === item), 1);
     setIngredientInputFields(values);
   };
 
@@ -132,24 +133,25 @@ const AddRecipeForm = () => {
           <FormControl>
             <FormLabel>Ingredients</FormLabel>
             { ingredientInputFields.map((ingredientInputField, index) => (
-              <div key={ingredientInputField.id}>
+              // eslint-disable-next-line react/no-array-index-key
+              <div key={index}>
                 <TextField
                   label="Amount"
                   variant="standard"
                   name="amount"
                   value={ingredientInputField.amount}
-                  onChange={(event) => handleChangeInput(ingredientInputField.id, event)}
+                  onChange={(event) => handleChangeInput(ingredientInputField.item, event)}
                 />
                 <TextField
                   label="Ingredient"
                   variant="standard"
                   name="item"
                   value={ingredientInputField.item}
-                  onChange={(event) => handleChangeInput(index, event)}
+                  onChange={(event) => handleChangeInput(ingredientInputField.item, event)}
                 />
                 <RemoveIcon
                   disabled={ingredientInputField.length === 1}
-                  onClick={() => handleRemoveFields(ingredientInputField.id)}
+                  onClick={() => handleRemoveFields(ingredientInputField.item)}
                 >
                   <RemoveIcon />
                 </RemoveIcon>
