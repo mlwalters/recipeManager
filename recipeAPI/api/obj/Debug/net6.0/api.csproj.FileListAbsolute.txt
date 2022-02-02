@@ -6,6 +6,7 @@
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/api.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/ref/api.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/api.pdb
+/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Castle.Core.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Humanizer.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/MessagePack.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/MessagePack.Annotations.dll
@@ -36,6 +37,7 @@
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Design.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll
+/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Proxies.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.SqlServer.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.Identity.Client.dll
@@ -266,5 +268,3 @@
 /Users/walterma/capstone-project/recipeAPI/api/obj/Debug/net6.0/ref/api.dll
 /Users/walterma/capstone-project/recipeAPI/api/obj/Debug/net6.0/api.pdb
 /Users/walterma/capstone-project/recipeAPI/api/obj/Debug/net6.0/api.genruntimeconfig.cache
-/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Castle.Core.dll
-/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Proxies.dll

@@ -36,6 +36,7 @@ namespace backend.Tests.Controllers
             public async void WhenRecipesExist_ReturnsOkObjectContainingListOfRecipes()
             {
                 var response = await testObject.GetRecipes();
+                Console.WriteLine(response);
                 response.Should().BeOfType<OkObjectResult>();
 
                 var recipeList = (response as OkObjectResult).Value as IEnumerable<RecipeResponse>;
