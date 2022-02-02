@@ -1,14 +1,13 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import Dashboard from './Dashboard';
+import HomePage from './HomePage';
 
 test('renders recipe dashboard on the home page', async () => {
   render(
     <BrowserRouter>
-      <Dashboard />
+      <HomePage />
     </BrowserRouter>,
   );
-  expect(await screen.findByText('Favorites')).toBeInTheDocument();
-  expect(await screen.findByText('Meal Planner')).toBeInTheDocument();
+  expect(await screen.findByText('Strawberry Cheesecake')).toBeInTheDocument();
 });
