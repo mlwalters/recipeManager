@@ -18,6 +18,9 @@ const AddRecipeForm = () => {
   const [ingredientInputFields, setIngredientInputFields] = useState([
     { amount: '', item: '' },
   ]);
+  const [instructionInputFields, setInstructionInputFields] = useState([
+    { stepNumber: 1, step: '' },
+  ]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -45,11 +48,24 @@ const AddRecipeForm = () => {
       return ing;
     });
     setIngredientInputFields(newInputFields);
-    console.log(newInputFields);
+  };
+
+  const handleChangeInputIns = (stepNumber, event) => {
+    const newInputFields = instructionInputFields.map((i) => {
+      const ins = i;
+      if (stepNumber === ins.stepNumber) {
+        ins[event.target.name] = event.target.value;
+      }
+      return ins;
+    });
+    setInstructionInputFields(newInputFields);
   };
 
   const handleAddFields = () => {
     setIngredientInputFields([...ingredientInputFields, { amount: '', item: '' }]);
+  };
+  const handleAddFieldsIng = () => {
+    setInstructionInputFields([...instructionInputFields, { stepNumber: 1, step: '' }]);
   };
 
   const handleRemoveFields = (item) => {
@@ -57,14 +73,20 @@ const AddRecipeForm = () => {
     values.splice(values.findIndex((value) => value.item === item), 1);
     setIngredientInputFields(values);
   };
+  const handleRemoveFieldsIng = (stepNumber) => {
+    const values = [...instructionInputFields];
+    values.splice(values.findIndex((value) => value.stepNumber === stepNumber), 1);
+    setInstructionInputFields(values);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setRecipeFormValues(() => { recipeFormValues.ingredients = ingredientInputFields; });
+    setRecipeFormValues(() => { recipeFormValues.instructions = instructionInputFields; });
     setRecipeFormValues(recipeFormValues);
     try {
-      await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
-      // console.log(recipeFormValues);
+      // await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
+      console.log(recipeFormValues);
     } catch (err) {
       setError(err);
     }
@@ -96,11 +118,20 @@ const AddRecipeForm = () => {
           onChange={handleOnChange}
         />
         <TextField
+          label="Description"
+          variant="outlined"
+          multiline
+          rows={2}
+          name="description"
+          value={recipeFormValues.description}
+          onChange={handleOnChange}
+        />
+        <TextField
           id="outlined-select-category"
           select
           label="Category"
           name="category"
-          value={recipeFormValues.category}
+          value={recipeFormValues.category || ''}
           onChange={handleOnChange}
           helperText="Please select the recipe type"
         >
@@ -118,15 +149,6 @@ const AddRecipeForm = () => {
           value={recipeFormValues.servingSize}
           min="0"
           max="30"
-          onChange={handleOnChange}
-        />
-        <TextField
-          label="Description"
-          variant="outlined"
-          multiline
-          rows={2}
-          name="description"
-          value={recipeFormValues.description}
           onChange={handleOnChange}
         />
         <FormGroup>
@@ -149,17 +171,48 @@ const AddRecipeForm = () => {
                   value={ingredientInputField.item}
                   onChange={(event) => handleChangeInput(ingredientInputField.item, event)}
                 />
-                <RemoveIcon
-                  disabled={ingredientInputField.length === 1}
-                  onClick={() => handleRemoveFields(ingredientInputField.item)}
-                >
-                  <RemoveIcon />
-                </RemoveIcon>
+                {index ? (
+                  <RemoveIcon
+                    disabled={ingredientInputField.length === 1}
+                    onClick={() => handleRemoveFields(ingredientInputField.item)}
+                  />
+                ) : null}
                 <AddIcon
                   onClick={handleAddFields}
-                >
-                  <AddIcon />
-                </AddIcon>
+                />
+              </div>
+            )) }
+          </FormControl>
+        </FormGroup>
+        <FormGroup>
+          <FormControl>
+            <FormLabel>Instructions</FormLabel>
+            { instructionInputFields.map((instructionField, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <div key={index}>
+                <TextField
+                  label="Step #"
+                  variant="standard"
+                  name="stepNumber"
+                  value={instructionField.stepNumber}
+                  onChange={(event) => handleChangeInputIns(instructionField.stepNumber, event)}
+                />
+                <TextField
+                  label="Step"
+                  variant="standard"
+                  name="step"
+                  value={instructionField.step}
+                  onChange={(event) => handleChangeInputIns(instructionField.stepNumber, event)}
+                />
+                {index ? (
+                  <RemoveIcon
+                    disabled={instructionField.length === 1}
+                    onClick={() => handleRemoveFieldsIng(instructionField.step)}
+                  />
+                ) : null}
+                <AddIcon
+                  onClick={handleAddFieldsIng}
+                />
               </div>
             )) }
           </FormControl>
