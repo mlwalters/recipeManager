@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import HomePage from './HomePage';
+import LandingPage from './LandingPage';
 
 test('renders recipe dashboard on the home page', async () => {
   render(
     <BrowserRouter>
-      <HomePage />
+      <LandingPage />
     </BrowserRouter>,
   );
-  expect(await screen.findByText('LOGO')).toBeInTheDocument();
+  expect(await screen.findByText('This is the landing page')).toBeInTheDocument();
 });

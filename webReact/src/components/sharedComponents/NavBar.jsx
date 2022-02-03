@@ -13,10 +13,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+
+import LogoutButton from '../LogoutButton';
+import Profile from '../Authentication/Profile';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 // const pages = ['Recipes', 'Favorites', 'Meal Planner', 'Grocery List'];
-const settings = ['Account', 'Dashboard', 'Logout'];
+// const settings = ['Account', 'Dashboard', 'Logout'];
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -47,7 +50,7 @@ const NavBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            <Link to="/">
+            <Link to="/home">
               LOGO
             </Link>
           </Typography>
@@ -131,7 +134,7 @@ const NavBar = () => {
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               <Typography>
-                <Link to="/">
+                <Link to="/home">
                   Favorites
                 </Link>
               </Typography>
@@ -168,11 +171,17 @@ const NavBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center"><Profile /></Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center"><LogoutButton /></Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

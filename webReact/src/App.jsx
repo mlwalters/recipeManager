@@ -1,16 +1,20 @@
 import './App.scss';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
 import HomePage from './components/HomePage';
 import RecipeDetails from './components/RecipeDetails';
 import AddRecipePage from './components/AddRecipePage';
+import Profile from './components/Authentication/Profile';
 
 function App() {
   return (
     <div>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
-        <Route path="/" element={<HomePage />} />
         <Route path="/recipe/add" element={<AddRecipePage />} />
       </Routes>
     </div>

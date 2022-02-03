@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+// import { useAuth0 } from '@auth0/auth0-react';
 import RecipeCardList from './RecipeCardList';
 import NavBar from './sharedComponents/NavBar';
 
-const Dashboard = () => (
+const HomePage = () => (
+  // const { isAuthenticated } = useAuth0();
+  // isAuthenticated && (
   <Grid container>
     <NavBar />
     <Grid item xs={2}>
@@ -23,6 +26,6 @@ const Dashboard = () => (
       </Grid>
     </Grid>
   </Grid>
+  // )
 );
-
-export default Dashboard;
+export default HomePage;
