@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,8 +13,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+// import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const pages = ['Recipes', 'Favorites', 'Meal Planner', 'Grocery List'];
+// const pages = ['Recipes', 'Favorites', 'Meal Planner', 'Grocery List'];
 const settings = ['Account', 'Dashboard', 'Logout'];
 
 const NavBar = () => {
@@ -44,7 +47,9 @@ const NavBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            <Link to="/">
+              LOGO
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -76,11 +81,18 @@ const NavBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+              {/* {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography>
+                  <Link to="/recipe/add">
+                    Add Recipe
+                  </Link>
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -89,10 +101,13 @@ const NavBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            <Link to="/">
+              LOGO
+            </Link>
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {/* {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -100,7 +115,35 @@ const NavBar = () => {
               >
                 {page}
               </Button>
-            ))}
+            ))} */}
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Typography>
+                <Link to="/recipe/add">
+                  Add Recipe
+                </Link>
+              </Typography>
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Typography>
+                <Link to="/">
+                  Favorites
+                </Link>
+              </Typography>
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <Typography>
+                Shopping List
+              </Typography>
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
