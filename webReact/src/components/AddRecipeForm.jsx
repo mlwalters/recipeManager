@@ -123,7 +123,7 @@ const AddRecipeForm = () => {
           multiline
           rows={2}
           name="description"
-          value={recipeFormValues.description}
+          value={recipeFormValues.description || ''}
           onChange={handleOnChange}
         />
         <TextField
@@ -146,7 +146,7 @@ const AddRecipeForm = () => {
           variant="outlined"
           type="number"
           name="servingSize"
-          value={recipeFormValues.servingSize}
+          value={recipeFormValues.servingSize || 0}
           min="0"
           max="30"
           onChange={handleOnChange}
@@ -223,7 +223,7 @@ const AddRecipeForm = () => {
           multiline
           rows={3}
           name="notes"
-          value={recipeFormValues.notes}
+          value={recipeFormValues.notes || ''}
           onChange={handleOnChange}
         />
         <Button
