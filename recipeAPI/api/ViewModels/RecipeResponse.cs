@@ -17,7 +17,7 @@ namespace api.Models
 
         [Range(0, 100)]
         public int ServingSize { get; set; }
-        
+
         public string Category { get; set; }
 
         [MaxLength(300)]
@@ -29,8 +29,30 @@ namespace api.Models
         {
             Name = name;
         }
-        public RecipeResponse() { }
+        public RecipeResponse(Recipe recipe)
+        {
+
+            Id = recipe.Id;
+            Name = recipe.Name;
+            Description = recipe.Description;
+            ServingSize = recipe.ServingSize;
+            Notes = recipe.Notes;
+            Category = recipe.Category.Name;
+            Instructions = recipe.Instructions?.Select(instruction => new InstructionResponse
+            {
+                Id = instruction.Id,
+                Step = instruction.Step,
+                StepNumber = instruction.StepNumber
+            });
+            Ingredients = recipe.Ingredients?.Select(ingredient => new IngredientResponse
+            {
+                Id = ingredient.Id,
+                Name = ingredient.Item.ItemName,
+                Amount = ingredient.Amount
+            });
+        }
     }
+
     public class AddRecipe
     {
         public int Id { get; set; }
@@ -40,7 +62,7 @@ namespace api.Models
         public string Description { get; set; }
 
         public int ServingSize { get; set; }
-        
+
         public CategoryId Category { get; set; } // Change to int?
 
         public string Notes { get; set; }

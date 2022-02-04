@@ -30,12 +30,12 @@ namespace backend.Tests.Controllers
             await db.DisposeAsync();
         }
 
-        public class GetAll : RecipeControllerTest
+        public class Get : RecipeControllerTest
         {
             [Fact]
             public async void WhenRecipesExist_ReturnsOkObjectContainingListOfRecipes()
             {
-                var response = await testObject.GetRecipes();
+                var response = await testObject.Get();
                 Console.WriteLine(response);
                 response.Should().BeOfType<OkObjectResult>();
 
@@ -54,7 +54,7 @@ namespace backend.Tests.Controllers
                 db.Recipes.RemoveRange(db.Recipes);
                 await db.SaveChangesAsync();
 
-                var response = await testObject.GetRecipes();
+                var response = await testObject.Get();
                 response.Should().BeOfType<OkObjectResult>();
                 var result = (response as OkObjectResult).Value as IEnumerable<RecipeResponse>;
                 result.Any().Should().BeFalse();
@@ -67,7 +67,7 @@ namespace backend.Tests.Controllers
                 mockDb.Setup(x => x.Recipes).Throws(new Exception("Something Broke"));
                 var testObject = new RecipeController(mockDb.Object, new Mock<ILogger<RecipeController>>().Object);
 
-                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.GetRecipes());
+                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.Get());
 
                 exception.Message.Should().Be("Something Broke");
             }
@@ -78,7 +78,7 @@ namespace backend.Tests.Controllers
             public async void WhenRecipeExists_ReturnsOkObjectContainingRecipe()
             {
                 var testId = db.Recipes.First(r => r.Name == TestData.RECIPE_NAME).Id;
-                var response = await testObject.GetRecipe(testId);
+                var response = await testObject.GetById(testId);
                 response.Should().BeOfType<OkObjectResult>();
 
                 var result = (response as OkObjectResult).Value as RecipeResponse;
@@ -93,7 +93,7 @@ namespace backend.Tests.Controllers
             public async void WhenNoRecipe_ReturnsNotFound()
             {
                 var testId = 888999;
-                var response = await testObject.GetRecipe(testId);
+                var response = await testObject.GetById(testId);
                 response.Should().BeOfType<NotFoundResult>();
             }
 
@@ -105,7 +105,7 @@ namespace backend.Tests.Controllers
                 mockDb.Setup(x => x.Recipes).Throws(new Exception("Something Broke"));
                 var testObject = new RecipeController(mockDb.Object, new Mock<ILogger<RecipeController>>().Object);
 
-                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.GetRecipe(testId));
+                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.GetById(testId));
 
                 exception.Message.Should().Be("Something Broke");
             }
