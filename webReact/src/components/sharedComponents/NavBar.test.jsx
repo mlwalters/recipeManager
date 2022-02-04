@@ -10,7 +10,7 @@ test('renders navigation bar on the home page', async () => {
     </BrowserRouter>,
   );
   expect(await screen.findByText('LOGO')).toBeInTheDocument();
-  expect(await screen.findByText('Recipes')).toBeInTheDocument();
+  expect(await screen.findByText('Add Recipe')).toBeInTheDocument();
   expect(await screen.findByText('Favorites')).toBeInTheDocument();
   expect(await screen.findByText('Meal Planner')).toBeInTheDocument();
 });

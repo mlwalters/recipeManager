@@ -51,21 +51,21 @@ const AddRecipeForm = () => {
   };
 
   const handleChangeInputIns = (stepNumber, event) => {
-    const newInputFields = instructionInputFields.map((i) => {
+    const newInsInputFields = instructionInputFields.map((i) => {
       const ins = i;
       if (stepNumber === ins.stepNumber) {
         ins[event.target.name] = event.target.value;
       }
       return ins;
     });
-    setInstructionInputFields(newInputFields);
+    setInstructionInputFields(newInsInputFields);
   };
 
   const handleAddFields = () => {
     setIngredientInputFields([...ingredientInputFields, { amount: '', item: '' }]);
   };
-  const handleAddFieldsIng = () => {
-    setInstructionInputFields([...instructionInputFields, { stepNumber: 1, step: '' }]);
+  const handleAddFieldsIns = () => {
+    setInstructionInputFields([...instructionInputFields, { stepNumber: 0, step: '' }]);
   };
 
   const handleRemoveFields = (item) => {
@@ -73,7 +73,7 @@ const AddRecipeForm = () => {
     values.splice(values.findIndex((value) => value.item === item), 1);
     setIngredientInputFields(values);
   };
-  const handleRemoveFieldsIng = (stepNumber) => {
+  const handleRemoveFieldsIns = (stepNumber) => {
     const values = [...instructionInputFields];
     values.splice(values.findIndex((value) => value.stepNumber === stepNumber), 1);
     setInstructionInputFields(values);
@@ -85,8 +85,8 @@ const AddRecipeForm = () => {
     setRecipeFormValues(() => { recipeFormValues.instructions = instructionInputFields; });
     setRecipeFormValues(recipeFormValues);
     try {
-      // await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
-      console.log(recipeFormValues);
+      await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
+      // console.log(recipeFormValues);
     } catch (err) {
       setError(err);
     }
@@ -207,11 +207,11 @@ const AddRecipeForm = () => {
                 {index ? (
                   <RemoveIcon
                     disabled={instructionField.length === 1}
-                    onClick={() => handleRemoveFieldsIng(instructionField.step)}
+                    onClick={() => handleRemoveFieldsIns(instructionField.step)}
                   />
                 ) : null}
                 <AddIcon
-                  onClick={handleAddFieldsIng}
+                  onClick={handleAddFieldsIns}
                 />
               </div>
             )) }
