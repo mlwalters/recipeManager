@@ -114,6 +114,7 @@ const AddRecipeForm = () => {
           variant="outlined"
           required
           name="name"
+          data-testid="Recipe name"
           value={recipeFormValues.name}
           onChange={handleOnChange}
         />
@@ -123,14 +124,16 @@ const AddRecipeForm = () => {
           multiline
           rows={2}
           name="description"
+          data-testid="Description"
           value={recipeFormValues.description || ''}
           onChange={handleOnChange}
         />
         <TextField
-          id="outlined-select-category"
+          // id="outlined-select-category"
           select
           label="Category"
           name="category"
+          data-testid="Category"
           value={recipeFormValues.category || ''}
           onChange={handleOnChange}
           helperText="Please select the recipe type"
@@ -146,6 +149,7 @@ const AddRecipeForm = () => {
           variant="outlined"
           type="number"
           name="servingSize"
+          data-testid="Serving Size"
           value={recipeFormValues.servingSize || 0}
           min="0"
           max="30"
@@ -154,7 +158,7 @@ const AddRecipeForm = () => {
         <FormGroup>
           <FormControl>
             <FormLabel>Ingredients</FormLabel>
-            { ingredientInputFields.map((ingredientInputField, index) => (
+            {ingredientInputFields.map((ingredientInputField, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <div key={index}>
                 <TextField
@@ -181,21 +185,25 @@ const AddRecipeForm = () => {
                   onClick={handleAddFields}
                 />
               </div>
-            )) }
+            ))}
           </FormControl>
         </FormGroup>
         <FormGroup>
           <FormControl>
             <FormLabel>Instructions</FormLabel>
-            { instructionInputFields.map((instructionField, index) => (
+            {instructionInputFields.map((instructionField, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <div key={index}>
                 <TextField
                   label="Step #"
                   variant="standard"
                   name="stepNumber"
-                  value={instructionField.stepNumber}
-                  onChange={(event) => handleChangeInputIns(instructionField.stepNumber, event)}
+                  value={index + 1} // set to the index + 1
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  // try to make read only
+                  // onChange={(event) => handleChangeInputIns(instructionField.stepNumber, event)}
                 />
                 <TextField
                   label="Step"
@@ -214,7 +222,7 @@ const AddRecipeForm = () => {
                   onClick={handleAddFieldsIns}
                 />
               </div>
-            )) }
+            ))}
           </FormControl>
         </FormGroup>
         <TextField

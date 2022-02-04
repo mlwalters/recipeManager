@@ -15,3 +15,15 @@ Then('I see {string}', (label) => {
     .contains(label)
     .should('exist');
 });
+
+// Given('I see my current recipes', () => {
+//   // check that recipe titles exist
+// });
+
+// And('I add...', () => {
+//   // code that adds a recipe
+// });
+
+// Then('I see...', () => {
+//   // check that recipe titles exist and new one
+// });

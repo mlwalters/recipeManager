@@ -2,12 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 // import { BrowserRouter } from 'react-router';
+
 import {
   render, screen,
 } from '@testing-library/react';
 // import userEvent from '@testing-library/user-event';
 // import { act } from 'react-dom/test-utils';
 import AddRecipeForm from './AddRecipeForm';
+// import AddRecipePage from './AddRecipePage';
+// import NavBar from './sharedComponents/NavBar';
 
 const testRecipes = [
   {
@@ -76,9 +79,37 @@ const testRecipes = [
   },
 ];
 
+const testCategory = [
+  {
+    id: 0,
+    name: 'Seafood',
+  },
+  {
+    id: 1,
+    name: 'Beef',
+  },
+  {
+    id: 2,
+    name: 'Pork',
+  },
+  {
+    id: 3,
+    name: 'Poultry',
+  },
+  {
+    id: 4,
+    name: 'Soup',
+  },
+  {
+    id: 5,
+    name: 'Dessert',
+  },
+];
+
 // const addedRecipe = {
-//   id: 213, name: 'Mushroom Risotto', description: '',
-// notes: 'Use dried mushrooms for extra flavor',
+//   id: 213, name: 'Mushroom Risotto',
+//   description: '',
+//   notes: 'Use dried mushrooms for extra flavor',
 // };
 
 // const clickToAddRecipe = async () => {
@@ -92,20 +123,25 @@ const testRecipes = [
 //       <AddRecipeForm />
 //     </BrowserRouter>,
 //   );
-describe('when form is rendered', () => {
-  beforeEach(async () => {
-    const mockApi = new MockAdapter(axios);
-    mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, testRecipes);
-  });
+// describe('when form is rendered', () => {
+//   beforeEach(async () => {
+//     const mockApi = new MockAdapter(axios);
+//     mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, testRecipes);
+//     mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategory);
+//   });
 
-  test('input fields to add a new recipe are displayed', async () => {
-    render(
-      <AddRecipeForm />,
-    );
-    expect(await screen.findAllByLabelText('Recipe name')).toBeInTheDocument();
-    expect(await screen.findByLabelText('Description')).toBeInTheDocument();
-    expect(await screen.findByLabelText('Category')).toBeInTheDocument();
-    // expect(await screen.findByText(testRecipes[0].name)).toBeInTheDocument();
-    // expect(await screen.findByText(testRecipes[1].name)).toBeInTheDocument();
-  });
+test('input fields to add a new recipe are displayed', async () => {
+  const mockApi = new MockAdapter(axios);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, testRecipes);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategory);
+  // mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, addedRecipe);
+  render(
+    <AddRecipeForm />,
+  );
+  expect(await screen.findByTestId('Recipe name')).toBeInTheDocument();
+  expect(await screen.findByTestId('Description')).toBeInTheDocument();
+  expect(await screen.findByTestId('Category')).toBeInTheDocument();
+  expect(await screen.findByTestId('Serving Size')).toBeInTheDocument();
+  // expect(await screen.findByDisplayValue('Beef')).toBeInTheDocument();
 });
+// });
