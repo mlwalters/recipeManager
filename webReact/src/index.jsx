@@ -6,13 +6,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
 
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+
 ReactDOM.render(
   <Auth0Provider
-    // domain={`${process.env.AUTH0_DOMAIN}`}
-    domain="dev-ynsj33me.us.auth0.com"
-    // clientId={`${process.env.AUTH0_CLIENT_SECRET}`}
-    clientId="fT0ON4CEBe9xxu5Tv64f26jPoPmwjE9I"
-    redirectUri="http://localhost:3000/home"
+    domain={domain}
+    clientId={clientId}
+    redirectUri={window.location.origin}
   >
     <React.StrictMode>
       <BrowserRouter>

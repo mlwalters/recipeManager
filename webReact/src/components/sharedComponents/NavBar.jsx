@@ -9,17 +9,16 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
+import LoginButton from '../LoginButton';
 import LogoutButton from '../LogoutButton';
 import Profile from '../Authentication/Profile';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
-
-// const pages = ['Recipes', 'Favorites', 'Meal Planner', 'Grocery List'];
-// const settings = ['Account', 'Dashboard', 'Logout'];
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -50,7 +49,7 @@ const NavBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            <Link to="/home">
+            <Link to="/">
               LOGO
             </Link>
           </Typography>
@@ -134,7 +133,7 @@ const NavBar = () => {
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               <Typography>
-                <Link to="/home">
+                <Link to="/">
                   Favorites
                 </Link>
               </Typography>
@@ -152,7 +151,7 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <AccountCircleIcon alt="account settings" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -176,6 +175,9 @@ const NavBar = () => {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))} */}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center"><LoginButton /></Typography>
+              </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography textAlign="center"><Profile /></Typography>
               </MenuItem>
