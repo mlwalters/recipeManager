@@ -23,8 +23,11 @@ namespace api.Models
         [MaxLength(300)]
         public string Notes { get; set; }
 
+        public string User { get; set; }
+
         public virtual IEnumerable<InstructionResponse> Instructions { get; set; } //= new List<Instruction>();
         public virtual IEnumerable<IngredientResponse> Ingredients { get; set; } //= new List<Instruction>();
+
         public RecipeResponse(string name)
         {
             Name = name;

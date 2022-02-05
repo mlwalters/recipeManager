@@ -14,9 +14,9 @@ namespace api.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly ILogger<RecipeController> _logger;
+        private readonly ILogger<CategoryController> _logger;
 
-        public CategoryController(AppDbContext context, ILogger<RecipeController> logger)
+        public CategoryController(AppDbContext context, ILogger<CategoryController> logger)
         {
             _context = context;
             _logger = logger;

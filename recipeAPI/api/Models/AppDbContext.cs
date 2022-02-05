@@ -15,6 +15,7 @@ namespace api.Models
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,19 +48,21 @@ namespace api.Models
                     Description = "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.",
                     ServingSize = 12,
                     CategoryId = CategoryId.Dessert,
-                    Notes = "This is my favorite cheesecake recipe."
+                    Notes = "This is my favorite cheesecake recipe.",
+                    UserId = 1
                 },
-                new
+                new Recipe
                 {
                     Id = 2,
                     Name = "Lentil Soup",
                     Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
                     CategoryId = CategoryId.Soup,
                     ServingSize = 6,
-                    Notes = ""
+                    Notes = "",
+                    UserId = 1
                 }
             );
-           
+
             modelBuilder.Entity<Instruction>()
             .HasData(
                 new

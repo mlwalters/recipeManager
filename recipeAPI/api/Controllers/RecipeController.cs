@@ -54,11 +54,6 @@ namespace api.Controllers
                 .Include(r => r.Category)
                 .FirstOrDefaultAsync(recipe => recipe.Id == id);
 
-                // if (recipe == null)
-                // {
-                //     return NotFound();
-                // }
-
                 return recipe is not null ? Ok(new RecipeResponse(recipe)) : new NotFoundResult();
             }
             catch (Exception e)
