@@ -97,7 +97,7 @@ const NavBar = () => {
               </MenuItem>
             </Menu>
           </Box>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="div"
@@ -106,7 +106,7 @@ const NavBar = () => {
             <Link to="/">
               LOGO
             </Link>
-          </Typography>
+          </Typography> */}
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {/* {pages.map((page) => (

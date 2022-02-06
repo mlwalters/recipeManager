@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -9,7 +10,6 @@ import CardActions from '@mui/material/CardActions';
 // import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-// import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -46,7 +46,12 @@ const RecipeCardList = () => {
   }
 
   return (
-    <div>
+    <Box sx={{
+      display: 'grid',
+      gap: 3,
+      gridTemplateColumns: 'repeat(3, 1fr)',
+    }}
+    >
       {recipes.map(({
         id, name, description, category,
       }) => (
@@ -78,7 +83,7 @@ const RecipeCardList = () => {
           </CardActions>
         </Card>
       ))}
-    </div>
+    </Box>
   );
 };
 

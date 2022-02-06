@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Fab from '@mui/material/Fab';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -22,6 +23,7 @@ const RecipeDetails = () => {
   });
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const print = () => window.print();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,6 +86,14 @@ const RecipeDetails = () => {
                 </p>
               </div>
             ))}
+          </Item>
+          <Item>
+            <Button onClick={print} sx={{ displayPrint: 'none' }}>
+              <Fab color="secondary" variant="extended">
+                Print Recipe
+                {' '}
+              </Fab>
+            </Button>
           </Item>
         </Grid>
       </Grid>
