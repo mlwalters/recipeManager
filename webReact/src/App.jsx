@@ -8,14 +8,14 @@ import Profile from './components/Authentication/Profile';
 
 function App() {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
         <Route path="/recipe/add" element={<AddRecipePage />} />
       </Routes>
-    </div>
+    </>
   );
 }
 

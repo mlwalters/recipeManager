@@ -3,8 +3,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Button from '@mui/material/Button';
 
 const LoginButton = () => {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, error } = useAuth0();
 
+  if (error) {
+    return `Oops, ${error.message}.`;
+  }
   return (
     !isAuthenticated
     && (
