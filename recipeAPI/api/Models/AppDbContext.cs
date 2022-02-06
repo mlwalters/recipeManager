@@ -19,23 +19,36 @@ namespace api.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+            .HasData(
+                new User
+                {
+                    Id = 1,
+                    Name = "Midnight Firespark",
+                    Email = "jofoda1740@afarek.com"
+                }
+            );
+
             modelBuilder.Entity<Recipe>()
-            .Property(e => e.CategoryId)
+            .Property(u => u.UserId);
+
+            modelBuilder.Entity<Recipe>()
+            .Property(c => c.CategoryId)
             .HasConversion<int>();
 
             modelBuilder
             .Entity<Category>()
-            .Property(e => e.Id)
+            .Property(c => c.Id)
             .HasConversion<int>();
 
             modelBuilder
             .Entity<Category>().HasData(
                 Enum.GetValues(typeof(CategoryId))
                     .Cast<CategoryId>()
-                    .Select(e => new Category()
+                    .Select(c => new Category()
                     {
-                        Id = e,
-                        Name = e.ToString()
+                        Id = c,
+                        Name = c.ToString()
                     })
             );
 
@@ -94,6 +107,7 @@ namespace api.Models
                     RecipeId = 2
                 }
             );
+
             modelBuilder.Entity<Item>()
             .HasData(
                 new
@@ -112,6 +126,7 @@ namespace api.Models
                     ItemName = "brown lentils",
                 }
             );
+
             modelBuilder.Entity<Ingredient>()
             .HasData(
                 new

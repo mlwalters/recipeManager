@@ -34,6 +34,20 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Recipes",
                 columns: table => new
                 {
@@ -43,7 +57,8 @@ namespace api.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ServingSize = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,6 +67,12 @@ namespace api.Migrations
                         name: "FK_Recipes_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Recipes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -134,14 +155,19 @@ namespace api.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Recipes",
-                columns: new[] { "Id", "CategoryId", "Description", "Name", "Notes", "ServingSize" },
-                values: new object[] { 1, 5, "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.", "Strawberry Cheesecake", "This is my favorite cheesecake recipe.", 12 });
+                table: "Users",
+                columns: new[] { "Id", "Email", "Name" },
+                values: new object[] { 1, "jofoda1740@afarek.com", "Midnight Firespark" });
 
             migrationBuilder.InsertData(
                 table: "Recipes",
-                columns: new[] { "Id", "CategoryId", "Description", "Name", "Notes", "ServingSize" },
-                values: new object[] { 2, 4, "The touch of spices and finishing it off with lemon really lifts this soup to the next level.", "Lentil Soup", "", 6 });
+                columns: new[] { "Id", "CategoryId", "Description", "Name", "Notes", "ServingSize", "UserId" },
+                values: new object[] { 1, 5, "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.", "Strawberry Cheesecake", "This is my favorite cheesecake recipe.", 12, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Recipes",
+                columns: new[] { "Id", "CategoryId", "Description", "Name", "Notes", "ServingSize", "UserId" },
+                values: new object[] { 2, 4, "The touch of spices and finishing it off with lemon really lifts this soup to the next level.", "Lentil Soup", "", 6, 1 });
 
             migrationBuilder.InsertData(
                 table: "Ingredients",
@@ -184,6 +210,11 @@ namespace api.Migrations
                 name: "IX_Recipes_CategoryId",
                 table: "Recipes",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recipes_UserId",
+                table: "Recipes",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -202,6 +233,9 @@ namespace api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

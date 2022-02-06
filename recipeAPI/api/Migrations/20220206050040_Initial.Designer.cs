@@ -11,7 +11,7 @@ using api.Models;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220202225634_Initial")]
+    [Migration("20220206050040_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,9 +266,14 @@ namespace api.Migrations
                     b.Property<int>("ServingSize")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Recipes");
 
@@ -280,7 +285,8 @@ namespace api.Migrations
                             Description = "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.",
                             Name = "Strawberry Cheesecake",
                             Notes = "This is my favorite cheesecake recipe.",
-                            ServingSize = 12
+                            ServingSize = 12,
+                            UserId = 1
                         },
                         new
                         {
@@ -289,7 +295,36 @@ namespace api.Migrations
                             Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
                             Name = "Lentil Soup",
                             Notes = "",
-                            ServingSize = 6
+                            ServingSize = 6,
+                            UserId = 1
+                        });
+                });
+
+            modelBuilder.Entity("api.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "jofoda1740@afarek.com",
+                            Name = "Midnight Firespark"
                         });
                 });
 
@@ -331,7 +366,15 @@ namespace api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("api.Models.User", "User")
+                        .WithMany("Recipes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("api.Models.Category", b =>
@@ -349,6 +392,11 @@ namespace api.Migrations
                     b.Navigation("Ingredients");
 
                     b.Navigation("Instructions");
+                });
+
+            modelBuilder.Entity("api.Models.User", b =>
+                {
+                    b.Navigation("Recipes");
                 });
 #pragma warning restore 612, 618
         }

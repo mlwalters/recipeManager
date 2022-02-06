@@ -25,8 +25,8 @@ namespace api.Models
 
         public int UserId { get; set; }
 
-        public virtual IEnumerable<InstructionResponse> Instructions { get; set; } //= new List<Instruction>();
-        public virtual IEnumerable<IngredientResponse> Ingredients { get; set; } //= new List<Instruction>();
+        public virtual IEnumerable<InstructionResponse> Instructions { get; set; }
+        public virtual IEnumerable<IngredientResponse> Ingredients { get; set; }
 
         public RecipeResponse(string name)
         {
@@ -59,17 +59,17 @@ namespace api.Models
 
     public class AddRecipe
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
 
         public int ServingSize { get; set; }
 
-        public CategoryId Category { get; set; } // Change to int?
+        public CategoryId Category { get; set; }
 
         public string Notes { get; set; }
+
+        public int UserId { get; set; }
 
         public ICollection<AddInstruction> Instructions { get; set; } = new List<AddInstruction>();
         public ICollection<AddIngredient> Ingredients { get; set; } = new List<AddIngredient>();

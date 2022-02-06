@@ -27,7 +27,6 @@ namespace api.Controllers
         {
             try
             {
-                var user = await _context.Users.FirstOrDefaultAsync();
                 var recipes = await _context.Recipes
                 .Include(ins => ins.Instructions)
                 .Include(ing => ing.Ingredients)
@@ -67,13 +66,14 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddRecipe addRecipe)
         {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == addRecipe.UserId);
             var items = await _context.Items.ToListAsync();
             var instructions = addRecipe.Instructions.Select(ins => new Instruction
             {
                 Id = ins.Id,
                 Step = ins.Step,
                 StepNumber = ins.StepNumber,
-                RecipeId = addRecipe.Id
+                RecipeId = user.Id
             }).ToList();
 
             var ingredients = addRecipe.Ingredients.Select(ing => new Ingredient
@@ -82,7 +82,7 @@ namespace api.Controllers
                 //Item = items.First(i => i.ItemId == ing.ItemId, new Item { ItemName = ing.Item}), // OTHER OPTION IS TERNARY --> ? items.First(i => i.ItemName.ToLower() == ing.Item.ToLower()) : new Item { ItemName = ing.Item}, //save as a function
                 Item = items.FirstOrDefault(i => i.ItemName.ToLower().Trim() == ing.Item.ToLower().Trim(), new Item { ItemName = ing.Item.ToLower().Trim() }), //? items.First(i => i.ItemName.ToLower() == ing.Item.ToLower()) : new Item { ItemName = ing.Item}, //save as a function
                 Amount = ing.Amount,
-                RecipeId = addRecipe.Id
+                RecipeId = user.Id
             }).ToList();
 
             Recipe newRecipe = new Recipe()
@@ -93,7 +93,8 @@ namespace api.Controllers
                 CategoryId = addRecipe.Category,
                 Notes = addRecipe.Notes,
                 Instructions = instructions,
-                Ingredients = ingredients
+                Ingredients = ingredients,
+                UserId = user.Id
             };
 
             _context.Recipes.Add(newRecipe);
