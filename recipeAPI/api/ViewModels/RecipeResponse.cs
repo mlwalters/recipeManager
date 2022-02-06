@@ -23,7 +23,7 @@ namespace api.Models
         [MaxLength(300)]
         public string Notes { get; set; }
 
-        public string User { get; set; }
+        public int UserId { get; set; }
 
         public virtual IEnumerable<InstructionResponse> Instructions { get; set; } //= new List<Instruction>();
         public virtual IEnumerable<IngredientResponse> Ingredients { get; set; } //= new List<Instruction>();
@@ -41,6 +41,7 @@ namespace api.Models
             ServingSize = recipe.ServingSize;
             Notes = recipe.Notes;
             Category = recipe.Category.Name;
+            UserId = recipe.UserId;
             Instructions = recipe.Instructions?.Select(instruction => new InstructionResponse
             {
                 Id = instruction.Id,

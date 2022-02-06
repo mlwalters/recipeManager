@@ -30,14 +30,14 @@ namespace backend.Tests.Controllers
             await db.DisposeAsync();
         }
 
-        public class Get : CategoryControllerTest
-        {
-            [Fact]
-            public async void ReturnsOkObjectContainingListOfRecipes_AfterCategoryRequest()
-            {
+        // public class Get : CategoryControllerTest
+        // {
+        //     [Fact]
+        //     public async void ReturnsOkObjectContainingListOfRecipes_AfterCategoryRequest()
+        //     {
                 
 
-            }
-        }
+        //     }
+        // }
     }
 }

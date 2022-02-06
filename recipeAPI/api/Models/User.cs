@@ -11,5 +11,13 @@ namespace api.Models
         public string Email { get; set; }
 
         public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
+
+        public User(User userDetails)
+        {
+            Name = userDetails.Name;
+            Email = userDetails.Email;
+        }
+
+        public User() { }
     }
 }
