@@ -1,5 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+// import {
+//   object, string, number, array,
+// } from 'yup';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -14,7 +17,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 const AddRecipeForm = () => {
   const [recipeFormValues, setRecipeFormValues] = useState({});
   const [categories, setCategories] = useState([{}]);
-  const [error, setError] = useState(null);
+  // const [err, setErr] = useState(null);
   const [ingredientInputFields, setIngredientInputFields] = useState([
     { amount: '', item: '' },
   ]);
@@ -38,6 +41,22 @@ const AddRecipeForm = () => {
       [name]: value,
     });
   };
+
+  // const recipeFormSchema = object().shape({
+  //   name: string().required('Recipe name is required'),
+  //   description: string().max(150, 'Character limit: 150'),
+  //   servingSize: number().max(25, 'Maximum number() accepted is 25'),
+  //   category: number().required('Category is required'),
+  //   instructions: array().of(object.shape({
+  //     stepNumber: number(),
+  //     step: string().max(350, 'Maximum character limit (350) has been reached'),
+  //   })),
+  //   ingredients: array().of(object().shape({
+  //     amount: string().max(50, 'Maximum character limit (100) has been reached'),
+  //     item: string().max(100, 'Maximum character limit (100) has been reached'),
+  //   })),
+  //   notes: string().max(400, 'Maximum character limit (350) has been reached'),
+  // });
 
   const handleChangeInput = (item, event) => {
     const newInputFields = ingredientInputFields.map((i) => {
@@ -65,7 +84,7 @@ const AddRecipeForm = () => {
     setIngredientInputFields([...ingredientInputFields, { amount: '', item: '' }]);
   };
   const handleAddFieldsIns = () => {
-    setInstructionInputFields([...instructionInputFields, { stepNumber: 0, step: '' }]);
+    setInstructionInputFields([...instructionInputFields, { step: '' }]);
   };
 
   const handleRemoveFields = (item) => {
@@ -84,19 +103,20 @@ const AddRecipeForm = () => {
     setRecipeFormValues(() => { recipeFormValues.ingredients = ingredientInputFields; });
     setRecipeFormValues(() => { recipeFormValues.instructions = instructionInputFields; });
     setRecipeFormValues(recipeFormValues);
-    try {
-      await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
-      // console.log(recipeFormValues);
-    } catch (err) {
-      setError(err);
-    }
+    // try {
+    //   await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, recipeFormValues);
+    //   // console.log(recipeFormValues);
+    // } catch (submitError) {
+    //   setErr(submitError);
+    // }
+    console.log(recipeFormValues);
   };
 
-  if (error) {
-    return (
-      <div>Oops! Could not fetch recipe card.</div>
-    );
-  }
+  // if (err) {
+  //   return (
+  //     <div>Oops! Could not fetch recipe list.</div>
+  //   );
+  // }
 
   return (
     <Box
@@ -104,7 +124,7 @@ const AddRecipeForm = () => {
       sx={{
         '& .MuiTextField-root': { m: 2, p: 1, width: '60ch' },
       }}
-      noValidate
+      // noValidate
       autoComplete="off"
       onSubmit={handleSubmit}
     >
@@ -117,6 +137,7 @@ const AddRecipeForm = () => {
           data-testid="Recipe name"
           value={recipeFormValues.name}
           onChange={handleOnChange}
+          // helperText={recipeFormSchema.name}
         />
         <TextField
           label="Description"
@@ -151,8 +172,6 @@ const AddRecipeForm = () => {
           name="servingSize"
           data-testid="Serving Size"
           value={recipeFormValues.servingSize || 0}
-          min="0"
-          max="30"
           onChange={handleOnChange}
         />
         <FormGroup>
@@ -198,12 +217,10 @@ const AddRecipeForm = () => {
                   label="Step #"
                   variant="standard"
                   name="stepNumber"
-                  value={index + 1} // set to the index + 1
+                  value={index + 1}
                   InputProps={{
                     readOnly: true,
                   }}
-                  // try to make read only
-                  // onChange={(event) => handleChangeInputIns(instructionField.stepNumber, event)}
                 />
                 <TextField
                   label="Step"

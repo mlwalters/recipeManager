@@ -13,15 +13,19 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+// import { useAuth0 } from '@auth0/auth0-react';
 import LoadingDisplay from './sharedComponents/LoadingDisplay';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
+  // const { isAuthenticated, isLoading, user} = useAuth0();
+  // const { name, picture, email } = user; // or just use user.email
 
   useEffect(() => {
     const fetchData = async () => {
+      // isAuthenticated && email
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`);
         setRecipes(data);
