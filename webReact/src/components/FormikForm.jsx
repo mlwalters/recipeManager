@@ -27,7 +27,7 @@ const initialValues = {
     item: '',
   }],
   instructions: [{
-    stepNumber: 0,
+    stepNumber: 1,
     step: '',
   }],
   notes: '',

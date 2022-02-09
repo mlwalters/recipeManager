@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {
-  FormGroup, FormLabel, FormControl, // FormHelperText, InputLabel, Input,
+  FormGroup, FormLabel, FormControl,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -27,7 +27,7 @@ const initialValues = {
     item: '',
   }],
   instructions: [{
-    stepNumber: 0,
+    stepNumber: 1,
     step: '',
   }],
   notes: '',
@@ -51,19 +51,19 @@ const FormikForm2 = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={object({
-          name: string().required('Recipe name is required').min(2, 'Name is too short'),
-          description: string().max(150, 'Character limit: 150'),
-          servingSize: number().max(25, 'Maximum number() accepted is 25'),
+          name: string().required('Recipe name is required').min(2, 'Name is too short').max(150, 'Maximum character limit of 150 has been reached'),
+          description: string().max(150, 'Maximum character limit of 150 has been reached'),
+          servingSize: number().max(25, 'Maximum number accepted is 25'),
           category: number().required('Category is required'),
           instructions: array().of(object().shape({
             stepNumber: number(),
             step: string().max(350, 'Maximum character limit of 350 has been reached'),
           })),
           ingredients: array().of(object().shape({
-            amount: string().max(50, 'Maximum character limit of 100 has been reached'),
+            amount: string().max(50, 'Maximum character limit of 50 has been reached'),
             item: string().max(100, 'Maximum character limit of 100 has been reached'),
           })),
-          notes: string().max(400, 'Maximum character limit of 350 has been reached'),
+          notes: string().max(400, 'Maximum character limit of 400 has been reached'),
         })}
         onSubmit={(values, formikHelpers) => setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
@@ -157,6 +157,10 @@ const FormikForm2 = () => {
                               as={TextField}
                               variant="outlined"
                               size="small"
+                              // error={Boolean(errors.ingredients.amount)
+                              //   && Boolean(errors.ingredients.amount)}
+                              // helperText={Boolean(touched.amount)
+                              //   && errors.amount}
                             />
                             <Field
                               name={`ingredients.${index}.item`}
@@ -164,6 +168,10 @@ const FormikForm2 = () => {
                               as={TextField}
                               variant="outlined"
                               size="small"
+                              // error={Boolean(errors.ingredients.item)
+                              //   && Boolean(errors.ingredients.item)}
+                              // helperText={Boolean(touched.item)
+                              //   && errors.item}
                             />
                             {index ? (
                               <RemoveIcon
@@ -202,6 +210,7 @@ const FormikForm2 = () => {
                               as={TextField}
                               variant="outlined"
                               size="small"
+                              value={index + 1}
                               InputProps={{
                                 readOnly: true,
                               }}
@@ -212,6 +221,8 @@ const FormikForm2 = () => {
                               as={TextField}
                               variant="outlined"
                               size="small"
+                              // error={Boolean(errors.step) && Boolean(touched.step)}
+                              // helperText={Boolean(touched.step) && errors.step}
                             />
                             {index ? (
                               <RemoveIcon
