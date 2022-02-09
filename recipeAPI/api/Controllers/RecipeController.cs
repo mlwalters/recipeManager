@@ -107,5 +107,31 @@ namespace api.Controllers
 
             return new CreatedResult("api/Recipe/" + newRecipe.Id, new RecipeResponse(addedRecipe));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var recipeToDelete = await _context.Recipes
+                .Include(ins => ins.Instructions)
+                .Include(ing => ing.Ingredients)
+                .FirstOrDefaultAsync(recipe => recipe.Id == id);
+
+            if (recipeToDelete == null)
+            {
+                return NotFound();
+            }
+
+            _context.Recipes.Remove(recipeToDelete);
+            await _context.SaveChangesAsync();
+
+            var recipes = await _context.Recipes
+                .Include(ins => ins.Instructions)
+                .Include(ing => ing.Ingredients)
+                .Include(r => r.Category)
+                .ToListAsync();
+
+            var recipeResponses = recipes.Select(r => new RecipeResponse(r));
+            return new OkObjectResult(recipeResponses);
+        }
     }
 }
