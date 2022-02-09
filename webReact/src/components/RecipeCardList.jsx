@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; // useParams
 import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
@@ -11,17 +11,39 @@ import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-// import { useAuth0 } from '@auth0/auth0-react';
+import DeleteIcon from '@mui/icons-material/Delete';// import { useAuth0 } from '@auth0/auth0-react';
 import LoadingDisplay from './sharedComponents/LoadingDisplay';
+// import DeleteDialogBox from './DeleteDialogBox';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
+  // const [open, setOpen] = useState(false);
+  // const { id } = useParams();
+
   // const { isAuthenticated, isLoading, user} = useAuth0();
   // const { name, picture, email } = user; // or just use user.email
+
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleCancel = () => setOpen(false);
+
+  // const handleDelete = () => {
+  //   setOpen(false);
+  //   const deleteData = async () => {
+  //     try {
+  //       const { data } = await axios
+  //         .delete(`${process.env.REACT_APP_BASE_API}/api/PracticeMembers/${id}`);
+  //       setRecipes(data);
+  //     } catch (err) {
+  //       setError(err);
+  //     }
+  //   };
+  //   deleteData();
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,13 +78,12 @@ const RecipeCardList = () => {
       gridTemplateColumns: 'repeat(3, 1fr)',
     }}
     >
+      {/* {open && <DeleteDialogBox onCancel={handleCancel} onDelete={handleDelete} />} */}
       {recipes.map(({
         id, name, description, category,
       }) => (
-        <Card sx={{ maxWidth: 345 }} key={id}>
+        <Card sx={{ maxWidth: 345 }} key={id} raised>
           <CardHeader
-            // avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">R</Avatar>}
-            action={<IconButton aria-label="settings"><MoreVertIcon /></IconButton>}
             title={<Link to={`/recipe/${id}`}>{name}</Link>}
             subheader={category}
           />
@@ -82,7 +103,8 @@ const RecipeCardList = () => {
               <FavoriteIcon />
             </IconButton>
             <IconButton aria-label="share">
-              <ShareIcon />
+              {/* <DeleteIcon /> onClick={handleClickOpen} */}
+              <DeleteIcon />
             </IconButton>
           </CardActions>
         </Card>

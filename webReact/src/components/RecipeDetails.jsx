@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
+import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -45,59 +46,61 @@ const RecipeDetails = () => {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={3}>
-        <Grid item xs={10}>
-          <Item>
-            <Typography variant="h3" color="#263238">{details.name}</Typography>
-            <Typography variant="body2" color="text.secondary">{details.description}</Typography>
-            <Typography variant="body2" color="text.secondary">
-              Serving size:
-              {' '}
-              {details.servingSize}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <RestaurantIcon />
-              {' '}
-              {details.category}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
-          </Item>
-          <Item>
-            <Typography variant="h6" color="#263238">Ingredients</Typography>
-            {details.ingredients.map(({ ingredientId, amount, name }) => (
-              <div key={ingredientId}>
-                <p variant="body2" color="text.secondary">
-                  <span>{amount}</span>
-                  {' '}
-                  <span>{name}</span>
-                </p>
-              </div>
-            ))}
-          </Item>
-          <Item>
-            <Typography variant="h6" color="#263238">Instructions:</Typography>
-            {details.instructions.map(({ step, stepNumber }) => (
-              <div key={stepNumber}>
-                <p variant="body2" color="text.secondary">
-                  <span>{stepNumber}</span>
-                  {' '}
-                  <span>{step}</span>
-                </p>
-              </div>
-            ))}
-          </Item>
-          <Item>
-            <Button onClick={print} sx={{ displayPrint: 'none' }}>
-              <Fab color="secondary" variant="extended">
-                Print Recipe
+    <Container maxWidth="lg">
+      <Box sx={{ flexGrow: 1, p: 4 }}>
+        <Grid container spacing={3}>
+          <Grid item xs={10}>
+            <Item>
+              <Typography variant="h3" color="#263238">{details.name}</Typography>
+              <Typography variant="body2" color="text.secondary">{details.description}</Typography>
+              <Typography variant="body2" color="text.secondary">
+                Serving size:
                 {' '}
-              </Fab>
-            </Button>
-          </Item>
+                {details.servingSize}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                <RestaurantIcon />
+                {' '}
+                {details.category}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
+            </Item>
+            <Item>
+              <Typography variant="h6" color="#263238">Ingredients</Typography>
+              {details.ingredients.map(({ ingredientId, amount, name }) => (
+                <div key={ingredientId}>
+                  <p variant="body2" color="text.secondary">
+                    <span>{amount}</span>
+                    {' '}
+                    <span>{name}</span>
+                  </p>
+                </div>
+              ))}
+            </Item>
+            <Item>
+              <Typography variant="h6" color="#263238">Instructions:</Typography>
+              {details.instructions.map(({ step, stepNumber }) => (
+                <div key={stepNumber}>
+                  <p variant="body2" color="text.secondary">
+                    <span>{stepNumber}</span>
+                    {' '}
+                    <span>{step}</span>
+                  </p>
+                </div>
+              ))}
+            </Item>
+            <Item>
+              <Button onClick={print} sx={{ displayPrint: 'none' }}>
+                <Fab color="secondary" variant="extended">
+                  Print Recipe
+                  {' '}
+                </Fab>
+              </Button>
+            </Item>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </Container>
   );
 };
 
