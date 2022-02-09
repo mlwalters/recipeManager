@@ -17,10 +17,10 @@ namespace api.Models
         Soup = 4,
         Dessert = 5,
         Salad = 6,
-        DipsAndSauces = 7,
+        Sauces = 7,
         Sides = 8,
         Bread = 9,
-        VegetarianOrVegan = 10,
+        Vegetarian = 10,
         Snack = 11
     }
 
