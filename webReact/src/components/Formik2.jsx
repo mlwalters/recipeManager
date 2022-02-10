@@ -6,9 +6,11 @@ import {
 import {
   object, string, number, array,
 } from 'yup';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {
@@ -19,6 +21,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 
 const initialValues = {
   name: '',
+  userEmail: '',
   category: '',
   servingSize: 0,
   description: '',
@@ -26,16 +29,25 @@ const initialValues = {
     amount: '',
     item: '',
   }],
-  instructions: [{
-    stepNumber: 1,
-    step: '',
-  }],
+  instructions: [{ step: '' }],
   notes: '',
 };
 
 const FormikForm2 = () => {
   const [categories, setCategories] = useState([{}]);
+  const [error, setError] = useState(null);
 
+  const handleSubmit = async (values) => {
+    const { user } = useAuth0();
+    // e.preventDefault();
+    const request = values;
+    request.userEmail = user.email;
+    try {
+      await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
+    } catch (err) {
+      setError(err);
+    }
+  };
   useEffect(() => {
     const fetchCategories = async () => {
       const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Category`);
@@ -44,6 +56,12 @@ const FormikForm2 = () => {
 
     fetchCategories();
   }, []);
+
+  if (error) {
+    return (
+      <div>Oops! Recipe submission failed.</div>
+    );
+  }
 
   return (
     <div>
@@ -56,7 +74,6 @@ const FormikForm2 = () => {
           servingSize: number().max(25, 'Maximum number accepted is 25'),
           category: number().required('Category is required'),
           instructions: array().of(object().shape({
-            stepNumber: number(),
             step: string().max(350, 'Maximum character limit of 350 has been reached'),
           })),
           ingredients: array().of(object().shape({
@@ -65,10 +82,9 @@ const FormikForm2 = () => {
           })),
           notes: string().max(400, 'Maximum character limit of 400 has been reached'),
         })}
-        onSubmit={(values, formikHelpers) => setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          formikHelpers.resetForm();
-        }, 500)}
+        onSubmit={async (values) => { // , formikHelpers
+          handleSubmit(values);
+        }}
       >
         {({
           errors, isValid, touched, dirty, values,
@@ -180,7 +196,7 @@ const FormikForm2 = () => {
                               />
                             ) : null}
                             <AddIcon
-                              onClick={() => arrayHelpers.insert(index, '')}
+                              onClick={() => arrayHelpers.insert(index + 1, '')}
                             />
                           </div>
                         ))
@@ -203,18 +219,8 @@ const FormikForm2 = () => {
                       {values.instructions && values.instructions.length > 0 ? (
                         values.instructions.map((instruction, index) => (
                           // eslint-disable-next-line react/no-array-index-key
-                          <div key={index}>
-                            <Field
-                              name={`instructions.${index}.stepNumber`}
-                              label="Step #"
-                              as={TextField}
-                              variant="outlined"
-                              size="small"
-                              value={index + 1}
-                              InputProps={{
-                                readOnly: true,
-                              }}
-                            />
+                          <Box key={index} display="flex">
+                            <Typography variant="body2" color="text.secondary">{`Step ${index + 1}`}</Typography>
                             <Field
                               name={`instructions.${index}.step`}
                               label="Step"
@@ -231,9 +237,9 @@ const FormikForm2 = () => {
                               />
                             ) : null}
                             <AddIcon
-                              onClick={() => arrayHelpers.insert(index, '')}
+                              onClick={() => arrayHelpers.insert(index + 1, { step: '' })}
                             />
-                          </div>
+                          </Box>
                         ))
                       ) : null}
                     </div>

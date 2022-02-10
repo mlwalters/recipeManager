@@ -1,15 +1,14 @@
 import React from 'react';
-// import FormikForm from './FormikForm';
-// import AddRecipeForm from './AddRecipeForm';
+import Container from '@mui/material/Container';
 import FormikForm2 from './Formik2';
 import NavBar from './sharedComponents/NavBar';
 
 const AddRecipePage = () => (
   <>
     <NavBar />
-    {/* <AddRecipeForm /> */}
-    {/* <FormikForm /> */}
-    <FormikForm2 />
+    <Container maxWidth="lg">
+      <FormikForm2 />
+    </Container>
   </>
 );
 
