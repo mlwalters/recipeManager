@@ -41,16 +41,14 @@ namespace api.Controllers
         {
             User newUser = new User()
             {
-                Name = userDetails.Name,
+                Name = userDetails?.Name,
                 Email= userDetails.Email             
             };
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            var addedUser = await _context.Users.Include(r =>r.Recipes).SingleAsync(u => u.Id == newUser.Id);
-
-            return new CreatedResult("api/User/" + newUser.Id, new UserResponse(addedUser));
+            return Ok(newUser);
         }
 
         [HttpDelete("{id}")]

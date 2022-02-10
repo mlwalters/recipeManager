@@ -11,7 +11,7 @@ using api.Models;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220206050040_Initial")]
+    [Migration("20220209222150_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,7 +74,7 @@ namespace api.Migrations
                         new
                         {
                             Id = 7,
-                            Name = "DipsAndSauces"
+                            Name = "Sauces"
                         },
                         new
                         {
@@ -89,12 +89,17 @@ namespace api.Migrations
                         new
                         {
                             Id = 10,
-                            Name = "VegetarianOrVegan"
+                            Name = "Vegetarian"
                         },
                         new
                         {
                             Id = 11,
                             Name = "Snack"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Drinks"
                         });
                 });
 
@@ -151,6 +156,27 @@ namespace api.Migrations
                             Amount = "1 tsp",
                             ItemId = 1,
                             RecipeId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Amount = "60ml",
+                            ItemId = 4,
+                            RecipeId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Amount = "30 ml",
+                            ItemId = 6,
+                            RecipeId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Amount = "90 ml",
+                            ItemId = 5,
+                            RecipeId = 3
                         });
                 });
 
@@ -169,10 +195,6 @@ namespace api.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<int>("StepNumber")
-                        .HasMaxLength(30)
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RecipeId");
@@ -184,29 +206,43 @@ namespace api.Migrations
                         {
                             Id = 1,
                             RecipeId = 1,
-                            Step = "Preheat oven to 160C/320F (standard) or 140C/295F (fan/convection).",
-                            StepNumber = 1
+                            Step = "Preheat oven to 160C/320F (standard) or 140C/295F (fan/convection)."
                         },
                         new
                         {
                             Id = 2,
                             RecipeId = 1,
-                            Step = "Butter and line the side of the pan.",
-                            StepNumber = 2
+                            Step = "Butter and line the side of the pan."
                         },
                         new
                         {
                             Id = 3,
                             RecipeId = 2,
-                            Step = "Heat oil in a large pot over medium heat. Add garlic and onion, cook for 2 minutes.",
-                            StepNumber = 1
+                            Step = "Heat oil in a large pot over medium heat. Add garlic and onion, cook for 2 minutes."
                         },
                         new
                         {
                             Id = 4,
                             RecipeId = 2,
-                            Step = "Add celery and carrot. Cook for 7-10 minutes or until softened and the onion is sweet.",
-                            StepNumber = 2
+                            Step = "Add celery and carrot. Cook for 7-10 minutes or until softened and the onion is sweet."
+                        },
+                        new
+                        {
+                            Id = 5,
+                            RecipeId = 3,
+                            Step = "Fill cocktail shaker with ice."
+                        },
+                        new
+                        {
+                            Id = 6,
+                            RecipeId = 3,
+                            Step = "Add vodka, cointreau, cranberry juice and lime. Shake vigorously 10 times."
+                        },
+                        new
+                        {
+                            Id = 7,
+                            RecipeId = 3,
+                            Step = "Strain into chilled martini glass. Garnish with orange peel."
                         });
                 });
 
@@ -240,6 +276,21 @@ namespace api.Migrations
                         {
                             Id = 3,
                             ItemName = "brown lentils"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ItemName = "vodka"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ItemName = "cranberry juice"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ItemName = "cointreu"
                         });
                 });
 
@@ -256,6 +307,9 @@ namespace api.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Favorite")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -283,6 +337,7 @@ namespace api.Migrations
                             Id = 1,
                             CategoryId = 5,
                             Description = "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.",
+                            Favorite = true,
                             Name = "Strawberry Cheesecake",
                             Notes = "This is my favorite cheesecake recipe.",
                             ServingSize = 12,
@@ -293,7 +348,19 @@ namespace api.Migrations
                             Id = 2,
                             CategoryId = 4,
                             Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
+                            Favorite = true,
                             Name = "Lentil Soup",
+                            Notes = "",
+                            ServingSize = 6,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 12,
+                            Description = "A wonderful classic, elegant cocktail",
+                            Favorite = false,
+                            Name = "Cosmopolitan Cocktail",
                             Notes = "",
                             ServingSize = 6,
                             UserId = 1

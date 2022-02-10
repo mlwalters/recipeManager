@@ -17,21 +17,17 @@ namespace api.Models
 
         [Range(0, 100)]
         public int ServingSize { get; set; }
-
+        public bool Favorite { get; set; } = false;
         public string Category { get; set; }
 
         [MaxLength(300)]
         public string Notes { get; set; }
 
-        public int UserId { get; set; }
+        public string UserEmail { get; set; }
+
 
         public virtual IEnumerable<InstructionResponse> Instructions { get; set; }
         public virtual IEnumerable<IngredientResponse> Ingredients { get; set; }
-
-        public RecipeResponse(string name)
-        {
-            Name = name;
-        }
         public RecipeResponse(Recipe recipe)
         {
 
@@ -40,13 +36,14 @@ namespace api.Models
             Description = recipe.Description;
             ServingSize = recipe.ServingSize;
             Notes = recipe.Notes;
+            Favorite = recipe.Favorite;
             Category = recipe.Category.Name;
-            UserId = recipe.UserId;
+            // UserId = recipe?.UserId;
+            UserEmail = recipe?.UserEmail;
             Instructions = recipe.Instructions?.Select(instruction => new InstructionResponse
             {
                 Id = instruction.Id,
                 Step = instruction.Step,
-                StepNumber = instruction.StepNumber
             });
             Ingredients = recipe.Ingredients?.Select(ingredient => new IngredientResponse
             {
@@ -67,11 +64,13 @@ namespace api.Models
 
         public CategoryId Category { get; set; }
 
+        public bool Favorite { get; set; }
+
         public string Notes { get; set; }
 
-        public int UserId { get; set; }
+        public string UserEmail { get; set; }
 
-        public ICollection<AddInstruction> Instructions { get; set; } = new List<AddInstruction>();
+        public ICollection<InstructionResponse> Instructions { get; set; } = new List<InstructionResponse>();
         public ICollection<AddIngredient> Ingredients { get; set; } = new List<AddIngredient>();
         public AddRecipe(string name)
         {

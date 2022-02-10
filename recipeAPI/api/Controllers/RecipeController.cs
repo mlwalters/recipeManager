@@ -66,21 +66,19 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddRecipe addRecipe)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == addRecipe.UserId);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == addRecipe.UserEmail, await new User { Email = addRecipe.UserEmail });
             var items = await _context.Items.ToListAsync();
             var instructions = addRecipe.Instructions.Select(ins => new Instruction
             {
-                Step = ins.Step.ToLower().Trim(),
-                StepNumber = ins.StepNumber,
-                RecipeId = user.Id
+                Step = ins.Step.ToLower().Trim() // isnullorempty
+                // RecipeId = addRecipe.Id
             }).ToList();
 
             var ingredients = addRecipe.Ingredients.Select(ing => new Ingredient
             {
-                //Item = items.First(i => i.ItemId == ing.ItemId, new Item { ItemName = ing.Item}), // OTHER OPTION IS TERNARY --> ? items.First(i => i.ItemName.ToLower() == ing.Item.ToLower()) : new Item { ItemName = ing.Item}, //save as a function
-                Item = items.FirstOrDefault(i => i.ItemName.ToLower().Trim() == ing.Item.ToLower().Trim(), new Item { ItemName = ing.Item.ToLower().Trim() }), //? items.First(i => i.ItemName.ToLower() == ing.Item.ToLower()) : new Item { ItemName = ing.Item}, //save as a function
+                Item = items.FirstOrDefault(i => i.ItemName.ToLower().Trim() == ing.Item.ToLower(), new Item { ItemName = ing.Item.ToLower().Trim() }),
                 Amount = ing.Amount.ToLower().Trim(),
-                RecipeId = user.Id
+                // RecipeId = addRecipe.Id
             }).ToList();
 
             Recipe newRecipe = new Recipe()
@@ -88,11 +86,12 @@ namespace api.Controllers
                 Name = addRecipe.Name.Trim(),
                 Description = addRecipe.Description.Trim(),
                 ServingSize = addRecipe.ServingSize,
+                Favorite = addRecipe.Favorite,
                 CategoryId = addRecipe.Category,
                 Notes = addRecipe.Notes.Trim(),
                 Instructions = instructions,
                 Ingredients = ingredients,
-                UserId = user.Id
+                UserEmail = user.Email
             };
 
             _context.Recipes.Add(newRecipe);
@@ -103,7 +102,6 @@ namespace api.Controllers
             .Include(ing => ing.Ingredients)
             .Include(r => r.Category)
             .SingleAsync(recipe => recipe.Id == newRecipe.Id);
-
 
             return new CreatedResult("api/Recipe/" + newRecipe.Id, new RecipeResponse(addedRecipe));
         }

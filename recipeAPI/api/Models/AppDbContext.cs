@@ -16,7 +16,6 @@ namespace api.Models
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Favorite> Favorites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,8 +29,8 @@ namespace api.Models
                 }
             );
 
-            modelBuilder.Entity<Recipe>()
-            .Property(u => u.UserId);
+            // modelBuilder.Entity<Recipe>()
+            // .Property(u => u.UserId);
 
             modelBuilder.Entity<Recipe>()
             .Property(c => c.CategoryId)
@@ -61,19 +60,32 @@ namespace api.Models
                     Name = "Strawberry Cheesecake",
                     Description = "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.",
                     ServingSize = 12,
+                    Favorite = true,
                     CategoryId = CategoryId.Dessert,
                     Notes = "This is my favorite cheesecake recipe.",
-                    UserId = 1
+                    UserEmail = "jofoda1740@afarek.com"
                 },
                 new Recipe
                 {
                     Id = 2,
                     Name = "Lentil Soup",
                     Description = "The touch of spices and finishing it off with lemon really lifts this soup to the next level.",
-                    CategoryId = CategoryId.Soup,
                     ServingSize = 6,
+                    Favorite = true,
+                    CategoryId = CategoryId.Soup,
                     Notes = "",
-                    UserId = 1
+                    UserEmail = "jofoda1740@afarek.com"
+                },
+                new Recipe
+                {
+                    Id = 3,
+                    Name = "Cosmopolitan Cocktail",
+                    Description = "A wonderful classic, elegant cocktail",
+                    ServingSize = 6,
+                    Favorite = false,
+                    CategoryId = CategoryId.Drinks,
+                    Notes = "",
+                    UserEmail = "jofoda1740@afarek.com"
                 }
             );
 
@@ -83,29 +95,43 @@ namespace api.Models
                 {
                     Id = 1,
                     Step = "Preheat oven to 160C/320F (standard) or 140C/295F (fan/convection).",
-                    StepNumber = 1,
                     RecipeId = 1
                 },
                 new
                 {
                     Id = 2,
                     Step = "Butter and line the side of the pan.",
-                    StepNumber = 2,
                     RecipeId = 1
                 },
                 new
                 {
                     Id = 3,
                     Step = "Heat oil in a large pot over medium heat. Add garlic and onion, cook for 2 minutes.",
-                    StepNumber = 1,
                     RecipeId = 2
                 },
                 new
                 {
                     Id = 4,
                     Step = "Add celery and carrot. Cook for 7-10 minutes or until softened and the onion is sweet.",
-                    StepNumber = 2,
                     RecipeId = 2
+                },
+                new
+                {
+                    Id = 5,
+                    Step = "Fill cocktail shaker with ice.",
+                    RecipeId = 3
+                },
+                new
+                {
+                    Id = 6,
+                    Step = "Add vodka, cointreau, cranberry juice and lime. Shake vigorously 10 times.",
+                    RecipeId = 3
+                },
+                new
+                {
+                    Id = 7,
+                    Step = "Strain into chilled martini glass. Garnish with orange peel.",
+                    RecipeId = 3
                 }
             );
 
@@ -125,6 +151,21 @@ namespace api.Models
                 {
                     Id = 3,
                     ItemName = "brown lentils",
+                },
+                new
+                {
+                    Id = 4,
+                    ItemName = "vodka",
+                },
+                new
+                {
+                    Id = 5,
+                    ItemName = "cranberry juice",
+                },
+                new
+                {
+                    Id = 6,
+                    ItemName = "cointreu",
                 }
             );
 
@@ -157,6 +198,27 @@ namespace api.Models
                     Amount = "1 tsp",
                     ItemId = 1,
                     RecipeId = 2
+                },
+                new
+                {
+                    Id = 5,
+                    Amount = "60ml",
+                    ItemId = 4,
+                    RecipeId = 3
+                },
+                new
+                {
+                    Id = 6,
+                    Amount = "30 ml",
+                    ItemId = 6,
+                    RecipeId = 3
+                },
+                new
+                {
+                    Id = 7,
+                    Amount = "90 ml",
+                    ItemId = 5,
+                    RecipeId = 3
                 }
             );
         }

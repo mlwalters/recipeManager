@@ -75,10 +75,10 @@ namespace backend.Tests.Utils
         private static void AddInstructions(AppDbContext db)
         {
             // var instruction = new Instruction(INSTRUCTIONS.Key, INSTRUCTIONS.Value);
-            var instructions = INSTRUCTIONS
-                .Select(ins => new Instruction(ins.Value, ins.Key))
-                .ToList();
-            db.Instructions.AddRange(instructions);
+            // var instructions = INSTRUCTIONS
+            //     .Select(ins => new Instruction(ins.Value, ins.Key))
+            //     .ToList();
+            // db.Instructions.AddRange(instructions);
 
 
             // var instruction = new Instruction(INSTRUCTIONS_STEP.Key, INSTRUCTIONS_STEP.Value);

@@ -21,7 +21,8 @@ namespace api.Models
         Sides = 8,
         Bread = 9,
         Vegetarian = 10,
-        Snack = 11
+        Snack = 11,
+        Drinks = 12
     }
 
     public class CategoryRequest

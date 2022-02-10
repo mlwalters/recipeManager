@@ -56,6 +56,7 @@ namespace api.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ServingSize = table.Column<int>(type: "int", nullable: false),
+                    Favorite = table.Column<bool>(type: "bit", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false)
@@ -111,7 +112,6 @@ namespace api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Step = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    StepNumber = table.Column<int>(type: "int", maxLength: 30, nullable: false),
                     RecipeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -137,11 +137,12 @@ namespace api.Migrations
                     { 4, "Soup" },
                     { 5, "Dessert" },
                     { 6, "Salad" },
-                    { 7, "DipsAndSauces" },
+                    { 7, "Sauces" },
                     { 8, "Sides" },
                     { 9, "Bread" },
-                    { 10, "VegetarianOrVegan" },
-                    { 11, "Snack" }
+                    { 10, "Vegetarian" },
+                    { 11, "Snack" },
+                    { 12, "Drinks" }
                 });
 
             migrationBuilder.InsertData(
@@ -151,7 +152,10 @@ namespace api.Migrations
                 {
                     { 1, "salt" },
                     { 2, "sugar" },
-                    { 3, "brown lentils" }
+                    { 3, "brown lentils" },
+                    { 4, "vodka" },
+                    { 5, "cranberry juice" },
+                    { 6, "cointreu" }
                 });
 
             migrationBuilder.InsertData(
@@ -161,13 +165,18 @@ namespace api.Migrations
 
             migrationBuilder.InsertData(
                 table: "Recipes",
-                columns: new[] { "Id", "CategoryId", "Description", "Name", "Notes", "ServingSize", "UserId" },
-                values: new object[] { 1, 5, "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.", "Strawberry Cheesecake", "This is my favorite cheesecake recipe.", 12, 1 });
+                columns: new[] { "Id", "CategoryId", "Description", "Favorite", "Name", "Notes", "ServingSize", "UserId" },
+                values: new object[] { 1, 5, "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.", true, "Strawberry Cheesecake", "This is my favorite cheesecake recipe.", 12, 1 });
 
             migrationBuilder.InsertData(
                 table: "Recipes",
-                columns: new[] { "Id", "CategoryId", "Description", "Name", "Notes", "ServingSize", "UserId" },
-                values: new object[] { 2, 4, "The touch of spices and finishing it off with lemon really lifts this soup to the next level.", "Lentil Soup", "", 6, 1 });
+                columns: new[] { "Id", "CategoryId", "Description", "Favorite", "Name", "Notes", "ServingSize", "UserId" },
+                values: new object[] { 2, 4, "The touch of spices and finishing it off with lemon really lifts this soup to the next level.", true, "Lentil Soup", "", 6, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Recipes",
+                columns: new[] { "Id", "CategoryId", "Description", "Favorite", "Name", "Notes", "ServingSize", "UserId" },
+                values: new object[] { 3, 12, "A wonderful classic, elegant cocktail", false, "Cosmopolitan Cocktail", "", 6, 1 });
 
             migrationBuilder.InsertData(
                 table: "Ingredients",
@@ -177,18 +186,24 @@ namespace api.Migrations
                     { 1, "1/2 tsp", 1, 1 },
                     { 2, "1 cup", 2, 1 },
                     { 3, "3 cups", 3, 2 },
-                    { 4, "1 tsp", 1, 2 }
+                    { 4, "1 tsp", 1, 2 },
+                    { 5, "60ml", 4, 3 },
+                    { 6, "30 ml", 6, 3 },
+                    { 7, "90 ml", 5, 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Instructions",
-                columns: new[] { "Id", "RecipeId", "Step", "StepNumber" },
+                columns: new[] { "Id", "RecipeId", "Step" },
                 values: new object[,]
                 {
-                    { 1, 1, "Preheat oven to 160C/320F (standard) or 140C/295F (fan/convection).", 1 },
-                    { 2, 1, "Butter and line the side of the pan.", 2 },
-                    { 3, 2, "Heat oil in a large pot over medium heat. Add garlic and onion, cook for 2 minutes.", 1 },
-                    { 4, 2, "Add celery and carrot. Cook for 7-10 minutes or until softened and the onion is sweet.", 2 }
+                    { 1, 1, "Preheat oven to 160C/320F (standard) or 140C/295F (fan/convection)." },
+                    { 2, 1, "Butter and line the side of the pan." },
+                    { 3, 2, "Heat oil in a large pot over medium heat. Add garlic and onion, cook for 2 minutes." },
+                    { 4, 2, "Add celery and carrot. Cook for 7-10 minutes or until softened and the onion is sweet." },
+                    { 5, 3, "Fill cocktail shaker with ice." },
+                    { 6, 3, "Add vodka, cointreau, cranberry juice and lime. Shake vigorously 10 times." },
+                    { 7, 3, "Strain into chilled martini glass. Garnish with orange peel." }
                 });
 
             migrationBuilder.CreateIndex(
