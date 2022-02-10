@@ -17,12 +17,8 @@ const HomePage = () => (
       <Box
         sx={{
           display: 'grid',
-          color: (theme) => (theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800'),
           border: 'none',
-          p: 1,
-          borderRadius: 2,
-          fontSize: '0.875rem',
-          fontWeight: '700',
+          p: 3,
         }}
       >
         <Typography variant="h6" color="primary">

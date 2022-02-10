@@ -84,7 +84,16 @@ const RecipeCardList = () => {
       }) => (
         <Card sx={{ maxWidth: 345 }} key={id} raised>
           <CardHeader
-            title={<Link to={`/recipe/${id}`}>{name}</Link>}
+            title={(
+              <Link to={`/recipe/${id}`}>
+                <Typography
+                  variant="h5"
+                  color="#263238"
+                >
+                  {name}
+                </Typography>
+              </Link>
+)}
             subheader={category}
           />
           <CardMedia

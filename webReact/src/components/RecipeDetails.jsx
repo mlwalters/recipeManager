@@ -51,7 +51,7 @@ const RecipeDetails = () => {
         <Grid container spacing={3}>
           <Grid item xs={10}>
             <Item>
-              <Typography variant="h3" color="#263238">{details.name}</Typography>
+              <Typography variant="h4" color="#263238">{details.name}</Typography>
               <Typography variant="body2" color="text.secondary">{details.description}</Typography>
               <Typography variant="body2" color="text.secondary">
                 Serving size:
@@ -79,10 +79,10 @@ const RecipeDetails = () => {
             </Item>
             <Item>
               <Typography variant="h6" color="#263238">Instructions:</Typography>
-              {details.instructions.map(({ step, stepNumber }) => (
-                <div key={stepNumber}>
+              {details.instructions.map(({ step, index }) => (
+                <div key={index}>
                   <p variant="body2" color="text.secondary">
-                    <span>{stepNumber}</span>
+                    <span>{index}</span>
                     {' '}
                     <span>{step}</span>
                   </p>

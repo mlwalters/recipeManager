@@ -90,8 +90,8 @@ const NavBar = () => {
               ))} */}
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography>
-                  <Link to="/recipe/add">
-                    Add Recipe
+                  <Link to="/">
+                    Recipe Collection
                   </Link>
                 </Typography>
               </MenuItem>
@@ -123,8 +123,8 @@ const NavBar = () => {
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               <Typography>
-                <Link to="/recipe/add">
-                  Add Recipe
+                <Link to="/" underline="none">
+                  <Typography variant="body" color="white" underline="none">My Recipes</Typography>
                 </Link>
               </Typography>
             </Button>
@@ -134,7 +134,7 @@ const NavBar = () => {
             >
               <Typography>
                 <Link to="/">
-                  Favorites
+                  <Typography variant="body" color="white" underline="none">Favorites</Typography>
                 </Link>
               </Typography>
             </Button>
