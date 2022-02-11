@@ -6,6 +6,8 @@ import {
 
 import DialogContentText from '@mui/material/DialogContentText';
 
+// onClick = event => do stuff
+
 const DeleteDialogBox = ({ onCancel, onDelete }) => (
   <div>
     <Dialog
@@ -14,7 +16,7 @@ const DeleteDialogBox = ({ onCancel, onDelete }) => (
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        Delete selected recipe?
+        Delete selected recipe
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">

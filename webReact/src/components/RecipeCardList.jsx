@@ -7,47 +7,49 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import Chip from '@mui/material/Chip';
 // import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import DeleteIcon from '@mui/icons-material/Delete';// import { useAuth0 } from '@auth0/auth0-react';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useAuth0 } from '@auth0/auth0-react';
 import LoadingDisplay from './sharedComponents/LoadingDisplay';
-// import DeleteDialogBox from './DeleteDialogBox';
+import DeleteDialogBox from './DeleteDialogBox';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
-  // const [open, setOpen] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
+  const [open, setOpen] = useState(false);
   // const { id } = useParams();
 
-  // const { isAuthenticated, isLoading, user} = useAuth0();
+  const { isAuthenticated } = useAuth0();
   // const { name, picture, email } = user; // or just use user.email
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-  // const handleCancel = () => setOpen(false);
+  const handleCancel = () => setOpen(false);
 
-  // const handleDelete = () => {
-  //   setOpen(false);
-  //   const deleteData = async () => {
-  //     try {
-  //       const { data } = await axios
-  //         .delete(`${process.env.REACT_APP_BASE_API}/api/PracticeMembers/${id}`);
-  //       setRecipes(data);
-  //     } catch (err) {
-  //       setError(err);
-  //     }
-  //   };
-  //   deleteData();
-  // };
+  const handleDelete = (id) => {
+    setOpen(false);
+    const deleteData = async () => {
+      try {
+        const { data } = await axios
+          .delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
+        setRecipes(data);
+      } catch (err) {
+        setDeleteError(err);
+      }
+    };
+    deleteData();
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      // isAuthenticated && email
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`);
         setRecipes(data);
@@ -71,18 +73,31 @@ const RecipeCardList = () => {
     );
   }
 
+  // const changeImage = (category) => {
+  // };
+  if (deleteError) {
+    return (
+      <Box m="4">
+        <Typography>Oops! Could not delete recipe.</Typography>
+        <br />
+        <Chip variant="outlined" color="primary" label="Back to recipes" onClick={window.location.reload} />
+      </Box>
+    );
+  }
+
   return (
+    isAuthenticated && (
     <Box sx={{
       display: 'grid',
       gap: 3,
       gridTemplateColumns: 'repeat(3, 1fr)',
     }}
     >
-      {/* {open && <DeleteDialogBox onCancel={handleCancel} onDelete={handleDelete} />} */}
       {recipes.map(({
         id, name, description, category,
       }) => (
         <Card sx={{ maxWidth: 345 }} key={id} raised>
+          {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}
           <CardHeader
             title={(
               <Link to={`/recipe/${id}`}>
@@ -93,7 +108,7 @@ const RecipeCardList = () => {
                   {name}
                 </Typography>
               </Link>
-)}
+            )}
             subheader={category}
           />
           <CardMedia
@@ -111,14 +126,14 @@ const RecipeCardList = () => {
             <IconButton aria-label="add to favorites">
               <FavoriteIcon />
             </IconButton>
-            <IconButton aria-label="share">
-              {/* <DeleteIcon /> onClick={handleClickOpen} */}
+            <IconButton aria-label="delete" onClick={handleClickOpen}>
               <DeleteIcon />
             </IconButton>
           </CardActions>
         </Card>
       ))}
     </Box>
+    )
   );
 };
 

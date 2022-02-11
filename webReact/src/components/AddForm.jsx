@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
   Field, Form, Formik, FieldArray,
@@ -36,7 +37,8 @@ const initialValues = {
 const AddForm = () => {
   const [categories, setCategories] = useState([{}]);
   const [error, setError] = useState(null);
-  const { user } = useAuth0(); // isAuthenticated
+  const { user, isAuthenticated } = useAuth0(); // isAuthenticated
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -48,12 +50,11 @@ const AddForm = () => {
   }, []);
 
   const handleSubmit = async (values) => {
-    // isAuthenticated &&
     const request = values;
     request.userEmail = user.email;
     try {
       await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
-      // redirect useNavigate
+      navigate('/');
     } catch (err) {
       setError(err);
     }
@@ -66,6 +67,7 @@ const AddForm = () => {
   }
 
   return (
+    isAuthenticated && (
     <div>
       <h1>Add a new recipe</h1>
       <Formik
@@ -84,7 +86,7 @@ const AddForm = () => {
           })),
           notes: string().max(400, 'Maximum character limit of 400 has been reached'),
         })}
-        onSubmit={async (values) => { // , formikHelpers
+        onSubmit={async (values) => {
           handleSubmit(values);
         }}
       >
@@ -278,6 +280,7 @@ const AddForm = () => {
         )}
       </Formik>
     </div>
+    )
   );
 };
 
