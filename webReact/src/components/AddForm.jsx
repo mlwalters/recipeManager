@@ -33,21 +33,11 @@ const initialValues = {
   notes: '',
 };
 
-const FormikForm2 = () => {
+const AddForm = () => {
   const [categories, setCategories] = useState([{}]);
   const [error, setError] = useState(null);
+  const { user } = useAuth0(); // isAuthenticated
 
-  const handleSubmit = async (values) => {
-    const { user } = useAuth0();
-    // e.preventDefault();
-    const request = values;
-    request.userEmail = user.email;
-    try {
-      await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
-    } catch (err) {
-      setError(err);
-    }
-  };
   useEffect(() => {
     const fetchCategories = async () => {
       const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Category`);
@@ -56,6 +46,18 @@ const FormikForm2 = () => {
 
     fetchCategories();
   }, []);
+
+  const handleSubmit = async (values) => {
+    // isAuthenticated &&
+    const request = values;
+    request.userEmail = user.email;
+    try {
+      await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
+      // redirect useNavigate
+    } catch (err) {
+      setError(err);
+    }
+  };
 
   if (error) {
     return (
@@ -279,4 +281,4 @@ const FormikForm2 = () => {
   );
 };
 
-export default FormikForm2;
+export default AddForm;

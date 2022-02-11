@@ -39,7 +39,7 @@ namespace api.Models
             Favorite = recipe.Favorite;
             Category = recipe.Category.Name;
             // UserId = recipe?.UserId;
-            UserEmail = recipe?.UserEmail;
+            UserEmail = recipe.UserEmail;
             Instructions = recipe.Instructions?.Select(instruction => new InstructionResponse
             {
                 Id = instruction.Id,

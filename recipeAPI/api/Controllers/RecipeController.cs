@@ -66,7 +66,6 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddRecipe addRecipe)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == addRecipe.UserEmail, await new User { Email = addRecipe.UserEmail });
             var items = await _context.Items.ToListAsync();
             var instructions = addRecipe.Instructions.Select(ins => new Instruction
             {
@@ -91,7 +90,7 @@ namespace api.Controllers
                 Notes = addRecipe.Notes.Trim(),
                 Instructions = instructions,
                 Ingredients = ingredients,
-                UserEmail = user.Email
+                UserEmail = addRecipe.UserEmail
             };
 
             _context.Recipes.Add(newRecipe);

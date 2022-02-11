@@ -15,19 +15,18 @@ namespace api.Models
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-            .HasData(
-                new User
-                {
-                    Id = 1,
-                    Name = "Midnight Firespark",
-                    Email = "jofoda1740@afarek.com"
-                }
-            );
+            // modelBuilder.Entity<User>()
+            // .HasData(
+            //     new User
+            //     {
+            //         Id = 1,
+            //         Name = "Midnight Firespark",
+            //         Email = "jofoda1740@afarek.com"
+            //     }
+            // );
 
             // modelBuilder.Entity<Recipe>()
             // .Property(u => u.UserId);
@@ -63,7 +62,7 @@ namespace api.Models
                     Favorite = true,
                     CategoryId = CategoryId.Dessert,
                     Notes = "This is my favorite cheesecake recipe.",
-                    UserEmail = "jofoda1740@afarek.com"
+                    UserEmail = "carrimax.dev@gmail.com"
                 },
                 new Recipe
                 {
@@ -74,7 +73,7 @@ namespace api.Models
                     Favorite = true,
                     CategoryId = CategoryId.Soup,
                     Notes = "",
-                    UserEmail = "jofoda1740@afarek.com"
+                    UserEmail = "carrimax.dev@gmail.com"
                 },
                 new Recipe
                 {
@@ -85,7 +84,7 @@ namespace api.Models
                     Favorite = false,
                     CategoryId = CategoryId.Drinks,
                     Notes = "",
-                    UserEmail = "jofoda1740@afarek.com"
+                    UserEmail = "carrimax.dev@gmail.com"
                 }
             );
 
