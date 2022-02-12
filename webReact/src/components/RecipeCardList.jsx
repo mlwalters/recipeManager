@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'; // useParams
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
@@ -13,16 +15,19 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useAuth0 } from '@auth0/auth0-react';
-import LoadingDisplay from './sharedComponents/LoadingDisplay';
+import Alert from '@mui/material/Alert';
+import { red } from '@mui/material/colors';
 import DeleteDialogBox from './DeleteDialogBox';
+import LoadingDisplay from './sharedComponents/LoadingDisplay';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
   const [deleteError, setDeleteError] = useState(null);
+  const [favoriteError, setFavoriteError] = useState(null);
   const [open, setOpen] = useState(false);
+  const [favoriteToggle, setFavoriteToggle] = useState(false);
   // const { id } = useParams();
 
   const { isAuthenticated } = useAuth0();
@@ -46,6 +51,23 @@ const RecipeCardList = () => {
       }
     };
     deleteData();
+  };
+
+  const handleClickFavorite = (id) => {
+    if (favoriteToggle) {
+      setFavoriteToggle(false);
+    } else {
+      setFavoriteToggle(true);
+    }
+
+    const request = {
+      favorite: favoriteToggle,
+    };
+    try {
+      axios.patch(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
+    } catch (favoriteErr) {
+      setFavoriteError('Oops! Could not save recipe as favorite.');
+    }
   };
 
   useEffect(() => {
@@ -123,12 +145,14 @@ const RecipeCardList = () => {
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
+            <IconButton aria-label="favorite" onClick={() => handleClickFavorite(id)}>
+              <FavoriteIcon sx={{ color: red[400] }} />
             </IconButton>
             <IconButton aria-label="delete" onClick={handleClickOpen}>
               <DeleteIcon />
             </IconButton>
+            {/* {!!error && <Alert severity="error">{error}</Alert>} */}
+            {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
           </CardActions>
         </Card>
       ))}

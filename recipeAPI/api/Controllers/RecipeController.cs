@@ -105,6 +105,26 @@ namespace api.Controllers
             return new CreatedResult("api/Recipe/" + newRecipe.Id, new RecipeResponse(addedRecipe));
         }
 
+        // [HttpPatch("{id}")]
+        // public async Task<IActionResult> Patch([FromBody])
+        // {
+        //     try
+        //     {
+        //         var recipe = await _context.Recipes
+        //         .Include(ins => ins.Instructions)
+        //         .Include(ing => ing.Ingredients)
+        //         .Include(r => r.Category)
+        //         .FirstOrDefaultAsync(recipe => recipe.Id == id);
+
+        //         return recipe is not null ? Ok(new RecipeResponse(recipe)) : new NotFoundResult();
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
+        //         throw;
+        //     }
+        // }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
