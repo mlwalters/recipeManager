@@ -145,7 +145,7 @@ const RecipeCardList = () => {
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="favorite" onClick={() => handleClickFavorite(id)}>
+            <IconButton aria-label="favorite" onClick={() => handleClickFavorite(id)} data-testid="favorite icon">
               <FavoriteIcon sx={{ color: red[400] }} />
             </IconButton>
             <IconButton aria-label="delete" onClick={handleClickOpen}>

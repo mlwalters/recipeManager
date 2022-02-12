@@ -96,5 +96,5 @@ test('renders add recipe button on the home page', async () => {
       <HomePage />
     </BrowserRouter>,
   );
-  expect(await screen.findByRole('button', { name: /add recipe/i }));
+  expect(await screen.findByRole('button', { name: /add recipe/i })).toBeInTheDocument();
 });
