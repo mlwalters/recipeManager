@@ -106,12 +106,13 @@ test('renders error if fetching recipe card fails', async () => {
   expect(await screen.findByText('Oops! Could not fetch recipe card.')).toBeInTheDocument();
 });
 
-// test('renders loading before getting practice member list', async () => {
-//   const mockApi = new MockAdapter(axios);
-//   mockApi
-//     .onGet(`${process.env.REACT_APP_BASE_API}/api/PracticeMembers`)
-//     .reply(() => new Promise((resolve) => setTimeout(() => resolve([200, null]), 5000)));
-//   render(<RecipeCardList />);
-//   const loadingText = await screen.findByText('Loading...');
-//   expect(loadingText).toBeInTheDocument();
-// });
+test('renders loading before getting recipe cards list', async () => {
+  const mockApi = new MockAdapter(axios);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, categories);
+  mockApi
+    .onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`)
+    .reply(() => new Promise((resolve) => setTimeout(() => resolve([200, null]), 5000)));
+  render(<RecipeCardList />);
+  const loadingText = await screen.findByText('Loading...');
+  expect(loadingText).toBeInTheDocument();
+});
