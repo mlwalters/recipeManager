@@ -10,6 +10,7 @@ import {
 import { useAuth0 } from '@auth0/auth0-react';
 
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -68,7 +69,7 @@ const AddForm = () => {
 
   return (
     isAuthenticated && (
-    <div>
+    <Paper elevation={3}>
       <h1>Add a new recipe</h1>
       <Formik
         initialValues={initialValues}
@@ -279,7 +280,7 @@ const AddForm = () => {
           </Form>
         )}
       </Formik>
-    </div>
+    </Paper>
     )
   );
 };

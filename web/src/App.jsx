@@ -5,12 +5,14 @@ import HomePage from './components/HomePage';
 import RecipeDetails from './components/RecipeDetails';
 import AddRecipePage from './components/AddRecipePage';
 import Profile from './components/Authentication/Profile';
+import LandingPage from './components/LandingPage';
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
         <Route path="/recipe/add" element={<AddRecipePage />} />

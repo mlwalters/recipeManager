@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,6 +20,22 @@ import LoginButton from '../LoginButton';
 import LogoutButton from '../LogoutButton';
 import Profile from '../Authentication/Profile';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+const theme = createTheme({
+  components: {
+    // Name of the component
+    MuiLink: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          fontSize: '1rem',
+          underline: 'none',
+        },
+      },
+    },
+  },
+});
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -49,7 +66,7 @@ const NavBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            <Link to="/">
+            <Link to="/home">
               LOGO
             </Link>
           </Typography>
@@ -85,7 +102,7 @@ const NavBar = () => {
             >
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography>
-                  <Link to="/">
+                  <Link to="/home">
                     Recipe Collection
                   </Link>
                 </Typography>
@@ -97,18 +114,18 @@ const NavBar = () => {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              <Typography>
-                <Link to="/" underline="none">
-                  <Typography variant="body" color="white" underline="none">My Recipes</Typography>
+              <ThemeProvider theme={theme}>
+                <Link to="/home">
+                  <Typography variant="body" color="white">My Recipes</Typography>
                 </Link>
-              </Typography>
+              </ThemeProvider>
             </Button>
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               <Typography>
-                <Link to="/">
+                <Link to="/home">
                   <Typography variant="body" color="white" underline="none">Favorites</Typography>
                 </Link>
               </Typography>
