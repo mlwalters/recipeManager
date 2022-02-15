@@ -95,8 +95,6 @@ const RecipeCardList = () => {
     );
   }
 
-  // const changeImage = (category) => {
-  // };
   if (deleteError) {
     return (
       <Box m="4">

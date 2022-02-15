@@ -258,6 +258,7 @@ const AddForm = () => {
               label="Notes"
               variant="outlined"
               size="small"
+              fullWidth
               multiline
               rows={5}
               as={TextField}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 
-const LoadingDisplay = () => (<Typography variant="h3">Loading...</Typography>);
+const LoadingDisplay = () => (<Typography component="span" variant="body2">Loading...</Typography>);
 
 export default LoadingDisplay;
