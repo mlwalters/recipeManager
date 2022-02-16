@@ -268,3 +268,6 @@
 /Users/walterma/capstone-project/recipeAPI/api/obj/Debug/net6.0/ref/api.dll
 /Users/walterma/capstone-project/recipeAPI/api/obj/Debug/net6.0/api.pdb
 /Users/walterma/capstone-project/recipeAPI/api/obj/Debug/net6.0/api.genruntimeconfig.cache
+/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
