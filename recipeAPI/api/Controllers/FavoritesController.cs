@@ -26,9 +26,12 @@
 //          [HttpGet]
 //         public async Task<IActionResult> Get()
 //         {
-//             try
 //             {
-//                 return favorites;// list of recipeids
+//                 var user = await _context.Users.ToListAsync();
+//                 var recipes = await _context.Favorites.Include(r => r.Recipes).ToListAsync();
+
+//                 var recipeResponses = recipes.Select(r => new RecipeResponse(r));
+//                 return Ok(recipeResponses);
 //             }
 //             catch (Exception e)
 //             {
