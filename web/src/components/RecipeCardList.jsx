@@ -15,10 +15,24 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from '@mui/material/Tooltip';
 import Alert from '@mui/material/Alert';
 import { red } from '@mui/material/colors';
 import DeleteDialogBox from './DeleteDialogBox';
 import LoadingDisplay from './sharedComponents/LoadingDisplay';
+
+import beef from '../assets/categories/beef.jpg';
+import bread from '../assets/categories/bread.jpg';
+import dessert from '../assets/categories/dessert.jpg';
+import dipssauces from '../assets/categories/dipssauces.jpg';
+import soup from '../assets/categories/soup.jpg';
+import pork from '../assets/categories/pork.jpg';
+import drinks from '../assets/categories/drinks.jpg';
+import salad from '../assets/categories/salad.jpg';
+import poultry from '../assets/categories/poultry.jpg';
+import vegetarian from '../assets/categories/vegetarian.jpg';
+import seafood from '../assets/categories/seafood.jpg';
+import sides from '../assets/categories/sides.jpg';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
@@ -30,8 +44,9 @@ const RecipeCardList = () => {
   const [favoriteToggle, setFavoriteToggle] = useState(false);
   // const { id } = useParams();
 
-  const { isAuthenticated } = useAuth0();
-  // const { name, picture, email } = user; // or just use user.email
+  const { isAuthenticated, user } = useAuth0();
+  console.log(user);
+  // const { email } = user;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -53,17 +68,54 @@ const RecipeCardList = () => {
     deleteData();
   };
 
+  const switchImageCard = (category) => {
+    switch (category) {
+      case 'Dessert':
+        return `${dessert}`;
+      case 'Drinks':
+        return `${drinks}`;
+      case 'Soup':
+        return `${soup}`;
+      case 'Seafood':
+        return `${seafood}`;
+      case 'Beef':
+        return `${beef}`;
+      case 'Pork':
+        return `${pork}`;
+      case 'Poultry':
+        return `${poultry}`;
+      case 'Salad':
+        return `${salad}`;
+      case 'Sauces':
+        return `${dipssauces}`;
+      case 'Sides':
+        return `${sides}`;
+      case 'Bread':
+        return `${bread}`;
+      case 'Vegetarian':
+        return `${vegetarian}`;
+      default:
+        return 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg';
+    }
+  };
   const handleClickFavorite = (id) => {
     if (favoriteToggle) {
       setFavoriteToggle(false);
     } else {
       setFavoriteToggle(true);
     }
-
-    const request = {
-      favorite: favoriteToggle,
-    };
     try {
+      // console.log(favoriteToggle);
+      // const idToUpdate = { id };
+      // console.log(idToUpdate);
+      // const request = {
+      //   op: 'replace',
+      //   path: '/Favorite',
+      //   value: favoriteToggle,
+      // };
+      const request = {
+        favorite: favoriteToggle,
+      };
       axios.patch(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
     } catch (favoriteErr) {
       setFavoriteError('Oops! Could not save recipe as favorite.');
@@ -74,6 +126,7 @@ const RecipeCardList = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`);
+        // const filteredData = data.filter((recipe) => recipe.UserEmail === email);
         setRecipes(data);
       } catch (err) {
         setError(err);
@@ -114,7 +167,7 @@ const RecipeCardList = () => {
     }}
     >
       {recipes.map(({
-        id, name, description, category,
+        id, name, description, category, favorite,
       }) => (
         <Card sx={{ maxWidth: 345 }} key={id} raised>
           {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}
@@ -134,7 +187,7 @@ const RecipeCardList = () => {
           <CardMedia
             component="img"
             height="194"
-            image="https://images.unsplash.com/photo-1621955511667-e2c316e4575d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2hlZXNlY2FrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
+            image={switchImageCard(category)}
             alt="Strawberry cheesecake"
           />
           <CardContent>
@@ -143,12 +196,18 @@ const RecipeCardList = () => {
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="favorite" onClick={() => handleClickFavorite(id)} data-testid="favorite icon">
-              <FavoriteIcon sx={{ color: red[400] }} />
-            </IconButton>
-            <IconButton aria-label="delete" onClick={handleClickOpen}>
-              <DeleteIcon />
-            </IconButton>
+            <Tooltip title="Favorite">
+              <IconButton aria-label="favorite" onClick={() => handleClickFavorite(id)} data-testid="favorite icon">
+                {/* <FavoriteIcon /> */}
+                {/* sx={{ color: red[400] }}  */}
+                {favorite === true ? <FavoriteIcon sx={{ color: red[400] }} /> : <FavoriteIcon /> }
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete">
+              <IconButton aria-label="delete" onClick={handleClickOpen}>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
             {/* {!!error && <Alert severity="error">{error}</Alert>} */}
             {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
           </CardActions>

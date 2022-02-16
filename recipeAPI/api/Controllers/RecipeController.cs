@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace api.Controllers
 {
@@ -27,7 +28,9 @@ namespace api.Controllers
         {
             try
             {
+                var user = await _context.Users.ToListAsync();
                 var recipes = await _context.Recipes
+                // .Include(u => u.User)
                 .Include(ins => ins.Instructions)
                 .Include(ing => ing.Ingredients)
                 .Include(r => r.Category)
@@ -66,6 +69,8 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddRecipe addRecipe)
         {
+            // this was an async
+            var user = _context.Users.FirstOrDefaultAsync(u => u.Email == addRecipe.UserEmail); //, new User{ Email = addRecipe.UserEmail});
             var items = await _context.Items.ToListAsync();
             var instructions = addRecipe.Instructions.Select(ins => new Instruction
             {
@@ -90,7 +95,7 @@ namespace api.Controllers
                 Notes = addRecipe.Notes.Trim(),
                 Instructions = instructions,
                 Ingredients = ingredients,
-                UserEmail = addRecipe.UserEmail
+                UserId= user.Id
             };
 
             _context.Recipes.Add(newRecipe);
@@ -105,25 +110,19 @@ namespace api.Controllers
             return new CreatedResult("api/Recipe/" + newRecipe.Id, new RecipeResponse(addedRecipe));
         }
 
-        // [HttpPatch("{id}")]
-        // public async Task<IActionResult> Patch([FromBody])
-        // {
-        //     try
-        //     {
-        //         var recipe = await _context.Recipes
-        //         .Include(ins => ins.Instructions)
-        //         .Include(ing => ing.Ingredients)
-        //         .Include(r => r.Category)
-        //         .FirstOrDefaultAsync(recipe => recipe.Id == id);
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> Patch(int id, [FromBody] JsonPatchDocument<Recipe> patchEntity)
+        {
+            var recipeToUpdate = await _context.Recipes.FirstOrDefaultAsync(recipe => recipe.Id == id);
+            if (id != recipeToUpdate.Id)
+            {
+                return BadRequest("Request ID does not match any recipe.");
+            }
+            patchEntity.ApplyTo(recipeToUpdate, ModelState);
+            await _context.SaveChangesAsync();
 
-        //         return recipe is not null ? Ok(new RecipeResponse(recipe)) : new NotFoundResult();
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
-        //         throw;
-        //     }
-        // }
+            return Ok(recipeToUpdate);
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
