@@ -14,6 +14,7 @@ namespace api.Models
 
         [MaxLength(150)]
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
 
         [Range(0, 100)]
         public int ServingSize { get; set; }
@@ -35,6 +36,7 @@ namespace api.Models
             Id = recipe.Id;
             Name = recipe.Name;
             Description = recipe.Description;
+            ImageUrl = recipe.ImageUrl;
             ServingSize = recipe.ServingSize;
             Notes = recipe.Notes;
             Favorite = recipe.Favorite;
@@ -58,17 +60,12 @@ namespace api.Models
     public class AddRecipe
     {
         public string Name { get; set; }
-
         public string Description { get; set; }
-
+        public string ImageUrl { get; set; }
         public int ServingSize { get; set; }
-
         public CategoryId Category { get; set; }
-
         public bool Favorite { get; set; }
-
         public string Notes { get; set; }
-
         // public int UserId { get; set; }
         public string UserEmail { get; set; }
 

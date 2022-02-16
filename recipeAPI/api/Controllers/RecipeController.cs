@@ -89,6 +89,7 @@ namespace api.Controllers
             {
                 Name = addRecipe.Name.Trim(),
                 Description = addRecipe.Description.Trim(),
+                ImageUrl = addRecipe.ImageUrl,
                 ServingSize = addRecipe.ServingSize,
                 Favorite = addRecipe.Favorite,
                 CategoryId = addRecipe.Category,

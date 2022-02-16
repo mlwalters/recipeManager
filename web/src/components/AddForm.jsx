@@ -28,6 +28,7 @@ const initialValues = {
   category: '',
   servingSize: 0,
   description: '',
+  imageUrl: '',
   ingredients: [{
     amount: '',
     item: '',
@@ -77,6 +78,7 @@ const AddForm = () => {
         validationSchema={object({
           name: string().required('Recipe name is required').min(2, 'Name is too short').max(150, 'Maximum character limit of 150 has been reached'),
           description: string().max(150, 'Maximum character limit of 150 has been reached'),
+          imageUrl: string().max(350, 'Maximum character limit of 350 has been reached'),
           servingSize: number().max(25, 'Maximum number accepted is 25'),
           category: number().required('Category is required'),
           instructions: array().of(object().shape({
@@ -124,6 +126,22 @@ const AddForm = () => {
               helperText={Boolean(touched.description) && errors.description}
             />
             <Box height={14} />
+
+            <Field
+              label="Image URL"
+              name="imageUrl"
+              type="imageUrl"
+              as={TextField}
+              variant="outlined"
+              size="small"
+              multiline
+              rows={2}
+              data-testid="Image"
+              error={Boolean(errors.imageUrl) && Boolean(touched.imageUrl)}
+              helperText={Boolean(touched.imageUrl) && errors.imageUrl}
+            />
+            <Box height={14} />
+
             <Field
               label="Category"
               name="category"
