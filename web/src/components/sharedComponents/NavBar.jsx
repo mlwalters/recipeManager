@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -20,22 +19,6 @@ import LoginButton from '../LoginButton';
 import LogoutButton from '../LogoutButton';
 import Profile from '../Authentication/Profile';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
-
-const theme = createTheme({
-  components: {
-    // Name of the component
-    MuiLink: {
-      styleOverrides: {
-        // Name of the slot
-        root: {
-          // Some CSS
-          fontSize: '1rem',
-          underline: 'none',
-        },
-      },
-    },
-  },
-});
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -57,19 +40,19 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: '#74bdcb' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-          >
-            <Link to="/home">
+          <Link to="/home">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            >
               LOGO
-            </Link>
-          </Typography>
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -101,11 +84,11 @@ const NavBar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography>
-                  <Link to="/home">
+                <Link to="/home">
+                  <Typography component="span">
                     Recipe Collection
-                  </Link>
-                </Typography>
+                  </Typography>
+                </Link>
               </MenuItem>
             </Menu>
           </Box>
@@ -114,27 +97,23 @@ const NavBar = () => {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              <ThemeProvider theme={theme}>
-                <Link to="/home">
-                  <Typography variant="body" color="white">My Recipes</Typography>
-                </Link>
-              </ThemeProvider>
+              <Link to="/home">
+                <Typography component="span" variant="body" color="white">My Recipes</Typography>
+              </Link>
             </Button>
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              <Typography>
-                <Link to="/home">
-                  <Typography variant="body" color="white" underline="none">Favorites</Typography>
-                </Link>
-              </Typography>
+              <Link to="/home">
+                <Typography component="span" variant="body" color="white" underline="none">Favorites</Typography>
+              </Link>
             </Button>
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              <Typography>
+              <Typography component="span">
                 Shopping List
               </Typography>
             </Button>

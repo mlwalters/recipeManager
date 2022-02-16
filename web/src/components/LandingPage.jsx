@@ -1,34 +1,34 @@
 import React from 'react';
-import Container from '@mui/material/Container';
+// import Container from '@mui/material/Container';
 // import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
 import { useAuth0 } from '@auth0/auth0-react';
 import LandingPageAppBar from './LandingPageAppBar';
 import LoginButton from './LoginButton';
+import backgroundImage from '../assets/shared-images/landingpage-background.jpg';
 
 // const navigate = useNavigate();
-// import Image from '../assets/shared-images/landingpage-background.jpg';
 
 const LandingPage = () => {
   const { isAuthenticated } = useAuth0(); // isAuthenticated
   return (
     !isAuthenticated && (
-    <>
+    <div style={{
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      backgroundPosition: 'center',
+      height: '500',
+    }}
+    >
       <LandingPageAppBar />
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            height: 1024,
-            width: 800,
-          // maxHeight: { xs: 233, md: 167 },
-          // maxWidth: { xs: 350, md: 250 },
-          }}
-        >
-          Landing Page
-          <LoginButton />
-        </Box>
-      </Container>
-    </>
+      {/* <Container maxWidth="lg"> */}
+      <div>
+        Landing Page
+        <LoginButton />
+      </div>
+      {/* </Container> */}
+    </div>
     )
   );
 };
