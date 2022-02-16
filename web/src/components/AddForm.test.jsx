@@ -1,12 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-// import { BrowserRouter } from 'react-router';
-
+import { BrowserRouter } from 'react-router';
 import {
   render, screen,
 } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 // import { act } from 'react-dom/test-utils';
 import AddForm from './AddForm';
 
@@ -104,11 +103,27 @@ const testCategory = [
   },
 ];
 
-test('input fields to add a new recipe are displayed', async () => {
+const addedRecipe = {
+  id: 213,
+  name: 'Mushroom Risotto',
+  description: '',
+  category: 2,
+  notes: 'Use dried mushrooms for extra flavor',
+  ingredients: [
+    {
+      id: 1, item: 'mushroom',
+    },
+    {
+      id: 2, item: 'rice',
+    },
+  ],
+};
+
+test.skip('input fields to add a new recipe are displayed', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, testRecipes);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategory);
-  // mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, addedRecipe);
+  mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, addedRecipe);
   render(
     <AddForm />,
   );
@@ -117,4 +132,20 @@ test('input fields to add a new recipe are displayed', async () => {
   expect(await screen.findByTestId('Description')).toBeInTheDocument();
   expect(await screen.findByTestId('Category')).toBeInTheDocument();
   expect(await screen.findByTestId('Serving Size')).toBeInTheDocument();
+});
+
+test.only('if the required fields are entered, the add recipe button becomes enabled', async () => {
+  const mockApi = new MockAdapter(axios);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, testRecipes);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategory);
+  mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, addedRecipe);
+  render(
+    <BrowserRouter>
+      <AddForm />
+    </BrowserRouter>,
+  );
+  expect(await screen.findByRole('button', { name: /add recipe/i })).toBeDisabled();
+  userEvent.type(await screen.findByPlaceholderText(/recipe name/i), testRecipes.name);
+  userEvent.type(await screen.findByPlaceholderText(/category/i), addedRecipe.category);
+  expect(await screen.findByRole('button', { name: /add recipe/i })).toBeEnabled();
 });

@@ -87,7 +87,7 @@ const categories = [
   },
 ];
 
-test.skip('renders recipe details preview as a card on the home page', async () => {
+test('renders recipe details preview as a card on the home page', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, recipeCardDetails);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, categories);
