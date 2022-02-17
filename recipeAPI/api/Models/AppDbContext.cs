@@ -35,8 +35,8 @@ namespace api.Models
                 }
             );
 
-            modelBuilder.Entity<Recipe>()
-            .Property(u => u.UserId);
+            // modelBuilder.Entity<Recipe>()
+            // .Property(u => u.UserId);
 
             modelBuilder.Entity<Recipe>()
             .Property(c => c.CategoryId)
@@ -69,8 +69,8 @@ namespace api.Models
                     Favorite = true,
                     CategoryId = CategoryId.Dessert,
                     Notes = "This is my favorite cheesecake recipe.",
-                    // UserEmail = "carrimax.dev@gmail.com"
-                    UserId = 1
+                    UserEmail = "carrimax.dev@gmail.com"
+                    // UserId = 1
                 },
                 new Recipe
                 {
@@ -81,8 +81,8 @@ namespace api.Models
                     Favorite = true,
                     CategoryId = CategoryId.Soup,
                     Notes = "",
-                    // UserEmail = "carrimax.dev@gmail.com"
-                    UserId = 1
+                    UserEmail = "carrimax.dev@gmail.com"
+                    // UserId = 1
                 },
                 new Recipe
                 {
@@ -93,20 +93,21 @@ namespace api.Models
                     Favorite = false,
                     CategoryId = CategoryId.Drinks,
                     Notes = "",
-                    UserId = 2
-                    // UserEmail = "carrimax.dev@gmail.com"
+                    UserEmail = "carrimax.dev@gmail.com"
+                    // UserId = 2
+                },
+                new Recipe
+                {
+                    Id = 4,
+                    Name = "Prime Rib",
+                    Description = "Also known as Standing Rib Roast, this is slathered in a herb and garlic butter, then roasted to juicy perfection.",
+                    ServingSize = 6,
+                    Favorite = true,
+                    CategoryId = CategoryId.Beef,
+                    Notes = "Use any cut of prime rib – with the bones attached, trimmed and frenched.",
+                    UserEmail = "raciram@gmail.com"
+                    // UserId = 1
                 }
-                // new Recipe
-                // {
-                //     Id = 4,
-                //     Name = "Prime Rib",
-                //     Description = "Also known as Standing Rib Roast, this is slathered in a herb and garlic butter, then roasted to juicy perfection.",
-                //     ServingSize = 6,
-                //     Favorite = true,
-                //     CategoryId = CategoryId.Beef,
-                //     Notes = "Use any cut of prime rib – with the bones attached, trimmed and frenched.",
-                //     UserEmail = "raciram@gmail.com"
-                // }
             );
 
             modelBuilder.Entity<Instruction>()

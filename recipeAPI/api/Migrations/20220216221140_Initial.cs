@@ -60,7 +60,8 @@ namespace api.Migrations
                     Favorite = table.Column<bool>(type: "bit", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,8 +76,7 @@ namespace api.Migrations
                         name: "FK_Recipes_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -170,18 +170,14 @@ namespace api.Migrations
 
             migrationBuilder.InsertData(
                 table: "Recipes",
-                columns: new[] { "Id", "CategoryId", "Description", "Favorite", "ImageUrl", "Name", "Notes", "ServingSize", "UserId" },
-                values: new object[] { 1, 5, "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.", true, null, "Strawberry Cheesecake", "This is my favorite cheesecake recipe.", 12, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Recipes",
-                columns: new[] { "Id", "CategoryId", "Description", "Favorite", "ImageUrl", "Name", "Notes", "ServingSize", "UserId" },
-                values: new object[] { 2, 4, "The touch of spices and finishing it off with lemon really lifts this soup to the next level.", true, null, "Lentil Soup", "", 6, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Recipes",
-                columns: new[] { "Id", "CategoryId", "Description", "Favorite", "ImageUrl", "Name", "Notes", "ServingSize", "UserId" },
-                values: new object[] { 3, 12, "A wonderful classic, elegant cocktail", false, null, "Cosmopolitan Cocktail", "", 6, 2 });
+                columns: new[] { "Id", "CategoryId", "Description", "Favorite", "ImageUrl", "Name", "Notes", "ServingSize", "UserEmail", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 5, "A light-yet-rich cheesecake, creamy but not dense-creamy like New York cheesecake.", true, null, "Strawberry Cheesecake", "This is my favorite cheesecake recipe.", 12, "carrimax.dev@gmail.com", null },
+                    { 2, 4, "The touch of spices and finishing it off with lemon really lifts this soup to the next level.", true, null, "Lentil Soup", "", 6, "carrimax.dev@gmail.com", null },
+                    { 3, 12, "A wonderful classic, elegant cocktail", false, null, "Cosmopolitan Cocktail", "", 6, "carrimax.dev@gmail.com", null },
+                    { 4, 1, "Also known as Standing Rib Roast, this is slathered in a herb and garlic butter, then roasted to juicy perfection.", true, null, "Prime Rib", "Use any cut of prime rib – with the bones attached, trimmed and frenched.", 6, "raciram@gmail.com", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "Ingredients",

@@ -11,9 +11,9 @@ namespace api.Models
         public virtual Category Category { get; set; }
         public CategoryId CategoryId { get; set; }
         public string Notes { get; set; }
-        public virtual User User { get; set; }
-        // public string UserEmail { get; set; }
-        public int UserId{ get; set; }
+        public string UserEmail { get; set; }
+        // public virtual User User { get; set; }
+        // public int UserId{ get; set; }
 
         public virtual ICollection<Instruction> Instructions { get; set; } //= new List<Instruction>();
         public virtual ICollection<Ingredient> Ingredients { get; set; } //= new List<Instruction>();

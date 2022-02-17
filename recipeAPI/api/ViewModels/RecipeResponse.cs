@@ -24,8 +24,8 @@ namespace api.Models
         [MaxLength(300)]
         public string Notes { get; set; }
 
-        // public string UserEmail { get; set; }
-        public int UserId { get; set; }
+        public string UserEmail { get; set; }
+        // public int UserId { get; set; }
 
 
         public virtual IEnumerable<InstructionResponse> Instructions { get; set; }
@@ -41,8 +41,8 @@ namespace api.Models
             Notes = recipe.Notes;
             Favorite = recipe.Favorite;
             Category = recipe.Category.Name;
-            UserId = recipe.UserId;
-            // UserEmail = recipe.UserEmail;
+            // UserId = recipe.UserId;
+            UserEmail = recipe.UserEmail;
             Instructions = recipe.Instructions?.Select(instruction => new InstructionResponse
             {
                 Id = instruction.Id,
@@ -66,8 +66,8 @@ namespace api.Models
         public CategoryId Category { get; set; }
         public bool Favorite { get; set; }
         public string Notes { get; set; }
-        // public int UserId { get; set; }
         public string UserEmail { get; set; }
+        // public int UserId { get; set; }
 
         public ICollection<InstructionResponse> Instructions { get; set; } = new List<InstructionResponse>();
         public ICollection<AddIngredient> Ingredients { get; set; } = new List<AddIngredient>();

@@ -24,18 +24,19 @@ namespace api.Controllers
         }
 
         [HttpGet]
+        // public async Task<IActionResult> Get([FromRoute] string email)
         public async Task<IActionResult> Get()
         {
             try
             {
-                var user = await _context.Users.ToListAsync();
+                // var user = email
                 var recipes = await _context.Recipes
-                // .Include(u => u.User)
                 .Include(ins => ins.Instructions)
                 .Include(ing => ing.Ingredients)
-                .Include(r => r.Category)
+                .Include(c => c.Category)
+                // .Where(u => u.UserEmail == email)
                 .ToListAsync();
-
+                Console.WriteLine(recipes);
                 var recipeResponses = recipes.Select(r => new RecipeResponse(r));
                 return Ok(recipeResponses);
             }
@@ -69,8 +70,7 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddRecipe addRecipe)
         {
-            // this was an async
-            var user = _context.Users.FirstOrDefaultAsync(u => u.Email == addRecipe.UserEmail); //, new User{ Email = addRecipe.UserEmail});
+            // var user = _context.Users.FirstOrDefaultAsync(u => u.Email == addRecipe.UserEmail); //, new User{ Email = addRecipe.UserEmail});
             var items = await _context.Items.ToListAsync();
             var instructions = addRecipe.Instructions.Select(ins => new Instruction
             {
@@ -96,7 +96,8 @@ namespace api.Controllers
                 Notes = addRecipe.Notes.Trim(),
                 Instructions = instructions,
                 Ingredients = ingredients,
-                UserId= user.Id
+                // UserId= user.Id
+                UserEmail= addRecipe.UserEmail
             };
 
             _context.Recipes.Add(newRecipe);
@@ -112,17 +113,26 @@ namespace api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> Patch(int id, [FromBody] JsonPatchDocument<Recipe> patchEntity)
+        public async Task<IActionResult> Patch(int id, [FromBody] bool favorite)
         {
             var recipeToUpdate = await _context.Recipes.FirstOrDefaultAsync(recipe => recipe.Id == id);
             if (id != recipeToUpdate.Id)
             {
                 return BadRequest("Request ID does not match any recipe.");
             }
-            patchEntity.ApplyTo(recipeToUpdate, ModelState);
+            recipeToUpdate.Favorite = favorite;
             await _context.SaveChangesAsync();
 
-            return Ok(recipeToUpdate);
+            var recipes = await _context.Recipes
+                .Include(ins => ins.Instructions)
+                .Include(ing => ing.Ingredients)
+                .Include(r => r.Category)
+                .ToListAsync();
+
+            var updatedRecipes = recipes.Select(r => new RecipeResponse(r));
+            return new OkObjectResult(updatedRecipes);
+            // return Ok();
+            // return Ok(recipeToUpdate);
         }
 
         [HttpDelete("{id}")]
