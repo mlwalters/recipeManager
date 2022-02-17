@@ -7,6 +7,7 @@ import RecipeDetails from './components/RecipeDetails';
 import AddRecipePage from './components/AddRecipePage';
 import Profile from './components/Authentication/Profile';
 import LandingPage from './components/LandingPage';
+import Favorites from './components/Favorites';
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <LandingPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
         <Route path="/recipe/add" element={<AddRecipePage />} />
       </Routes>

@@ -6,7 +6,6 @@ import Grid from '@mui/material/Grid';
 import Fab from '@mui/material/Fab';
 import Typography from '@mui/material/Typography';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-// import { useAuth0 } from '@auth0/auth0-react';
 import RecipeCardList from './RecipeCardList';
 import NavBar from './sharedComponents/NavBar';
 

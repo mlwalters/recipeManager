@@ -5,12 +5,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import LoginButton from './LoginButton';
+// import LoginButton from './LoginButton';
+import logo from '../assets/shared-images/bigLogo.png';
 
 export default function LandingPageAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: '#f5efd7' }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -21,12 +22,9 @@ export default function LandingPageAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Put Logo Here
-          </Typography>
-          <Box>
-            <LoginButton />
-          </Box>
+          <img src={logo} alt="Big Bite logo" height="80px" p="1" />
+          <Typography sx={{ color: '#313438' }}>Features</Typography>
+          <Typography sx={{ color: '#313438' }}>About</Typography>
         </Toolbar>
       </AppBar>
     </Box>

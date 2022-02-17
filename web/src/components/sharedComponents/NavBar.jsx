@@ -18,6 +18,7 @@ import MenuItem from '@mui/material/MenuItem';
 import LoginButton from '../LoginButton';
 import LogoutButton from '../LogoutButton';
 import Profile from '../Authentication/Profile';
+import logo from '../../assets/shared-images/roundLogo-blue.png';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const NavBar = () => {
@@ -44,14 +45,15 @@ const NavBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to="/home">
-            <Typography
+            {/* <Typography
               variant="h6"
               noWrap
               component="div"
               sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
-              LOGO
-            </Typography>
+              Big Bite
+            </Typography> */}
+            <img src={logo} alt="Big Bite logo" height="80px" p="1" />
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -105,7 +107,7 @@ const NavBar = () => {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              <Link to="/home">
+              <Link to="/favorites" underline="hover">
                 <Typography component="span" variant="body" color="white" underline="none">Favorites</Typography>
               </Link>
             </Button>
@@ -120,7 +122,7 @@ const NavBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AccountCircleIcon alt="account settings" />
               </IconButton>

@@ -5,6 +5,7 @@ import React from 'react';
 // import { Link as RouterLink } from 'react-router-dom';
 import { createTheme } from '@mui/material';
 
+// const yellowish = '#f5efd7';
 const primary = '#74bdcb'; // aquamarine
 // const otherPrimary = '#ffa384'; // salmon
 const secondary = '#e7f2f8'; // baby blue

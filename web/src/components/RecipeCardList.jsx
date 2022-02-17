@@ -42,11 +42,10 @@ const RecipeCardList = () => {
   const [favoriteError, setFavoriteError] = useState(null);
   const [open, setOpen] = useState(false);
   const [favoriteToggle, setFavoriteToggle] = useState(false);
-  // const { id } = useParams();
-
   const { isAuthenticated, user } = useAuth0();
-  console.log(user);
   // const { email } = user;
+  // const filteredRecipes = recipes.filter((recipe) => recipe.UserEmail === email);
+  // const { id } = useParams();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -98,7 +97,7 @@ const RecipeCardList = () => {
         return 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg';
     }
   };
-  const handleClickFavorite = (id) => {
+  const handleClickFavorite = async (id) => {
     if (favoriteToggle) {
       setFavoriteToggle(false);
     } else {
@@ -113,10 +112,14 @@ const RecipeCardList = () => {
       //   path: '/Favorite',
       //   value: favoriteToggle,
       // };
-      const request = {
-        favorite: favoriteToggle,
-      };
-      axios.patch(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
+      // view model patch request
+      // const request = {
+      //   favorite: favoriteToggle,
+      // };
+      const { data } = await axios.patch(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, favoriteToggle);
+      // await axios.patch(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
+      setRecipes(data);
+      window.location.reload();
     } catch (favoriteErr) {
       setFavoriteError('Oops! Could not save recipe as favorite.');
     }
@@ -125,8 +128,9 @@ const RecipeCardList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`);
-        // const filteredData = data.filter((recipe) => recipe.UserEmail === email);
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`, user.email);
+        // let filteredData = Array.from(data);
+        // filteredData = filteredData.filter((recipe) => recipe.UserEmail.includes(user.email));
         setRecipes(data);
       } catch (err) {
         setError(err);
@@ -167,7 +171,7 @@ const RecipeCardList = () => {
     }}
     >
       {recipes.map(({
-        id, name, description, category, imageUrl, favorite,
+        id, name, description, category, favorite, // imageUrl,
       }) => (
         <Card sx={{ maxWidth: 345 }} key={id} raised>
           {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}
@@ -187,8 +191,9 @@ const RecipeCardList = () => {
           <CardMedia
             component="img"
             height="194"
-            image={!imageUrl ? switchImageCard(category) : `${imageUrl}`}
-            alt="Strawberry cheesecake"
+            // image={imageUrl === '' ? switchImageCard(category) : `${imageUrl}`}
+            image={switchImageCard(category)}
+            alt={`Picture of ${category}`}
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
@@ -208,7 +213,7 @@ const RecipeCardList = () => {
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-            {/* {!!error && <Alert severity="error">{error}</Alert>} */}
+            {!!error && <Alert severity="error">{error}</Alert>}
             {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
           </CardActions>
         </Card>
