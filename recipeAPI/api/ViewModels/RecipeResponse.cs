@@ -38,8 +38,8 @@ namespace api.Models
             Description = recipe.Description;
             ImageUrl = recipe.ImageUrl;
             ServingSize = recipe.ServingSize;
-            Notes = recipe.Notes;
             Favorite = recipe.Favorite;
+            Notes = recipe.Notes;
             Category = recipe.Category.Name;
             // UserId = recipe.UserId;
             UserEmail = recipe.UserEmail;

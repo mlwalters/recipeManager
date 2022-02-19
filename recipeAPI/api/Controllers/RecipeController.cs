@@ -29,7 +29,6 @@ namespace api.Controllers
         {
             try
             {
-                // var user = email
                 var recipes = await _context.Recipes
                 .Include(ins => ins.Instructions)
                 .Include(ing => ing.Ingredients)
@@ -90,7 +89,6 @@ namespace api.Controllers
                 Description = addRecipe.Description.Trim(),
                 ImageUrl = addRecipe.ImageUrl,
                 ServingSize = addRecipe.ServingSize,
-                Favorite = addRecipe.Favorite,
                 CategoryId = addRecipe.Category,
                 Notes = addRecipe.Notes.Trim(),
                 Instructions = instructions,
@@ -120,29 +118,11 @@ namespace api.Controllers
                 return BadRequest("Request ID does not match any recipe.");
             }
 
-            var items = await _context.Items.ToListAsync();
-            var instructions = recipeToUpdate.Instructions.Select(ins => new Instruction
-            {
-                Step = ins.Step.ToLower().Trim() // isnullorempty
-                // RecipeId = recipeToUpdate.id
-            }).ToList();
-
-            var ingredients = recipeToUpdate.Ingredients.Select(ing => new Ingredient
-            {
-                Item = items.FirstOrDefault(i => i.ItemName.ToLower().Trim() == ing.Item, new Item { ItemName = ing.Item.Trim() }),
-                Amount = ing.Amount.ToLower().Trim(),
-                // RecipeId = recipeToUpdate.Id
-            }).ToList();
-
             recipeToUpdate.Name = recipe.Name;
-            recipeToUpdate.Description = recipe.Description;
             recipeToUpdate.CategoryId = recipe.Category;
-            recipeToUpdate.ServingSize = recipe.ServingSize;
-            recipeToUpdate.Notes = recipe.Notes;
             recipeToUpdate.Favorite = recipe.Favorite;
-            recipeToUpdate.Ingredients = recipe.Ingredients;
-            recipeToUpdate.Instructions = recipe.Instructions;
             recipeToUpdate.UserEmail = recipe.UserEmail;
+
             _context.Entry(recipeToUpdate).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
@@ -150,12 +130,11 @@ namespace api.Controllers
                 .Include(ins => ins.Instructions)
                 .Include(ing => ing.Ingredients)
                 .Include(r => r.Category)
+                .Where(r => r.UserEmail == recipe.UserEmail)
                 .ToListAsync();
 
             var updatedRecipes = recipes.Select(r => new RecipeResponse(r));
             return Ok(updatedRecipes);
-            // return Ok();
-            // return Ok(recipeToUpdate);
         }
 
         [HttpDelete("{id}")]

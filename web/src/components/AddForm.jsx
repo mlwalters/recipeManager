@@ -26,7 +26,6 @@ const initialValues = {
   name: '',
   userEmail: '',
   category: '',
-  favorite: false,
   servingSize: 0,
   description: '',
   imageUrl: '',
@@ -83,7 +82,6 @@ const AddForm = () => {
           imageUrl: string().trim().max(350, 'Maximum character limit of 350 has been reached'),
           servingSize: number().max(25, 'Maximum number accepted is 25'),
           category: number().required('Category is required'),
-          // favorite: boolean().default(false),
           instructions: array().of(object().shape({
             step: string().trim().max(450, 'Maximum character limit of 350 has been reached'),
           })),

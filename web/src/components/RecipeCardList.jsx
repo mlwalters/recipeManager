@@ -104,16 +104,10 @@ const RecipeCardList = () => {
       setFavoriteToggle(true);
     }
     try {
-      // console.log(favoriteToggle);
-      const recipeToUpdate = recipes.filter((recipe) => recipe.id === id);
-      // console.log(recipeToUpdate);
-      const request = { ...recipeToUpdate, favorite: favoriteToggle };
-      // const request = {
-      //   favorite: favoriteToggle,
-      // };
+      const recipeToUpdate = recipes.find((recipe) => recipe.id === id);
+      const request = { ...recipeToUpdate, favorite: favoriteToggle, userEmail: user.email };
       const { data } = await axios.put(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
       setRecipes(data);
-      // window.location.reload();
     } catch (favoriteErr) {
       setFavoriteError('Oops! Could not save recipe as favorite.');
     }
