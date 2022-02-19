@@ -59,10 +59,13 @@ namespace api.Models
 
     public class AddRecipe
     {
+        [Required]
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public int ServingSize { get; set; }
+
+        [Required]
         public CategoryId Category { get; set; }
         public bool Favorite { get; set; }
         public string Notes { get; set; }
@@ -71,10 +74,5 @@ namespace api.Models
 
         public ICollection<InstructionResponse> Instructions { get; set; } = new List<InstructionResponse>();
         public ICollection<AddIngredient> Ingredients { get; set; } = new List<AddIngredient>();
-        public AddRecipe(string name)
-        {
-            Name = name;
-        }
-        public AddRecipe() { }
     }
 }

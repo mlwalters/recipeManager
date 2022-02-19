@@ -105,21 +105,15 @@ const RecipeCardList = () => {
     }
     try {
       // console.log(favoriteToggle);
-      // const idToUpdate = { id };
-      // console.log(idToUpdate);
-      // const request = {
-      //   op: 'replace',
-      //   path: '/Favorite',
-      //   value: favoriteToggle,
-      // };
-      // view model patch request
+      const recipeToUpdate = recipes.filter((recipe) => recipe.id === id);
+      // console.log(recipeToUpdate);
+      const request = { ...recipeToUpdate, favorite: favoriteToggle };
       // const request = {
       //   favorite: favoriteToggle,
       // };
-      const { data } = await axios.patch(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, favoriteToggle);
-      // await axios.patch(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
+      const { data } = await axios.put(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
       setRecipes(data);
-      window.location.reload();
+      // window.location.reload();
     } catch (favoriteErr) {
       setFavoriteError('Oops! Could not save recipe as favorite.');
     }
@@ -171,7 +165,7 @@ const RecipeCardList = () => {
     }}
     >
       {recipes.map(({
-        id, name, description, category, favorite, // imageUrl,
+        id, name, description, category, favorite,
       }) => (
         <Card sx={{ maxWidth: 345 }} key={id} raised>
           {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}

@@ -26,6 +26,7 @@ const initialValues = {
   name: '',
   userEmail: '',
   category: '',
+  favorite: false,
   servingSize: 0,
   description: '',
   imageUrl: '',
@@ -76,19 +77,21 @@ const AddForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={object({
-          name: string().required('Recipe name is required').min(2, 'Name is too short').max(150, 'Maximum character limit of 150 has been reached'),
-          description: string().max(150, 'Maximum character limit of 150 has been reached'),
-          imageUrl: string().max(350, 'Maximum character limit of 350 has been reached'),
+          name: string().trim().required('Recipe name is required').min(2, 'Name is too short')
+            .max(150, 'Maximum character limit of 150 has been reached'),
+          description: string().trim().max(150, 'Maximum character limit of 150 has been reached'),
+          imageUrl: string().trim().max(350, 'Maximum character limit of 350 has been reached'),
           servingSize: number().max(25, 'Maximum number accepted is 25'),
           category: number().required('Category is required'),
+          // favorite: boolean().default(false),
           instructions: array().of(object().shape({
-            step: string().max(350, 'Maximum character limit of 350 has been reached'),
+            step: string().trim().max(450, 'Maximum character limit of 350 has been reached'),
           })),
           ingredients: array().of(object().shape({
-            amount: string().max(50, 'Maximum character limit of 50 has been reached'),
-            item: string().max(100, 'Maximum character limit of 100 has been reached'),
+            amount: string().trim().max(50, 'Maximum character limit of 50 has been reached'),
+            item: string().trim().max(100, 'Maximum character limit of 100 has been reached'),
           })),
-          notes: string().max(400, 'Maximum character limit of 400 has been reached'),
+          notes: string().trim().max(400, 'Maximum character limit of 400 has been reached'),
         })}
         onSubmit={async (values) => {
           handleSubmit(values);

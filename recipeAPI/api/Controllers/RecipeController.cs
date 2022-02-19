@@ -70,7 +70,6 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddRecipe addRecipe)
         {
-            // var user = _context.Users.FirstOrDefaultAsync(u => u.Email == addRecipe.UserEmail); //, new User{ Email = addRecipe.UserEmail});
             var items = await _context.Items.ToListAsync();
             var instructions = addRecipe.Instructions.Select(ins => new Instruction
             {
@@ -97,7 +96,7 @@ namespace api.Controllers
                 Instructions = instructions,
                 Ingredients = ingredients,
                 // UserId= user.Id
-                UserEmail= addRecipe.UserEmail
+                UserEmail = addRecipe.UserEmail
             };
 
             _context.Recipes.Add(newRecipe);
@@ -112,15 +111,39 @@ namespace api.Controllers
             return new CreatedResult("api/Recipe/" + newRecipe.Id, new RecipeResponse(addedRecipe));
         }
 
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> Patch(int id, [FromBody] bool favorite)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateRecipeRequest recipe)
         {
-            var recipeToUpdate = await _context.Recipes.FirstOrDefaultAsync(recipe => recipe.Id == id);
+            var recipeToUpdate = await _context.Recipes.FirstOrDefaultAsync(r => r.Id == id);
             if (id != recipeToUpdate.Id)
             {
                 return BadRequest("Request ID does not match any recipe.");
             }
-            recipeToUpdate.Favorite = favorite;
+
+            var items = await _context.Items.ToListAsync();
+            var instructions = recipeToUpdate.Instructions.Select(ins => new Instruction
+            {
+                Step = ins.Step.ToLower().Trim() // isnullorempty
+                // RecipeId = recipeToUpdate.id
+            }).ToList();
+
+            var ingredients = recipeToUpdate.Ingredients.Select(ing => new Ingredient
+            {
+                Item = items.FirstOrDefault(i => i.ItemName.ToLower().Trim() == ing.Item, new Item { ItemName = ing.Item.Trim() }),
+                Amount = ing.Amount.ToLower().Trim(),
+                // RecipeId = recipeToUpdate.Id
+            }).ToList();
+
+            recipeToUpdate.Name = recipe.Name;
+            recipeToUpdate.Description = recipe.Description;
+            recipeToUpdate.CategoryId = recipe.Category;
+            recipeToUpdate.ServingSize = recipe.ServingSize;
+            recipeToUpdate.Notes = recipe.Notes;
+            recipeToUpdate.Favorite = recipe.Favorite;
+            recipeToUpdate.Ingredients = recipe.Ingredients;
+            recipeToUpdate.Instructions = recipe.Instructions;
+            recipeToUpdate.UserEmail = recipe.UserEmail;
+            _context.Entry(recipeToUpdate).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             var recipes = await _context.Recipes
@@ -130,7 +153,7 @@ namespace api.Controllers
                 .ToListAsync();
 
             var updatedRecipes = recipes.Select(r => new RecipeResponse(r));
-            return new OkObjectResult(updatedRecipes);
+            return Ok(updatedRecipes);
             // return Ok();
             // return Ok(recipeToUpdate);
         }
