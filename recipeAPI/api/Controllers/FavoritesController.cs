@@ -29,8 +29,6 @@ namespace api.Controllers
        try
             {
                 var recipes = await _context.Recipes
-                .Include(ins => ins.Instructions)
-                .Include(ing => ing.Ingredients)
                 .Include(r => r.Category)
                 .Where(r => r.Favorite == true)
                 .ToListAsync();
