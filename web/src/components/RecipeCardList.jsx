@@ -99,12 +99,12 @@ const RecipeCardList = () => {
   };
 
   const handleClickFavorite = async (id) => {
-    if (favoriteToggle) {
-      setFavoriteToggle(false);
-    } else {
-      setFavoriteToggle(true);
-    }
     try {
+      if (favoriteToggle) {
+        setFavoriteToggle(false);
+      } else {
+        setFavoriteToggle(true);
+      }
       const recipeToUpdate = recipes.find((recipe) => recipe.id === id);
       const request = { ...recipeToUpdate, favorite: favoriteToggle, userEmail: user.email };
       const { data } = await axios.put(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
