@@ -97,6 +97,7 @@ const RecipeCardList = () => {
         return 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg';
     }
   };
+
   const handleClickFavorite = async (id) => {
     if (favoriteToggle) {
       setFavoriteToggle(false);
@@ -117,8 +118,6 @@ const RecipeCardList = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`, user.email);
-        // let filteredData = Array.from(data);
-        // filteredData = filteredData.filter((recipe) => recipe.UserEmail.includes(user.email));
         setRecipes(data);
       } catch (err) {
         setError(err);
@@ -203,6 +202,7 @@ const RecipeCardList = () => {
             </Tooltip>
             {!!error && <Alert severity="error">{error}</Alert>}
             {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
+            {!!deleteError && <Alert severity="error">{deleteError}</Alert>}
           </CardActions>
         </Card>
       ))}

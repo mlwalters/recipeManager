@@ -33,9 +33,9 @@ namespace api.Controllers
                 .Include(ins => ins.Instructions)
                 .Include(ing => ing.Ingredients)
                 .Include(c => c.Category)
-                // .Where(u => u.UserEmail == email)
+                // .Where(r => r.UserEmail == email)
                 .ToListAsync();
-                Console.WriteLine(recipes);
+
                 var recipeResponses = recipes.Select(r => new RecipeResponse(r));
                 return Ok(recipeResponses);
             }
@@ -72,25 +72,25 @@ namespace api.Controllers
             var items = await _context.Items.ToListAsync();
             var instructions = addRecipe.Instructions.Select(ins => new Instruction
             {
-                Step = ins.Step.ToLower().Trim() // isnullorempty
+                Step = ins.Step,// isnullorempty
                 // RecipeId = addRecipe.Id
             }).ToList();
 
             var ingredients = addRecipe.Ingredients.Select(ing => new Ingredient
             {
-                Item = items.FirstOrDefault(i => i.ItemName.ToLower().Trim() == ing.Item.ToLower(), new Item { ItemName = ing.Item.ToLower().Trim() }),
-                Amount = ing.Amount.ToLower().Trim(),
+                Item = items.FirstOrDefault(i => i.ItemName.ToLower() == ing.Item.ToLower(), new Item { ItemName = ing.Item.ToLower() }),
+                Amount = ing.Amount.ToLower(),
                 // RecipeId = addRecipe.Id
             }).ToList();
 
             Recipe newRecipe = new Recipe()
             {
-                Name = addRecipe.Name.Trim(),
-                Description = addRecipe.Description.Trim(),
+                Name = addRecipe.Name,
+                Description = addRecipe.Description,
                 ImageUrl = addRecipe.ImageUrl,
                 ServingSize = addRecipe.ServingSize,
                 CategoryId = addRecipe.Category,
-                Notes = addRecipe.Notes.Trim(),
+                Notes = addRecipe.Notes,
                 Instructions = instructions,
                 Ingredients = ingredients,
                 // UserId= user.Id
@@ -121,7 +121,7 @@ namespace api.Controllers
             recipeToUpdate.Name = recipe.Name;
             recipeToUpdate.CategoryId = recipe.Category;
             recipeToUpdate.Favorite = recipe.Favorite;
-            recipeToUpdate.UserEmail = recipe.UserEmail;
+            // recipeToUpdate.UserEmail = recipe.UserEmail;
 
             _context.Entry(recipeToUpdate).State = EntityState.Modified;
             await _context.SaveChangesAsync();
