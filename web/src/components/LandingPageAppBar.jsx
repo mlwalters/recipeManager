@@ -6,12 +6,12 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 // import LoginButton from './LoginButton';
-import logo from '../assets/shared-images/bigLogo.png';
+import logo from '../assets/shared-images/loadingLogo.jpg';
 
 export default function LandingPageAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: '#f5efd7' }}>
+      <AppBar position="static" sx={{ backgroundColor: '#ffffff', boxShawdow: 1 }}>
         <Toolbar>
           <IconButton
             size="large"
