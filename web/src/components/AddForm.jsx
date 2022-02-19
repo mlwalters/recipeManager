@@ -80,7 +80,7 @@ const AddForm = () => {
             .max(150, 'Maximum character limit of 150 has been reached'),
           description: string().trim().max(150, 'Maximum character limit of 150 has been reached'),
           imageUrl: string().trim().max(350, 'Maximum character limit of 350 has been reached'),
-          servingSize: number().max(25, 'Maximum number accepted is 25'),
+          servingSize: number().min(0, 'Minimum value is 0').max(50, 'Maximum value is 50'),
           category: number().required('Category is required'),
           instructions: array().of(object().shape({
             step: string().trim().max(450, 'Maximum character limit of 350 has been reached'),
