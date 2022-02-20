@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.0000" tests="3" failures="3">
+  <testsuite name="Root Suite" timestamp="2022-02-19T23:33:29" tests="0" file="cypress/integration/homePage.feature" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Home Page" timestamp="2022-02-19T23:33:29" tests="3" time="0.0000" failures="3">
+    <testcase name="Home Page I can see the app bar" time="0.0000" classname="I can see the app bar">
+      <failure message="Step implementation missing for: I am on the Home Page" type="Error"><![CDATA[Error: Step implementation missing for: I am on the Home Page
+    at Context.resolveAndRunStepDefinition (http://localhost:3000/__cypress/tests?p=cypress/integration/homePage.feature:12335:11)
+    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/homePage.feature:11650:35)]]></failure>
+    </testcase>
+    <testcase name="Home Page I can see the recipe card list after the page loads" time="0.0000" classname="I can see the recipe card list after the page loads">
+      <failure message="Step implementation missing for: I am on the Home Page" type="Error"><![CDATA[Error: Step implementation missing for: I am on the Home Page
+    at Context.resolveAndRunStepDefinition (http://localhost:3000/__cypress/tests?p=cypress/integration/homePage.feature:12335:11)
+    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/homePage.feature:11650:35)]]></failure>
+    </testcase>
+    <testcase name="Home Page I can add a recipe" time="0.0000" classname="I can add a recipe">
+      <failure message="Step implementation missing for: I am on the Home Page" type="Error"><![CDATA[Error: Step implementation missing for: I am on the Home Page
+    at Context.resolveAndRunStepDefinition (http://localhost:3000/__cypress/tests?p=cypress/integration/homePage.feature:12335:11)
+    at Context.eval (http://localhost:3000/__cypress/tests?p=cypress/integration/homePage.feature:11650:35)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

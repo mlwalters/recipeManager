@@ -53,7 +53,7 @@ const NavBar = () => {
             >
               Big Bite
             </Typography> */}
-            <img src={logo} alt="Big Bite logo" height="80px" p="1" />
+            <img src={logo} alt="Big Bite logo" height="80px" p="1" data-testid="appbar-logo" />
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

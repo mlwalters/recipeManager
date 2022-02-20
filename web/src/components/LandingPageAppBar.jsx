@@ -22,7 +22,7 @@ export default function LandingPageAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <img src={logo} alt="Big Bite logo" height="80px" p="1" />
+          <img src={logo} alt="Big Bite logo" height="80px" p="1" data-testid="logo" />
           <Typography sx={{ color: '#313438' }}>Features</Typography>
           <Typography sx={{ color: '#313438' }}>About</Typography>
         </Toolbar>

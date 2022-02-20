@@ -1,5 +1,5 @@
-Feature: Recipe Details
-  Background: Go to Recipe Details
+Feature: Recipe Details Page
+  Background: Go to Recipe Details Page
     Given I am on the Recipe Details Page
 
   Scenario: I can see the recipe details
