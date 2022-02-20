@@ -7,7 +7,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 
@@ -90,12 +89,10 @@ const RecipeDetails = () => {
               ))}
             </Item>
             <Item>
-              <Button onClick={print} sx={{ displayPrint: 'none' }}>
-                <Fab color="secondary" variant="extended">
-                  Print Recipe
-                  {' '}
-                </Fab>
-              </Button>
+              <Fab color="secondary" variant="extended" onClick={print} sx={{ displayPrint: 'none' }}>
+                Print Recipe
+                {' '}
+              </Fab>
             </Item>
           </Grid>
         </Grid>
