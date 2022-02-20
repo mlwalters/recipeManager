@@ -41,7 +41,6 @@ const AddForm = () => {
   const [categories, setCategories] = useState([{}]);
   const [error, setError] = useState(null);
   const { user, isAuthenticated } = useAuth0(); // isAuthenticated
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -53,6 +52,7 @@ const AddForm = () => {
   }, []);
 
   const handleSubmit = async (values) => {
+    const navigate = useNavigate();
     const request = values;
     request.userEmail = user.email;
     try {
