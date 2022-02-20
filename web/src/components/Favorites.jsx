@@ -8,17 +8,7 @@ import Box from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Chip from '@mui/material/Chip';
-// import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Tooltip from '@mui/material/Tooltip';
-import Alert from '@mui/material/Alert';
-import { red } from '@mui/material/colors';
-import DeleteDialogBox from './DeleteDialogBox';
 import LoadingDisplay from './sharedComponents/LoadingDisplay';
 
 import beef from '../assets/categories/beef.jpg';
@@ -38,34 +28,8 @@ const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
-  const [deleteError, setDeleteError] = useState(null);
-  const [favoriteError, setFavoriteError] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [favoriteToggle, setFavoriteToggle] = useState(false);
   const { isAuthenticated } = useAuth0();
   // const { email } = user;
-  // const filteredRecipes = recipes.filter((recipe) => recipe.UserEmail === email);
-  // const { id } = useParams();
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleCancel = () => setOpen(false);
-
-  const handleDelete = (id) => {
-    setOpen(false);
-    const deleteData = async () => {
-      try {
-        const { data } = await axios
-          .delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
-        setRecipes(data);
-      } catch (err) {
-        setDeleteError(err);
-      }
-    };
-    deleteData();
-  };
 
   const switchImageCard = (category) => {
     switch (category) {
@@ -97,40 +61,11 @@ const RecipeCardList = () => {
         return 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg';
     }
   };
-  const handleClickFavorite = async (id) => {
-    if (favoriteToggle) {
-      setFavoriteToggle(false);
-    } else {
-      setFavoriteToggle(true);
-    }
-    try {
-      // console.log(favoriteToggle);
-      // const idToUpdate = { id };
-      // console.log(idToUpdate);
-      // const request = {
-      //   op: 'replace',
-      //   path: '/Favorite',
-      //   value: favoriteToggle,
-      // };
-      // view model patch request
-      // const request = {
-      //   favorite: favoriteToggle,
-      // };
-      const { data } = await axios.patch(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, favoriteToggle);
-      // await axios.patch(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
-      setRecipes(data);
-      window.location.reload();
-    } catch (favoriteErr) {
-      setFavoriteError('Oops! Could not save recipe as favorite.');
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Favorites`);
-        // let filteredData = Array.from(data);
-        // filteredData = filteredData.filter((recipe) => recipe.UserEmail.includes(user.email));
         setRecipes(data);
       } catch (err) {
         setError(err);
@@ -152,30 +87,20 @@ const RecipeCardList = () => {
     );
   }
 
-  if (deleteError) {
-    return (
-      <Box m="4">
-        <Typography>Oops! Could not delete recipe.</Typography>
-        <br />
-        <Chip variant="outlined" color="primary" label="Back to recipes" onClick={window.location.reload} />
-      </Box>
-    );
-  }
-
   return (
     isAuthenticated && (
-
     <Box sx={{
       display: 'grid',
       gap: 3,
-      gridTemplateColumns: 'repeat(3, 1fr)',
+      gridTemplateColumns: 'repeat(5, 1fr)',
+      mt: 2,
+      p: 6,
     }}
     >
       {recipes.map(({
-        id, name, description, category, favorite, // imageUrl,
+        id, name, description, category,
       }) => (
         <Card sx={{ maxWidth: 345 }} key={id} raised>
-          {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}
           <CardHeader
             title={(
               <Link to={`/recipe/${id}`}>
@@ -201,22 +126,6 @@ const RecipeCardList = () => {
               {description}
             </Typography>
           </CardContent>
-          <CardActions disableSpacing>
-            <Tooltip title="Favorite">
-              <IconButton aria-label="favorite" onClick={() => handleClickFavorite(id)} data-testid="favorite icon">
-                {/* <FavoriteIcon /> */}
-                {/* sx={{ color: red[400] }}  */}
-                {favorite === true ? <FavoriteIcon sx={{ color: red[400] }} /> : <FavoriteIcon /> }
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete">
-              <IconButton aria-label="delete" onClick={handleClickOpen}>
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
-            {!!error && <Alert severity="error">{error}</Alert>}
-            {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
-          </CardActions>
         </Card>
       ))}
     </Box>
