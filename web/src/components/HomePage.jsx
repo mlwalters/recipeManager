@@ -7,11 +7,9 @@ import Fab from '@mui/material/Fab';
 import Typography from '@mui/material/Typography';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RecipeCardList from './RecipeCardList';
-import NavBar from './sharedComponents/NavBar';
 
 const HomePage = () => (
   <>
-    <NavBar />
     <Container maxWidth="lg">
       <Box
         sx={{

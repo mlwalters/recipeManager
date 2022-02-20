@@ -8,11 +8,14 @@ import AddRecipePage from './components/AddRecipePage';
 import Profile from './components/Authentication/Profile';
 import LandingPage from './components/LandingPage';
 import Favorites from './components/Favorites';
+// import BigBiteAppBar from './components/BigBiteAppBar';
+import NavBar from './components/sharedComponents/NavBar';
 
 function App() {
   const { isAuthenticated } = useAuth0();
   return (
     <>
+      <NavBar />
       <Routes>
         <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <LandingPage />} />
         <Route path="/home" element={<HomePage />} />

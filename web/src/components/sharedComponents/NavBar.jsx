@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-// import Avatar from '@mui/material/Avatar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
@@ -18,7 +17,9 @@ import MenuItem from '@mui/material/MenuItem';
 import LoginButton from '../LoginButton';
 import LogoutButton from '../LogoutButton';
 import Profile from '../Authentication/Profile';
-import logo from '../../assets/shared-images/roundLogo-blue.png';
+// import logo from '../../assets/shared-images/roundLogo-blue.png';
+import logo from '../../assets/shared-images/loadingLogo.jpg';
+
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const NavBar = () => {
@@ -41,7 +42,7 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#74bdcb' }}>
+    <AppBar position="sticky" sx={{ backgroundColor: '#ffffff', boxShawdow: 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to="/home">
@@ -53,7 +54,7 @@ const NavBar = () => {
             >
               Big Bite
             </Typography> */}
-            <img src={logo} alt="Big Bite logo" height="80px" p="1" data-testid="appbar-logo" />
+            <img src={logo} alt="Big Bite logo" height="80px" p="1" data-testid="logo" />
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -86,7 +87,7 @@ const NavBar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/home">
+                <Link to="/home" color="#313438">
                   <Typography component="span">
                     Recipe Collection
                   </Typography>
@@ -97,7 +98,7 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ my: 2, color: '#313438', display: 'block' }}
             >
               <Link to="/home">
                 <Typography component="span" variant="body" color="white">My Recipes</Typography>
@@ -105,15 +106,15 @@ const NavBar = () => {
             </Button>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ my: 2, color: '#313438', display: 'block' }}
             >
-              <Link to="/favorites" underline="hover">
+              <Link to="/favorites">
                 <Typography component="span" variant="body" color="white" underline="none">Favorites</Typography>
               </Link>
             </Button>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ my: 2, color: '#313438', display: 'block' }}
             >
               <Typography component="span">
                 Shopping List

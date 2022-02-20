@@ -20,7 +20,6 @@ import Alert from '@mui/material/Alert';
 import { red } from '@mui/material/colors';
 import DeleteDialogBox from './DeleteDialogBox';
 import LoadingDisplay from './sharedComponents/LoadingDisplay';
-import NavBar from './sharedComponents/NavBar';
 
 import beef from '../assets/categories/beef.jpg';
 import bread from '../assets/categories/bread.jpg';
@@ -172,7 +171,6 @@ const RecipeCardList = () => {
       gridTemplateColumns: 'repeat(3, 1fr)',
     }}
     >
-      <NavBar />
       {recipes.map(({
         id, name, description, category, favorite, // imageUrl,
       }) => (
