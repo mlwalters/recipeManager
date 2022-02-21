@@ -20,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const RecipeDetails = () => {
   const [details, setDetails] = useState({
-    id: 0, name: '', category: '', description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
+    id: 0, name: '', category: '', imageUrl: '', description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
   });
   const [error, setError] = useState(null);
   const { id } = useParams();
@@ -52,6 +52,9 @@ const RecipeDetails = () => {
         <Grid container spacing={3}>
           <Grid item xs={10}>
             <Item>
+              {!details.imageUrl ? '' : <img src={details.imageUrl} alt={details.name} />}
+            </Item>
+            <Item>
               <Typography variant="h4" color="#263238">{details.name}</Typography>
               <Typography variant="body2" color="text.secondary" fontStyle="italic">{details.description}</Typography>
               <Typography variant="body2" color="text.secondary">
@@ -59,7 +62,7 @@ const RecipeDetails = () => {
                 {' '}
                 {details.servingSize}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body1" color="text.secondary">
                 <RestaurantIcon />
                 {' '}
                 {details.category}

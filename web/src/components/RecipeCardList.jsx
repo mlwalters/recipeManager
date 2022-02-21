@@ -155,6 +155,7 @@ const RecipeCardList = () => {
       display: 'grid',
       gap: 3,
       gridTemplateColumns: 'repeat(3, 1fr)',
+      marginBottom: 5,
     }}
     >
       {recipes.map(({
