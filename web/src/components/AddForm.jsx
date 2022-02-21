@@ -43,6 +43,7 @@ const AddForm = () => {
   const [categories, setCategories] = useState([{}]);
   const [error, setError] = useState(null);
   const { user, isAuthenticated } = useAuth0(); // isAuthenticated
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -54,7 +55,6 @@ const AddForm = () => {
   }, []);
 
   const handleSubmit = async (values) => {
-    const navigate = useNavigate();
     const request = values;
     request.userEmail = user.email;
     try {
@@ -75,10 +75,8 @@ const AddForm = () => {
     isAuthenticated && (
       <>
         <BackToHomeBtn />
-
         <Paper elevation={3}>
-
-          <h2>Add a new recipe</h2>
+          <Typography variant="h4" padding={1}>Add a new recipe</Typography>
           <Formik
             initialValues={initialValues}
             validationSchema={object({
