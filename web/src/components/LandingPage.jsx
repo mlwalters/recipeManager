@@ -7,7 +7,7 @@ import React from 'react';
 // import Button from '@mui/material/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Typography } from '@mui/material';
-// import LoginButton from './LoginButton';
+import LoginButton from './LoginButton';
 import backgroundImage from '../assets/shared-images/landingpage-background.jpg';
 import './LandingPage.css';
 
@@ -29,7 +29,7 @@ const LandingPage = () => {
             <Typography variant="h2">Big Bite Recipe Manager</Typography>
             {/* <Typography variant="h4">Recipe Manager</Typography> */}
             <Typography variant="h5" className="subtitle">Save your favorite recipes. Explore the foodie in you.</Typography>
-
+            <LoginButton />
           </div>
           <div className="right">
             <img src={backgroundImage} alt="background" width="800" className="hero-image" />
