@@ -47,26 +47,6 @@ const RecipeCardList = () => {
   // const filteredRecipes = recipes.filter((recipe) => recipe.UserEmail === email);
   // const { id } = useParams();
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleCancel = () => setOpen(false);
-
-  const handleDelete = (id) => {
-    setOpen(false);
-    const deleteData = async () => {
-      try {
-        const { data } = await axios
-          .delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
-        setRecipes(data);
-      } catch (err) {
-        setDeleteError(err);
-      }
-    };
-    deleteData();
-  };
-
   const switchImageCard = (category) => {
     switch (category) {
       case 'Dessert':
@@ -96,6 +76,28 @@ const RecipeCardList = () => {
       default:
         return 'https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_960_720.jpg';
     }
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleCancel = () => setOpen(false);
+
+  const handleDelete = (id) => {
+    setOpen(false);
+    const deleteData = async () => {
+      try {
+      //   const recipeToDelete = recipes.find((recipe) => recipe.id === id);
+      // const request = { ...recipeToDelete, favorite: favoriteToggle, userEmail: user.email };
+        const { data } = await axios
+          .delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
+        setRecipes(data);
+      } catch (err) {
+        setDeleteError(err);
+      }
+    };
+    deleteData();
   };
 
   const handleClickFavorite = async (id) => {
