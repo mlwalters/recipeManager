@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Fab from '@mui/material/Fab';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import BackToHomeBtn from './sharedComponents/BackToHomeBtn';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -46,12 +47,13 @@ const RecipeDetails = () => {
 
   return (
     <Container maxWidth="lg">
+      <BackToHomeBtn />
       <Box sx={{ flexGrow: 1, p: 4 }}>
         <Grid container spacing={3}>
           <Grid item xs={10}>
             <Item>
               <Typography variant="h4" color="#263238">{details.name}</Typography>
-              <Typography variant="body2" color="text.secondary">{details.description}</Typography>
+              <Typography variant="body2" color="text.secondary" fontStyle="italic">{details.description}</Typography>
               <Typography variant="body2" color="text.secondary">
                 Serving size:
                 {' '}
@@ -62,7 +64,7 @@ const RecipeDetails = () => {
                 {' '}
                 {details.category}
               </Typography>
-              <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
+
             </Item>
             <Item>
               <Typography variant="h6" color="#263238">Ingredients</Typography>
@@ -87,6 +89,11 @@ const RecipeDetails = () => {
                   </p>
                 </div>
               ))}
+
+            </Item>
+            <Item>
+              <Typography variant="h6" color="#263238">Notes</Typography>
+              <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
             </Item>
             <Item>
               <Fab color="secondary" variant="extended" onClick={print} sx={{ displayPrint: 'none' }}>

@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Fab from '@mui/material/Fab';
 import Typography from '@mui/material/Typography';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+// import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RecipeCardList from './RecipeCardList';
 
 const HomePage = () => (
@@ -20,12 +20,11 @@ const HomePage = () => (
       >
         <Typography variant="h6" color="primary">
           <Link to="/recipe/add">
-            <Fab color="secondary" variant="extended">
+            <Fab color="secondary" variant="extended" p={2}>
               Add recipe
-              {' '}
-              <AddCircleIcon sx={{ mr: 1 }} />
             </Fab>
           </Link>
+
         </Typography>
       </Box>
       <Grid container>

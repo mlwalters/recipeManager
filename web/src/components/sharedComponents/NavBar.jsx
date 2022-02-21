@@ -126,14 +126,16 @@ const NavBar = () => {
                 <Typography component="span" variant="body" underline="none">Favorites</Typography>
               </Link>
             </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: '#313438', display: 'block' }}
-            >
-              <Typography component="span">
-                Shopping List
-              </Typography>
-            </Button>
+            <Tooltip title="Upcoming feature!" placement="top">
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: '#313438', display: 'block' }}
+              >
+                <Typography component="span">
+                  Shopping List
+                </Typography>
+              </Button>
+            </Tooltip>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
