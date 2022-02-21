@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,15 +14,26 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
 import LoginButton from '../LoginButton';
 import LogoutButton from '../LogoutButton';
 import Profile from '../Authentication/Profile';
-// import logo from '../../assets/shared-images/roundLogo-blue.png';
 import logo from '../../assets/shared-images/loadingLogo.jpg';
-
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 
+// const theme = createTheme({
+//   components: {
+//     // Name of the component ⚛️
+//     MuiTypography: {
+//       styleOverrides: {
+//         // Name of the slot
+//         root: {
+//           // Some CSS
+//           color: 'black',
+//         },
+//       },
+//     },
+//   },
+// });
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -42,18 +54,11 @@ const NavBar = () => {
   };
 
   return (
+  // <ThemeProvider theme={theme}>
     <AppBar position="sticky" sx={{ backgroundColor: '#ffffff', boxShawdow: 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to="/home">
-            {/* <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-            >
-              Big Bite
-            </Typography> */}
             <img src={logo} alt="Big Bite logo" height="80px" p="1" data-testid="logo" />
           </Link>
 
@@ -87,8 +92,8 @@ const NavBar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="/home" color="#313438">
-                  <Typography component="span">
+                <Link to="/home">
+                  <Typography component="span" variant="body">
                     Recipe Collection
                   </Typography>
                 </Link>
@@ -98,18 +103,27 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: '#313438', display: 'block' }}
+              sx={{
+                my: 2, display: 'block', fontSize: '1rem',
+              }}
             >
-              <Link to="/home">
-                <Typography component="span" variant="body" color="white">My Recipes</Typography>
+              <Link
+                to="/home"
+                sx={{
+                  textDecoration: 'none',
+                }}
+              >
+                <Typography component="span" variant="body">My Recipes</Typography>
               </Link>
             </Button>
             <Button
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: '#313438', display: 'block' }}
+              sx={{
+                my: 2, display: 'block', fontSize: '1rem',
+              }}
             >
               <Link to="/favorites">
-                <Typography component="span" variant="body" color="white" underline="none">Favorites</Typography>
+                <Typography component="span" variant="body" underline="none">Favorites</Typography>
               </Link>
             </Button>
             <Button
@@ -158,6 +172,7 @@ const NavBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+  // </ThemeProvider>
   );
 };
 export default NavBar;

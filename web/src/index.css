@@ -7,3 +7,13 @@
 html {
   scroll-behavior: smooth;
 }
+
+a:link, a:visited, a:active {
+  color: #313438;
+  text-decoration: none;
+}
+
+a:hover {
+  color:rebeccapurple;
+  text-decoration: none;
+}

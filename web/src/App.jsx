@@ -8,7 +8,6 @@ import AddRecipePage from './components/AddRecipePage';
 import Profile from './components/Authentication/Profile';
 import LandingPage from './components/LandingPage';
 import Favorites from './components/Favorites';
-// import BigBiteAppBar from './components/BigBiteAppBar';
 import NavBar from './components/sharedComponents/NavBar';
 
 function App() {
