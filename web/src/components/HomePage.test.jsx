@@ -87,14 +87,19 @@ const categories = [
   },
 ];
 
-test('renders add recipe button on the home page', async () => {
-  const mockApi = new MockAdapter(axios);
-  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, recipeCards);
-  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, categories);
-  render(
-    <BrowserRouter>
-      <HomePage />
-    </BrowserRouter>,
-  );
-  expect(await screen.findByRole('button', { name: /add recipe/i })).toBeInTheDocument();
+describe('Home Page: When the page is rendered', () => {
+  beforeEach(async () => {
+    const mockApi = new MockAdapter(axios);
+    mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, recipeCards);
+    mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, categories);
+    render(
+      <BrowserRouter>
+        <HomePage />
+      </BrowserRouter>,
+    );
+  });
+
+  test('it should display add recipe button', async () => {
+    expect(await screen.findByRole('button', { name: /add recipe/i })).toBeInTheDocument();
+  });
 });

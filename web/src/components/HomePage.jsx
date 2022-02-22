@@ -18,14 +18,11 @@ const HomePage = () => (
           p: 3,
         }}
       >
-        <Typography variant="h6" color="primary">
-          <Link to="/recipe/add">
-            <Fab color="secondary" variant="extended" p={2}>
-              Add recipe
-            </Fab>
-          </Link>
-
-        </Typography>
+        <Link to="/recipe/add">
+          <Fab color="secondary" variant="extended" p={2}>
+            <Typography variant="body1" component="span" color="white">Add recipe</Typography>
+          </Fab>
+        </Link>
       </Box>
       <Grid container>
         <RecipeCardList />
