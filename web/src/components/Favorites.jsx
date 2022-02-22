@@ -30,8 +30,7 @@ const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
-  const { isAuthenticated } = useAuth0();
-  // const { email } = user;
+  const { isAuthenticated, user } = useAuth0();
 
   const switchImageCard = (category) => {
     switch (category) {
@@ -67,7 +66,7 @@ const RecipeCardList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Favorites`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Favorites/${user.email}`);
         setRecipes(data);
       } catch (err) {
         setError(err);
@@ -121,7 +120,7 @@ const RecipeCardList = () => {
               <CardMedia
                 component="img"
                 height="194"
-            // image={imageUrl === '' ? switchImageCard(category) : `${imageUrl}`}
+                // image={imageUrl === '' ? switchImageCard(category) : `${imageUrl}`}
                 image={switchImageCard(category)}
                 alt={`Picture of ${category}`}
               />

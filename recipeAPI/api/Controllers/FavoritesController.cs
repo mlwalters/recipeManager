@@ -23,14 +23,16 @@ namespace api.Controllers
             _logger = logger;
         }
 
-         [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet]
+        [Route("{email}")]
+        public async Task<IActionResult> Get(string email)
         {
        try
             {
                 var recipes = await _context.Recipes
                 .Include(r => r.Category)
                 .Where(r => r.Favorite == true)
+                .Where(r => r.UserEmail == email)
                 .ToListAsync();
 
                 var recipeResponses = recipes.Select(r => new RecipeResponse(r));

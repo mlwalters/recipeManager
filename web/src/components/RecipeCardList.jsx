@@ -88,8 +88,6 @@ const RecipeCardList = () => {
     setOpen(false);
     const deleteData = async () => {
       try {
-      //   const recipeToDelete = recipes.find((recipe) => recipe.id === id);
-      // const request = { ...recipeToDelete, favorite: favoriteToggle, userEmail: user.email };
         const { data } = await axios
           .delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
         setRecipes(data);
@@ -119,7 +117,7 @@ const RecipeCardList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe`, user.email);
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/All/${user.email}`);
         setRecipes(data);
       } catch (err) {
         setError(err);

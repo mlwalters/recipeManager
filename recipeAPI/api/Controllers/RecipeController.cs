@@ -24,8 +24,8 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        // public async Task<IActionResult> Get([FromRoute] string email)
-        public async Task<IActionResult> Get()
+        [Route("All/{email}")]
+        public async Task<IActionResult> Get(string email)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace api.Controllers
                 .Include(ins => ins.Instructions)
                 .Include(ing => ing.Ingredients)
                 .Include(c => c.Category)
-                // .Where(r => r.UserEmail == email)
+                .Where(r => r.UserEmail == email)
                 .ToListAsync();
 
                 var recipeResponses = recipes.Select(r => new RecipeResponse(r));
@@ -157,6 +157,7 @@ namespace api.Controllers
                 .Include(ins => ins.Instructions)
                 .Include(ing => ing.Ingredients)
                 .Include(r => r.Category)
+                .Where(r => r.UserEmail == recipeToDelete.UserEmail)
                 .ToListAsync();
 
             var recipeResponses = recipes.Select(r => new RecipeResponse(r));
