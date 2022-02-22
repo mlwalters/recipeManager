@@ -9,6 +9,7 @@ import Profile from './components/Authentication/Profile';
 import LandingPage from './components/LandingPage';
 import Favorites from './components/Favorites';
 import NavBar from './components/sharedComponents/NavBar';
+import ProtectedRoutes from './ProtectedRoutes';
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -17,11 +18,14 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <LandingPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/recipe/:id" element={<RecipeDetails />} />
-        <Route path="/recipe/add" element={<AddRecipePage />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/recipe/:id" element={<RecipeDetails />} />
+          <Route path="/recipe/add" element={<AddRecipePage />} />
+        </Route>
+
       </Routes>
     </>
   );
