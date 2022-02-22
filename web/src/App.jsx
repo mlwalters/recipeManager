@@ -25,7 +25,7 @@ function App() {
           <Route path="/recipe/:id" element={<RecipeDetails />} />
           <Route path="/recipe/add" element={<AddRecipePage />} />
         </Route>
-
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </>
   );

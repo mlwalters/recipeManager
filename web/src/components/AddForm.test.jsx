@@ -95,3 +95,6 @@ describe('AddForm: When add recipe form is rendered', () => {
 });
 
 // https://stackoverflow.com/questions/55184037/react-testing-library-on-change-for-material-ui-select-component
+// const selectElement = await screen.findByTestId('select');
+//       expect(selectElement).toBeInTheDocument();
+//       fireEvent.change(selectElement, { target: { value: 'C#' } });
