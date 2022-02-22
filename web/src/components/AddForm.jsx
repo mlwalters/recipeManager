@@ -109,7 +109,7 @@ const AddForm = () => {
                 required
                 variant="outlined"
                 size="small"
-                autocomplete="false"
+                autoComplete="false"
                 error={Boolean(errors.name) && Boolean(touched.name)}
                 helperText={Boolean(touched.name) && errors.name}
               />
@@ -147,6 +147,7 @@ const AddForm = () => {
                 name="category"
                 type="category"
                 as={TextField}
+                // id="outlined-select-category"
                 select
                 fullWidth
                 variant="outlined"
@@ -205,11 +206,13 @@ const AddForm = () => {
                               />
                               {index ? (
                                 <RemoveIcon
+                                  data-testid="remove-icon-ingredient"
                                   disabled={index.length === 1}
                                   onClick={() => arrayHelpers.remove(index)}
                                 />
                               ) : null}
                               <AddIcon
+                                data-testid="add-icon-ingredient"
                                 onClick={() => arrayHelpers.insert(index + 1, '')}
                               />
                             </div>
@@ -243,11 +246,13 @@ const AddForm = () => {
                               />
                               {index ? (
                                 <RemoveIcon
+                                  data-testid="remove-icon-instruction"
                                   disabled={index.length === 1}
                                   onClick={() => arrayHelpers.remove(index)}
                                 />
                               ) : null}
                               <AddIcon
+                                data-testid="add-icon-instruction"
                                 onClick={() => arrayHelpers.insert(index + 1, { step: '' })}
                               />
                             </Box>
