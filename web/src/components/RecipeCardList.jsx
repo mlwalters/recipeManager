@@ -42,10 +42,7 @@ const RecipeCardList = () => {
   const [favoriteError, setFavoriteError] = useState(null);
   const [open, setOpen] = useState(false);
   const [favoriteToggle, setFavoriteToggle] = useState(false);
-  const { isAuthenticated, user } = useAuth0();
-  // const { email } = user;
-  // const filteredRecipes = recipes.filter((recipe) => recipe.UserEmail === email);
-  // const { id } = useParams();
+  const { user } = useAuth0();
 
   const switchImageCard = (category) => {
     switch (category) {
@@ -150,7 +147,7 @@ const RecipeCardList = () => {
   }
 
   return (
-    isAuthenticated && (
+    // isAuthenticated && (
     <Box sx={{
       display: 'grid',
       gap: 3,
@@ -208,7 +205,7 @@ const RecipeCardList = () => {
         </Card>
       ))}
     </Box>
-    )
+    // )
   );
 };
 
