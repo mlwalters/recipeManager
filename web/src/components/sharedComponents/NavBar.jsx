@@ -177,7 +177,7 @@ const NavBar = () => {
                     <Typography textAlign="center"><LoginButton /></Typography>
                   </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center"><Profile /></Typography>
+                    <Typography textAlign="center" component="div"><Profile /></Typography>
                   </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center"><LogoutButton /></Typography>
