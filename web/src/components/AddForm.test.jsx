@@ -56,6 +56,7 @@ describe('AddForm: When add recipe form is rendered', () => {
     const mockApi = new MockAdapter(axios);
     mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategory);
     mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, addedRecipe);
+
     render(
       <BrowserRouter>
         <AddForm />

@@ -148,6 +148,7 @@ const AddForm = () => {
                 type="category"
                 as={TextField}
                 // id="outlined-select-category"
+                // key=(category)
                 select
                 fullWidth
                 variant="outlined"
