@@ -88,7 +88,7 @@ const RecipeCardList = () => {
 
   if (fetchError) {
     return (
-      <Typography variant="h5">Oops! Could not fetch recipe card.</Typography>
+      <Typography variant="h5">Oops! Could not fetch recipe cards.</Typography>
     );
   }
 
