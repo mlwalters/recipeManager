@@ -10,7 +10,6 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Chip from '@mui/material/Chip';
-// import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -25,7 +24,7 @@ import SwitchImageCard from './sharedComponents/SwitchImageCard';
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
-  const [error, setError] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
   const [deleteError, setDeleteError] = useState(null);
   const [favoriteError, setFavoriteError] = useState(null);
   const [open, setOpen] = useState(false);
@@ -64,7 +63,7 @@ const RecipeCardList = () => {
       const { data } = await axios.put(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
       setRecipes(data);
     } catch (favoriteErr) {
-      setFavoriteError('Oops! Could not save recipe as favorite.');
+      setFavoriteError(<Typography variant="h6">Oops! Could not save recipe as favorite.</Typography>);
     }
   };
 
@@ -74,7 +73,7 @@ const RecipeCardList = () => {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/All/${user.email}`);
         setRecipes(data);
       } catch (err) {
-        setError(err);
+        setFetchError(err);
       }
       setLoadingState(false);
     };
@@ -87,9 +86,9 @@ const RecipeCardList = () => {
     );
   }
 
-  if (error) {
+  if (fetchError) {
     return (
-      <div>Oops! Could not fetch recipe card.</div>
+      <Typography variant="h5">Oops! Could not fetch recipe card.</Typography>
     );
   }
 
@@ -154,12 +153,12 @@ const RecipeCardList = () => {
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-            {!!error && <Alert severity="error">{error}</Alert>}
-            {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
-            {!!deleteError && <Alert severity="error">{deleteError}</Alert>}
           </CardActions>
         </Card>
       ))}
+      {!!fetchError && <Alert severity="error">{fetchError}</Alert>}
+      {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
+      {!!deleteError && <Alert severity="error">{deleteError}</Alert>}
     </Box>
   );
 };
