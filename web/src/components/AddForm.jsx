@@ -188,8 +188,16 @@ const AddForm = () => {
                       <div>
                         {values.ingredients && values.ingredients.length > 0 ? (
                           values.ingredients.map((ingredient, index) => (
-                            // eslint-disable-next-line react/no-array-index-key
-                            <div key={index}>
+                            <Box
+                              // eslint-disable-next-line react/no-array-index-key
+                              key={index}
+                              sx={{
+                                display: 'flex',
+                                // justifyContent: 'space-evenly',
+                                p: 1,
+                                m: 1,
+                              }}
+                            >
                               <Field
                                 name={`ingredients.${index}.amount`}
                                 label="Amount"
@@ -205,17 +213,21 @@ const AddForm = () => {
                                 size="small"
                               />
                               {index ? (
-                                <RemoveIcon
-                                  data-testid="remove-icon-ingredient"
-                                  disabled={index.length === 1}
-                                  onClick={() => arrayHelpers.remove(index)}
-                                />
+                                <div>
+                                  <RemoveIcon
+                                    data-testid="remove-icon-ingredient"
+                                    disabled={index.length === 1}
+                                    onClick={() => arrayHelpers.remove(index)}
+                                  />
+                                </div>
                               ) : null}
-                              <AddIcon
-                                data-testid="add-icon-ingredient"
-                                onClick={() => arrayHelpers.insert(index + 1, '')}
-                              />
-                            </div>
+                              <div>
+                                <AddIcon
+                                  data-testid="add-icon-ingredient"
+                                  onClick={() => arrayHelpers.insert(index + 1, '')}
+                                />
+                              </div>
+                            </Box>
                           ))
                         ) : null}
                       </div>
@@ -227,7 +239,6 @@ const AddForm = () => {
               <FormGroup>
                 <FormControl>
                   <FormLabel>Instructions</FormLabel>
-
                   <FieldArray
                     name="instructions"
                     render={(arrayHelpers) => (
@@ -235,7 +246,15 @@ const AddForm = () => {
                         {values.instructions && values.instructions.length > 0 ? (
                           values.instructions.map((instruction, index) => (
                             // eslint-disable-next-line react/no-array-index-key
-                            <Box key={index} display="flex">
+                            <Box
+                              key="instruction-$(index)"
+                              sx={{
+                                display: 'flex',
+                                // justifyContent: 'space-evenly',
+                                p: 1,
+                                m: 1,
+                              }}
+                            >
                               <Typography variant="body2" color="text.secondary">{`Step ${index + 1}`}</Typography>
                               <Field
                                 name={`instructions.${index}.step`}
@@ -245,16 +264,22 @@ const AddForm = () => {
                                 size="small"
                               />
                               {index ? (
-                                <RemoveIcon
-                                  data-testid="remove-icon-instruction"
-                                  disabled={index.length === 1}
-                                  onClick={() => arrayHelpers.remove(index)}
-                                />
+                                <div>
+                                  <RemoveIcon
+                                    data-testid="remove-icon-instruction"
+                                    disabled={index.length === 1}
+                                    onClick={() => arrayHelpers.remove(index)}
+                                  />
+
+                                </div>
                               ) : null}
-                              <AddIcon
-                                data-testid="add-icon-instruction"
-                                onClick={() => arrayHelpers.insert(index + 1, { step: '' })}
-                              />
+                              <div>
+                                <AddIcon
+                                  data-testid="add-icon-instruction"
+                                  onClick={() => arrayHelpers.insert(index + 1, { step: '' })}
+                                />
+
+                              </div>
                             </Box>
                           ))
                         ) : null}
@@ -278,16 +303,24 @@ const AddForm = () => {
                 helperText={Boolean(touched.notes) && errors.notes}
               />
 
-              <Button
-                type="submit"
-                variant="contained"
-                color="secondary"
-                size="large"
-                disabled={!isValid || !dirty}
+              <Box sx={{
+                display: 'flex',
+                justifyContent: 'flex-start',
+                p: 1,
+                m: 1,
+              }}
               >
-                Add Recipe
-              </Button>
-              <Button variant="outlined" color="secondary" size="large" disabled={!dirty} type="reset" onClick={resetForm}>Reset</Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  disabled={!isValid || !dirty}
+                >
+                  Add Recipe
+                </Button>
+                <Button variant="outlined" color="secondary" size="large" disabled={!dirty} type="reset" onClick={resetForm}>Reset</Button>
+              </Box>
             </Stack>
           </Form>
         )}
