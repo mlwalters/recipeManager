@@ -10,6 +10,8 @@ import Paper from '@mui/material/Paper';
 import Fab from '@mui/material/Fab';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import BackToHomeBtn from './sharedComponents/BackToHomeBtn';
+import SwitchImageCard from './sharedComponents/SwitchImageCard';
+import './RecipeDetails.css';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -20,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const RecipeDetails = () => {
   const [details, setDetails] = useState({
-    id: 0, name: '', category: '', imageUrl: '', description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
+    id: 0, name: '', userEmail: '', category: '', imageUrl: '', description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
   });
   const [error, setError] = useState(null);
   const { id } = useParams();
@@ -41,7 +43,7 @@ const RecipeDetails = () => {
 
   if (error) {
     return (
-      <div>Oops! Could not fetch recipe details.</div>
+      <Typography>Oops! Could not fetch recipe details.</Typography>
     );
   }
 
@@ -49,10 +51,10 @@ const RecipeDetails = () => {
     <Container maxWidth="lg">
       <BackToHomeBtn />
       <Box sx={{ flexGrow: 1, p: 4 }}>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} className="section-to-print">
           <Grid item xs={10}>
             <Item>
-              {!details.imageUrl ? '' : <img src={details.imageUrl} alt={details.name} />}
+              <img src={SwitchImageCard(details.category)} alt={details.name} height="250" />
             </Item>
             <Item>
               <Typography variant="h4" color="#263238">{details.name}</Typography>
