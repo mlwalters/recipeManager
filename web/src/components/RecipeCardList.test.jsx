@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom'; //  Route, Routes
 import { render, screen } from '@testing-library/react';
 import RecipeCardList from './RecipeCardList';
 
@@ -123,21 +123,21 @@ const testCategory = [
   },
 ];
 
-const renderWithRoutes = () => render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <LandingPage />} />
-      <Route element={<ProtectedRoutes />}>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/recipe/:id" element={<RecipeDetails />} />
-        <Route path="/recipe/add" element={<AddRecipePage />} />
-      </Route>
-      <Route path="*" element={<RecipeCardList />} />
-    </Routes>
-  </BrowserRouter>,
-);
+// const renderWithRoutes = () => render(
+//   <BrowserRouter>
+//     <Routes>
+//       <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <LandingPage />} />
+//       <Route element={<ProtectedRoutes />}>
+//         <Route path="/home" element={<HomePage />} />
+//         <Route path="/profile" element={<Profile />} />
+//         <Route path="/favorites" element={<Favorites />} />
+//         <Route path="/recipe/:id" element={<RecipeDetails />} />
+//         <Route path="/recipe/add" element={<AddRecipePage />} />
+//       </Route>
+//       <Route path="*" element={<RecipeCardList />} />
+//     </Routes>
+//   </BrowserRouter>,
+// );
 
 describe('RecipeCardList: When recipe card list is rendered', () => {
   beforeEach(async () => {
@@ -148,9 +148,9 @@ describe('RecipeCardList: When recipe card list is rendered', () => {
     mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, sampleRecipe);
     mockApi.onDelete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${sampleRecipe.id}`).reply(200, recipeCardDetails);
     render(
-      <BrowserRouter>
-        <RecipeCardList />
-      </BrowserRouter>,
+      // <BrowserRouter>
+      <RecipeCardList />,
+      // </BrowserRouter>,
     );
   });
 
