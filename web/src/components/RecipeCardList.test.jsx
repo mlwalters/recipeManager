@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { BrowserRouter } from 'react-router-dom'; //  Route, Routes
+import { BrowserRouter } from 'react-router-dom';
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import RecipeCardList from './RecipeCardList';
 
@@ -18,7 +18,7 @@ const sampleId = 9;
 
 const recipeCards = [{
   id: 1,
-  email: 'google@yahoo.com',
+  userEmail: 'google@yahoo.com',
   name: 'Strawberry Cheesecake',
   description: 'A light-yet-rich cheesecake, creamynot dense-creamy like New York cheesecake.',
   servingSize: 12,
@@ -51,7 +51,7 @@ const recipeCards = [{
 },
 {
   id: 2,
-  email: 'google@yahoo.com',
+  userEmail: 'google@yahoo.com',
   name: 'Lentil Soup',
   description: 'The touch of spices with lemon really lifts this soup to the next level.',
   servingSize: 6,
@@ -82,9 +82,6 @@ const recipeCards = [{
     },
   ],
 }];
-
-// const onCancelFn = jest.fn();
-// const onDeleteFn = jest.fn();
 
 const renderWithMocks = (fetchError, fetchErrorCode, deleteError, deleteErrorCode) => {
   const mockApi = new MockAdapter(axios);

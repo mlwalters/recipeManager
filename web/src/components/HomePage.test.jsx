@@ -5,9 +5,11 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import HomePage from './HomePage';
 
+const userEmail = 'google@yahoo.com';
 const recipeCards = [{
   id: 1,
   name: 'Strawberry Cheesecake',
+  userEmail: 'google@yahoo.com',
   description: 'A light-yet-rich cheesecake, creamynot dense-creamy like New York cheesecake.',
   servingSize: 12,
   category: 'Dessert',
@@ -90,7 +92,7 @@ const categories = [
 describe('Home Page: When the page is rendered', () => {
   beforeEach(async () => {
     const mockApi = new MockAdapter(axios);
-    mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(200, recipeCards);
+    mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe/All/${userEmail}`).reply(200, recipeCards);
     mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, categories);
     render(
       <BrowserRouter>
