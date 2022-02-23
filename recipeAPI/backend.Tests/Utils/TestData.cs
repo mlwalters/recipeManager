@@ -9,6 +9,7 @@ namespace backend.Tests.Utils
 {
     public static class TestData
     {
+        public static readonly string EMAIL = "google@yahoo.com";
         public static readonly string RECIPE_NAME = "Filipino Chicken Adobo";
         public static readonly string DESCRIPTION = "Intense in flavour, but so fast and easy to prepare!";
         public static readonly int SERVING_SIZE = 4;

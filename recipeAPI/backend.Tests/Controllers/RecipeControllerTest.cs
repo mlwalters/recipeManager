@@ -35,7 +35,8 @@ namespace backend.Tests.Controllers
             [Fact]
             public async void WhenRecipesExist_ReturnsOkObjectContainingListOfRecipes()
             {
-                var response = await testObject.Get();
+                var email = TestData.EMAIL;
+                var response = await testObject.Get(email);
                 Console.WriteLine(response);
                 response.Should().BeOfType<OkObjectResult>();
 
@@ -45,7 +46,7 @@ namespace backend.Tests.Controllers
                 // var recipe = recipeList.First(p => p.Name == TestData.RECIPE_NAME);
 
                 // recipe.Name.Should().Be(TestData.RECIPE_NAME);
-                
+
             }
 
             [Fact]
@@ -54,7 +55,8 @@ namespace backend.Tests.Controllers
                 db.Recipes.RemoveRange(db.Recipes);
                 await db.SaveChangesAsync();
 
-                var response = await testObject.Get();
+                var email = TestData.EMAIL;
+                var response = await testObject.Get(email);
                 response.Should().BeOfType<OkObjectResult>();
                 var result = (response as OkObjectResult).Value as IEnumerable<RecipeResponse>;
                 result.Any().Should().BeFalse();
@@ -67,7 +69,8 @@ namespace backend.Tests.Controllers
                 mockDb.Setup(x => x.Recipes).Throws(new Exception("Something Broke"));
                 var testObject = new RecipeController(mockDb.Object, new Mock<ILogger<RecipeController>>().Object);
 
-                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.Get());
+                var email = TestData.EMAIL;
+                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.Get(email));
 
                 exception.Message.Should().Be("Something Broke");
             }
