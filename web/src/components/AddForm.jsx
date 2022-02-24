@@ -77,20 +77,20 @@ const AddForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={object({
-          name: string().trim().required('Recipe name is required').min(2, 'Name is too short')
-            .max(150, 'Maximum character limit of 150 has been reached'),
-          description: string().trim().max(150, 'Maximum character limit of 150 has been reached'),
-          imageUrl: string().trim().max(350, 'Maximum character limit of 350 has been reached'),
-          servingSize: number().min(0, 'Minimum value is 0').max(50, 'Maximum value is 50'),
+          name: string().trim().required('Recipe name is required').min(3, 'Name is too short')
+            .max(350, 'Maximum character limit is 350'),
+          description: string().trim().max(900, 'Maximum character limit is 900'),
+          imageUrl: string().trim().max(350, 'Maximum character limit is 350'),
+          servingSize: number().min(0, 'Minimum value is 0').max(100, 'Maximum value is 100'),
           category: number().required('Category is required'),
           instructions: array().of(object().shape({
-            step: string().trim().max(450, 'Maximum character limit of 350 has been reached'),
+            step: string().trim().max(950, 'Maximum character limit is 950'),
           })),
           ingredients: array().of(object().shape({
-            amount: string().trim().max(50, 'Maximum character limit of 50 has been reached'),
-            item: string().trim().max(100, 'Maximum character limit of 100 has been reached'),
+            amount: string().trim().max(50, 'Maximum character limit is 50'),
+            item: string().trim().max(200, 'Maximum character limit is 200'),
           })),
-          notes: string().trim().max(400, 'Maximum character limit of 400 has been reached'),
+          notes: string().trim().max(1500, 'Maximum character limit is 1500'),
         })}
         onSubmit={async (values) => {
           handleSubmit(values);
