@@ -111,7 +111,7 @@ const RecipeCardList = () => {
     }}
     >
       {recipes.map(({
-        id, name, description, category, favorite,
+        id, name, description, category, favorite, imageUrl,
       }) => (
         <Card sx={{ maxWidth: 345 }} key={id} raised>
           {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}
@@ -128,13 +128,21 @@ const RecipeCardList = () => {
             )}
             subheader={category}
           />
-          <CardMedia
-            component="img"
-            height="194"
-            // image={imageUrl === '' ? switchImageCard(category) : `${imageUrl}`}
-            image={SwitchImageCard(category)}
-            alt={`Picture of ${category}`}
-          />
+          {imageUrl === null || imageUrl === '' ? (
+            <CardMedia
+              component="img"
+              height="194"
+              image={SwitchImageCard(category)}
+              alt={`Picture of ${category}`}
+            />
+          ) : (
+            <CardMedia
+              component="img"
+              height="194"
+              image={imageUrl}
+              alt={`Picture of ${category}`}
+            />
+          )}
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               {description}
