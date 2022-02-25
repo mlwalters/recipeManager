@@ -10,6 +10,8 @@
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Humanizer.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/MessagePack.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/MessagePack.Annotations.dll
+/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.AspNetCore.Razor.Language.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.Build.dll
@@ -57,6 +59,7 @@
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.Win32.SystemEvents.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Newtonsoft.Json.dll
+/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/NuGet.Common.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/NuGet.Configuration.dll
 /Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/NuGet.DependencyResolver.Core.dll
@@ -268,6 +271,3 @@
 /Users/walterma/capstone-project/recipeAPI/api/obj/Debug/net6.0/ref/api.dll
 /Users/walterma/capstone-project/recipeAPI/api/obj/Debug/net6.0/api.pdb
 /Users/walterma/capstone-project/recipeAPI/api/obj/Debug/net6.0/api.genruntimeconfig.cache
-/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
-/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
-/Users/walterma/capstone-project/recipeAPI/api/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll

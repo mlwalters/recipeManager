@@ -83,17 +83,16 @@ namespace backend.Tests.Controllers
                 response.Should().BeOfType<OkObjectResult>();
 
                 var result = (response as OkObjectResult).Value as RecipeResponse;
-                Console.WriteLine(result);
                 result.Name.Should().Be(TestData.RECIPE_NAME);
                 result.ServingSize.Should().Be(TestData.SERVING_SIZE);
-                // result.Category.Should().Be(TestData.RECIPE_CATEGORY);
-                // result.Instructions.Count().Should().Be(TestData.INSTRUCTIONS.Count());
+                result.Category.Should().Be(TestData.CATEGORY);
+                result.Notes.Should().Be(TestData.NOTES);
             }
 
             [Fact]
             public async void WhenNoRecipe_ReturnsNotFound()
             {
-                var testId = 888999;
+                var testId = 10000000;
                 var response = await testObject.GetById(testId);
                 response.Should().BeOfType<NotFoundResult>();
             }
@@ -101,7 +100,7 @@ namespace backend.Tests.Controllers
             [Fact]
             public async void WhenAnErrorOccursGettingARecipeUsingDataBase_ThrowsError()
             {
-                var testId = 888999;
+                var testId = 3000000;
                 var mockDb = new Mock<AppDbContext>();
                 mockDb.Setup(x => x.Recipes).Throws(new Exception("Something Broke"));
                 var testObject = new RecipeController(mockDb.Object, new Mock<ILogger<RecipeController>>().Object);
