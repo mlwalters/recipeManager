@@ -11,10 +11,5 @@ namespace api.Models
         public int RecipeId { get; set; }
         public virtual Recipe Recipe { get; set; }
         public virtual Item Item { get; set; }
-
-        public static string NullIfEmpty(string value)
-        {
-            return string.IsNullOrEmpty(value) ? null : value;
-        }
     }
 }

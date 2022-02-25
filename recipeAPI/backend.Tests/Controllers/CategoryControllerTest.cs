@@ -30,14 +30,20 @@ namespace backend.Tests.Controllers
             await db.DisposeAsync();
         }
 
-        // public class Get : CategoryControllerTest
-        // {
-        //     [Fact]
-        //     public async void ReturnsOkObjectContainingListOfRecipes_AfterCategoryRequest()
-        //     {
+        public class Get : CategoryControllerTest
+        {
+            [Fact]
+            public async void ReturnsOkObjectContainingListOfCategories()
+            {
                 
+                var response = await testObject.Get();
+                response.Should().BeOfType<OkObjectResult>();
 
-        //     }
-        // }
+                var categories = (response as OkObjectResult).Value as IEnumerable<CategoryResponse>;
+                categories.Count().Should().Be(13);
+                var poultry = categories.First(c => c.Name == TestData.CATEGORY);
+                poultry.Id.Should().Be((CategoryId)TestData.CATEGORY_ID);
+            }
+        }
     }
 }

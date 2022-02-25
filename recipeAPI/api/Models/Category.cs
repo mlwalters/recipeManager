@@ -25,7 +25,7 @@ namespace api.Models
         Drinks = 12
     }
 
-    public class CategoryRequest
+    public class CategoryResponse
     {
         public CategoryId Id { get; set; }
         public string Name { get; set; }

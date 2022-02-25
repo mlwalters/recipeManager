@@ -30,7 +30,7 @@ namespace api.Controllers
                 var categories = await _context.Categories.ToListAsync();
 
                 var categoriesResponse = categories.Select(cat =>
-                    new CategoryRequest
+                    new CategoryResponse
                     {
                         Id = cat.Id,
                         Name = cat.Name
