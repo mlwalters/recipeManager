@@ -3,15 +3,21 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import NavBar from './NavBar';
 
+const userEmail = 'google@yahoo.com';
+
+jest.mock('@auth0/auth0-react', () => ({
+  useAuth0: () => ({
+    user: {
+      email: userEmail,
+    },
+  }),
+}));
+
 test('renders navigation bar on the home page', async () => {
   render(
     <BrowserRouter>
       <NavBar />
     </BrowserRouter>,
   );
-  expect(await screen.findByRole('link', { name: /logo/i })).toBeInTheDocument();
-  expect(await screen.findByRole('link', { name: /my recipes/i })).toBeInTheDocument();
-  expect(await screen.findByText(/favorites/i)).toBeInTheDocument();
-  expect(await screen.findByText(/shopping list/i)).toBeInTheDocument();
-  // expect(await screen.findByAltText(/account settings/i));
+  expect(await screen.findByRole('img', { name: /big bite logo/i })).toBeInTheDocument();
 });
