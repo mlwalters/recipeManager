@@ -39,18 +39,15 @@ const LandingPage = () => {
           <div className="credits">
             <div className="credits-left">
               <Typography component="span" variant="body2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Tempora, dolores cupiditate. Error, blanditiis nisi, libero debitis illum
-                eligendi et qui odio perferendis deserunt omnis nam cumque!
-                Dolore possimus quia alias?
+                Free for commercial or personal use
               </Typography>
-            </div>
-            <div className="credits-right">
               <Typography component="span" variant="body2">
                 Made by:
                 {' '}
                 <a href="https://github.com/mlwalters" target="_blank" rel="noreferrer">Maricar Lusuegro Walters</a>
               </Typography>
+            </div>
+            <div className="credits-right">
               <Typography component="span" variant="body2">
                 Illustrations are from
                 {' '}
