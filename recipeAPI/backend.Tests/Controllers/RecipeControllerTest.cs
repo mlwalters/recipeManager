@@ -37,16 +37,14 @@ namespace backend.Tests.Controllers
             {
                 var email = TestData.EMAIL;
                 var response = await testObject.Get(email);
-                Console.WriteLine(response);
+                
                 response.Should().BeOfType<OkObjectResult>();
 
                 var recipeList = (response as OkObjectResult).Value as IEnumerable<RecipeResponse>;
-                recipeList.Count().Should().Be(db.Recipes.Count());
-                recipeList.Count(recipe => recipe.Name == TestData.RECIPE_NAME).Should().Be(1);
-                // var recipe = recipeList.First(p => p.Name == TestData.RECIPE_NAME);
-
-                // recipe.Name.Should().Be(TestData.RECIPE_NAME);
-
+                var filteredList = recipeList.Where(r=> r.UserEmail == email).ToList();
+                var dbFilteredList = db.Recipes.Where(r=> r.UserEmail == email).ToList();
+                filteredList.Count().Should().Be(dbFilteredList.Count());
+                filteredList.Count(recipe => recipe.UserEmail == TestData.EMAIL).Should().Be(1);
             }
 
             [Fact]
@@ -89,7 +87,7 @@ namespace backend.Tests.Controllers
                 result.Name.Should().Be(TestData.RECIPE_NAME);
                 result.ServingSize.Should().Be(TestData.SERVING_SIZE);
                 // result.Category.Should().Be(TestData.RECIPE_CATEGORY);
-                result.Instructions.Count().Should().Be(TestData.INSTRUCTIONS.Count());
+                // result.Instructions.Count().Should().Be(TestData.INSTRUCTIONS.Count());
             }
 
             [Fact]

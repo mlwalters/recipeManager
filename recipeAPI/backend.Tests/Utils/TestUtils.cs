@@ -14,6 +14,7 @@ namespace backend.Tests.Utils
             var db = new AppDbContext(CreateOptions());
             await db.Database.EnsureDeletedAsync();
             await db.Database.EnsureCreatedAsync();
+            await TestData.SeedDBWithData(db);
             return db;
         }
 

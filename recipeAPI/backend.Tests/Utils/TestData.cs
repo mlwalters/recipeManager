@@ -10,6 +10,7 @@ namespace backend.Tests.Utils
     public static class TestData
     {
         public static readonly string EMAIL = "google@yahoo.com";
+        public static readonly string IMAGE_URL = "http://picture.com";
         public static readonly string RECIPE_NAME = "Filipino Chicken Adobo";
         public static readonly string DESCRIPTION = "Intense in flavour, but so fast and easy to prepare!";
         public static readonly int SERVING_SIZE = 4;
@@ -49,9 +50,11 @@ namespace backend.Tests.Utils
             var recipe = new Recipe
             {
                 Name = RECIPE_NAME,
+                UserEmail = EMAIL,
                 Description = DESCRIPTION,
                 ServingSize = SERVING_SIZE,
-                // Category = CATEGORY_ID,
+                ImageUrl = IMAGE_URL,
+                CategoryId = (CategoryId)CATEGORY_ID,
                 Notes = NOTES,
                 Ingredients = new List<Ingredient>(), // {}
                 Instructions = new List<Instruction>(), // {}
