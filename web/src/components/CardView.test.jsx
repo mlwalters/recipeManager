@@ -3,7 +3,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import RecipeCardList from './RecipeCardList';
+import CardView from './CardView';
 
 const userEmail = 'google@yahoo.com';
 jest.mock('@auth0/auth0-react', () => ({
@@ -98,7 +98,7 @@ const renderWithMocks = (fetchError, fetchErrorCode, deleteError, deleteErrorCod
   }
   render(
     <BrowserRouter>
-      <RecipeCardList />
+      <CardView />
     </BrowserRouter>,
   );
 };
@@ -118,7 +118,7 @@ test('renders loading before getting recipe cards list', async () => {
     .reply(() => new Promise((resolve) => setTimeout(() => resolve([200, []]), 500)));
   render(
     <BrowserRouter>
-      <RecipeCardList />
+      <CardView />
     </BrowserRouter>,
   );
   const loadingText = await screen.findByText('Loading...');
@@ -129,7 +129,7 @@ test('renders loading before getting recipe cards list', async () => {
 test('renders error if fetching recipe cards list fails', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Projects`).reply(500);
-  render(<RecipeCardList />);
+  render(<CardView />);
   expect(await screen.findByText('Oops! Could not fetch recipe cards.')).toBeInTheDocument();
 });
 

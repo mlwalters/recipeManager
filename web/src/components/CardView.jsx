@@ -113,7 +113,7 @@ const RecipeCardList = () => {
       {recipes.map(({
         id, name, description, category, favorite, imageUrl,
       }) => (
-        <Card sx={{ maxWidth: 345 }} key={id} raised>
+        <Card sx={{ maxWidth: 345, height: 450 }} key={id} raised>
           {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}
           <CardHeader
             title={(
@@ -144,7 +144,7 @@ const RecipeCardList = () => {
             />
           )}
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" className="card-view-text">
               {description}
             </Typography>
           </CardContent>

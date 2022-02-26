@@ -2,12 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Fab from '@mui/material/Fab';
 import Typography from '@mui/material/Typography';
-// import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RecipeCardList from './RecipeCardList';
-import RecipeListView from './RecipeListView';
 import ToggleButtonView from './ToggleButtonView';
 
 const HomePage = () => (
@@ -27,10 +23,6 @@ const HomePage = () => (
         </Link>
       </Box>
       <ToggleButtonView />
-      <Grid container marginTop={2}>
-        <RecipeCardList />
-      </Grid>
-      <RecipeListView />
     </Container>
   </>
 );
