@@ -7,6 +7,7 @@ import Fab from '@mui/material/Fab';
 import Typography from '@mui/material/Typography';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RecipeCardList from './RecipeCardList';
+import RecipeListView from './RecipeListView';
 
 const HomePage = () => (
   <>
@@ -27,6 +28,7 @@ const HomePage = () => (
       <Grid container>
         <RecipeCardList />
       </Grid>
+      <RecipeListView />
     </Container>
   </>
 );
