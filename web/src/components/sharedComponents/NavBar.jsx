@@ -15,6 +15,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { Avatar } from '@mui/material';
 import LoginButton from '../Authentication/LoginButton';
 import LogoutButton from '../Authentication/LogoutButton';
 import Profile from '../Authentication/Profile';
@@ -139,9 +140,16 @@ const NavBar = () => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <AccountCircleIcon alt="Settings" />
+                    {user.picture == null ? <AccountCircleIcon alt="Settings" /> : (
+                      <Avatar
+                        alt="Remy Sharp"
+                        src={user.picture}
+                        sx={{ width: 56, height: 56 }}
+                      />
+                    )}
+
                     <div>
-                      <Typography component="span" variant="body2" marginLeft={1}>
+                      <Typography component="span" variant="body1" marginLeft={1}>
                         Hello,
                         {' '}
                         {user.name}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Typography } from '@mui/material';
 import LoadingDisplay from '../sharedComponents/LoadingDisplay';
 
 const Profile = () => {
@@ -12,14 +13,14 @@ const Profile = () => {
   return (
     isAuthenticated && (
       <>
-        <img src={user.picture} alt={user.name} />
-        <p>
-          Hello,
+        <Typography component="p" variant="text.secondary">
+          Account:
           {' '}
           {user.name}
-          !
-        </p>
-        <p>{user.email}</p>
+        </Typography>
+        <Typography component="p" variant="text.secondary">
+          {user.email}
+        </Typography>
       </>
     )
   );
