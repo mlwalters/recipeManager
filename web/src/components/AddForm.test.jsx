@@ -86,11 +86,9 @@ describe('AddForm: When add recipe form is rendered', () => {
     expect(await screen.findByRole('button', { name: /reset/i })).toBeInTheDocument();
   });
 
-  test('if the required fields are entered, the add recipe button becomes enabled', async () => {
+  test('if a required field is missing, the add recipe button stays disabled', async () => {
     expect(await screen.findByRole('button', { name: /add recipe/i })).toBeDisabled();
     userEvent.type(await screen.findByRole('textbox', { name: /recipe name/i }), 'Sample Recipe');
-    // userEvent.selectOptions(await screen.findByRole('option', { name: /beef/i }), 'Beef');
-
     expect(await screen.findByRole('button', { name: /add recipe/i })).toBeDisabled();
   });
 });
