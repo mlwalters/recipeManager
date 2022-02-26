@@ -50,7 +50,7 @@ const RecipeDetails = () => {
   return (
     <Container maxWidth="lg">
       <BackToHomeBtn />
-      <Box sx={{ flexGrow: 1, p: 4 }}>
+      <Box sx={{ flexGrow: 1, p: 2 }}>
         <Grid container spacing={3} className="section-to-print">
           <Grid item xs={10}>
             <Item id="hide-print">
