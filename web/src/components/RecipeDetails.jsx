@@ -15,8 +15,8 @@ import './RecipeDetails.css';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
+  padding: theme.spacing(2),
+  textAlign: 'left',
   color: theme.palette.text.secondary,
 }));
 
@@ -53,26 +53,28 @@ const RecipeDetails = () => {
       <Box sx={{ flexGrow: 1, p: 4 }}>
         <Grid container spacing={3} className="section-to-print">
           <Grid item xs={10}>
-            <Item>
-              <img src={SwitchImageCard(details.category)} alt={details.name} height="250" />
+            <Item id="hide-print">
+              <img src={SwitchImageCard(details.category)} alt={details.name} height="250" id="details-image" />
             </Item>
             <Item>
-              <Typography variant="h4" color="#263238">{details.name}</Typography>
+              <Typography variant="h5" color="#263238" mt={1}>{details.name}</Typography>
+              <br />
+              <Typography variant="body1" color="text.secondary">
+                <RestaurantIcon sx={{ width: 20 }} />
+                {' '}
+                {details.category}
+              </Typography>
+              <br />
               <Typography variant="body2" color="text.secondary" fontStyle="italic">{details.description}</Typography>
+              <br />
               <Typography variant="body2" color="text.secondary">
                 Serving size:
                 {' '}
                 {details.servingSize}
               </Typography>
-              <Typography variant="body1" color="text.secondary">
-                <RestaurantIcon />
-                {' '}
-                {details.category}
-              </Typography>
-
             </Item>
             <Item>
-              <Typography variant="h6" color="#263238">Ingredients</Typography>
+              <Typography variant="body1" color="#263238">Ingredients</Typography>
               {details.ingredients.map(({ ingredientId, amount, name }) => (
                 <div key={ingredientId}>
                   <p variant="body2" color="text.secondary">
@@ -84,20 +86,23 @@ const RecipeDetails = () => {
               ))}
             </Item>
             <Item>
-              <Typography variant="h6" color="#263238">Instructions:</Typography>
+              <Typography variant="body1" color="#263238">Instructions</Typography>
               {details.instructions.map(({ step, index }) => (
                 <div key={index}>
                   <p variant="body2" color="text.secondary">
                     <span>{index}</span>
                     {' '}
-                    <span>{step}</span>
+                    <span>
+                      {step}
+                    </span>
                   </p>
+                  <br />
                 </div>
               ))}
 
             </Item>
             <Item>
-              <Typography variant="h6" color="#263238">Notes</Typography>
+              <Typography variant="body1" color="#263238">Notes</Typography>
               <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
             </Item>
             <Item>

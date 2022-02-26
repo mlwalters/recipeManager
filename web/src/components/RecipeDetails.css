@@ -1,11 +1,23 @@
+#details-image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 @media print {
   body * {
     visibility: hidden;
   }
-  
+
+  #hide-print {
+    display: none;
+  }
+
   .section-to-print, .section-to-print * {
     visibility: visible;
   }
+
   .section-to-print {
     position: absolute;
     left: 0;
