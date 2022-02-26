@@ -57,7 +57,7 @@ const RecipeCardList = () => {
       }}
       >
         {recipes.map(({
-          id, name, description, category,
+          id, name, description, category, imageUrl,
         }) => (
           <Card sx={{ maxWidth: 345 }} key={id} raised>
             <CardHeader
@@ -73,13 +73,21 @@ const RecipeCardList = () => {
             )}
               subheader={category}
             />
-            <CardMedia
-              component="img"
-              height="194"
-                // image={imageUrl === '' ? switchImageCard(category) : `${imageUrl}`}
-              image={SwitchImageCard(category)}
-              alt={`Picture of ${category}`}
-            />
+            {imageUrl === null || imageUrl === '' ? (
+              <CardMedia
+                component="img"
+                height="194"
+                image={SwitchImageCard(category)}
+                alt={`Picture of ${category}`}
+              />
+            ) : (
+              <CardMedia
+                component="img"
+                height="194"
+                image={imageUrl}
+                alt={`Picture of ${category}`}
+              />
+            )}
             <CardContent>
               <Typography variant="body2" color="text.secondary">
                 {description}

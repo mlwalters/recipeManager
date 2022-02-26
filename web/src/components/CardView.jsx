@@ -127,7 +127,7 @@ const RecipeCardList = () => {
                 </Typography>
               </Link>
             )}
-            subheader={category}
+            subheader={<Typography variant="body2" color="text.secondary">{category}</Typography>}
           />
           {imageUrl === null || imageUrl === '' ? (
             <CardMedia

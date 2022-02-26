@@ -20,11 +20,11 @@ export default function ToggleButtonView() {
         }}
         sx={{ padding: 1.5 }}
       >
-        <ToggleButton aria-label="list" value="list">
-          <ViewListIcon />
-        </ToggleButton>
         <ToggleButton aria-label="module" value="card">
           <ViewModuleIcon />
+        </ToggleButton>
+        <ToggleButton aria-label="list" value="list">
+          <ViewListIcon />
         </ToggleButton>
         <Box sx={{ paddingTop: 1, paddingLeft: 1.5 }}>
           <Typography variant="h5">View All</Typography>
