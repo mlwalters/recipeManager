@@ -7,7 +7,7 @@ import React from 'react';
 // import Button from '@mui/material/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Typography } from '@mui/material';
-import LoginButton from './LoginButton';
+import LoginButton from './Authentication/LoginButton';
 import backgroundImage from '../assets/shared-images/landingpage-background.jpg';
 import './LandingPage.css';
 

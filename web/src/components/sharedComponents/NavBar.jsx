@@ -15,27 +15,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import LoginButton from '../LoginButton';
-import LogoutButton from '../LogoutButton';
+import LoginButton from '../Authentication/LoginButton';
+import LogoutButton from '../Authentication/LogoutButton';
 import Profile from '../Authentication/Profile';
 import logo from '../../assets/shared-images/loadingLogo.jpg';
 
-// import AddCircleIcon from '@mui/icons-material/AddCircle';
-
-// const theme = createTheme({
-//   components: {
-//     // Name of the component ⚛️
-//     MuiTypography: {
-//       styleOverrides: {
-//         // Name of the slot
-//         root: {
-//           // Some CSS
-//           color: 'black',
-//         },
-//       },
-//     },
-//   },
-// });
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -57,7 +41,6 @@ const NavBar = () => {
   };
 
   return (
-  // <ThemeProvider theme={theme}>
     <AppBar position="sticky" sx={{ backgroundColor: '#ffffff', boxShawdow: 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -199,7 +182,6 @@ const NavBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  // </ThemeProvider>
   );
 };
 export default NavBar;
