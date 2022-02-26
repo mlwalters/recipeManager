@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RecipeCardList from './RecipeCardList';
 import RecipeListView from './RecipeListView';
+import ToggleButtonView from './ToggleButtonView';
 
 const HomePage = () => (
   <>
@@ -25,7 +26,8 @@ const HomePage = () => (
           </Fab>
         </Link>
       </Box>
-      <Grid container>
+      <ToggleButtonView />
+      <Grid container marginTop={2}>
         <RecipeCardList />
       </Grid>
       <RecipeListView />
