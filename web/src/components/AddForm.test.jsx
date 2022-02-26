@@ -75,7 +75,7 @@ describe('AddForm: When add recipe form is rendered', () => {
     expect(await screen.findByRole('textbox', { name: /ingredient/i })).toBeInTheDocument();
     expect(await screen.findByTestId('add-icon-ingredient')).toBeInTheDocument();
     expect(await screen.findByText(/instructions/i)).toBeInTheDocument();
-    expect(await screen.findByText(/step 1/i)).toBeInTheDocument();
+    expect(await screen.findByText(/# 1/i)).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /step/i })).toBeInTheDocument();
     expect(await screen.findByTestId('add-icon-ingredient')).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /notes/i })).toBeInTheDocument();

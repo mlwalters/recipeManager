@@ -137,7 +137,7 @@ const NavBar = () => {
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     {user.picture == null ? <AccountCircleIcon alt="Settings" /> : (
                       <Avatar
-                        alt="Remy Sharp"
+                        alt="User Avatar"
                         src={user.picture}
                         sx={{ width: 56, height: 56 }}
                       />

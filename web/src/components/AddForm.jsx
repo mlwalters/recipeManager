@@ -20,7 +20,6 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-// import Stack from '@mui/material/Stack';
 
 const initialValues = {
   name: '',
@@ -65,7 +64,7 @@ const AddForm = () => {
 
   if (error) {
     return (
-      <Typography component="p" variant="h3">Oops! Recipe submission failed.</Typography>
+      <Typography component="p" variant="h6">Oops! Recipe submission failed.</Typography>
     );
   }
 
@@ -98,7 +97,6 @@ const AddForm = () => {
           errors, isValid, touched, dirty, values, resetForm,
         }) => (
           <Form>
-            {/* <Stack spacing={2}> */}
             <Field
               label="Recipe name"
               name="name"
@@ -114,39 +112,7 @@ const AddForm = () => {
               sx={{ padding: 1 }}
             />
 
-            <Field
-              label="Description"
-              name="description"
-              type="description"
-              as={TextField}
-              variant="outlined"
-              size="small"
-              multiline
-              fullWidth
-              rows={2}
-              data-testid="Description"
-              error={Boolean(errors.description) && Boolean(touched.description)}
-              helperText={Boolean(touched.description) && errors.description}
-              sx={{ padding: 1 }}
-            />
-
-            <Field
-              label="Image URL"
-              name="imageUrl"
-              type="imageUrl"
-              as={TextField}
-              variant="outlined"
-              size="small"
-              multiline
-              fullWidth
-              rows={2}
-              data-testid="Image"
-              error={Boolean(errors.imageUrl) && Boolean(touched.imageUrl)}
-              helperText={Boolean(touched.imageUrl) && errors.imageUrl}
-              sx={{ padding: 1 }}
-            />
-
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', padding: 1 }}>
+            <Box sx={{ display: 'flex', padding: 1 }}>
               <Field
                 label="Category"
                 name="category"
@@ -186,6 +152,22 @@ const AddForm = () => {
               />
             </Box>
 
+            <Field
+              label="Description"
+              name="description"
+              type="description"
+              as={TextField}
+              variant="outlined"
+              size="small"
+              multiline
+              fullWidth
+              rows={2}
+              data-testid="Description"
+              error={Boolean(errors.description) && Boolean(touched.description)}
+              helperText={Boolean(touched.description) && errors.description}
+              sx={{ padding: 1 }}
+            />
+
             <FormGroup sx={{ padding: 1 }}>
               <FormControl>
                 <FormLabel>Ingredients</FormLabel>
@@ -196,13 +178,14 @@ const AddForm = () => {
                       {values.ingredients && values.ingredients.length > 0 ? (
                         values.ingredients.map((ingredient, index) => (
                           // eslint-disable-next-line react/no-array-index-key
-                          <div key={index}>
+                          <Box key={index} sx={{ display: 'flex', padding: 1 }}>
                             <Field
                               name={`ingredients.${index}.amount`}
                               label="Amount"
                               as={TextField}
                               variant="outlined"
                               size="small"
+                              sx={{ width: '35%' }}
                             />
                             <Field
                               name={`ingredients.${index}.item`}
@@ -210,19 +193,25 @@ const AddForm = () => {
                               as={TextField}
                               variant="outlined"
                               size="small"
+                              fullWidth
+                              sx={{ width: '55%', paddingLeft: 1 }}
                             />
-                            {index ? (
-                              <RemoveIcon
-                                data-testid="remove-icon-ingredient"
-                                disabled={index.length === 1}
-                                onClick={() => arrayHelpers.remove(index)}
+                            <Box sx={{ width: '5%', paddingLeft: 1, paddingTop: 1 }}>
+                              <AddIcon
+                                data-testid="add-icon-ingredient"
+                                onClick={() => arrayHelpers.insert(index + 1, '')}
                               />
+                            </Box>
+                            {index ? (
+                              <Box sx={{ width: '5%', paddingLeft: 1, paddingTop: 1 }}>
+                                <RemoveIcon
+                                  data-testid="remove-icon-ingredient"
+                                  disabled={index.length === 1}
+                                  onClick={() => arrayHelpers.remove(index)}
+                                />
+                              </Box>
                             ) : null}
-                            <AddIcon
-                              data-testid="add-icon-ingredient"
-                              onClick={() => arrayHelpers.insert(index + 1, '')}
-                            />
-                          </div>
+                          </Box>
                         ))
                       ) : null}
                     </div>
@@ -242,26 +231,33 @@ const AddForm = () => {
                       {values.instructions && values.instructions.length > 0 ? (
                         values.instructions.map((instruction, index) => (
                           // eslint-disable-next-line react/no-array-index-key
-                          <Box key={index} display="flex">
-                            <Typography variant="body2" color="text.secondary">{`Step ${index + 1}`}</Typography>
+                          <Box key={index} sx={{ display: 'flex', padding: 1 }}>
+                            <Typography variant="body2" color="text.secondary" sx={{ paddingTop: 1.25, paddingLeft: 1 }}>
+                              {`# ${index + 1}`}
+                            </Typography>
                             <Field
                               name={`instructions.${index}.step`}
                               label="Step"
                               as={TextField}
                               variant="outlined"
                               size="small"
+                              sx={{ width: '85%', paddingLeft: 1.25 }}
                             />
-                            {index ? (
-                              <RemoveIcon
-                                data-testid="remove-icon-instruction"
-                                disabled={index.length === 1}
-                                onClick={() => arrayHelpers.remove(index)}
+                            <Box sx={{ width: '5%', paddingLeft: 1, paddingTop: 1 }}>
+                              <AddIcon
+                                data-testid="add-icon-instruction"
+                                onClick={() => arrayHelpers.insert(index + 1, { step: '' })}
                               />
+                            </Box>
+                            {index ? (
+                              <Box sx={{ width: '5%', paddingLeft: 1, paddingTop: 1 }}>
+                                <RemoveIcon
+                                  data-testid="remove-icon-instruction"
+                                  disabled={index.length === 1}
+                                  onClick={() => arrayHelpers.remove(index)}
+                                />
+                              </Box>
                             ) : null}
-                            <AddIcon
-                              data-testid="add-icon-instruction"
-                              onClick={() => arrayHelpers.insert(index + 1, { step: '' })}
-                            />
                           </Box>
                         ))
                       ) : null}
@@ -270,6 +266,22 @@ const AddForm = () => {
                 />
               </FormControl>
             </FormGroup>
+
+            <Field
+              label="Image URL"
+              name="imageUrl"
+              type="imageUrl"
+              as={TextField}
+              variant="outlined"
+              size="small"
+              multiline
+              fullWidth
+              rows={2}
+              data-testid="Image"
+              error={Boolean(errors.imageUrl) && Boolean(touched.imageUrl)}
+              helperText={Boolean(touched.imageUrl) && errors.imageUrl}
+              sx={{ padding: 1 }}
+            />
 
             <Field
               label="Notes"
@@ -299,7 +311,6 @@ const AddForm = () => {
               <Button variant="outlined" color="secondary" size="large" disabled={!dirty} type="reset" onClick={resetForm}>Reset</Button>
             </Box>
 
-            {/* </Stack> */}
           </Form>
         )}
       </Formik>
