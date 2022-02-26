@@ -13,7 +13,8 @@ const HomePage = () => (
         sx={{
           display: 'grid',
           border: 'none',
-          p: 3,
+          pt: 3,
+          pl: 3,
         }}
       >
         <Link to="/recipe/add">

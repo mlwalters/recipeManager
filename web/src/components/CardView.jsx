@@ -20,6 +20,7 @@ import { red } from '@mui/material/colors';
 import DeleteDialogBox from './DeleteDialogBox';
 import LoadingDisplay from './sharedComponents/LoadingDisplay';
 import SwitchImageCard from './sharedComponents/SwitchImageCard';
+import './CardView.css';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
@@ -113,13 +114,13 @@ const RecipeCardList = () => {
       {recipes.map(({
         id, name, description, category, favorite, imageUrl,
       }) => (
-        <Card sx={{ maxWidth: 345, height: 450 }} key={id} raised>
+        <Card sx={{ width: 325, height: 405 }} key={id} xs={1} raised>
           {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}
           <CardHeader
             title={(
               <Link to={`/recipe/${id}`}>
                 <Typography
-                  variant="h5"
+                  variant="h6"
                   color="#263238"
                 >
                   {name}
@@ -143,8 +144,8 @@ const RecipeCardList = () => {
               alt={`Picture of ${category}`}
             />
           )}
-          <CardContent>
-            <Typography variant="body2" color="text.secondary" className="card-view-text">
+          <CardContent className="card-view-text line-clamp">
+            <Typography variant="body2" color="text.secondary">
               {description}
             </Typography>
           </CardContent>

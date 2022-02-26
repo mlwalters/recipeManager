@@ -77,7 +77,7 @@ const NavBar = () => {
                   open={Boolean(anchorElNav)}
                   onClose={handleCloseNavMenu}
                   sx={{
-                    display: { xs: 'block', md: 'none' },
+                    display: { xs: 'block', md: 'none', color: '#313438' },
                   }}
                 >
                   <MenuItem onClick={handleCloseNavMenu}>
@@ -85,6 +85,11 @@ const NavBar = () => {
                       <Typography component="span" variant="body">
                         My Recipes
                       </Typography>
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Link to="/favorites">
+                      <Typography component="span" variant="body">Favorites</Typography>
                     </Link>
                   </MenuItem>
                 </Menu>
@@ -112,19 +117,9 @@ const NavBar = () => {
                   }}
                 >
                   <Link to="/favorites">
-                    <Typography component="span" variant="body" underline="none">Favorites</Typography>
+                    <Typography component="span" variant="body">Favorites</Typography>
                   </Link>
                 </Button>
-                <Tooltip title="Upcoming feature!" placement="top">
-                  <Button
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: '#313438', display: 'block' }}
-                  >
-                    <Typography component="span">
-                      Quick & Easy
-                    </Typography>
-                  </Button>
-                </Tooltip>
                 <Tooltip title="Upcoming feature!" placement="top">
                   <Button
                     onClick={handleCloseNavMenu}

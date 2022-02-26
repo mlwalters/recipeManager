@@ -3,7 +3,7 @@ import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { Paper, Box } from '@mui/material';
+import { Paper, Box, Typography } from '@mui/material';
 import ListView from './ListView';
 import CardView from './CardView';
 
@@ -11,13 +11,14 @@ export default function ToggleButtonView() {
   const [view, setView] = React.useState('card');
 
   return (
-    <Paper>
+    <Paper sx={{ padding: 2 }} elevation={0}>
       <ToggleButtonGroup
         value={view}
         exclusive
         onChange={(event, newView) => {
           setView(newView);
         }}
+        sx={{ padding: 1.5 }}
       >
         <ToggleButton aria-label="list" value="list">
           <ViewListIcon />
@@ -25,6 +26,9 @@ export default function ToggleButtonView() {
         <ToggleButton aria-label="module" value="card">
           <ViewModuleIcon />
         </ToggleButton>
+        <Box sx={{ paddingTop: 1, paddingLeft: 1.5 }}>
+          <Typography variant="h5">View All</Typography>
+        </Box>
       </ToggleButtonGroup>
       {view === 'list' ? (
         <Box>

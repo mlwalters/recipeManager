@@ -91,11 +91,11 @@ const RecipeListView = () => {
   }
 
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} sx={{ paddingTop: 2, paddingBottom: 3, paddingRight: 2 }}>
       {recipes.map(({
         id, name, description, category, favorite, imageUrl,
       }) => (
-        <List sx={{ width: '100%', bgcolor: 'background.paper' }} key={id}>
+        <List sx={{ width: '100%' }} key={id}>
           {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}
           <ListItem alignItems="flex-start">
             <Link to={`/recipe/${id}`}>
@@ -126,8 +126,7 @@ const RecipeListView = () => {
                   >
                     {category}
                   </Typography>
-                  {'   -  '}
-                  {description}
+                  {`    ${description}`}
                 </>
           )}
             />
