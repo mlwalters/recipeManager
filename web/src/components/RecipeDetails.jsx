@@ -50,7 +50,7 @@ const RecipeDetails = () => {
   return (
     <Container maxWidth="lg">
       <BackToHomeBtn />
-      <Box sx={{ flexGrow: 1, p: 2 }}>
+      <Box sx={{ flexGrow: 1, p: 2, mb: 5 }}>
         <Grid container spacing={3} className="section-to-print">
           <Grid item xs={10}>
             <Item id="hide-print">
@@ -105,6 +105,7 @@ const RecipeDetails = () => {
               <Typography variant="body1" color="#263238">Notes</Typography>
               <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
             </Item>
+
             <Item>
               <Fab color="secondary" variant="extended" onClick={print} sx={{ displayPrint: 'none' }}>
                 Print Recipe

@@ -303,9 +303,6 @@ const AddForm = () => {
             }}
             >
               <Box>
-                <Button variant="outlined" color="secondary" size="large" disabled={!dirty} type="reset" onClick={resetForm}>Reset</Button>
-              </Box>
-              <Box sx={{ paddingLeft: 1 }}>
                 <Button
                   type="submit"
                   variant="contained"
@@ -315,6 +312,9 @@ const AddForm = () => {
                 >
                   Add Recipe
                 </Button>
+              </Box>
+              <Box sx={{ paddingLeft: 1 }}>
+                <Button variant="outlined" color="secondary" size="large" disabled={!dirty} type="reset" onClick={resetForm}>Reset</Button>
               </Box>
             </Box>
 
