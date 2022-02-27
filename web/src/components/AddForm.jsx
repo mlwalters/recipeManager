@@ -69,7 +69,7 @@ const AddForm = () => {
   }
 
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} marginBottom={5}>
       <Typography variant="h5" padding={1}>Add a new recipe</Typography>
       <Formik
         initialValues={initialValues}
@@ -241,16 +241,16 @@ const AddForm = () => {
                               as={TextField}
                               variant="outlined"
                               size="small"
-                              sx={{ width: '85%', paddingLeft: 1.25 }}
+                              sx={{ width: '87.5%', paddingLeft: 1.25 }}
                             />
-                            <Box sx={{ width: '5%', paddingLeft: 1, paddingTop: 1 }}>
+                            <Box sx={{ width: '2.5%', paddingLeft: 1, paddingTop: 1 }}>
                               <AddIcon
                                 data-testid="add-icon-instruction"
                                 onClick={() => arrayHelpers.insert(index + 1, { step: '' })}
                               />
                             </Box>
                             {index ? (
-                              <Box sx={{ width: '5%', paddingLeft: 1, paddingTop: 1 }}>
+                              <Box sx={{ width: '2.5%', paddingLeft: 5, paddingTop: 1 }}>
                                 <RemoveIcon
                                   data-testid="remove-icon-instruction"
                                   disabled={index.length === 1}
@@ -298,17 +298,24 @@ const AddForm = () => {
               sx={{ padding: 1 }}
             />
 
-            <Box>
-              <Button
-                type="submit"
-                variant="contained"
-                color="secondary"
-                size="large"
-                disabled={!isValid || !dirty}
-              >
-                Add Recipe
-              </Button>
-              <Button variant="outlined" color="secondary" size="large" disabled={!dirty} type="reset" onClick={resetForm}>Reset</Button>
+            <Box sx={{
+              display: 'flex', padding: 1, paddingTop: 3, paddingBottom: 3, marginBottom: 5,
+            }}
+            >
+              <Box>
+                <Button variant="outlined" color="secondary" size="large" disabled={!dirty} type="reset" onClick={resetForm}>Reset</Button>
+              </Box>
+              <Box sx={{ paddingLeft: 1 }}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  disabled={!isValid || !dirty}
+                >
+                  Add Recipe
+                </Button>
+              </Box>
             </Box>
 
           </Form>
