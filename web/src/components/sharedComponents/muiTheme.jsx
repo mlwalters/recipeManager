@@ -1,50 +1,24 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-// import { Link as RouterLink } from 'react-router-dom';
 import { createTheme } from '@mui/material';
-
-// const yellowish = '#f5efd7';
-const primary = '#74bdcb'; // aquamarine
-// const otherPrimary = '#ffa384'; // salmon
-const secondary = '#e7f2f8'; // baby blue
-// const otherSecondary = '#efe7bc'; //freesia
-const error = '#F44336';
-const textPrimary = '#313438';
+import Merriweather from '../../assets/fonts/Merriweather,Merriweather_Sans/Merriweather/Merriweather-Bold.ttf';
 
 const theme = createTheme({
-  palette: {
-    // type: 'light',
-    primary: {
-      main: primary,
-    },
-    secondary: {
-      main: secondary,
-    },
-    error: {
-      main: error,
-    },
-  },
   typography: {
-    fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+    fontFamily: 'Merriweather, Merriweather Sans, Roboto',
   },
   components: {
-    MuiLink: {
-      defaultProps: {
-        underline: 'hover',
-        // component: React.forwardRef(({ href, ...other }, ref) => (
-        //   <RouterLink ref={ref} to={href} {...other} />
-        // )),
-      },
-      styleOverrides: {
-        root: {
-          color: textPrimary,
-          cursor: 'pointer',
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-        },
-      },
+    MuiCssBaseline: {
+      styleOverrides: `
+        @font-face {
+          font-family: 'Merriweather';
+          font-style: normal;
+          font-display: swap;
+          font-weight: 400;
+          src: local('Merriweather'), local('Merriweather-Bold'), url(${Merriweather}) format('ttf');
+          unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
+        }
+      `,
     },
   },
 });
