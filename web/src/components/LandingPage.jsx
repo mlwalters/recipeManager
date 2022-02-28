@@ -13,8 +13,10 @@ const LandingPage = () => {
     <>
       <div className="main">
         <div className="left">
-          <Typography variant="h2" id="hero-text">Big Bite Recipe Manager makes saving your recipes easier.</Typography>
-          <div className="subtitle"><LoginButton /></div>
+          <Typography variant="h2" id="hero-text">Big Bite Recipe Manager makes saving your recipes easier. Free for personal use.</Typography>
+          <div className="subtitle">
+            <LoginButton />
+          </div>
         </div>
         <div className="right">
           <img src={backgroundImage} alt="background" width="800" className="hero-image" />

@@ -21,14 +21,15 @@
 .left {
   width: 100%;
   height: auto;
-  text-align: center;
+  text-align: left;
   padding: 5%;
 
 }
 
 .subtitle {
   width: 500px;
-  margin-top: 15px;
+  margin-top: 8px;
+  display: flex;
 }
 
 .right {
@@ -47,7 +48,7 @@
 
 /* Footer */
 footer {
-  /* background-color: #f4f2f1; */
+  background-color: #f4f2f1;
   text-align: left;
 }
 .credits {
