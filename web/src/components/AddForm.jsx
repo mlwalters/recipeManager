@@ -56,6 +56,7 @@ const AddForm = () => {
     request.userEmail = user.email;
     try {
       await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
+      // window.alert('Recipe saved!');
       navigate('/');
     } catch (err) {
       setError(err);
@@ -116,7 +117,6 @@ const AddForm = () => {
               <Field
                 label="Category"
                 name="category"
-                type="category"
                 as={TextField}
                 data-testid="select-category"
                 select
@@ -156,7 +156,6 @@ const AddForm = () => {
             <Field
               label="Description"
               name="description"
-              type="description"
               as={TextField}
               variant="outlined"
               size="small"
