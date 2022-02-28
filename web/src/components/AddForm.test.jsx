@@ -4,8 +4,9 @@ import MockAdapter from 'axios-mock-adapter';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import {
-  render, screen,
+  render, screen, // waitFor,
 } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import AddForm from './AddForm';
 
 const testCategory = [
@@ -51,17 +52,23 @@ const addedRecipe = {
   ],
 };
 
+// const promise = Promise.resolve();
+
+const onSubmitFn = jest.fn();
+
 describe('AddForm: When add recipe form is rendered', () => {
   beforeEach(async () => {
     const mockApi = new MockAdapter(axios);
     mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategory);
     mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, addedRecipe);
 
-    render(
-      <BrowserRouter>
-        <AddForm />
-      </BrowserRouter>,
-    );
+    act(() => {
+      render(
+        <BrowserRouter>
+          <AddForm onSubmit={onSubmitFn} />
+        </BrowserRouter>,
+      );
+    });
   });
 
   test('input fields to add a new recipe are displayed', async () => {
@@ -70,6 +77,7 @@ describe('AddForm: When add recipe form is rendered', () => {
     expect(await screen.findByRole('textbox', { name: /description/i })).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /image url/i })).toBeInTheDocument();
     expect(await screen.findByRole('button', { name: /category/i })).toBeInTheDocument();
+
     expect(await screen.findByText(/ingredients/i)).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /amount/i })).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /ingredient/i })).toBeInTheDocument();
@@ -89,7 +97,13 @@ describe('AddForm: When add recipe form is rendered', () => {
   test('if a required field is missing, the add recipe button stays disabled', async () => {
     expect(await screen.findByRole('button', { name: /add recipe/i })).toBeDisabled();
     userEvent.type(await screen.findByRole('textbox', { name: /recipe name/i }), 'Sample Recipe');
+    // const selectElement = screen.getByTestId('category-dropdown').parentElement;
+    // userEvent.click(selectElement);
+    // userEvent.click(screen.getByText('Beef'));
+    // const saveButton = await screen.findByRole('button', { name: /add recipe/i });
     expect(await screen.findByRole('button', { name: /add recipe/i })).toBeDisabled();
+    // await waitFor(() => expect(saveButton).toBeEnabled());
+    // expect(onSubmitFn).toHaveBeenCalled();
   });
 });
 

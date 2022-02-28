@@ -69,7 +69,7 @@ const AddForm = () => {
   }
 
   return (
-    <Paper elevation={3} marginBottom={5}>
+    <Paper elevation={3} marginbottom={5}>
       <Typography variant="h5" padding={1}>Add a new recipe</Typography>
       <Formik
         initialValues={initialValues}
@@ -129,6 +129,7 @@ const AddForm = () => {
                 {categories.map((option) => (
                   <Field
                     as={MenuItem}
+                    data-testid="category-dropdown"
                     key={option.value}
                     value={option.id}
                     size="small"
