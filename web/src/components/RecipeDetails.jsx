@@ -54,7 +54,8 @@ const RecipeDetails = () => {
         <Grid container spacing={3} className="section-to-print">
           <Grid item xs={10}>
             <Item id="hide-print">
-              <img src={SwitchImageCard(details.category)} alt={details.name} height="250" id="details-image" />
+              {details.imageUrl === '' ? <img src={SwitchImageCard(details.category)} alt={details.name} height="250" id="details-image" />
+                : <img src={details.imageUrl} alt={details.name} height="250" id="details-image" />}
             </Item>
             <Item>
               <Typography variant="h5" color="#263238" mt={1}>{details.name}</Typography>
