@@ -72,15 +72,13 @@ namespace api.Controllers
             var items = await _context.Items.ToListAsync();
             var instructions = addRecipe.Instructions.Select(ins => new Instruction
             {
-                Step = ins.Step,// isnullorempty
-                // RecipeId = addRecipe.Id
+                Step = ins.Step.Trim(),
             }).ToList();
 
             var ingredients = addRecipe.Ingredients.Select(ing => new Ingredient
             {
-                Item = items.FirstOrDefault(i => i.ItemName.ToLower() == ing.Item.ToLower(), new Item { ItemName = ing.Item.ToLower() }),
-                Amount = ing.Amount.ToLower(),
-                // RecipeId = addRecipe.Id
+                Item = items.FirstOrDefault(i => i.ItemName.Trim().ToLower() == ing.Item.Trim().ToLower(), new Item { ItemName = ing.Item.Trim().ToLower() }),
+                Amount = ing.Amount.Trim().ToLower(),
             }).ToList();
 
             Recipe newRecipe = new Recipe()
@@ -93,7 +91,6 @@ namespace api.Controllers
                 Notes = addRecipe.Notes,
                 Instructions = instructions,
                 Ingredients = ingredients,
-                // UserId= user.Id
                 UserEmail = addRecipe.UserEmail
             };
 
@@ -121,7 +118,6 @@ namespace api.Controllers
             recipeToUpdate.Name = recipe.Name;
             recipeToUpdate.CategoryId = recipe.Category;
             recipeToUpdate.Favorite = recipe.Favorite;
-            // recipeToUpdate.UserEmail = recipe.UserEmail;
 
             _context.Entry(recipeToUpdate).State = EntityState.Modified;
             await _context.SaveChangesAsync();

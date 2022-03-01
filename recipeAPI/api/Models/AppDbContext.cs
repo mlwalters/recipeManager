@@ -69,6 +69,7 @@ namespace api.Models
                     Favorite = true,
                     CategoryId = CategoryId.Dessert,
                     Notes = "This is my favorite cheesecake recipe.",
+                    ImageUrl = "https://cdn.pixabay.com/photo/2020/02/07/21/12/cheesecake-4828403_960_720.jpg",
                     UserEmail = "carrimax.dev@gmail.com"
                     // UserId = 1
                 },
@@ -81,6 +82,7 @@ namespace api.Models
                     Favorite = true,
                     CategoryId = CategoryId.Soup,
                     Notes = "",
+                    ImageUrl = "https://cdn.pixabay.com/photo/2017/05/19/00/27/lentil-soup-2325144_960_720.jpg",
                     UserEmail = "carrimax.dev@gmail.com"
                     // UserId = 1
                 },
@@ -93,6 +95,7 @@ namespace api.Models
                     Favorite = false,
                     CategoryId = CategoryId.Drinks,
                     Notes = "",
+                    ImageUrl = "https://images.unsplash.com/photo-1617524124781-38a0e1d71ba6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29zbW9wb2xpdGFuJTIwY29ja3RhaWx8ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
                     UserEmail = "carrimax.dev@gmail.com"
                     // UserId = 2
                 },
@@ -105,6 +108,7 @@ namespace api.Models
                     Favorite = true,
                     CategoryId = CategoryId.Beef,
                     Notes = "Use any cut of prime rib – with the bones attached, trimmed and frenched.",
+                    ImageUrl = "https://cdn.pixabay.com/photo/2018/12/29/00/40/prime-rib-3900674_960_720.jpg",
                     UserEmail = "raciram@gmail.com"
                     // UserId = 1
                 }
