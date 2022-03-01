@@ -52,8 +52,6 @@ const addedRecipe = {
   ],
 };
 
-// const promise = Promise.resolve();
-
 const onSubmitFn = jest.fn();
 
 describe('AddForm: When add recipe form is rendered', () => {
@@ -77,8 +75,6 @@ describe('AddForm: When add recipe form is rendered', () => {
     expect(await screen.findByRole('textbox', { name: /description/i })).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /image url/i })).toBeInTheDocument();
     expect(await screen.findByRole('button', { name: /category/i })).toBeInTheDocument();
-    // Try adding an expect to see list of categories here with a waitFor
-    // await waitFor (()=> {}userEvent.selectOptions
     expect(await screen.findByText(/ingredients/i)).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /amount/i })).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /ingredient/i })).toBeInTheDocument();
@@ -107,8 +103,3 @@ describe('AddForm: When add recipe form is rendered', () => {
     // expect(onSubmitFn).toHaveBeenCalled();
   });
 });
-
-// https://stackoverflow.com/questions/55184037/react-testing-library-on-change-for-material-ui-select-component
-// const selectElement = await screen.findByTestId('select');
-//       expect(selectElement).toBeInTheDocument();
-//       fireEvent.change(selectElement, { target: { value: 'C#' } });

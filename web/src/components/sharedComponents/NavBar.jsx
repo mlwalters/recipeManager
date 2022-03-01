@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -22,8 +22,8 @@ import Profile from '../Authentication/Profile';
 import logo from '../../assets/shared-images/loadingLogo.jpg';
 
 const NavBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const { isAuthenticated, user } = useAuth0();
 
   const handleOpenNavMenu = (event) => {
@@ -60,7 +60,7 @@ const NavBar = () => {
                   onClick={handleOpenNavMenu}
                   color="inherit"
                 >
-                  <MenuIcon />
+                  <MenuIcon sx={{ color: '#313438' }} />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
