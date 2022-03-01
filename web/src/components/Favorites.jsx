@@ -13,6 +13,7 @@ import { Container } from '@mui/material';
 import LoadingDisplay from './sharedComponents/LoadingDisplay';
 import BackToHomeBtn from './sharedComponents/BackToHomeBtn';
 import SwitchImageCard from './sharedComponents/SwitchImageCard';
+import './CardView.css';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);
@@ -59,7 +60,7 @@ const RecipeCardList = () => {
         {recipes.map(({
           id, name, description, category, imageUrl,
         }) => (
-          <Card sx={{ maxWidth: 345 }} key={id} raised>
+          <Card sx={{ width: 325, height: 390 }} key={id} raised>
             <CardHeader
               title={(
                 <Link to={`/recipe/${id}`}>
@@ -88,7 +89,7 @@ const RecipeCardList = () => {
                 alt={`Picture of ${category}`}
               />
             )}
-            <CardContent>
+            <CardContent className="card-view-text line-clamp">
               <Typography variant="body2" color="text.secondary">
                 {description}
               </Typography>
