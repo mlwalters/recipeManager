@@ -27,7 +27,6 @@ namespace api.Models
         public string UserEmail { get; set; }
         // public int UserId { get; set; }
 
-
         public virtual IEnumerable<InstructionResponse> Instructions { get; set; }
         public virtual IEnumerable<IngredientResponse> Ingredients { get; set; }
         public RecipeResponse(Recipe recipe)

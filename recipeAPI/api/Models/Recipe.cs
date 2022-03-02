@@ -15,8 +15,8 @@ namespace api.Models
         // public virtual User User { get; set; }
         // public int UserId{ get; set; }
 
-        public virtual ICollection<Instruction> Instructions { get; set; } //= new List<Instruction>();
-        public virtual ICollection<Ingredient> Ingredients { get; set; } //= new List<Instruction>();
+        public virtual ICollection<Instruction> Instructions { get; set; }
+        public virtual ICollection<Ingredient> Ingredients { get; set; }
 
         public Recipe(string name)
         {

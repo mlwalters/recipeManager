@@ -8,7 +8,5 @@ namespace api.Models
         public int Id { get; set; }
         public string ItemName { get; set; }
 
-        public virtual ICollection<Ingredient> Ingredients { get; set; }
-        // public virtual ICollection<ShoppingItems> ShoppingList { get; set; }
     }
 }

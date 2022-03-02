@@ -13,9 +13,7 @@ namespace api.Models
 
         [JsonIgnore]
         public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
-        // [JsonIgnore]
-        // public virtual ICollection<Recipe> Favorites{ get; set; } = new List<Recipe>();
-
+       
         public User(User userDetails)
         {
             Name = userDetails.Name;
