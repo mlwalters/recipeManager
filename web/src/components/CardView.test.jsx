@@ -103,14 +103,6 @@ const renderWithMocks = (fetchError, fetchErrorCode, deleteError, deleteErrorCod
   );
 };
 
-// const renderWithMockFavoriteError = (fetchErrorCode) => {
-//   renderWithMocks(true, fetchErrorCode);
-// };
-
-// const renderWithMockDeleteError = (deleteErrorCode) => {
-//   renderWithMocks(true, deleteErrorCode);
-// };
-
 test('renders loading before getting recipe cards list', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi
@@ -141,9 +133,6 @@ describe('RecipeCardList: When recipe card list is rendered', () => {
   test('renders recipe cards list on the home page', async () => {
     renderWithMocks();
     expect(await screen.findByText(/strawberry cheesecake/i)).toBeInTheDocument();
-    // expect(await screen.findByAltText(`Picture of ${sampleRecipe.category}`)).toBeInTheDocument()
-    // expect(await screen.findByText(recipeCards[0].description)).toBeInTheDocument();
-    // expect(await screen.findByTestId('favorite icon')); // .toBeDefined();
   });
 
   // test('renders recipe card image', async () => {
