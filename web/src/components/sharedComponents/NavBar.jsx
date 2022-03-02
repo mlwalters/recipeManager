@@ -126,7 +126,7 @@ const NavBar = () => {
                     sx={{ my: 2, color: '#313438', display: 'block' }}
                   >
                     <Typography component="span">
-                      Shopping List
+                      Grocery List
                     </Typography>
                   </Button>
                 </Tooltip>

@@ -28,7 +28,7 @@ const LandingPage = () => {
             <Typography component="span" variant="body1">
               Made by:
               {' '}
-              <a href="https://github.com/mlwalters" target="_blank" rel="noreferrer">Maricar Lusuegro Walters</a>
+              <a href="https://github.com/mlwalters" className="credits-links" target="_blank" rel="noreferrer">Maricar Lusuegro Walters</a>
             </Typography>
           </div>
           <div className="credits-right">
@@ -48,7 +48,7 @@ const LandingPage = () => {
             </Typography>
           </div>
         </div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f993b0" fillOpacity="0.75" d="M0,128L48,149.3C96,171,192,213,288,229.3C384,245,480,235,576,218.7C672,203,768,181,864,165.3C960,149,1056,139,1152,160C1248,181,1344,235,1392,261.3L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#F3F4F5" fillOpacity="0.75" d="M0,128L48,149.3C96,171,192,213,288,229.3C384,245,480,235,576,218.7C672,203,768,181,864,165.3C960,149,1056,139,1152,160C1248,181,1344,235,1392,261.3L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" /></svg>
       </footer>
     </>
     )
