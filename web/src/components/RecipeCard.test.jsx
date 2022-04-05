@@ -20,7 +20,7 @@ const testRecipeCard = {
   description: 'Juicy and tasty',
 };
 
-test('renders card header', async () => {
+test.only('renders card header', async () => {
   render(<RecipeCard />);
   expect(await screen.findByText(testRecipeCard.title)).toBeInTheDocument();
 });
