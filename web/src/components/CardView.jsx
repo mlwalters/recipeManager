@@ -27,10 +27,7 @@ const RecipeCardList = () => {
   const [loadingState, setLoadingState] = useState(true);
   const [fetchError, setFetchError] = useState(null);
   const [deleteError, setDeleteError] = useState(null);
-  const [favoriteError, setFavoriteError] = useState(null);
   const [open, setOpen] = useState(false);
-  const [favoriteToggle, setFavoriteToggle] = useState(false);
-  const { user } = useAuth0();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -50,22 +47,6 @@ const RecipeCardList = () => {
       }
     };
     deleteData();
-  };
-
-  const handleClickFavorite = async (id) => {
-    try {
-      if (favoriteToggle) {
-        setFavoriteToggle(false);
-      } else {
-        setFavoriteToggle(true);
-      }
-      const recipeToUpdate = recipes.find((recipe) => recipe.id === id);
-      const request = { ...recipeToUpdate, favorite: favoriteToggle, userEmail: user.email };
-      const { data } = await axios.put(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
-      setRecipes(data);
-    } catch (favoriteErr) {
-      setFavoriteError(<Typography variant="h6">Oops! Could not save recipe as favorite.</Typography>);
-    }
   };
 
   useEffect(() => {
