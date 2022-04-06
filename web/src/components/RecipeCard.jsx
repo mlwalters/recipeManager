@@ -19,27 +19,17 @@ import DeleteDialogBox from './DeleteDialogBox';
 import SwitchImageCard from './sharedComponents/SwitchImageCard';
 import './CardView.css';
 
-const RecipeCard = ({ id, title, description, category, favorite }) => {
+const RecipeCard = ({ id, name, description, category, imageUrl, favorite}) => {
   const [favoriteToggle, setFavoriteToggle] = useState(false);
   const [favoriteError, setFavoriteError] = useState(null);
+  const [open, setOpen] = useState(false);
 
-  const { user } = useAuth0();
 
-  const handleClickFavorite = async (id) => {
-    try {
-      if (favoriteToggle) {
-        setFavoriteToggle(false);
-      } else {
-        setFavoriteToggle(true);
-      }
-      const recipeToUpdate = recipes.find((recipe) => recipe.id === id);
-      const request = { ...recipeToUpdate, favorite: favoriteToggle, userEmail: user.email };
-      const { data } = await axios.put(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
-      setRecipes(data);
-    } catch (favoriteErr) {
-      setFavoriteError(<Typography variant="h6">Oops! Could not save recipe as favorite.</Typography>);
-    }
+  const handleClickOpen = () => {
+    setOpen(true);
   };
+
+  const handleCancel = () => setOpen(false);
 
   return (
     <Card sx={{ width: 325, height: 405 }} key={id} xs={1} raised>
