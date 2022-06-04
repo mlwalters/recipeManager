@@ -22,7 +22,7 @@ Install Docker <https://docs.docker.com/get-docker/>
 
 - Then run the following to launch an instance of the docker image:
 
-  `docker run -d --name sqlserver_capstone -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=' -p 1533:1433 mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04`
+  `docker run -d --name sqlserver_capstone -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=capstone88!' -p 1533:1433 mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04`
 
 - Then run the following and ensure that your new container is listed:
 
@@ -30,7 +30,7 @@ Install Docker <https://docs.docker.com/get-docker/>
 
 - Then start your container, by running:
 
-  `docker start sql_server_app_team`
+  `docker start sqlserver_capstone`
 
 #### .Net Tools Setup
 
@@ -84,10 +84,11 @@ Connecting to your database
   - Server: `localhost`
   - Authentication Type: `SQL Login`
   - User Name: `sa`
-  - Password: ``
+  - Password: `capstone88!`
   - Database: `<default>`
   - Server Group: `<default>`
   - Name (optional): (give this a name that is helpful to you)
+- Click `Advanced Settings` and add `1533` to the port, click save
 - Click `Connect`
 
 Your database should now appear on the left side panel with a green dot signaling an active connection.
