@@ -15,6 +15,7 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
   },
   rules: {
+    'linebreak-style': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.test.js', '**/*.test.jsx', '**/*_def.js', 'cypress/**/**'] }],
     'jsx-a11y/label-has-associated-control': [
       'warn',
