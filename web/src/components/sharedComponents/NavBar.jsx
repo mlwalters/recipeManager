@@ -125,9 +125,9 @@ const NavBar = () => {
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: '#313438', display: 'block' }}
                   >
-                    <Typography component="span">
-                      Grocery List
-                    </Typography>
+                    <Link to="/groceryList">
+                      <Typography component="span">Grocery List</Typography>
+                    </Link>
                   </Button>
                 </Tooltip>
               </Box>

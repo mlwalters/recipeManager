@@ -8,6 +8,7 @@ import AddRecipePage from './components/AddRecipePage';
 import Profile from './components/Authentication/Profile';
 import LandingPage from './components/LandingPage';
 import Favorites from './components/Favorites';
+import GroceryList from './components/GroceryList';
 import NavBar from './components/sharedComponents/NavBar';
 import ProtectedRoutes from './ProtectedRoutes';
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/groceryList" element={<GroceryList />} />
           <Route path="/recipe/:id" element={<RecipeDetails />} />
           <Route path="/recipe/add" element={<AddRecipePage />} />
         </Route>
