@@ -1,6 +1,3 @@
-using System;
-using System.Text.Json.Serialization;
-
 namespace api.Models
 {
     public class Ingredient

@@ -1,13 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Models;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.JsonPatch;
-
 namespace api.Controllers
 {
     [Route("api/[controller]")]
