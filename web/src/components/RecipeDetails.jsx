@@ -112,6 +112,10 @@ const RecipeDetails = () => {
                 Print Recipe
                 {' '}
               </Fab>
+              <Fab color="primary" variant="extended">
+                Add to Grocery List
+                {' '}
+              </Fab>
             </Item>
           </Grid>
         </Grid>

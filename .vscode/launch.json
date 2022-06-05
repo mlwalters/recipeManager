@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/newsReaderAPI/bin/Debug/net6.0/api.dll",
+            "program": "${workspaceFolder}/recipeAPI/bin/Debug/net6.0/api.dll",
             "args": [],
             "cwd": "${workspaceFolder}/recipeAPI",
             "stopAtEntry": false,

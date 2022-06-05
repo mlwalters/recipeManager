@@ -24,7 +24,7 @@ namespace api
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Big Bite Recipe Manager API", Version = "v1" });
             });
 
             services.AddDbContext<AppDbContext>(b =>
