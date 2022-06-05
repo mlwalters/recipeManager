@@ -117,7 +117,7 @@ You will likely need to restart your Docker container after a reboot of your loc
 
 ## Accessing Swagger Documentation
 
-To access the swagger docs, you will need to have the backend server running, by running the `dotnet run` command in the backend directory. You can then access the api and the swagger documentation through a browser by navigating to the url: `localhost:7001/swagger`. (Keep in mind the port may be different on your machine. You can find the localhost url to use by looking at the outputted logs after running `dotnet run`.)
+To access the swagger docs, you will need to have the backend server running, by running the `dotnet run` command in the backend directory. You can then access the api and the swagger documentation through a browser by navigating to the url: `localhost:7001/swagger` or `https://localhost:7001/swagger/index.html`. (You can find the localhost url to use by looking at the outputted logs after running `dotnet run`, but this is currently set to port 7001.)
 
 ## Working with EF database migrations
 
