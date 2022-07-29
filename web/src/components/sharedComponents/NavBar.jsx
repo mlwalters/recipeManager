@@ -92,6 +92,11 @@ const NavBar = () => {
                       <Typography component="span" variant="body">Favorites</Typography>
                     </Link>
                   </MenuItem>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Link to="/grocerylist">
+                      <Typography component="span" variant="body">Grocery List</Typography>
+                    </Link>
+                  </MenuItem>
                 </Menu>
               </Box>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -125,7 +130,7 @@ const NavBar = () => {
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: '#313438', display: 'block' }}
                   >
-                    <Link to="/groceryList">
+                    <Link to="/grocerylist">
                       <Typography component="span">Grocery List</Typography>
                     </Link>
                   </Button>
