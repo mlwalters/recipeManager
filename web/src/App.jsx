@@ -8,7 +8,8 @@ import AddRecipePage from './components/AddRecipePage';
 import Profile from './components/Authentication/Profile';
 import LandingPage from './components/LandingPage';
 import Favorites from './components/Favorites';
-import GroceryListPage from './components/GroceryListPage';
+// import GroceryListPage from '../src/views/grocery-list-page/GroceryListPage.jsx';
+import GroceryListPage from './views/grocery-list-page/GroceryListPage';
 import NavBar from './components/sharedComponents/NavBar';
 import ProtectedRoutes from './ProtectedRoutes';
 

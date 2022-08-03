@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '@mui/material/Container';
-import GroceryList from './GroceryList';
+import GroceryList from '../../components/GroceryList';
 
 const GroceryListPage = () => (
   <>
