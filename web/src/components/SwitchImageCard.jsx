@@ -1,16 +1,16 @@
-import beef from '../../assets/categories/beef.jpg';
-import bread from '../../assets/categories/bread.jpg';
-import dessert from '../../assets/categories/dessert.jpg';
-import dipssauces from '../../assets/categories/dipssauces.jpg';
-import soup from '../../assets/categories/soup.jpg';
-import pork from '../../assets/categories/pork.jpg';
-import drinks from '../../assets/categories/drinks.jpg';
-import salad from '../../assets/categories/salad.jpg';
-import poultry from '../../assets/categories/poultry.jpg';
-import vegetarian from '../../assets/categories/vegetarian.jpg';
-import seafood from '../../assets/categories/seafood.jpg';
-import sides from '../../assets/categories/sides.jpg';
-import snack from '../../assets/categories/snack.jpg';
+import beef from '../assets/categories/beef.jpg';
+import bread from '../assets/categories/bread.jpg';
+import dessert from '../assets/categories/dessert.jpg';
+import dipssauces from '../assets/categories/dipssauces.jpg';
+import soup from '../assets/categories/soup.jpg';
+import pork from '../assets/categories/pork.jpg';
+import drinks from '../assets/categories/drinks.jpg';
+import salad from '../assets/categories/salad.jpg';
+import poultry from '../assets/categories/poultry.jpg';
+import vegetarian from '../assets/categories/vegetarian.jpg';
+import seafood from '../assets/categories/seafood.jpg';
+import sides from '../assets/categories/sides.jpg';
+import snack from '../assets/categories/snack.jpg';
 
 const SwitchImageCard = (category) => {
   switch (category) {

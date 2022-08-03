@@ -16,10 +16,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Avatar } from '@mui/material';
-import LoginButton from '../Authentication/LoginButton';
-import LogoutButton from '../Authentication/LogoutButton';
-import Profile from '../Authentication/Profile';
-import logo from '../../assets/shared-images/loadingLogo.jpg';
+import LoginButton from '../../authentication/LoginButton';
+import LogoutButton from '../../authentication/LogoutButton';
+import Profile from '../../authentication/Profile';
+import logo from '../../../assets/shared-images/loadingLogo.jpg';
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);

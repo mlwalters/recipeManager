@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import Typography from '@mui/material/Typography';
-import ToggleButtonView from './ToggleButtonView';
+import ToggleButtonView from '../../components/ToggleButtonView';
 
 const HomePage = () => (
   <>

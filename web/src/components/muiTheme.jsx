@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { createTheme } from '@mui/material';
-import Merriweather from '../../assets/fonts/Merriweather,Merriweather_Sans/Merriweather/Merriweather-Bold.ttf';
+import Merriweather from '../assets/fonts/Merriweather,Merriweather_Sans/Merriweather/Merriweather-Bold.ttf';
 
 const theme = createTheme({
   typography: {

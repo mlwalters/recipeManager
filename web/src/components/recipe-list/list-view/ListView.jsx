@@ -2,27 +2,24 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-
-import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Chip from '@mui/material/Chip';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Tooltip from '@mui/material/Tooltip';
-import Alert from '@mui/material/Alert';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Typography from '@mui/material/Typography';
+import {
+  Alert, IconButton, Paper, Tooltip,
+} from '@mui/material';
 import { red } from '@mui/material/colors';
-import DeleteDialogBox from './DeleteDialogBox';
-import LoadingDisplay from './sharedComponents/LoadingDisplay';
-import SwitchImageCard from './sharedComponents/SwitchImageCard';
-import './CardView.css';
+import LoadingDisplay from '../../loading-display/LoadingDisplay';
+import DeleteDialogBox from '../../DeleteDialogBox';
+import SwitchImageCard from '../../SwitchImageCard';
 
-const RecipeCardList = () => {
+const RecipeListView = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [fetchError, setFetchError] = useState(null);
@@ -93,63 +90,46 @@ const RecipeCardList = () => {
     );
   }
 
-  if (deleteError) {
-    return (
-      <Box m="4">
-        <Typography>Oops! Could not delete recipe.</Typography>
-        <br />
-        <Chip variant="outlined" color="primary" label="Back to recipes" onClick={window.location.reload} />
-      </Box>
-    );
-  }
-
   return (
-    <Box sx={{
-      display: 'grid',
-      gap: 3,
-      gridTemplateColumns: 'repeat(3, 1fr)',
-      marginBottom: 5,
-    }}
-    >
+    <Paper elevation={3} sx={{ paddingTop: 2, paddingBottom: 3, paddingRight: 2 }}>
       {recipes.map(({
         id, name, description, category, favorite, imageUrl,
       }) => (
-        <Card sx={{ width: 325, height: 405 }} key={id} xs={1} raised>
+        <List sx={{ width: '100%' }} key={id}>
           {open && <DeleteDialogBox onCancel={handleCancel} onDelete={() => handleDelete(id)} />}
-          <CardHeader
-            title={(
-              <Link to={`/recipe/${id}`}>
-                <Typography
-                  variant="h6"
-                  color="#263238"
-                >
-                  {name}
-                </Typography>
-              </Link>
-            )}
-            subheader={<Typography variant="body2" color="text.secondary">{category}</Typography>}
-          />
-          {imageUrl === null || imageUrl === '' ? (
-            <CardMedia
-              component="img"
-              height="194"
-              image={SwitchImageCard(category)}
-              alt={`Picture of ${category}`}
-            />
-          ) : (
-            <CardMedia
-              component="img"
-              height="194"
-              image={imageUrl}
-              alt={`Picture of ${category}`}
-            />
+          <ListItem alignItems="flex-start">
+            <Link to={`/recipe/${id}`}>
+              <ListItemAvatar>
+                {imageUrl === null || imageUrl === ''
+                  ? (
+                    <Avatar
+                      alt={name}
+                      src={SwitchImageCard(category)}
+                      sx={{ width: 56, height: 56 }}
+                    />
+                  )
+                  : (
+                    <Avatar alt={name} src={imageUrl} sx={{ width: 56, height: 56 }} />
+                  )}
+              </ListItemAvatar>
+            </Link>
+            <ListItemText
+              primary={<Link to={`/recipe/${id}`}>{name}</Link>}
+              sx={{ pl: 2 }}
+              secondary={(
+                <>
+                  <Typography
+                    sx={{ display: 'inline' }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                    {category}
+                  </Typography>
+                  {`    ${description}`}
+                </>
           )}
-          <CardContent className="card-view-text line-clamp">
-            <Typography variant="body2" color="text.secondary">
-              {description}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
+            />
             <Tooltip title="Favorite">
               <IconButton aria-label="favorite" onClick={() => handleClickFavorite(id)} data-testid="favorite icon">
                 {favorite === true ? <FavoriteIcon sx={{ color: red[400] }} /> : <FavoriteIcon /> }
@@ -160,14 +140,15 @@ const RecipeCardList = () => {
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-          </CardActions>
-        </Card>
+          </ListItem>
+          <Divider variant="inset" component="li" />
+        </List>
       ))}
       {!!fetchError && <Alert severity="error">{fetchError}</Alert>}
       {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
       {!!deleteError && <Alert severity="error">{deleteError}</Alert>}
-    </Box>
+    </Paper>
   );
 };
 
-export default RecipeCardList;
+export default RecipeListView;

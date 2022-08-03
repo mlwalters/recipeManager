@@ -2,16 +2,15 @@ import './App.scss';
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import RecipeDetails from './components/RecipeDetails';
-import AddRecipePage from './components/AddRecipePage';
-import Profile from './components/Authentication/Profile';
-import LandingPage from './components/LandingPage';
-import Favorites from './components/Favorites';
-// import GroceryListPage from '../src/views/grocery-list-page/GroceryListPage.jsx';
-import GroceryListPage from './views/grocery-list-page/GroceryListPage';
-import NavBar from './components/sharedComponents/NavBar';
-import ProtectedRoutes from './ProtectedRoutes';
+import HomePage from './views/dashboard/HomePage';
+import RecipeDetails from './views/recipe-details/RecipeDetails';
+import AddRecipePage from './views/recipe-form/AddRecipePage';
+import Profile from './components/authentication/Profile';
+import LandingPage from './views/landing/LandingPage';
+import Favorites from './views/favorites/Favorites';
+import GroceryListPage from './views/grocery-list/GroceryListPage';
+import NavBar from './components/navigation/navbar/NavBar';
+import ProtectedRoutes from './routing/ProtectedRoutes';
 
 function App() {
   const { isAuthenticated } = useAuth0();

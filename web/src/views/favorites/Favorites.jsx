@@ -10,10 +10,10 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
-import LoadingDisplay from './sharedComponents/LoadingDisplay';
-import BackToHomeBtn from './sharedComponents/BackToHomeBtn';
-import SwitchImageCard from './sharedComponents/SwitchImageCard';
-import './CardView.css';
+import LoadingDisplay from '../../components/loading-display/LoadingDisplay';
+import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
+import SwitchImageCard from '../../components/SwitchImageCard';
+import '../../components/recipe-list/card-view/CardView.css';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);

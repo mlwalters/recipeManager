@@ -9,8 +9,8 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Fab from '@mui/material/Fab';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import BackToHomeBtn from './sharedComponents/BackToHomeBtn';
-import SwitchImageCard from './sharedComponents/SwitchImageCard';
+import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
+import SwitchImageCard from '../../components/SwitchImageCard';
 import './RecipeDetails.css';
 
 const Item = styled(Paper)(({ theme }) => ({

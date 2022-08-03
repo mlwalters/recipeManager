@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '@mui/material/Container';
-import AddForm from './AddForm';
-import BackToHomeBtn from './sharedComponents/BackToHomeBtn';
+import AddForm from '../../components/add-recipe-form/AddForm';
+import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
 
 const AddRecipePage = () => (
   <Container maxWidth="lg">

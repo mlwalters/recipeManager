@@ -4,8 +4,8 @@ import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Paper, Box, Typography } from '@mui/material';
-import ListView from './ListView';
-import CardView from './CardView';
+import ListView from './recipe-list/list-view/ListView';
+import CardView from './recipe-list/card-view/CardView';
 
 export default function ToggleButtonView() {
   const [view, setView] = React.useState('card');
