@@ -5,7 +5,8 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Paper, Box, Typography } from '@mui/material';
 import ListView from './recipe-list/list-view/ListView';
-import CardView from './recipe-list/card-view/CardView';
+// import CardView from './recipe-list/card-view/CardView';
+import RecipeCard from './new-recipe-card/RecipeCard';
 
 export default function ToggleButtonView() {
   const [view, setView] = React.useState('card');
@@ -36,7 +37,7 @@ export default function ToggleButtonView() {
         </Box>
       ) : (
         <Box>
-          <CardView />
+          <RecipeCard />
         </Box>
       )}
     </Paper>

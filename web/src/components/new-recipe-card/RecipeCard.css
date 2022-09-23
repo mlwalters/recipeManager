@@ -1,0 +1,15 @@
+.card-view-text {
+  text-overflow: ellipsis;
+  margin: 0 0 1em 0;
+  overflow: hidden;
+}
+
+.card-view-text p {
+  margin: 0;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;  
+}
