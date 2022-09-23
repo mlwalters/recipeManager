@@ -5,10 +5,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
-// import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-// import CardActions from '@mui/material/CardActions';
 import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -21,6 +19,7 @@ import DeleteDialogBox from '../DeleteDialogBox';
 import LoadingDisplay from '../loading-display/LoadingDisplay';
 import SwitchImageCard from '../SwitchImageCard';
 import './RecipeCard.css';
+// import { useToggle } from '../useToggle';
 
 const RecipeCard = () => {
   const [recipes, setRecipes] = useState([]);
@@ -30,6 +29,7 @@ const RecipeCard = () => {
   const [favoriteError, setFavoriteError] = useState(null);
   const [open, setOpen] = useState(false);
   const [favoriteToggle, setFavoriteToggle] = useState(false);
+  // const { status: favoriteToggle, toggleStatus: setFavoriteToggle } = useToggle();
   const { user } = useAuth0();
 
   const handleClickOpen = () => {
@@ -131,7 +131,7 @@ const RecipeCard = () => {
             <CardMedia
               component="img"
               image={SwitchImageCard(category)}
-              sx={{ width: 100 }}
+              sx={{ width: 100, borderRadius: 2 }}
               alt={`Picture of ${category}`}
             />
           ) : (
