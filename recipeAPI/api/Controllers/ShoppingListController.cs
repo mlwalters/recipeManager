@@ -18,7 +18,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string email)
         {
             try
             {
@@ -39,6 +39,28 @@ namespace api.Controllers
                 _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
                 throw;
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] ShoppingItem shoppingItem)
+        {
+            try
+                {
+                    var recipes = await _context.Recipes
+                    .Include(ins => ins.Instructions)
+                    .Include(ing => ing.Ingredients)
+                    .Include(c => c.Category)
+                    .Where(r => r.UserEmail == email)
+                    .ToListAsync();
+
+                    var recipeResponses = recipes.Select(r => new RecipeResponse(r));
+                    return Ok(recipeResponses);
+                }
+            catch (Exception e)
+                {
+                    _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
+                    throw;
+                }
         }
     }
 }
