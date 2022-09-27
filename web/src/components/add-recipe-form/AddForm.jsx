@@ -115,7 +115,7 @@ const AddForm = () => {
 
             <Box sx={{ display: 'flex', padding: 1 }}>
               <Field
-                label="Category"
+                label="Category *"
                 name="category"
                 as={TextField}
                 data-testid="select-category"
