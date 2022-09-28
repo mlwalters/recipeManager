@@ -14,9 +14,8 @@ namespace api.Models
         public virtual DbSet<Instruction> Instructions { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
-        
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<ShoppingItem> ShoppingList { get; set; }
+        public virtual DbSet<GroceryItem> GroceryList { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

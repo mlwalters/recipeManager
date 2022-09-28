@@ -8,25 +8,19 @@ namespace api.Models
     public class RecipeResponse
     {
         public int Id { get; set; }
-
         [MaxLength(100)]
         public string Name { get; set; }
-
         [MaxLength(150)]
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-
         [Range(0, 100)]
         public int ServingSize { get; set; }
         public bool Favorite { get; set; } = false;
         public string Category { get; set; }
-
         [MaxLength(300)]
         public string Notes { get; set; }
-
         public string UserEmail { get; set; }
         // public int UserId { get; set; }
-
         public virtual IEnumerable<InstructionResponse> Instructions { get; set; }
         public virtual IEnumerable<IngredientResponse> Ingredients { get; set; }
         public RecipeResponse(Recipe recipe)
