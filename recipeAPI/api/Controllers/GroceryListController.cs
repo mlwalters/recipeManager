@@ -33,36 +33,35 @@ namespace api.Controllers
                 _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
                 throw;
             }
-            
         }
 
-        [HttpPost("{email}")]
-        public async Task<IActionResult> Post(string email, [FromBody] IEnumerable<Ingredient> ingredients)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Post(int id)
         {
-            var items = await _context.Ingredients
-                .Select(ing => new GroceryItem
+            try
+            {
+                // Get ingredients related to the recipe id, then from ing get itemids
+                var recipe = await _context.Recipes.FirstAsync(r => r.Id == id);
+                var ingredients = await _context.Ingredients.Where(ing => ing.RecipeId == id).ToListAsync();
+                var items = ingredients.Select(ing => ing.ItemId).Distinct().ToList(); // list of unique items ids in ingredients
+                var itemsToAdd = await _context.Items.Where(i => items.Contains(i.Id)).ToListAsync(); // list of Item objects unique from the ingredients and db
+
+                var listOfGroceryItems = itemsToAdd.Select(i => new GroceryItem
                 {
-                    ItemId = ing.ItemId,
-                    UserEmail = email
-                })
-                .DistinctBy(i => i.ItemId)
-                .ToListAsync();
-            // GroceryItem newGroceryItem = new GroceryItem()
-            // {
-            //     ItemId = addGroceryItem.ItemId,
-            //     Checked = addGroceryItem.Checked,
-            //     UserEmail = email
-            // };
+                    UserEmail = recipe.UserEmail,
+                    ItemId = i.Id,
+                }).ToList();
 
-            // _context.GroceryList.Add(newGroceryItem);
-            // await _context.SaveChangesAsync();
+                _context.GroceryList.AddRange(listOfGroceryItems);
+                await _context.SaveChangesAsync();
 
-            // var addedGroceryItem = await _context.GroceryList
-
-            // .ToListAsync(recipe => recipe.Id == newRecipe.Id);
-
-            // return new CreatedResult("api/GroceryList/" + newRecipe.Id, new RecipeResponse(addedRecipe));
-            return items;
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
+                throw;
+            }
         }
     }
 }
