@@ -1,11 +1,12 @@
 import React from 'react';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import GroceryList from '../../components/GroceryList';
 
 const GroceryListPage = () => (
   <>
     <Container maxWidth="lg">
-      <h1>Grocery List</h1>
+      <Typography component="h1" variant="text.primary">Grocery List</Typography>
       <GroceryList />
     </Container>
   </>

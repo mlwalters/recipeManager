@@ -12,8 +12,8 @@ using api.Models;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220605034324_AddShoppingList")]
-    partial class AddShoppingList
+    [Migration("20220930221319_AddSeededIngredients")]
+    partial class AddSeededIngredients
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,6 +101,46 @@ namespace api.Migrations
                         {
                             Id = 12,
                             Name = "Drinks"
+                        });
+                });
+
+            modelBuilder.Entity("api.Models.GroceryItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Checked")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("GroceryList");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Checked = false,
+                            ItemId = 1,
+                            UserEmail = "carrimax.dev@gmail.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Checked = false,
+                            ItemId = 2,
+                            UserEmail = "carrimax.dev@gmail.com"
                         });
                 });
 
@@ -389,30 +429,6 @@ namespace api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("api.Models.ShoppingItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Checked")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ListItem")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("ShoppingList");
-                });
-
             modelBuilder.Entity("api.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -445,6 +461,17 @@ namespace api.Migrations
                             Email = "raciram@gmail.com",
                             Name = "Kai"
                         });
+                });
+
+            modelBuilder.Entity("api.Models.GroceryItem", b =>
+                {
+                    b.HasOne("api.Models.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("api.Models.Ingredient", b =>
@@ -490,17 +517,6 @@ namespace api.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("api.Models.ShoppingItem", b =>
-                {
-                    b.HasOne("api.Models.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("api.Models.Category", b =>

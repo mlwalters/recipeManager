@@ -14,9 +14,8 @@ namespace api.Models
         public virtual DbSet<Instruction> Instructions { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
-        
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<ShoppingItem> ShoppingList { get; set; }
+        public virtual DbSet<GroceryItem> GroceryList { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -162,40 +161,6 @@ namespace api.Models
                 }
             );
 
-            modelBuilder.Entity<Item>()
-            .HasData(
-                new
-                {
-                    Id = 1,
-                    ItemName = "salt",
-                },
-                new
-                {
-                    Id = 2,
-                    ItemName = "sugar",
-                },
-                new
-                {
-                    Id = 3,
-                    ItemName = "brown lentils",
-                },
-                new
-                {
-                    Id = 4,
-                    ItemName = "vodka",
-                },
-                new
-                {
-                    Id = 5,
-                    ItemName = "cranberry juice",
-                },
-                new
-                {
-                    Id = 6,
-                    ItemName = "cointreu",
-                }
-            );
-
             modelBuilder.Entity<Ingredient>()
             .HasData(
                 new
@@ -246,6 +211,58 @@ namespace api.Models
                     Amount = "90 ml",
                     ItemId = 5,
                     RecipeId = 3
+                }
+            );
+
+            modelBuilder.Entity<Item>()
+            .HasData(
+                new
+                {
+                    Id = 1,
+                    ItemName = "salt",
+                },
+                new
+                {
+                    Id = 2,
+                    ItemName = "sugar",
+                },
+                new
+                {
+                    Id = 3,
+                    ItemName = "brown lentils",
+                },
+                new
+                {
+                    Id = 4,
+                    ItemName = "vodka",
+                },
+                new
+                {
+                    Id = 5,
+                    ItemName = "cranberry juice",
+                },
+                new
+                {
+                    Id = 6,
+                    ItemName = "cointreu",
+                }
+            );
+
+            modelBuilder.Entity<GroceryItem>()
+            .HasData(
+                new
+                {
+                    Id = 1,
+                    ItemId = 1,
+                    UserEmail = "carrimax.dev@gmail.com",
+                    Checked = false,
+                },
+                new
+                {
+                    Id = 2,
+                    ItemId = 2,
+                    UserEmail = "carrimax.dev@gmail.com",
+                    Checked = false,
                 }
             );
         }

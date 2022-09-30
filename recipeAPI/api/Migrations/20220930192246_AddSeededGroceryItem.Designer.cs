@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Models;
 
@@ -11,9 +12,10 @@ using api.Models;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220930192246_AddSeededGroceryItem")]
+    partial class AddSeededGroceryItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,57 +168,6 @@ namespace api.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("Ingredients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amount = "1/2 tsp",
-                            ItemId = 1,
-                            RecipeId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amount = "1 cup",
-                            ItemId = 2,
-                            RecipeId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amount = "3 cups",
-                            ItemId = 3,
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Amount = "1 tsp",
-                            ItemId = 1,
-                            RecipeId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Amount = "60ml",
-                            ItemId = 4,
-                            RecipeId = 3
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Amount = "30 ml",
-                            ItemId = 6,
-                            RecipeId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Amount = "90 ml",
-                            ItemId = 5,
-                            RecipeId = 3
-                        });
                 });
 
             modelBuilder.Entity("api.Models.Instruction", b =>

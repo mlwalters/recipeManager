@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -24,7 +24,9 @@ const RecipeDetails = () => {
   const [details, setDetails] = useState({
     id: 0, name: '', userEmail: '', category: '', imageUrl: '', description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
   });
-  const [error, setError] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
+  const [addError, setAddError] = useState(null);
+  const navigate = useNavigate();
   const { id } = useParams();
   const print = () => window.print();
 
@@ -34,16 +36,30 @@ const RecipeDetails = () => {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
         setDetails(data);
       } catch (err) {
-        setError(err);
+        setFetchError(err);
       }
     };
-
     fetchData();
   }, []);
 
-  if (error) {
+  if (fetchError) {
     return (
       <Typography>Oops! Could not fetch recipe details.</Typography>
+    );
+  }
+
+  const addToGroceryList = async () => {
+    try {
+      await axios.post(`${process.env.REACT_APP_BASE_API}/api/GroceryList/${id}`);
+      navigate('/grocerylist');
+    } catch (err) {
+      setAddError(err);
+    }
+  };
+
+  if (addError) {
+    return (
+      <Typography>Oops! Could not add ingredients to grocery list.</Typography>
     );
   }
 
@@ -112,7 +128,7 @@ const RecipeDetails = () => {
                 Print Recipe
                 {' '}
               </Fab>
-              <Fab color="primary" variant="extended">
+              <Fab color="primary" variant="extended" onClick={() => addToGroceryList(details.id)}>
                 Add to Grocery List
                 {' '}
               </Fab>
