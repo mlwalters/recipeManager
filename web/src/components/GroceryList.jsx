@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import IconButton from '@mui/material/IconButton';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import CommentIcon from '@mui/icons-material/Comment';
 import Checkbox from '@mui/material/Checkbox';
 import Alert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
@@ -64,36 +67,33 @@ const GroceryList = () => {
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {groceryItems.map((value) => {
-        const labelId = `checkbox-list-label-${value}`;
-
-        return (
-          <ListItem
-            key={value}
-            // secondaryAction={
-              // <IconButton edge="end" aria-label="comments">
-              //   <CommentIcon />
-              // </IconButton>
-            // }
-            disablePadding
-          >
-            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
-              <ListItemIcon>
-                <Checkbox
+      {groceryItems.map(({ id, name }) => (
+        // const labelId = `<checkbox-list-label-1>${id}</checkbox-list-label-1>`;
+        <ListItem
+          key={id}
+          secondaryAction={(
+            <IconButton edge="end" aria-label="comments">
+              <CommentIcon />
+            </IconButton>
+            )}
+          disablePadding
+        >
+          <ListItemButton role={Button} onClick={handleToggle(id)} dense>
+            <ListItemIcon>
+              <Checkbox
                 // icon={<CircleUnchecked />}
                 // checkedIcon={<CircleCheckedFilled />}
-                  edge="start"
-                  checked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
+                edge="start"
+                checked={checked.indexOf(id) !== -1}
+                tabIndex={-1}
+                disableRipple
+                inputProps={{ 'aria-labelledby': id }}
+              />
+            </ListItemIcon>
+            <ListItemText id={id} primary={name}>{name}</ListItemText>
+          </ListItemButton>
+        </ListItem>
+      ))}
       {!!fetchError && <Alert severity="error">{fetchError}</Alert>}
     </List>
   );
