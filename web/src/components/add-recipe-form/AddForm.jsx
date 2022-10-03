@@ -38,7 +38,7 @@ const initialValues = {
 
 const AddForm = () => {
   const [categories, setCategories] = useState([{}]);
-  const [error, setError] = useState(null);
+  const [submitError, setSubmitError] = useState(null);
   const { user } = useAuth0();
   const navigate = useNavigate();
 
@@ -59,11 +59,11 @@ const AddForm = () => {
       // window.alert('Recipe saved!');
       navigate('/');
     } catch (err) {
-      setError(err);
+      setSubmitError(err);
     }
   };
 
-  if (error) {
+  if (submitError) {
     return (
       <Typography component="p" variant="h6">Oops! Recipe submission failed.</Typography>
     );
