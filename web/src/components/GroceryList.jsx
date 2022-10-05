@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -11,20 +10,13 @@ import ListItemText from '@mui/material/ListItemText';
 import CommentIcon from '@mui/icons-material/Comment';
 import Checkbox from '@mui/material/Checkbox';
 import Alert from '@mui/material/Alert';
-import Typography from '@mui/material/Typography';
-import LoadingDisplay from './loading-display/LoadingDisplay';
+// import Typography from '@mui/material/Typography';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
-// import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
-// import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
-// import IconButton from '@mui/material/IconButton';
-// import CommentIcon from '@mui/icons-material/Comment';
-
-const GroceryList = () => {
-  const [groceryItems, setGroceryItems] = useState([]);
-  const [loadingState, setLoadingState] = useState(true);
-  const [fetchError, setFetchError] = useState(null);
+const GroceryList = ({ items, fetchError }) => {
+  // const [loadingState, setLoadingState] = useState(true);
   const [checked, setChecked] = useState([0]);
-  const { user } = useAuth0();
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -38,36 +30,9 @@ const GroceryList = () => {
     setChecked(newChecked);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/GroceryList/All/${user.email}`);
-        setGroceryItems(data);
-        // eslint-disable-next-line no-console
-        console.log(groceryItems);
-      } catch (err) {
-        setFetchError(err);
-      }
-      setLoadingState(false);
-    };
-    fetchData();
-  }, []);
-
-  if (loadingState) {
-    return (
-      <LoadingDisplay />
-    );
-  }
-
-  if (fetchError) {
-    return (
-      <Typography variant="h5">Oops! Could not fetch recipe cards.</Typography>
-    );
-  }
-
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {groceryItems.map(({ id, name }) => (
+      {items.map(({ id, name }) => (
         // const labelId = `<checkbox-list-label-1>${id}</checkbox-list-label-1>`;
         <ListItem
           key={id}
@@ -81,8 +46,8 @@ const GroceryList = () => {
           <ListItemButton role={Button} onClick={handleToggle(id)} dense>
             <ListItemIcon>
               <Checkbox
-                // icon={<CircleUnchecked />}
-                // checkedIcon={<CircleCheckedFilled />}
+                icon={<RadioButtonUncheckedIcon />}
+                checkedIcon={<CheckCircleIcon />}
                 edge="start"
                 checked={checked.indexOf(id) !== -1}
                 tabIndex={-1}
@@ -97,6 +62,23 @@ const GroceryList = () => {
       {!!fetchError && <Alert severity="error">{fetchError}</Alert>}
     </List>
   );
+};
+
+GroceryList.defaultProps = {
+  fetchError: true,
+  items: [],
+};
+
+GroceryList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string.isRequired,
+      checked: PropTypes.bool,
+      userEmail: PropTypes.string,
+    }),
+  ),
+  fetchError: PropTypes.string,
 };
 
 export default GroceryList;
