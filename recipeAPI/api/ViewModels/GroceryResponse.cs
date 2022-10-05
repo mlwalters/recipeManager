@@ -25,4 +25,10 @@ namespace api.Models
         public bool Checked { get; set; }
         public string UserEmail { get; set; }
     }
+
+    public class AddGroceryRequest
+    {
+        public string Name { get; set; }  
+        public string UserEmail { get; set; }
+    }
 }
