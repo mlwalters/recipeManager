@@ -34,8 +34,7 @@ namespace api.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("Add")]
+        [HttpPost("Add")]
         public async Task<IActionResult> Post(AddGroceryRequest addrequest)
         {
             try
@@ -55,17 +54,9 @@ namespace api.Controllers
                 _context.GroceryList.Add(itemToAdd);
                 await _context.SaveChangesAsync();
 
-                return Ok();
-
-                // if(_context.GroceryList.Any(g => g.ItemId == itemToAdd.ItemId))
-                // {
-                    
-                // }
-
-                // Also try: return new OkObjectResult
-                // var addedItem = await _context.GroceryList.SingleAsync(item => item.Id == newItem.Id);
-                // // return new CreatedResult("api/GroceryList/" + newItem.Id, new GroceryItemResponse(addedItem));
-                // return Ok( new GroceryItemResponse(addedItem));
+                var addedItem = await _context.GroceryList.SingleAsync(item => item.Id == itemToAdd.Id);
+                var groceryItemResponse = new GroceryItemResponse(addedItem);
+                return new CreatedResult("api/GroceryList/Add/" + addedItem.Id, new GroceryItemResponse(addedItem));
             }
             catch (Exception e)
             {
@@ -94,8 +85,6 @@ namespace api.Controllers
 
                 _context.GroceryList.AddRange(listOfGroceryItems);
                 await _context.SaveChangesAsync();
-
-                // return Ok();
 
                 var groceries = await _context.GroceryList
                 .Where(g => g.UserEmail == recipe.UserEmail)
