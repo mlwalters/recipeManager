@@ -15,7 +15,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 const GroceryList = ({ items, fetchError }) => {
-  // const [loadingState, setLoadingState] = useState(true);
   const [checked, setChecked] = useState([0]);
 
   const handleToggle = (value) => () => {
@@ -24,8 +23,12 @@ const GroceryList = ({ items, fetchError }) => {
 
     if (currentIndex === -1) {
       newChecked.push(value);
+      // eslint-disable-next-line no-console
+      console.log(checked);
     } else {
       newChecked.splice(currentIndex, 1);
+      // eslint-disable-next-line no-console
+      console.log(checked);
     }
     setChecked(newChecked);
   };

@@ -12,13 +12,11 @@ import LoadingDisplay from '../../components/loading-display/LoadingDisplay';
 import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
 
 const GroceryListPage = () => {
-  // const [open, setOpen] = useState(false);
   const [groceryItems, setGroceryItems] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [fetchError, setFetchError] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [saveItemError, setSaveItemError] = useState(null);
-  // const [isChecked, setIsChecked] = useState([0]);
   const { user } = useAuth0();
 
   const handleCloseAddModal = () => {
@@ -31,10 +29,9 @@ const GroceryListPage = () => {
     request.userEmail = user.email;
     try {
       const newGroceryItem = await axios.post(`${process.env.REACT_APP_BASE_API}/api/GroceryList/Add`, request);
-      setGroceryItems([...groceryItems, newGroceryItem]);
+      setGroceryItems([...groceryItems, newGroceryItem.data]);
       setSaveItemError(null);
       handleCloseAddModal();
-      // window.alert('Item saved!');
     } catch (err) {
       setSaveItemError(err);
     }
@@ -45,8 +42,6 @@ const GroceryListPage = () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/GroceryList/All/${user.email}`);
         setGroceryItems(data);
-        // eslint-disable-next-line no-console
-        console.log(groceryItems);
       } catch (err) {
         setFetchError(err);
       }
