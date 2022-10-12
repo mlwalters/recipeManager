@@ -42,16 +42,30 @@ namespace api.Controllers
             {
                 var items = await _context.Items.ToListAsync();
                 Item newItem = items.FirstOrDefault(i => i.ItemName.Trim().ToLower() == addrequest.Name.Trim().ToLower(), new Item { ItemName = addrequest.Name.Trim().ToLower() });
+                _context.Items.Add(newItem);
+                await _context.SaveChangesAsync();
+
                 GroceryItem itemToAdd = new GroceryItem
                 {
                     UserEmail = addrequest.UserEmail,
                     ItemId = newItem.Id,
+                    Checked = false,
                 };
 
                 _context.GroceryList.Add(itemToAdd);
                 await _context.SaveChangesAsync();
 
                 return Ok();
+
+                // if(_context.GroceryList.Any(g => g.ItemId == itemToAdd.ItemId))
+                // {
+                    
+                // }
+
+                // Also try: return new OkObjectResult
+                // var addedItem = await _context.GroceryList.SingleAsync(item => item.Id == newItem.Id);
+                // // return new CreatedResult("api/GroceryList/" + newItem.Id, new GroceryItemResponse(addedItem));
+                // return Ok( new GroceryItemResponse(addedItem));
             }
             catch (Exception e)
             {
@@ -60,13 +74,13 @@ namespace api.Controllers
             }
         }
 
-        [HttpPost("{id}")]
-        public async Task<IActionResult> Post(int id)
+        [HttpPost("Add/{recipeId}")]
+        public async Task<IActionResult> Post(int recipeId)
         {
             try
             {
-                var recipe = await _context.Recipes.FirstAsync(r => r.Id == id);
-                var ingredients = await _context.Ingredients.Where(ing => ing.RecipeId == id).ToListAsync();
+                var recipe = await _context.Recipes.FirstAsync(r => r.Id == recipeId);
+                var ingredients = await _context.Ingredients.Where(ing => ing.RecipeId == recipeId).ToListAsync();
                 var items = ingredients.Select(ing => ing.ItemId).Distinct().ToList();
                 var itemsToAdd = await _context.Items.Where(i => items.Contains(i.Id)).ToListAsync();
 
@@ -74,12 +88,21 @@ namespace api.Controllers
                 {
                     UserEmail = recipe.UserEmail,
                     ItemId = i.Id,
-                }).ToList();
+                })
+                .DistinctBy(gi => new { gi.Id, gi.UserEmail })
+                .ToList();
 
                 _context.GroceryList.AddRange(listOfGroceryItems);
                 await _context.SaveChangesAsync();
 
-                return Ok();
+                // return Ok();
+
+                var groceries = await _context.GroceryList
+                .Where(g => g.UserEmail == recipe.UserEmail)
+                .ToListAsync();
+
+                var updatedGroceryList = groceries.Select(g => new GroceryItemResponse(g));
+                return Ok(updatedGroceryList);
             }
             catch (Exception e)
             {
