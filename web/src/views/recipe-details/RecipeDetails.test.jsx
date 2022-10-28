@@ -51,7 +51,7 @@ const details = {
   ],
 };
 
-test('renders details on the recipe details page', async () => {
+const mockGetDetails = () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`).reply(200, details);
   render(
@@ -59,22 +59,15 @@ test('renders details on the recipe details page', async () => {
       <RecipeDetails />
     </BrowserRouter>,
   );
+};
+
+test('renders details on the recipe details page', async () => {
+  mockGetDetails();
   const title = await screen.findByRole('heading', {
     name: /lentil soup/i,
   });
   expect(title).toBeInTheDocument();
   expect(await screen.findByText(details.category)).toBeInTheDocument();
-});
-
-test('renders button to print the recipe', async () => {
-  const mockApi = new MockAdapter(axios);
-  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`).reply(200, details);
-  render(
-    <BrowserRouter>
-      <RecipeDetails />
-    </BrowserRouter>,
-  );
-  expect(await screen.findByText(/print recipe/i)).toBeInTheDocument();
 });
 
 test('renders error if fetching recipe card fails', async () => {
@@ -86,4 +79,14 @@ test('renders error if fetching recipe card fails', async () => {
     </BrowserRouter>,
   );
   expect(await screen.findByText('Oops! Could not fetch recipe details.')).toBeInTheDocument();
+});
+
+test('renders button to print the recipe', async () => {
+  mockGetDetails();
+  expect(await screen.findByText(/print recipe/i)).toBeInTheDocument();
+});
+
+test('renders button to add ingredients to grocery list', async () => {
+  mockGetDetails();
+  expect(await screen.findByText(/add to grocery list/i)).toBeInTheDocument();
 });
