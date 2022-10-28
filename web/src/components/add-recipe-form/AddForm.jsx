@@ -126,15 +126,15 @@ const AddForm = () => {
                 error={Boolean(errors.category) && Boolean(touched.category)}
                 helperText={Boolean(touched.category) && errors.category}
               >
-                {categories.map((option) => (
+                {categories.map((category) => (
                   <Field
                     as={MenuItem}
                     data-testid="category-dropdown"
-                    key={option.value}
-                    value={option.id}
+                    key={category.name}
+                    value={category.id}
                     size="small"
                   >
-                    {option.name}
+                    {category.name}
                   </Field>
                 ))}
               </Field>
