@@ -92,25 +92,23 @@ const RecipeDetails = () => {
             </Item>
             <Item>
               <Typography variant="body1" color="#263238">Ingredients</Typography>
-              {details.ingredients.map(({ ingredientId, amount, name }) => (
-                <div key={ingredientId}>
+              {details.ingredients.map((ingredient) => (
+                <div key={ingredient.id}>
                   <p variant="body2" color="text.secondary">
-                    <span>{amount}</span>
+                    <span>{ingredient.amount}</span>
                     {' '}
-                    <span>{name}</span>
+                    <span>{ingredient.name}</span>
                   </p>
                 </div>
               ))}
             </Item>
             <Item>
               <Typography variant="body1" color="#263238">Instructions</Typography>
-              {details.instructions.map(({ step, index }) => (
-                <div key={index}>
+              {details.instructions.map((instruction) => (
+                <div key={instruction.id}>
                   <p variant="body2" color="text.secondary">
-                    <span>{index}</span>
-                    {' '}
                     <span>
-                      {step}
+                      {instruction.step}
                     </span>
                   </p>
                   <br />
