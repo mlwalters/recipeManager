@@ -4,9 +4,8 @@ import MockAdapter from 'axios-mock-adapter';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import {
-  render, screen, // waitFor,
+  render, screen,
 } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 import AddForm from './AddForm';
 
 const testCategory = [
@@ -60,13 +59,12 @@ describe('AddForm: When add recipe form is rendered', () => {
     mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategory);
     mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, addedRecipe);
 
-    act(() => {
-      render(
-        <BrowserRouter>
-          <AddForm onSubmit={onSubmitFn} />
-        </BrowserRouter>,
-      );
-    });
+    render(
+      <BrowserRouter>
+        <AddForm onSubmit={onSubmitFn} />
+      </BrowserRouter>,
+    );
+    expect(await screen.findByText('Add a new recipe')).toBeInTheDocument();
   });
 
   test('input fields to add a new recipe are displayed', async () => {

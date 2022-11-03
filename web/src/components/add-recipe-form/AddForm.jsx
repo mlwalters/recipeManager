@@ -56,7 +56,6 @@ const AddForm = () => {
     request.userEmail = user.email;
     try {
       await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
-      // window.alert('Recipe saved!');
       navigate('/');
     } catch (err) {
       setSubmitError(err);
@@ -130,7 +129,7 @@ const AddForm = () => {
                   <Field
                     as={MenuItem}
                     data-testid="category-dropdown"
-                    key={category.name}
+                    key={category}
                     value={category.id}
                     size="small"
                   >
@@ -177,8 +176,7 @@ const AddForm = () => {
                     <div>
                       {values.ingredients && values.ingredients.length > 0 ? (
                         values.ingredients.map((ingredient, index) => (
-                          // eslint-disable-next-line react/no-array-index-key
-                          <Box key={index} sx={{ display: 'flex', padding: 1 }}>
+                          <Box key={ingredient} sx={{ display: 'flex', padding: 1 }}>
                             <Field
                               name={`ingredients.${index}.amount`}
                               label="Amount"
