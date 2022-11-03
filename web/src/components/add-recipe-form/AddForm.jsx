@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import Toast, { variants } from '../toast/Toast';
 
 const initialValues = {
   name: '',
@@ -39,6 +40,8 @@ const initialValues = {
 const AddForm = () => {
   const [categories, setCategories] = useState([{}]);
   const [submitError, setSubmitError] = useState(null);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastVariant, setToastVariant] = useState(variants.info);
   const { user } = useAuth0();
   const navigate = useNavigate();
 
@@ -56,6 +59,8 @@ const AddForm = () => {
     request.userEmail = user.email;
     try {
       await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
+      setToastMessage('Added new item');
+      setToastVariant(variants.success);
       navigate('/');
     } catch (err) {
       setSubmitError(err);
@@ -319,6 +324,11 @@ const AddForm = () => {
           </Form>
         )}
       </Formik>
+      <Toast
+        onClose={() => setToastMessage('')}
+        message={toastMessage}
+        variant={toastVariant}
+      />
     </Paper>
   );
 };
