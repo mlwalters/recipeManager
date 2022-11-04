@@ -4,7 +4,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import HomePage from './views/dashboard/HomePage';
 import RecipeDetails from './views/recipe-details/RecipeDetails';
-import AddRecipePage from './views/recipe-form/AddRecipePage';
 import Profile from './components/authentication/Profile';
 import LandingPage from './views/landing/LandingPage';
 import Favorites from './views/favorites/Favorites';
@@ -25,7 +24,6 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/grocerylist" element={<GroceryListPage />} />
           <Route path="/recipe/:id" element={<RecipeDetails />} />
-          <Route path="/recipe/add" element={<AddRecipePage />} />
         </Route>
         {/* <Route path="*" element={LandingPage />} /> */}
       </Routes>
