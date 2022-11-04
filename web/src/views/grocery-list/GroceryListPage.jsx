@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import GroceryList from '../../components/GroceryList';
-import AddGroceryItemForm from '../../components/AddGroceryItemForm';
+import AddGroceryItemForm from '../../components/forms/AddGroceryItemForm';
 import LoadingDisplay from '../../components/loading-display/LoadingDisplay';
 import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
 import Toast, { variants } from '../../components/toast/Toast';
