@@ -1,13 +1,56 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
+// import Fab from '@mui/material/Fab';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ToggleButtonView from '../../components/ToggleButtonView';
+import Toast, { variants } from '../../components/toast/Toast';
+import AddRecipeForm from '../../components/forms/AddRecipeForm';
 
-const HomePage = () => (
-  <>
+const HomePage = () => {
+  const [categories, setCategories] = useState([{}]);
+  const [submitError, setSubmitError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastVariant, setToastVariant] = useState(variants.info);
+  const { user } = useAuth0();
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Category`);
+      setCategories(data);
+    };
+    fetchCategories();
+  }, []);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSubmitError(null);
+  };
+
+  const handleSubmitModal = async (values) => {
+    const request = values;
+    request.userEmail = user.email;
+    try {
+      await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
+      setSubmitError(null);
+      handleCloseModal();
+      setToastMessage('New recipe added');
+      setToastVariant(variants.success);
+    } catch (err) {
+      setSubmitError(err);
+    }
+  };
+
+  if (submitError) {
+    return (
+      <Typography component="p" variant="h6">Oops! Recipe submission failed.</Typography>
+    );
+  }
+  return (
     <Container maxWidth="lg">
       <Box
         sx={{
@@ -17,14 +60,23 @@ const HomePage = () => (
           pl: 3,
         }}
       >
-        <Link to="/recipe/add">
-          <Fab color="secondary" variant="extended" p={2}>
-            <Typography variant="body1" component="span" color="white">Add recipe</Typography>
-          </Fab>
-        </Link>
+        <Button variant="contained" onClick={() => setIsModalOpen(true)}>Add Recipe</Button>
       </Box>
       <ToggleButtonView />
+      {isModalOpen && (
+        <AddRecipeForm
+          categories={categories}
+          saveError={submitError}
+          onSubmit={handleSubmitModal}
+          handleClose={handleCloseModal}
+        />
+      )}
+      <Toast
+        onClose={() => setToastMessage('')}
+        message={toastMessage}
+        variant={toastVariant}
+      />
     </Container>
-  </>
-);
+  );
+};
 export default HomePage;
