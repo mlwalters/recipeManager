@@ -99,6 +99,7 @@ describe('Home Page: When the page is rendered', () => {
         <HomePage />
       </BrowserRouter>,
     );
+    expect(await screen.findByText('View All')).toBeInTheDocument();
   });
 
   test('it should display add recipe button', async () => {
