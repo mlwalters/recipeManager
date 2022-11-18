@@ -1,14 +1,17 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
-// import rotatingLogo from '../../assets/shared-images/loadingLogo.jpg';
-import './LoadingDisplay.css';
+import Container from '@mui/material/Container';
 import { Box } from '@mui/material';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const LoadingDisplay = () => (
-  <Box m={2} p={2}>
-    <Typography component="span" variant="h3">Loading...</Typography>
-    {/* <img className="rotate" src={rotatingLogo}
-    alt="loading display" height="120px" m="10" /> */}
-  </Box>
+  <Container maxWidth="xl">
+    <Box sx={{
+      width: '100%', marginTop: 5, marginBottom: 5,
+    }}
+    >
+      <LinearProgress />
+    </Box>
+  </Container>
+
 );
 export default LoadingDisplay;
