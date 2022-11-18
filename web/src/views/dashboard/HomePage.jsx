@@ -52,13 +52,9 @@ const HomePage = () => {
   }
   return (
     <Container maxWidth="lg">
-      <Box
-        sx={{
-          display: 'grid',
-          border: 'none',
-          pt: 3,
-          pl: 3,
-        }}
+      <Box sx={{
+        padding: 2, margin: 1,
+      }}
       >
         <Button variant="contained" onClick={() => setIsModalOpen(true)}>Add Recipe</Button>
       </Box>
