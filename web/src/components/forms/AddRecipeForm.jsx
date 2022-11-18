@@ -6,7 +6,8 @@ import {
   object, string, number, array,
 } from 'yup';
 import PropTypes from 'prop-types';
-
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -22,7 +23,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+// import DialogTitle from '@mui/material/DialogTitle';
 
 const initialValues = {
   name: '',
@@ -52,26 +53,46 @@ const AddRecipeForm = ({
   return (
     <Dialog
       open
+      fullScreen
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">
+      <AppBar sx={{ position: 'relative' }}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            onClick={handleClose}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+          <Typography sx={{ ml: 2, flex: 1 }} variant="h6">
+            Add Recipe
+          </Typography>
+          <Button autoFocus color="inherit" onClick={handleClose}>
+            save
+          </Button>
+        </Toolbar>
+      </AppBar>
+      {/* <DialogTitle id="alert-dialog-title" sx={{ paddingTop: 5, paddingLeft: 5 }}>
         Add Recipe
         <IconButton
           aria-label="close"
           alt="close"
-          // sx={{
-          //   position: 'absolute',
-          //   right: 8,
-          //   top: 8,
-          //   color: (theme) => theme.palette.grey[500],
-          // }}
+          sx={{
+            position: 'relative',
+            left: 4,
+            top: -2,
+            color: (theme) => theme.palette.grey[500],
+          }}
           onClick={handleClose}
         >
           <CloseIcon />
         </IconButton>
-      </DialogTitle>
+      </DialogTitle> */}
+
       <DialogContent>
         {!!saveError && <Alert severity="error">{saveError}</Alert>}
         <Formik
@@ -112,7 +133,7 @@ const AddRecipeForm = ({
                 autoComplete="false"
                 error={Boolean(errors.name) && Boolean(touched.name)}
                 helperText={Boolean(touched.name) && errors.name}
-                sx={{ padding: 1 }}
+                sx={{ margin: 1 }}
               />
 
               <Box sx={{ display: 'flex', padding: 1 }}>
@@ -299,7 +320,7 @@ const AddRecipeForm = ({
               />
 
               <Box sx={{
-                display: 'flex', padding: 1, paddingTop: 3, paddingBottom: 3, marginBottom: 5,
+                display: 'flex', paddingLeft: 1, paddingTop: 3, paddingBottom: 3, marginBottom: 5,
               }}
               >
                 <Box>
