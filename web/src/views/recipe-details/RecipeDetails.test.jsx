@@ -78,7 +78,7 @@ test('renders error if fetching recipe card fails', async () => {
       <RecipeDetails />
     </BrowserRouter>,
   );
-  expect(await screen.findByText('Oops! Could not fetch recipe details.')).toBeInTheDocument();
+  expect(await screen.findByText('Oops, there was an error.')).toBeInTheDocument();
 });
 
 test('renders button to print the recipe', async () => {

@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'; // useParams
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
@@ -21,6 +20,7 @@ import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBt
 import LoadingDisplay from '../../components/loading-display/LoadingDisplay';
 import SwitchImageCard from '../../components/new-recipe-card/RecipeCard';
 import '../../components/recipe-list/card-view/CardView.css';
+import NotFound from '../../components/error-msgs/NotFound';
 
 const FavoritesList = () => {
   const [recipes, setRecipes] = useState([]);
@@ -54,7 +54,7 @@ const FavoritesList = () => {
 
   if (fetchError) {
     return (
-      <Typography variant="h5">Oops! Could not fetch recipe cards.</Typography>
+      <NotFound />
     );
   }
 
