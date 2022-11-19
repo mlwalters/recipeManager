@@ -18,6 +18,7 @@ import { red } from '@mui/material/colors';
 import LoadingDisplay from '../../loading-display/LoadingDisplay';
 import DeleteDialogBox from '../../DeleteDialogBox';
 import SwitchImageCard from '../../SwitchImageCard';
+import NotFound from '../../error-msgs/NotFound';
 
 const RecipeListView = () => {
   const [recipes, setRecipes] = useState([]);
@@ -86,7 +87,7 @@ const RecipeListView = () => {
 
   if (fetchError) {
     return (
-      <Typography variant="h5">Oops! Could not fetch recipe cards.</Typography>
+      <NotFound />
     );
   }
 

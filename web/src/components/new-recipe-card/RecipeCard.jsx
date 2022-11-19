@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
@@ -19,6 +18,7 @@ import DeleteDialogBox from '../DeleteDialogBox';
 import LoadingDisplay from '../loading-display/LoadingDisplay';
 import SwitchImageCard from '../SwitchImageCard';
 import './RecipeCard.css';
+import NotFound from '../error-msgs/NotFound';
 // import { useToggle } from '../useToggle';
 
 const RecipeCard = () => {
@@ -89,7 +89,7 @@ const RecipeCard = () => {
 
   if (fetchError) {
     return (
-      <Typography variant="h5">Oops! Could not fetch recipe cards.</Typography>
+      <NotFound />
     );
   }
 

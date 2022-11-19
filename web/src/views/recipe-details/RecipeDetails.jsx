@@ -12,6 +12,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
 import SwitchImageCard from '../../components/SwitchImageCard';
 import './RecipeDetails.css';
+import NotFound from '../../components/error-msgs/NotFound';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -44,7 +45,7 @@ const RecipeDetails = () => {
 
   if (fetchError) {
     return (
-      <Typography>Oops! Could not fetch recipe details.</Typography>
+      <NotFound />
     );
   }
 

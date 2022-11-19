@@ -11,6 +11,7 @@ import AddGroceryItemForm from '../../components/forms/AddGroceryItemForm';
 import LoadingDisplay from '../../components/loading-display/LoadingDisplay';
 import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
 import Toast, { variants } from '../../components/toast/Toast';
+import NotFound from '../../components/error-msgs/NotFound';
 
 const GroceryListPage = () => {
   const [groceryItems, setGroceryItems] = useState([]);
@@ -63,7 +64,7 @@ const GroceryListPage = () => {
 
   if (fetchError) {
     return (
-      <Typography variant="h6">Oops! Could not fetch recipe cards.</Typography>
+      <NotFound />
     );
   }
 
