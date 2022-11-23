@@ -6,31 +6,30 @@ import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
-import Alert from '@mui/material/Alert';
 import { red } from '@mui/material/colors';
 import DeleteDialogBox from '../DeleteDialogBox';
 import LoadingDisplay from '../loading-display/LoadingDisplay';
 import SwitchImageCard from '../SwitchImageCard';
 import './RecipeCard.css';
 import NotFound from '../error-msgs/NotFound';
+import Toast, { variants } from '../toast/Toast';
 // import { useToggle } from '../useToggle';
 
 const RecipeCard = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [fetchError, setFetchError] = useState(null);
-  const [deleteError, setDeleteError] = useState(null);
-  const [favoriteError, setFavoriteError] = useState(null);
   const [open, setOpen] = useState(false);
   const [favoriteToggle, setFavoriteToggle] = useState(false);
-  // const { status: favoriteToggle, toggleStatus: setFavoriteToggle } = useToggle();
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastVariant, setToastVariant] = useState(variants.info);
   const { user } = useAuth0();
+  // const { status: favoriteToggle, toggleStatus: setFavoriteToggle } = useToggle();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -42,29 +41,39 @@ const RecipeCard = () => {
     setOpen(false);
     const deleteData = async () => {
       try {
-        const { data } = await axios
-          .delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
+        const { data } = await axios.delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
         setRecipes(data);
+        setToastMessage('Recipe has been deleted');
+        setToastVariant(variants.info);
       } catch (err) {
-        setDeleteError(err);
+        setToastMessage('Oops! Could not delete recipe, try again');
+        setToastVariant(variants.error);
       }
     };
     deleteData();
   };
 
   const handleClickFavorite = async (id) => {
+    const recipeToUpdate = recipes.find((recipe) => recipe.id === id);
     try {
-      if (favoriteToggle) {
-        setFavoriteToggle(false);
-      } else {
-        setFavoriteToggle(true);
-      }
-      const recipeToUpdate = recipes.find((recipe) => recipe.id === id);
+      setFavoriteToggle((toggle) => !toggle);
       const request = { ...recipeToUpdate, favorite: favoriteToggle, userEmail: user.email };
       const { data } = await axios.put(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
       setRecipes(data);
+      if (!recipeToUpdate.favorite) {
+        setToastMessage('Recipe saved in Favorites');
+        setToastVariant(variants.success);
+      } else {
+        setToastMessage('Recipe removed from Favorites');
+        setToastVariant(variants.info);
+      }
     } catch (favoriteErr) {
-      setFavoriteError(<Typography variant="h6">Oops! Could not save recipe as favorite.</Typography>);
+      if (!recipeToUpdate.favorite) {
+        setToastMessage('Oops! Could not save recipe in Favorites, try again');
+      } else {
+        setToastMessage('Oops! Could not delete recipe from Favorites, try again');
+      }
+      setToastVariant(variants.error);
     }
   };
 
@@ -90,16 +99,6 @@ const RecipeCard = () => {
   if (fetchError) {
     return (
       <NotFound />
-    );
-  }
-
-  if (deleteError) {
-    return (
-      <Box m="4">
-        <Typography>Oops! Could not delete recipe.</Typography>
-        <br />
-        <Chip variant="outlined" color="primary" label="Back to recipes" onClick={window.location.reload} />
-      </Box>
     );
   }
 
@@ -179,9 +178,11 @@ const RecipeCard = () => {
           </Box>
         </Card>
       ))}
-      {!!fetchError && <Alert severity="error">{fetchError}</Alert>}
-      {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
-      {!!deleteError && <Alert severity="error">{deleteError}</Alert>}
+      <Toast
+        onClose={() => setToastMessage('')}
+        message={toastMessage}
+        variant={toastVariant}
+      />
     </Box>
   );
 };
