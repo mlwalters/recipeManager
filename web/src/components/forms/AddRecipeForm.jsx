@@ -1,4 +1,5 @@
 import React from 'react';
+// import React, { useState } from 'react';
 import {
   Field, Form, Formik, FieldArray,
 } from 'formik';
@@ -23,6 +24,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
+// import Toast, { variants } from '../toast/Toast';
 // import DialogTitle from '@mui/material/DialogTitle';
 
 const initialValues = {
@@ -49,7 +51,13 @@ const AddRecipeForm = ({
   const handleSubmit = (values) => {
     onSubmit(values);
   };
+  // const [toastMessage, setToastMessage] = useState('');
+  // const [toastVariant, setToastVariant] = useState(variants.info);
 
+  // if (saveError) {
+  //   setToastMessage(saveError);
+  //   setToastVariant(variants.error);
+  // }
   return (
     <Dialog
       open
@@ -343,6 +351,11 @@ const AddRecipeForm = ({
           )}
         </Formik>
       </DialogContent>
+      {/* <Toast
+        onClose={() => setToastMessage('')}
+        message={toastMessage}
+        variant={toastVariant}
+      /> */}
     </Dialog>
   );
 };

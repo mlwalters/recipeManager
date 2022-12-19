@@ -12,20 +12,21 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Typography from '@mui/material/Typography';
 import {
-  Alert, IconButton, Paper, Tooltip,
+  IconButton, Paper, Tooltip,
 } from '@mui/material';
 import { red } from '@mui/material/colors';
 import LoadingDisplay from '../../loading-display/LoadingDisplay';
 import DeleteDialogBox from '../../DeleteDialogBox';
 import SwitchImageCard from '../../SwitchImageCard';
+import Toast, { variants } from '../../toast/Toast';
 import NotFound from '../../error-msgs/NotFound';
 
 const RecipeListView = () => {
   const [recipes, setRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [fetchError, setFetchError] = useState(null);
-  const [deleteError, setDeleteError] = useState(null);
-  const [favoriteError, setFavoriteError] = useState(null);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastVariant, setToastVariant] = useState(variants.info);
   const [open, setOpen] = useState(false);
   const [favoriteToggle, setFavoriteToggle] = useState(false);
   const { user } = useAuth0();
@@ -40,29 +41,39 @@ const RecipeListView = () => {
     setOpen(false);
     const deleteData = async () => {
       try {
-        const { data } = await axios
-          .delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
+        const { data } = await axios.delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
         setRecipes(data);
+        setToastMessage('Recipe has been deleted');
+        setToastVariant(variants.info);
       } catch (err) {
-        setDeleteError(err);
+        setToastMessage('Oops! Could not delete recipe, try again');
+        setToastVariant(variants.error);
       }
     };
     deleteData();
   };
 
   const handleClickFavorite = async (id) => {
+    const recipeToUpdate = recipes.find((recipe) => recipe.id === id);
     try {
-      if (favoriteToggle) {
-        setFavoriteToggle(false);
-      } else {
-        setFavoriteToggle(true);
-      }
-      const recipeToUpdate = recipes.find((recipe) => recipe.id === id);
+      setFavoriteToggle((toggle) => !toggle);
       const request = { ...recipeToUpdate, favorite: favoriteToggle, userEmail: user.email };
       const { data } = await axios.put(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
       setRecipes(data);
+      if (!recipeToUpdate.favorite) {
+        setToastMessage('Recipe saved in Favorites');
+        setToastVariant(variants.success);
+      } else {
+        setToastMessage('Recipe removed from Favorites');
+        setToastVariant(variants.info);
+      }
     } catch (favoriteErr) {
-      setFavoriteError(<Typography variant="h6">Oops! Could not save recipe as favorite.</Typography>);
+      if (!recipeToUpdate.favorite) {
+        setToastMessage('Oops! Could not save recipe in Favorites, try again');
+      } else {
+        setToastMessage('Oops! Could not delete recipe from Favorites, try again');
+      }
+      setToastVariant(variants.error);
     }
   };
 
@@ -145,9 +156,11 @@ const RecipeListView = () => {
           <Divider variant="inset" component="li" />
         </List>
       ))}
-      {!!fetchError && <Alert severity="error">{fetchError}</Alert>}
-      {!!favoriteError && <Alert severity="error">{favoriteError}</Alert>}
-      {!!deleteError && <Alert severity="error">{deleteError}</Alert>}
+      <Toast
+        onClose={() => setToastMessage('')}
+        message={toastMessage}
+        variant={toastVariant}
+      />
     </Paper>
   );
 };

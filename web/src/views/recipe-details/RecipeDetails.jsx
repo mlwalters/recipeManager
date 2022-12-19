@@ -13,6 +13,7 @@ import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBt
 import SwitchImageCard from '../../components/SwitchImageCard';
 import './RecipeDetails.css';
 import NotFound from '../../components/error-msgs/NotFound';
+import Toast, { variants } from '../../components/toast/Toast';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -26,7 +27,9 @@ const RecipeDetails = () => {
     id: 0, name: '', userEmail: '', category: '', imageUrl: '', description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
   });
   const [fetchError, setFetchError] = useState(null);
-  const [addError, setAddError] = useState(null);
+  // const [addError, setAddError] = useState(null);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastVariant, setToastVariant] = useState(variants.info);
   const navigate = useNavigate();
   const { id } = useParams();
   const print = () => window.print();
@@ -45,7 +48,10 @@ const RecipeDetails = () => {
 
   if (fetchError) {
     return (
-      <NotFound />
+      <Container maxWidth="xl">
+        <BackToHomeBtn />
+        <NotFound />
+      </Container>
     );
   }
 
@@ -54,15 +60,11 @@ const RecipeDetails = () => {
       await axios.post(`${process.env.REACT_APP_BASE_API}/api/GroceryList/Add/${id}`);
       navigate('/grocerylist');
     } catch (err) {
-      setAddError(err);
+      // setAddError(err);
+      setToastMessage('Oops! Could not add ingredients to grocery list, try again');
+      setToastVariant(variants.error);
     }
   };
-
-  if (addError) {
-    return (
-      <Typography>Oops! Could not add ingredients to grocery list.</Typography>
-    );
-  }
 
   return (
     <Container maxWidth="lg">
@@ -135,6 +137,11 @@ const RecipeDetails = () => {
           </Grid>
         </Grid>
       </Box>
+      <Toast
+        onClose={() => setToastMessage('')}
+        message={toastMessage}
+        variant={toastVariant}
+      />
     </Container>
   );
 };

@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const BackToHomeBtn = () => (
-  <Box mt={2} p={1}>
+  <Box sx={{
+    padding: 2, margin: 1,
+  }}
+  >
     <Link to="/home">
       <ArrowBackIcon />
       <Typography component="span" variant="h6">  Back to home</Typography>

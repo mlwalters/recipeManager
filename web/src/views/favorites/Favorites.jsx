@@ -6,7 +6,6 @@ import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import Alert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 // import Chip from '@mui/material/Chip';
@@ -54,7 +53,10 @@ const FavoritesList = () => {
 
   if (fetchError) {
     return (
-      <NotFound />
+      <Container maxWidth="lg">
+        <BackToHomeBtn />
+        <NotFound />
+      </Container>
     );
   }
 
@@ -118,7 +120,6 @@ const FavoritesList = () => {
             </Box>
           </Card>
         ))}
-        {!!fetchError && <Alert severity="error">{fetchError}</Alert>}
       </Box>
     </Container>
   );

@@ -25,7 +25,7 @@ const GroceryListPage = () => {
 
   const handleCloseAddModal = () => {
     setIsAddModalOpen(false);
-    setSaveItemError(false);
+    setSaveItemError(null);
   };
 
   const handleSubmitAddModal = async (item) => {
@@ -40,6 +40,8 @@ const GroceryListPage = () => {
       setToastVariant(variants.success);
     } catch (err) {
       setSaveItemError(err);
+      setToastMessage('Oops! Could not add new item, try again');
+      setToastVariant(variants.error);
     }
   };
 
@@ -64,7 +66,10 @@ const GroceryListPage = () => {
 
   if (fetchError) {
     return (
-      <NotFound />
+      <Container maxWidth="lg">
+        <BackToHomeBtn />
+        <NotFound />
+      </Container>
     );
   }
 
