@@ -43,13 +43,10 @@ const initialValues = {
 };
 
 const AddRecipeForm = ({
-  categories,
-  saveError,
-  onSubmit,
-  handleClose,
+  categories, saveError, onFormSubmit, handleClose,
 }) => {
-  const handleSubmit = (values) => {
-    onSubmit(values);
+  const handleSubmit = async (values) => {
+    await onFormSubmit(values);
   };
   // const [toastMessage, setToastMessage] = useState('');
   // const [toastVariant, setToastVariant] = useState(variants.info);
@@ -122,11 +119,11 @@ const AddRecipeForm = ({
             notes: string().trim().max(1500, 'Maximum character limit is 1500'),
           })}
           onSubmit={async (values) => {
-            handleSubmit(values);
+            await handleSubmit(values);
           }}
         >
           {({
-            errors, isValid, touched, dirty, values, resetForm,
+            errors, isValid, touched, dirty, values, resetForm, isSubmitting,
           }) => (
             <Form>
               <Field
@@ -337,7 +334,7 @@ const AddRecipeForm = ({
                     variant="contained"
                     color="secondary"
                     size="large"
-                    disabled={!isValid || !dirty}
+                    disabled={!isValid || !dirty || isSubmitting}
                   >
                     Add Recipe
                   </Button>
@@ -363,7 +360,7 @@ const AddRecipeForm = ({
 AddRecipeForm.defaultProps = {
   categories: undefined,
   saveError: undefined,
-  onSubmit: undefined,
+  onFormSubmit: undefined,
   handleClose: undefined,
 };
 
@@ -372,7 +369,7 @@ AddRecipeForm.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
   }]),
-  onSubmit: PropTypes.func,
+  onFormSubmit: PropTypes.func,
   handleClose: PropTypes.func,
   saveError: PropTypes.string,
 };
