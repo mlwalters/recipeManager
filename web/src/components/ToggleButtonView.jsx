@@ -14,23 +14,30 @@ import AddRecipeForm from './forms/AddRecipeForm';
 import NotFound from './error-msgs/NotFound';
 import ListView from './recipe-list/list-view/ListView';
 import RecipeCard from './new-recipe-card/RecipeCard';
+import LoadingDisplay from './loading-display/LoadingDisplay';
 
 export default function ToggleButtonView() {
   const [view, setView] = React.useState('card');
+  const [loadingState, setLoadingState] = useState(true);
   const [categories, setCategories] = useState([{}]);
-  const [submitError, setSubmitError] = useState(null);
   const [fetchCategoryError, setFetchCategoryError] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [recipes, setRecipes] = useState([]);
+  const [fetchRecipesError, setFetchRecipesError] = useState(null);
+  const [saveRecipeError, setSaveRecipeError] = useState(null);
+  const [favoriteToggle, setFavoriteToggle] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isAddRecipeModalOpen, setIsAddRecipeModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [toastVariant, setToastVariant] = useState(variants.info);
-
   const { user } = useAuth0();
 
   useEffect(() => {
     const fetchCategories = async () => {
+      setLoadingState(true);
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Category`);
         setCategories(data);
+        setLoadingState(false);
       } catch (err) {
         setFetchCategoryError(err);
         setToastMessage('Oops! There was an error, try again');
@@ -40,38 +47,96 @@ export default function ToggleButtonView() {
     fetchCategories();
   }, []);
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSubmitError(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/All/${user.email}`);
+        setRecipes(data);
+      } catch (err) {
+        setFetchRecipesError(err);
+      }
+      setLoadingState(false);
+    };
+    fetchData();
+  }, []);
+
+  const handleCloseAddRecipeModal = () => {
+    setIsAddRecipeModalOpen(false);
+    setSaveRecipeError(null);
   };
 
-  const handleSubmitModal = async (values) => {
+  const handleSubmitAddRecipeModal = async (values) => {
     const request = values;
     request.userEmail = user.email;
     try {
-      // const { data } =
-      await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
+      // const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
       // setRecipes(data);
-      setSubmitError(null);
-      handleCloseModal();
+      const newRecipe = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
+      setRecipes([...recipes, newRecipe.data]);
+      setSaveRecipeError(null);
+      handleCloseAddRecipeModal();
       setToastMessage('New recipe added');
       setToastVariant(variants.success);
     } catch (err) {
-      setSubmitError(err);
+      setSaveRecipeError(err);
       // setToastMessage('Oops! Recipe submission failed, try again');
       // setToastVariant(variants.error);
     }
   };
 
-  if (submitError) {
+  const handleClickFavorite = async (id) => {
+    const recipeToUpdate = recipes.find((recipe) => recipe.id === id);
+    try {
+      setFavoriteToggle((toggle) => !toggle);
+      const request = { ...recipeToUpdate, favorite: favoriteToggle, userEmail: user.email };
+      const { data } = await axios.put(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`, request);
+      setRecipes(data);
+      if (!recipeToUpdate.favorite) {
+        setToastMessage('Recipe saved in Favorites');
+        setToastVariant(variants.success);
+      } else {
+        setToastMessage('Recipe removed from Favorites');
+        setToastVariant(variants.info);
+      }
+    } catch (favoriteErr) {
+      if (!recipeToUpdate.favorite) {
+        setToastMessage('Oops! Could not save recipe in Favorites, try again');
+      } else {
+        setToastMessage('Oops! Could not delete recipe from Favorites, try again');
+      }
+      setToastVariant(variants.error);
+    }
+  };
+
+  const handleDeleteRecipe = (id) => {
+    // const recipeToDelete = recipes.find((recipe) => recipe.id === id);
+    // console.log(recipeToDelete);
+    setIsDeleteDialogOpen(false);
+    const deleteData = async () => {
+      try {
+        const { data } = await axios.delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
+        setRecipes(data);
+        setToastMessage('Recipe has been deleted');
+        setToastVariant(variants.info);
+      } catch (err) {
+        setToastMessage('Oops! Could not delete recipe, try again');
+        setToastVariant(variants.error);
+      }
+    };
+    deleteData();
+  };
+
+  const handleCancelDeleteDialog = () => setIsDeleteDialogOpen(false);
+
+  const handleClickDeleteDialog = () => setIsDeleteDialogOpen(true);
+
+  if (loadingState) {
     return (
-      <Container maxWidth="lg">
-        <NotFound />
-      </Container>
+      <LoadingDisplay />
     );
   }
 
-  if (fetchCategoryError) {
+  if (fetchRecipesError || fetchCategoryError || saveRecipeError) {
     return (
       <Container maxWidth="lg">
         <NotFound />
@@ -101,16 +166,16 @@ export default function ToggleButtonView() {
             padding: 2, margin: 1,
           }}
           >
-            <Button variant="contained" onClick={() => setIsModalOpen(true)}>Add Recipe</Button>
+            <Button variant="contained" onClick={() => setIsAddRecipeModalOpen(true)}>Add Recipe</Button>
           </Box>
         </Box>
       </ToggleButtonGroup>
-      {isModalOpen && (
+      {isAddRecipeModalOpen && (
         <AddRecipeForm
           categories={categories}
-          saveError={submitError}
-          onFormSubmit={handleSubmitModal}
-          handleClose={handleCloseModal}
+          saveError={saveRecipeError}
+          onAddRecipeFormSubmit={handleSubmitAddRecipeModal}
+          handleClose={handleCloseAddRecipeModal}
         />
       )}
       <Toast
@@ -120,11 +185,25 @@ export default function ToggleButtonView() {
       />
       {view === 'list' ? (
         <Box>
-          <ListView />
+          <ListView
+            allRecipes={recipes}
+            handleFavoriteRecipe={handleClickFavorite}
+            isDeleteOpen={isDeleteDialogOpen}
+            handleCancelDeleteDialog={handleCancelDeleteDialog}
+            handleClickDeleteDialog={handleClickDeleteDialog}
+            handleDeleteRecipe={handleDeleteRecipe}
+          />
         </Box>
       ) : (
         <Box>
-          <RecipeCard />
+          <RecipeCard
+            allRecipes={recipes}
+            handleFavoriteRecipe={handleClickFavorite}
+            isDeleteOpen={isDeleteDialogOpen}
+            handleCancelDeleteDialog={handleCancelDeleteDialog}
+            handleClickDeleteDialog={handleClickDeleteDialog}
+            handleDeleteRecipe={handleDeleteRecipe}
+          />
         </Box>
       )}
     </Paper>
