@@ -5,8 +5,6 @@ import {
 } from '@mui/material';
 import DialogContentText from '@mui/material/DialogContentText';
 
-// onClick = event => do stuff
-
 const DeleteDialogBox = ({ onCancel, onDelete }) => (
   <Dialog
     open
@@ -14,7 +12,7 @@ const DeleteDialogBox = ({ onCancel, onDelete }) => (
     aria-describedby="alert-dialog-description"
     BackdropProps={{
       style: {
-        backgroundColor: '#000009', opacity: 0.10,
+        backgroundColor: '#000009', opacity: 0.12,
       },
     }}
     PaperProps={{
