@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'; // useParams
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+// import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
@@ -17,12 +18,12 @@ import { Container } from '@mui/material';
 // import DeleteDialogBox from '../../components/DeleteDialogBox';
 import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
 import LoadingDisplay from '../../components/loading-display/LoadingDisplay';
-import SwitchImageCard from '../../components/new-recipe-card/RecipeCard';
-import '../../components/recipe-list/card-view/CardView.css';
+import SwitchImageCard from '../../components/SwitchImageCard';
+import '../../components/new-recipe-card/RecipeCard.css';
 import NotFound from '../../components/error-msgs/NotFound';
 
 const FavoritesList = () => {
-  const [recipes, setRecipes] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [fetchError, setFetchError] = useState(null);
   // const [deleteError, setDeleteError] = useState(null);
@@ -36,7 +37,7 @@ const FavoritesList = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Favorites/${user.email}`);
-        setRecipes(data);
+        setFavoriteRecipes(data);
       } catch (err) {
         setFetchError(err);
       }
@@ -71,7 +72,7 @@ const FavoritesList = () => {
         marginBottom: 5,
       }}
       >
-        {recipes.map(({
+        {favoriteRecipes.map(({
           id, name, description, category, imageUrl,
         }) => (
           <Card
@@ -123,6 +124,10 @@ const FavoritesList = () => {
       </Box>
     </Container>
   );
+};
+
+FavoritesList.defaultProps = {
+  favoriteRecipes: {},
 };
 
 export default FavoritesList;
