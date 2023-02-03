@@ -86,7 +86,11 @@ const GroceryListPage = () => {
             {' '}
             {new Date().toLocaleTimeString()}
           </div>
-          <Typography variant="h3">Grocery List</Typography>
+          <Typography variant="h3">
+            Grocery List (
+            {groceryItems.length}
+            )
+          </Typography>
         </Box>
         <Button variant="contained" startIcon={<AddIcon />} onClick={() => setIsAddModalOpen(true)}>Add an item</Button>
         {isAddModalOpen && (
