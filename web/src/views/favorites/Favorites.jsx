@@ -64,6 +64,11 @@ const FavoritesList = () => {
   return (
     <Container>
       <BackToHomeBtn />
+      <div>
+        Last rendered
+        {' '}
+        {new Date().toLocaleTimeString()}
+      </div>
       <Box sx={{
         display: 'grid',
         gap: 3,

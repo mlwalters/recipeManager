@@ -81,6 +81,11 @@ const GroceryListPage = () => {
           width: '100%', maxWidth: 500, paddingTop: 2, paddingBottom: 2,
         }}
         >
+          <div>
+            Last rendered
+            {' '}
+            {new Date().toLocaleTimeString()}
+          </div>
           <Typography variant="h3">Grocery List</Typography>
         </Box>
         <Button variant="contained" startIcon={<AddIcon />} onClick={() => setIsAddModalOpen(true)}>Add an item</Button>
