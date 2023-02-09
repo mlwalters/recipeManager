@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.6940" tests="1" failures="0">
-  <testsuite name="Root Suite" timestamp="2022-02-27T04:23:47" tests="0" file="cypress/integration/landingPage.feature" time="0.0000" failures="0">
-  </testsuite>
-  <testsuite name="Landing Page" timestamp="2022-02-27T04:23:47" tests="1" time="0.6940" failures="0">
-    <testcase name="Landing Page I can see the app details" time="0.6940" classname="I can see the app details">
-    </testcase>
-  </testsuite>
-</testsuites>

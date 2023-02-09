@@ -57,9 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^8.0.0-rc.1",
     "cypress": "^9.1.0",
-    "cypress-cucumber-preprocessor": "^4.3.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-cypress": "^2.12.1",
@@ -72,8 +70,5 @@
     "stylelint-config-standard-scss": "^2.0.1",
     "stylelint-order": "^5.0.0",
     "stylelint-scss": "^4.0.0"
-  },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
   }
 }
