@@ -14,25 +14,25 @@ const LandingPage = () => {
     <>
       <div className="main">
         <div className="left">
-          <Typography variant="h2" id="hero-text">Big Bite Recipe Manager makes saving your recipes easier. Free for personal use.</Typography>
+          <Typography variant="h2" id="hero-text" data-cy="landing-text">Big Bite Recipe Manager makes saving your recipes easier. Free for personal use.</Typography>
           <div className="subtitle">
             <LoginButton />
           </div>
         </div>
         <div className="right">
-          <img src={backgroundImage} alt="background" width="800" className="hero-image" />
+          <img src={backgroundImage} alt="background" width="800" className="hero-image" data-cy="hero-img" />
         </div>
       </div>
       <footer id="about">
         <div className="credits">
           <div className="credits-left">
-            <Typography component="span" variant="body1">
-              Made by:
+            <Typography component="span" variant="body1" data-cy="app-creator">
+              Made with ❤️:
               {' '}
               <a href="https://github.com/mlwalters" className="credits-links" target="_blank" rel="noreferrer">Maricar Lusuegro Walters</a>
             </Typography>
           </div>
-          <div className="credits-right">
+          <div className="credits-right" data-cy="credits">
             <Typography component="span" variant="body2">
               Illustrations are from
               {' '}

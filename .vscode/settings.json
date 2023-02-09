@@ -16,7 +16,7 @@
     "editor.insertSpaces": true
   },
   "[js, jsx]": {
-    "editor.tabSize": 4,
+    "editor.tabSize": 2,
     "editor.insertSpaces": true
   },
 }

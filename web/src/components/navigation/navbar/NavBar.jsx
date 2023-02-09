@@ -46,7 +46,7 @@ const NavBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to="/home">
-            <img src={logo} alt="Big Bite logo" height="80px" p="1" data-testid="logo" />
+            <img src={logo} alt="Big Bite logo" height="80px" p="1" data-cy="logo" />
           </Link>
 
           {isAuthenticated && (
@@ -79,6 +79,7 @@ const NavBar = () => {
                   sx={{
                     display: { xs: 'block', md: 'none', color: '#313438' },
                   }}
+                  data-cy="menu"
                 >
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Link to="/home">
