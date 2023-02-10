@@ -9,12 +9,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CommentIcon from '@mui/icons-material/Comment';
 import Checkbox from '@mui/material/Checkbox';
-import Alert from '@mui/material/Alert';
-// import Typography from '@mui/material/Typography';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
-const GroceryList = ({ items, fetchError }) => {
+const GroceryList = ({ items }) => {
   const [checked, setChecked] = useState([0]);
 
   const handleToggle = (value) => () => {
@@ -62,13 +60,11 @@ const GroceryList = ({ items, fetchError }) => {
           </ListItemButton>
         </ListItem>
       ))}
-      {!!fetchError && <Alert severity="error">{fetchError}</Alert>}
     </List>
   );
 };
 
 GroceryList.defaultProps = {
-  fetchError: true,
   items: [],
 };
 
@@ -81,7 +77,6 @@ GroceryList.propTypes = {
       userEmail: PropTypes.string,
     }),
   ),
-  fetchError: PropTypes.string,
 };
 
 export default GroceryList;

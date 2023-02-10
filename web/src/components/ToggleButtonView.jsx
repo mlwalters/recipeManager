@@ -146,6 +146,11 @@ export default function ToggleButtonView() {
 
   return (
     <Paper sx={{ padding: 2 }} elevation={0}>
+      <div>
+        Last rendered
+        {' '}
+        {new Date().toLocaleTimeString()}
+      </div>
       <ToggleButtonGroup
         value={view}
         exclusive

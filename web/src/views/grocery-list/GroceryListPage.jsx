@@ -81,7 +81,16 @@ const GroceryListPage = () => {
           width: '100%', maxWidth: 500, paddingTop: 2, paddingBottom: 2,
         }}
         >
-          <Typography variant="h3">Grocery List</Typography>
+          <div>
+            Last rendered
+            {' '}
+            {new Date().toLocaleTimeString()}
+          </div>
+          <Typography variant="h3">
+            Grocery List (
+            {groceryItems.length}
+            )
+          </Typography>
         </Box>
         <Button variant="contained" startIcon={<AddIcon />} onClick={() => setIsAddModalOpen(true)}>Add an item</Button>
         {isAddModalOpen && (
@@ -91,7 +100,9 @@ const GroceryListPage = () => {
             handleClose={handleCloseAddModal}
           />
         )}
-        <GroceryList items={groceryItems} fetchError={fetchError} />
+        <GroceryList
+          items={groceryItems.sort((a, b) => a.name.localeCompare(b.name))}
+        />
         <Toast
           onClose={() => setToastMessage('')}
           message={toastMessage}
