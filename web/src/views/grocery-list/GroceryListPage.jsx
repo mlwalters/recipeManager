@@ -100,7 +100,10 @@ const GroceryListPage = () => {
             handleClose={handleCloseAddModal}
           />
         )}
-        <GroceryList items={groceryItems} fetchError={fetchError} />
+        <GroceryList
+          items={groceryItems.sort((a, b) => a.name.localeCompare(b.name))}
+          fetchError={fetchError}
+        />
         <Toast
           onClose={() => setToastMessage('')}
           message={toastMessage}
