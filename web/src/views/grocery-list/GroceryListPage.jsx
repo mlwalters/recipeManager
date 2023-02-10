@@ -102,7 +102,6 @@ const GroceryListPage = () => {
         )}
         <GroceryList
           items={groceryItems.sort((a, b) => a.name.localeCompare(b.name))}
-          fetchError={fetchError}
         />
         <Toast
           onClose={() => setToastMessage('')}
