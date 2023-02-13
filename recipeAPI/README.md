@@ -24,6 +24,8 @@ Install Docker <https://docs.docker.com/get-docker/>
 
   `docker run -d --name sqlserver_capstone -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=capstone88!' -p 1533:1433 mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04`
 
+    Connection Strings: `"Server=localhost,1533;Initial Catalog=sqlserver_capstone;User Id=sa;Password=capstone88!;"`
+
 - Then run the following and ensure that your new container is listed:
 
   `docker ps`
@@ -143,3 +145,7 @@ Resources:
 - Run the `ef database update` command followed by the name of the migration you would like to set it to from the backend project directory as follows (replacing `MyTargetMigration` with the name of the migration that you want it to run up to):
 
   `dotnet ef database update MyTargetMigration`
+
+
+  ### Using SQLite
+Download and use DBeaver Community (free version) as GUI

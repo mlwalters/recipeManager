@@ -341,3 +341,9 @@ _ReSharper.*
 bin
 obj
 packages
+
+######################
+# Logs and databases #
+######################
+*.log
+*.sqlite
