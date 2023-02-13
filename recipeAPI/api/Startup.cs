@@ -30,7 +30,8 @@ namespace api
             services.AddDbContext<AppDbContext>(b =>
             {
                 b.UseLazyLoadingProxies();
-                b.UseSqlServer(Configuration.GetConnectionString("SqlDbConnection"));
+                // b.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"));
+                b.UseSqlite(Configuration.GetConnectionString("DatabaseConnection"));
             }, ServiceLifetime.Transient);    
         }
 
