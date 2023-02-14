@@ -29,26 +29,30 @@ const GroceryListPage = () => {
   };
 
   const handleSubmitAddModal = async (item) => {
-    const request = item;
-    request.userEmail = user.email;
-    try {
-      const newGroceryItem = await axios.post(`${process.env.REACT_APP_BASE_API}/api/GroceryList/Add`, request);
-      setGroceryItems([...groceryItems, newGroceryItem.data]);
-      setSaveItemError(null);
-      handleCloseAddModal();
-      setToastMessage('Added new item');
-      setToastVariant(variants.success);
-    } catch (err) {
-      setSaveItemError(err);
-      setToastMessage('Oops! Could not add new item, try again');
-      setToastVariant(variants.error);
+    if (item.itemName.trim() === '') {
+      setSaveItemError('Item can not be empty');
+    } else if (groceryItems.find((i) => i.name === item.itemName)) {
+      setSaveItemError('Item is already in the list');
+    } else {
+      const request = item;
+      request.userEmail = user.email;
+      try {
+        const newGroceryItem = await axios.post(`${process.env.REACT_APP_BASE_API}/api/GroceryItems/Add`, request);
+        setGroceryItems([...groceryItems, newGroceryItem.data]);
+        setSaveItemError(null);
+        handleCloseAddModal();
+        setToastMessage('Added new item');
+        setToastVariant(variants.success);
+      } catch (err) {
+        setSaveItemError('Oops! Could not save item. Please try again.');
+      }
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/GroceryList/All/${user.email}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/GroceryItems/All/${user.email}`);
         setGroceryItems(data);
       } catch (err) {
         setFetchError(err);
@@ -71,6 +75,12 @@ const GroceryListPage = () => {
         <NotFound />
       </Container>
     );
+  }
+
+  if (saveItemError) {
+    handleCloseAddModal();
+    setToastMessage(saveItemError);
+    setToastVariant(variants.error);
   }
 
   return (
