@@ -28,7 +28,7 @@ namespace api.Models
 
     public class AddGroceryRequest
     {
-        public string Name { get; set; }  
+        public string ItemName { get; set; }  
         public string UserEmail { get; set; }
     }
 }

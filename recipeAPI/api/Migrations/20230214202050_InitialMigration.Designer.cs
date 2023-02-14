@@ -11,7 +11,7 @@ using api.Models;
 namespace api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230213193246_InitialMigration")]
+    [Migration("20230214202050_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,7 +118,7 @@ namespace api.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("GroceryList");
+                    b.ToTable("GroceryItems");
 
                     b.HasData(
                         new
@@ -442,7 +442,7 @@ namespace api.Migrations
                         {
                             Id = 2,
                             Email = "raciram@gmail.com",
-                            Name = "Kai"
+                            Name = "Kai LW"
                         });
                 });
 

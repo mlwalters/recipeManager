@@ -116,7 +116,7 @@ namespace api.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("GroceryList");
+                    b.ToTable("GroceryItems");
 
                     b.HasData(
                         new
@@ -440,7 +440,7 @@ namespace api.Migrations
                         {
                             Id = 2,
                             Email = "raciram@gmail.com",
-                            Name = "Kai"
+                            Name = "Kai LW"
                         });
                 });
 
