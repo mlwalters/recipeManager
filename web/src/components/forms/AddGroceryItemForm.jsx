@@ -28,7 +28,7 @@ const AddGroceryItemForm = ({
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        Add Grocery Item
+        Add an item
         <IconButton
           aria-label="close"
           alt="close"
