@@ -38,8 +38,6 @@ namespace api.Controllers
         {
             try
             {
-                // First, add the item in the Items table
-                // Item newItem = await itemsService.AddItemByName(addrequest.ItemName);
                 var items = await _context.Items.ToListAsync();
                 Item newItem = items.FirstOrDefault(i => i.ItemName.Trim().ToLower() == addrequest.ItemName.Trim().ToLower(), new Item { ItemName = addrequest.ItemName.Trim().ToLower() });
                 _context.Items.Add(newItem);
@@ -75,13 +73,14 @@ namespace api.Controllers
                 var ingredients = await _context.Ingredients.Where(ing => ing.RecipeId == recipeId).ToListAsync();
                 var items = ingredients.Select(ing => ing.ItemId).Distinct().ToList();
                 var itemsToAdd = await _context.Items.Where(i => items.Contains(i.Id)).ToListAsync();
+                var currentGroceryList = await _context.GroceryItems.Where(gi => gi.UserEmail == recipe.UserEmail).ToListAsync();
+                var noDuplicates = itemsToAdd.Where(i => !currentGroceryList.Any(gl => gl.ItemId == i.Id));
 
-                var listOfGroceryItems = itemsToAdd.Select(i => new GroceryItem
+                var listOfGroceryItems = noDuplicates?.Select(i => new GroceryItem
                 {
                     UserEmail = recipe.UserEmail,
                     ItemId = i.Id,
                 })
-                .DistinctBy(gi => new { gi.Id, gi.UserEmail })
                 .ToList();
 
                 _context.GroceryItems.AddRange(listOfGroceryItems);
