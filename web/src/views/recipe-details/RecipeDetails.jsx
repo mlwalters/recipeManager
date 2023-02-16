@@ -57,7 +57,7 @@ const RecipeDetails = () => {
 
   const addToGroceryList = async () => {
     try {
-      await axios.post(`${process.env.REACT_APP_BASE_API}/api/GroceryList/Add/${id}`);
+      await axios.post(`${process.env.REACT_APP_BASE_API}/api/GroceryItems/Add/${id}`);
       navigate('/grocerylist');
     } catch (err) {
       // setAddError(err);
