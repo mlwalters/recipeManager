@@ -19,6 +19,7 @@ const AddGroceryItemForm = ({
   const onInputChange = (event) => {
     setItem(event.target.value);
   };
+
   return (
     <Dialog
       open
@@ -27,7 +28,7 @@ const AddGroceryItemForm = ({
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        Add Grocery Item
+        Add an item
         <IconButton
           aria-label="close"
           alt="close"
@@ -60,7 +61,7 @@ const AddGroceryItemForm = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button type="submit" onClick={() => onSubmit({ name: item })}>Save</Button>
+        <Button type="submit" onClick={() => onSubmit({ itemName: item })}>Save</Button>
       </DialogActions>
     </Dialog>
   );

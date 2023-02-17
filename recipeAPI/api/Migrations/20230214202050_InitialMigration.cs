@@ -48,7 +48,7 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GroceryList",
+                name: "GroceryItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -59,9 +59,9 @@ namespace api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroceryList", x => x.Id);
+                    table.PrimaryKey("PK_GroceryItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GroceryList_Items_ItemId",
+                        name: "FK_GroceryItems_Items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "Items",
                         principalColumn: "Id",
@@ -250,15 +250,15 @@ namespace api.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "Name" },
-                values: new object[] { 2, "raciram@gmail.com", "Kai" });
+                values: new object[] { 2, "raciram@gmail.com", "Kai LW" });
 
             migrationBuilder.InsertData(
-                table: "GroceryList",
+                table: "GroceryItems",
                 columns: new[] { "Id", "Checked", "ItemId", "UserEmail" },
                 values: new object[] { 1, false, 1, "carrimax.dev@gmail.com" });
 
             migrationBuilder.InsertData(
-                table: "GroceryList",
+                table: "GroceryItems",
                 columns: new[] { "Id", "Checked", "ItemId", "UserEmail" },
                 values: new object[] { 2, false, 2, "carrimax.dev@gmail.com" });
 
@@ -353,8 +353,8 @@ namespace api.Migrations
                 values: new object[] { 7, 3, "Strain into chilled martini glass. Garnish with orange peel." });
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroceryList_ItemId",
-                table: "GroceryList",
+                name: "IX_GroceryItems_ItemId",
+                table: "GroceryItems",
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
@@ -386,7 +386,7 @@ namespace api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GroceryList");
+                name: "GroceryItems");
 
             migrationBuilder.DropTable(
                 name: "Ingredients");

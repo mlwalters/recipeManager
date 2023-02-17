@@ -6,12 +6,11 @@ namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GroceryListController : ControllerBase
+    public class GroceryItemsController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly ILogger<GroceryListController> _logger;
-
-        public GroceryListController(AppDbContext context, ILogger<GroceryListController> logger)
+        private readonly ILogger<GroceryItemsController> _logger;
+        public GroceryItemsController(AppDbContext context, ILogger<GroceryItemsController> logger)
         {
             _context = context;
             _logger = logger;
@@ -23,8 +22,8 @@ namespace api.Controllers
         {
             try
             {
-                var groceryList = await _context.GroceryList.Where(g => g.UserEmail == email).ToListAsync();
-                var groceryListResponse = groceryList.Select(gl => new GroceryItemResponse(gl));
+                var groceryList = await _context.GroceryItems.Where(g => g.UserEmail == email).ToListAsync();
+                var groceryListResponse = groceryList.Select(gi => new GroceryItemResponse(gi));
                 return Ok(groceryListResponse);
             }
             catch (Exception e)
@@ -40,7 +39,7 @@ namespace api.Controllers
             try
             {
                 var items = await _context.Items.ToListAsync();
-                Item newItem = items.FirstOrDefault(i => i.ItemName.Trim().ToLower() == addrequest.Name.Trim().ToLower(), new Item { ItemName = addrequest.Name.Trim().ToLower() });
+                Item newItem = items.FirstOrDefault(i => i.ItemName.Trim().ToLower() == addrequest.ItemName.Trim().ToLower(), new Item { ItemName = addrequest.ItemName.Trim().ToLower() });
                 _context.Items.Add(newItem);
                 await _context.SaveChangesAsync();
 
@@ -51,12 +50,12 @@ namespace api.Controllers
                     Checked = false,
                 };
 
-                _context.GroceryList.Add(itemToAdd);
+                _context.GroceryItems.Add(itemToAdd);
                 await _context.SaveChangesAsync();
 
-                var addedItem = await _context.GroceryList.SingleAsync(item => item.Id == itemToAdd.Id);
+                var addedItem = await _context.GroceryItems.SingleAsync(item => item.Id == itemToAdd.Id);
                 var groceryItemResponse = new GroceryItemResponse(addedItem);
-                return new CreatedResult("api/GroceryList/Add/" + addedItem.Id, new GroceryItemResponse(addedItem));
+                return new CreatedResult("api/GroceryItems/Add/" + addedItem.Id, new GroceryItemResponse(addedItem));
             }
             catch (Exception e)
             {
@@ -74,24 +73,25 @@ namespace api.Controllers
                 var ingredients = await _context.Ingredients.Where(ing => ing.RecipeId == recipeId).ToListAsync();
                 var items = ingredients.Select(ing => ing.ItemId).Distinct().ToList();
                 var itemsToAdd = await _context.Items.Where(i => items.Contains(i.Id)).ToListAsync();
+                var currentGroceryList = await _context.GroceryItems.Where(gi => gi.UserEmail == recipe.UserEmail).ToListAsync();
+                var noDuplicates = itemsToAdd.Where(i => !currentGroceryList.Any(gl => gl.ItemId == i.Id));
 
-                var listOfGroceryItems = itemsToAdd.Select(i => new GroceryItem
+                var listOfGroceryItems = noDuplicates?.Select(i => new GroceryItem
                 {
                     UserEmail = recipe.UserEmail,
                     ItemId = i.Id,
                 })
-                .DistinctBy(gi => new { gi.Id, gi.UserEmail })
                 .ToList();
 
-                _context.GroceryList.AddRange(listOfGroceryItems);
+                _context.GroceryItems.AddRange(listOfGroceryItems);
                 await _context.SaveChangesAsync();
 
-                var groceries = await _context.GroceryList
+                var groceries = await _context.GroceryItems
                 .Where(g => g.UserEmail == recipe.UserEmail)
                 .ToListAsync();
 
-                var updatedGroceryList = groceries.Select(g => new GroceryItemResponse(g));
-                return Ok(updatedGroceryList);
+                var updatedGroceryItems = groceries.Select(g => new GroceryItemResponse(g));
+                return Ok(updatedGroceryItems);
             }
             catch (Exception e)
             {

@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
-
 namespace api.Models
 {
     public partial class AppDbContext : DbContext
@@ -15,7 +13,7 @@ namespace api.Models
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<GroceryItem> GroceryList { get; set; }
+        public virtual DbSet<GroceryItem> GroceryItems { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,7 +29,7 @@ namespace api.Models
                 new User
                 {
                     Id = 2,
-                    Name = "Kai",
+                    Name = "Kai LW",
                     Email = "raciram@gmail.com"
                 }
             );
