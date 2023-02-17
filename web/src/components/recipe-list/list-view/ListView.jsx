@@ -14,8 +14,8 @@ import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Tooltip from '@mui/material/Tooltip';
 import { red } from '@mui/material/colors';
-import DeleteDialogBox from '../../DeleteDialogBox';
-import SwitchImageCard from '../../SwitchImageCard';
+import DeleteDialogBox from '../../sharedComponents/DeleteDialogBox';
+import SwitchImageCard from '../../sharedComponents/SwitchImageCard';
 
 const RecipeListView = ({
   allRecipes,

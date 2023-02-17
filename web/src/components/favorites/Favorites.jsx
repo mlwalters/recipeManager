@@ -16,11 +16,11 @@ import { Container } from '@mui/material';
 // import Tooltip from '@mui/material/Tooltip';
 // import { red } from '@mui/material/colors';
 // import DeleteDialogBox from '../../components/DeleteDialogBox';
-import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
-import LoadingDisplay from '../../components/loading-display/LoadingDisplay';
-import SwitchImageCard from '../../components/SwitchImageCard';
-import '../../components/new-recipe-card/RecipeCard.css';
-import NotFound from '../../components/error-msgs/NotFound';
+import BackToHomeBtn from '../sharedComponents/BackToHomeBtn';
+import LoadingDisplay from '../sharedComponents/LoadingDisplay';
+import SwitchImageCard from '../sharedComponents/SwitchImageCard';
+import '../recipe-list/new-recipe-card/RecipeCard.css';
+import NotFound from '../sharedComponents/error/NotFound';
 
 const FavoritesList = () => {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);

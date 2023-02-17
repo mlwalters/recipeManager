@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import AppBar from '@mui/material/AppBar';
@@ -16,10 +15,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Avatar } from '@mui/material';
-import LoginButton from '../../authentication/LoginButton';
-import LogoutButton from '../../authentication/LogoutButton';
-import Profile from '../../authentication/Profile';
-import logo from '../../../assets/shared-images/loadingLogo.jpg';
+import LoginButton from '../authentication/LoginButton';
+import LogoutButton from '../authentication/LogoutButton';
+import Profile from '../authentication/Profile';
+import logo from '../../assets/shared-images/loadingLogo.jpg';
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);

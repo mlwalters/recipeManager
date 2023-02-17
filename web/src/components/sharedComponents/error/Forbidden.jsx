@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '@mui/material/Container';
 import { Box, Typography } from '@mui/material';
-import forbidden from '../../assets/shared-images/403.jpg';
+import forbidden from '../../../assets/shared-images/403.jpg';
 
 const Forbidden = () => (
   <Container maxWidth="md">

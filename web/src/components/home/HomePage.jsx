@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '@mui/material/Container';
-import ToggleButtonView from '../../components/ToggleButtonView';
+import ToggleButtonView from '../sharedComponents/ToggleButtonView';
 
 const HomePage = () => (
   <Container maxWidth="lg">

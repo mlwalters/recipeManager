@@ -11,10 +11,10 @@ import Button from '@mui/material/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 import Toast, { variants } from './toast/Toast';
 import AddRecipeForm from './forms/AddRecipeForm';
-import NotFound from './error-msgs/NotFound';
-import ListView from './recipe-list/list-view/ListView';
-import RecipeCard from './new-recipe-card/RecipeCard';
-import LoadingDisplay from './loading-display/LoadingDisplay';
+import NotFound from './error/NotFound';
+import ListView from '../recipe-list/list-view/ListView';
+import RecipeCard from '../recipe-list/new-recipe-card/RecipeCard';
+import LoadingDisplay from './LoadingDisplay';
 
 export default function ToggleButtonView() {
   const [view, setView] = React.useState('card');

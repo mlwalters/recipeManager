@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '@mui/material/Container';
 import { Box, Typography } from '@mui/material';
-import notfound from '../../assets/shared-images/notfound.jpg';
+import notfound from '../../../assets/shared-images/notfound.jpg';
 
 const NotFound = () => (
   <Container maxWidth="md">
