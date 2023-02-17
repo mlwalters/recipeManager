@@ -9,11 +9,11 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Fab from '@mui/material/Fab';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
-import SwitchImageCard from '../../components/SwitchImageCard';
+import BackToHomeBtn from '../sharedComponents/BackToHomeBtn';
+import SwitchImageCard from '../sharedComponents/SwitchImageCard';
 import './RecipeDetails.css';
-import NotFound from '../../components/error-msgs/NotFound';
-import Toast, { variants } from '../../components/toast/Toast';
+import NotFound from '../sharedComponents/error/NotFound';
+import Toast, { variants } from '../sharedComponents/toast/Toast';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,

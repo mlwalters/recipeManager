@@ -11,8 +11,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import { red } from '@mui/material/colors';
-import DeleteDialogBox from '../DeleteDialogBox';
-import SwitchImageCard from '../SwitchImageCard';
+import DeleteDialogBox from '../../sharedComponents/DeleteDialogBox';
+import SwitchImageCard from '../../sharedComponents/SwitchImageCard';
 import './RecipeCard.css';
 
 const RecipeCard = ({

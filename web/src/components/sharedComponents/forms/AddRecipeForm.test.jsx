@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import {
   render, screen,
 } from '@testing-library/react';
@@ -95,7 +95,8 @@ describe('AddRecipeForm: When add recipe form is rendered', () => {
 
   // test('if a required field is missing, the add recipe button stays disabled', async () => {
   //   expect(await screen.findByRole('button', { name: /add recipe/i })).toBeDisabled();
-  //   userEvent.type(await screen.findByRole('textbox', { name: /recipe name/i }), 'Sample Recipe');
+  //   userEvent.type(await screen.findByRole('textbox', { name: /recipe name/i }),
+  // 'Sample Recipe');
   //   // const selectElement = screen.getByTestId('category-dropdown').parentElement;
   //   // userEvent.click(selectElement);
   //   // userEvent.click(screen.getByText('Beef'));

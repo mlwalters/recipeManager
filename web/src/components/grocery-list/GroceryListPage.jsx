@@ -6,12 +6,12 @@ import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import GroceryList from '../../components/GroceryList';
-import AddGroceryItemForm from '../../components/forms/AddGroceryItemForm';
-import LoadingDisplay from '../../components/loading-display/LoadingDisplay';
-import BackToHomeBtn from '../../components/navigation/back-to-home/BackToHomeBtn';
-import Toast, { variants } from '../../components/toast/Toast';
-import NotFound from '../../components/error-msgs/NotFound';
+import GroceryList from './GroceryList';
+import AddGroceryItemForm from '../sharedComponents/forms/AddGroceryItemForm';
+import LoadingDisplay from '../sharedComponents/LoadingDisplay';
+import BackToHomeBtn from '../sharedComponents/BackToHomeBtn';
+import Toast, { variants } from '../sharedComponents/toast/Toast';
+import NotFound from '../sharedComponents/error/NotFound';
 
 const GroceryListPage = () => {
   const [groceryItems, setGroceryItems] = useState([]);

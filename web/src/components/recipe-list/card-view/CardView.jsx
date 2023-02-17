@@ -16,11 +16,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import Alert from '@mui/material/Alert';
 import { red } from '@mui/material/colors';
-import DeleteDialogBox from '../../DeleteDialogBox';
-import LoadingDisplay from '../../loading-display/LoadingDisplay';
-import SwitchImageCard from '../../SwitchImageCard';
+import DeleteDialogBox from '../../sharedComponents/DeleteDialogBox';
+import LoadingDisplay from '../../sharedComponents/LoadingDisplay';
+import SwitchImageCard from '../../sharedComponents/SwitchImageCard';
 import './CardView.css';
-import NotFound from '../../error-msgs/NotFound';
+import NotFound from '../../sharedComponents/error/NotFound';
 
 const RecipeCardList = () => {
   const [recipes, setRecipes] = useState([]);

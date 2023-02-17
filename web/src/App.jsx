@@ -2,13 +2,13 @@ import './App.scss';
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import HomePage from './views/dashboard/HomePage';
-import RecipeDetails from './views/recipe-details/RecipeDetails';
+import HomePage from './components/home/HomePage';
+import RecipeDetails from './components/recipe-details/RecipeDetails';
 import Profile from './components/authentication/Profile';
-import LandingPage from './views/landing/LandingPage';
-import Favorites from './views/favorites/Favorites';
-import GroceryListPage from './views/grocery-list/GroceryListPage';
-import NavBar from './components/navigation/navbar/NavBar';
+import LandingPage from './components/landing/LandingPage';
+import Favorites from './components/favorites/Favorites';
+import GroceryListPage from './components/grocery-list/GroceryListPage';
+import NavBar from './components/navigation/NavBar';
 import ProtectedRoutes from './routing/ProtectedRoutes';
 
 function App() {

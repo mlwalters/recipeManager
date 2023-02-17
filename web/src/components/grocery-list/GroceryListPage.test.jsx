@@ -5,7 +5,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import GroceryListPage from './GroceryListPage';
-import AddGroceryItemForm from '../../components/forms/AddGroceryItemForm';
+import AddGroceryItemForm from '../sharedComponents/forms/AddGroceryItemForm';
 
 const userEmail = 'google@yahoo.com';
 
