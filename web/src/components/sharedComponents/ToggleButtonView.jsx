@@ -17,7 +17,7 @@ import RecipeCard from '../recipe-list/new-recipe-card/RecipeCard';
 import LoadingDisplay from './LoadingDisplay';
 
 export default function ToggleButtonView() {
-  const [view, setView] = React.useState('card');
+  const [view, setView] = useState('card');
   const [loadingState, setLoadingState] = useState(true);
   const [categories, setCategories] = useState([{}]);
   const [fetchCategoryError, setFetchCategoryError] = useState(null);
@@ -77,7 +77,6 @@ export default function ToggleButtonView() {
       setToastVariant(variants.success);
     } catch (err) {
       setSaveRecipeError('Oops, could not save the recipe');
-      // handleCloseAddRecipeModal();
       setToastMessage(saveRecipeError);
       setToastVariant(variants.error);
     }
@@ -107,22 +106,19 @@ export default function ToggleButtonView() {
     }
   };
 
-  const handleDeleteRecipe = (id) => {
-    // const recipeToDelete = recipes.find((recipe) => recipe.id === id);
-    // console.log(recipeToDelete);
+  const handleDeleteRecipe = async (idToDelete) => {
+    const recipeToDelete = recipes.find((recipe) => recipe.id === idToDelete);
+    console.log(recipeToDelete);
     setIsDeleteDialogOpen(false);
-    const deleteData = async () => {
-      try {
-        const { data } = await axios.delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
-        setRecipes(data);
-        setToastMessage('Recipe has been deleted');
-        setToastVariant(variants.info);
-      } catch (err) {
-        setToastMessage('Oops! Could not delete recipe, try again');
-        setToastVariant(variants.error);
-      }
-    };
-    deleteData();
+    try {
+      const { data } = await axios.delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${recipeToDelete.id}`);
+      setRecipes(data);
+      setToastMessage('Recipe has been deleted');
+      setToastVariant(variants.info);
+    } catch (err) {
+      setToastMessage('Oops! Could not delete recipe, try again');
+      setToastVariant(variants.error);
+    }
   };
 
   const handleCancelDeleteDialog = () => setIsDeleteDialogOpen(false);
