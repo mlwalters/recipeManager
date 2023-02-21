@@ -63,23 +63,22 @@ const RecipeListView = ({
               </>
           )}
           />
-          {isDeleteOpen && (
-          <DeleteDialogBox
-            onCancel={handleCancelDeleteDialog}
-            onDelete={() => handleDeleteRecipe(id)}
-          />
-          )}
           <Tooltip title="Favorite">
             <IconButton aria-label="favorite" onClick={() => handleFavoriteRecipe(id)} data-testid="favorite icon">
               {favorite === true ? <FavoriteIcon sx={{ color: red[400] }} /> : <FavoriteIcon /> }
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-
-            <IconButton aria-label="delete" onClick={handleClickDeleteDialog}>
+            <IconButton aria-label="delete" onClick={handleClickDeleteDialog(id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
+          {isDeleteOpen && (
+          <DeleteDialogBox
+            onCancel={handleCancelDeleteDialog}
+            onDelete={() => handleDeleteRecipe(id)}
+          />
+          )}
         </ListItem>
         <Divider variant="inset" component="li" />
       </List>

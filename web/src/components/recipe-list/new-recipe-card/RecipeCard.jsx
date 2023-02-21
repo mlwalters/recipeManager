@@ -81,13 +81,6 @@ const RecipeCard = ({
             display: 'flex', alignItems: 'center', p: 1, justifyContent: 'flex-end',
           }}
           >
-            {isDeleteOpen && (
-            <DeleteDialogBox
-              id={id}
-              onCancel={handleCancelDeleteDialog}
-              onDelete={() => handleDeleteRecipe(id)}
-            />
-            )}
             <Tooltip title="Favorite">
               <IconButton aria-label="favorite" onClick={() => handleFavoriteRecipe(id)} data-testid="favorite icon" size="small">
                 {favorite === true
@@ -100,6 +93,12 @@ const RecipeCard = ({
                 <DeleteIcon sx={{ fontSize: 20 }} />
               </IconButton>
             </Tooltip>
+            {isDeleteOpen && (
+            <DeleteDialogBox
+              onCancel={handleCancelDeleteDialog}
+              onDelete={() => handleDeleteRecipe(id)}
+            />
+            )}
           </Box>
         </Box>
       </Card>
