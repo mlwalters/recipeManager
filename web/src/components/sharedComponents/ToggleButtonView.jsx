@@ -69,8 +69,6 @@ export default function ToggleButtonView() {
     const request = values;
     request.userEmail = user.email;
     try {
-      // const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
-      // setRecipes(data);
       const newRecipe = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Recipe`, request);
       setRecipes([...recipes, newRecipe.data]);
       setSaveRecipeError(null);
@@ -78,9 +76,10 @@ export default function ToggleButtonView() {
       setToastMessage('New recipe added');
       setToastVariant(variants.success);
     } catch (err) {
-      setSaveRecipeError(err);
-      // setToastMessage('Oops! Recipe submission failed, try again');
-      // setToastVariant(variants.error);
+      setSaveRecipeError('Oops, could not save the recipe');
+      // handleCloseAddRecipeModal();
+      setToastMessage(saveRecipeError);
+      setToastVariant(variants.error);
     }
   };
 
@@ -136,7 +135,7 @@ export default function ToggleButtonView() {
     );
   }
 
-  if (fetchRecipesError || fetchCategoryError || saveRecipeError) {
+  if (fetchRecipesError || fetchCategoryError) {
     return (
       <Container maxWidth="lg">
         <NotFound />
@@ -178,7 +177,6 @@ export default function ToggleButtonView() {
       {isAddRecipeModalOpen && (
         <AddRecipeForm
           categories={categories}
-          saveError={saveRecipeError}
           onAddRecipeFormSubmit={handleSubmitAddRecipeModal}
           handleClose={handleCloseAddRecipeModal}
         />
