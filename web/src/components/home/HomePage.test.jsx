@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import HomePage from './HomePage';
+import ToggleButtonView from '../sharedComponents/ToggleButtonView';
 
 const userEmail = 'google@yahoo.com';
 const recipeCards = [{
@@ -96,7 +97,9 @@ describe('Home Page: When the page is rendered', () => {
     mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, categories);
     render(
       <BrowserRouter>
-        <HomePage />
+        <HomePage>
+          <ToggleButtonView />
+        </HomePage>
       </BrowserRouter>,
     );
     expect(await screen.findByText('View All')).toBeInTheDocument();

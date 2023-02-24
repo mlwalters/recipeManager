@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
 import React from 'react';
-// import React, { useState } from 'react';
 import {
   Field, Form, Formik, FieldArray,
 } from 'formik';
@@ -106,7 +104,6 @@ const AddRecipeForm = ({
           notes: string().trim().max(1500, 'Maximum character limit is 1500'),
         })}
         onSubmit={async (values) => {
-          // await handleSubmit(values);
           await onAddRecipeFormSubmit(values);
         }}
       >
@@ -143,7 +140,6 @@ const AddRecipeForm = ({
                 error={Boolean(errors.category) && Boolean(touched.category)}
                 helperText={Boolean(touched.category) && errors.category}
               >
-                {console.log(categories)}
                 {categories.map((category) => (
                   <Field
                     as={MenuItem}

@@ -51,6 +51,7 @@ const addedRecipe = {
 };
 
 const onSubmitFn = jest.fn();
+const handleCloseFn = jest.fn();
 
 describe('AddRecipeForm: When add recipe form is rendered', () => {
   beforeEach(async () => {
@@ -59,20 +60,14 @@ describe('AddRecipeForm: When add recipe form is rendered', () => {
     mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, addedRecipe);
 
     render(
-      <AddRecipeForm onSubmit={onSubmitFn} />,
+      <AddRecipeForm onAddRecipeFormSubmit={onSubmitFn} handleClose={handleCloseFn} />,
     );
-    // await act(async () => render(
-    //   <PracticeMemberModal
-    //     onClose={onCloseFn}
-    //     onSubmit={onSubmitFn}
-    //   />,
-    // ));
-    expect(await screen.findByText('Add a new recipe')).toBeInTheDocument();
-    screen.debug();
+    expect(await screen.findByText('Add recipe')).toBeInTheDocument();
+    // screen.debug();
   });
 
   test('input fields to add a new recipe are displayed', async () => {
-    expect(await screen.findByText(/add a new recipe/i)).toBeInTheDocument();
+    expect(await screen.findByText(/add recipe/i)).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /recipe name/i })).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /description/i })).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /image url/i })).toBeInTheDocument();
