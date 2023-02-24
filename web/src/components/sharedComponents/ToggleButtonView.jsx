@@ -25,6 +25,7 @@ export default function ToggleButtonView() {
   const [fetchRecipesError, setFetchRecipesError] = useState(null);
   const [saveRecipeError, setSaveRecipeError] = useState(null);
   const [favoriteToggle, setFavoriteToggle] = useState(false);
+  const [idToRemove, setIdToRemove] = useState(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isAddRecipeModalOpen, setIsAddRecipeModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -106,9 +107,8 @@ export default function ToggleButtonView() {
     }
   };
 
-  const handleDeleteRecipe = async (idToDelete) => {
-    const recipeToDelete = recipes.find((recipe) => recipe.id === idToDelete);
-    console.log(recipeToDelete);
+  const handleDeleteRecipe = async () => {
+    const recipeToDelete = recipes.find((recipe) => recipe.id === idToRemove);
     setIsDeleteDialogOpen(false);
     try {
       const { data } = await axios.delete(`${process.env.REACT_APP_BASE_API}/api/Recipe/${recipeToDelete.id}`);
@@ -123,7 +123,10 @@ export default function ToggleButtonView() {
 
   const handleCancelDeleteDialog = () => setIsDeleteDialogOpen(false);
 
-  const handleClickDeleteDialog = () => setIsDeleteDialogOpen(true);
+  const handleClickDeleteDialog = (idToDelete) => {
+    setIdToRemove(idToDelete);
+    setIsDeleteDialogOpen(true);
+  };
 
   if (loadingState) {
     return (

@@ -89,14 +89,14 @@ const RecipeCard = ({
               </IconButton>
             </Tooltip>
             <Tooltip title="Delete">
-              <IconButton aria-label="delete" onClick={handleClickDeleteDialog} size="small">
+              <IconButton aria-label="delete" onClick={() => handleClickDeleteDialog(id)} size="small">
                 <DeleteIcon sx={{ fontSize: 20 }} />
               </IconButton>
             </Tooltip>
             {isDeleteOpen && (
             <DeleteDialogBox
               onCancel={handleCancelDeleteDialog}
-              onDelete={() => handleDeleteRecipe(id)}
+              onDelete={() => handleDeleteRecipe()}
             />
             )}
           </Box>
