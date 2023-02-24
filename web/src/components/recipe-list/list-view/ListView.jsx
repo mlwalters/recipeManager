@@ -69,14 +69,14 @@ const RecipeListView = ({
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-            <IconButton aria-label="delete" onClick={handleClickDeleteDialog(id)}>
+            <IconButton aria-label="delete" onClick={() => handleClickDeleteDialog(id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
           {isDeleteOpen && (
           <DeleteDialogBox
             onCancel={handleCancelDeleteDialog}
-            onDelete={() => handleDeleteRecipe(id)}
+            onDelete={() => handleDeleteRecipe()}
           />
           )}
         </ListItem>

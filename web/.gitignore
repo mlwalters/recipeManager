@@ -333,3 +333,7 @@ ASALocalRun/
 .ionide
 
 .DS_Store
+
+
+### Cypress
+cypress.env.json
