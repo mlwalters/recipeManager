@@ -337,3 +337,5 @@ ASALocalRun/
 
 ### Cypress
 cypress.env.json
+#### ENV
+.env
