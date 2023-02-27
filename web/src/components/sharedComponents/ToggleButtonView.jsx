@@ -149,30 +149,33 @@ export default function ToggleButtonView() {
         {' '}
         {new Date().toLocaleTimeString()}
       </div>
-      <ToggleButtonGroup
-        value={view}
-        exclusive
-        onChange={(event, newView) => {
-          setView(newView);
-        }}
-        sx={{ padding: 1.5 }}
+      <Box sx={{
+        marginBottom: 3, display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
+      }}
       >
-        <ToggleButton aria-label="module" value="card">
-          <ViewModuleIcon />
-        </ToggleButton>
-        <ToggleButton aria-label="list" value="list">
-          <ViewListIcon />
-        </ToggleButton>
-        <Box sx={{ paddingTop: 1, paddingLeft: 1.5 }}>
-          <Typography variant="h5">View All</Typography>
-          <Box sx={{
-            padding: 2, margin: 1,
+        <ToggleButtonGroup
+          value={view}
+          exclusive
+          onChange={(event, newView) => {
+            setView(newView);
           }}
-          >
-            <Button variant="contained" onClick={() => setIsAddRecipeModalOpen(true)}>Add Recipe</Button>
-          </Box>
+          sx={{ padding: 1.5 }}
+        >
+          <ToggleButton aria-label="module" value="card">
+            <ViewModuleIcon />
+          </ToggleButton>
+          <ToggleButton aria-label="list" value="list">
+            <ViewListIcon />
+          </ToggleButton>
+        </ToggleButtonGroup>
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography variant="h5" component="h5">All Recipes</Typography>
         </Box>
-      </ToggleButtonGroup>
+        <Box>
+          <Button variant="contained" onClick={() => setIsAddRecipeModalOpen(true)}>Add Recipe</Button>
+        </Box>
+      </Box>
+
       {isAddRecipeModalOpen && (
         <AddRecipeForm
           categories={categories}
