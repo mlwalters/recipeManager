@@ -253,14 +253,14 @@ namespace api.Models
                     Id = 1,
                     ItemId = 1,
                     UserEmail = "carrimax.dev@gmail.com",
-                    Checked = false,
+                    isChecked = false,
                 },
                 new
                 {
                     Id = 2,
                     ItemId = 2,
                     UserEmail = "carrimax.dev@gmail.com",
-                    Checked = false,
+                    isChecked = false,
                 }
             );
         }

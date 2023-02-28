@@ -47,7 +47,7 @@ namespace api.Controllers
                 {
                     UserEmail = addrequest.UserEmail,
                     ItemId = newItem.Id,
-                    Checked = false,
+                    isChecked = false,
                 };
 
                 _context.GroceryItems.Add(itemToAdd);
