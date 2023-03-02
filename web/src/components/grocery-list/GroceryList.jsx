@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
@@ -13,27 +14,16 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 const GroceryList = ({ items }) => {
-  const [checked, setChecked] = useState([0]);
-
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-      // eslint-disable-next-line no-console
-      console.log(checked);
-    } else {
-      newChecked.splice(currentIndex, 1);
-      // eslint-disable-next-line no-console
-      console.log(checked);
-    }
-    setChecked(newChecked);
-  };
+  const newItems = items;
+  // const handleToggle = (value) => {
+  //   const [checked, setChecked] = useState(false);
+  //   setChecked((prevStatus) => !prevStatus);
+  //   console.log(checked);
+  // };
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {items.map(({ id, name }) => (
+      {newItems.map(({ id, name, isChecked }) => (
         // const labelId = `<checkbox-list-label-1>${id}</checkbox-list-label-1>`;
         <ListItem
           key={id}
@@ -44,13 +34,13 @@ const GroceryList = ({ items }) => {
             )}
           disablePadding
         >
-          <ListItemButton role={Button} onClick={handleToggle(id)} dense>
+          <ListItemButton role={Button} onClick={handleToggle((prevStatus) => !prevStatus)} dense>
             <ListItemIcon>
               <Checkbox
                 icon={<RadioButtonUncheckedIcon />}
                 checkedIcon={<CheckCircleIcon />}
                 edge="start"
-                checked={checked.indexOf(id) !== -1}
+                checked={isChecked}
                 tabIndex={-1}
                 disableRipple
                 inputProps={{ 'aria-labelledby': id }}

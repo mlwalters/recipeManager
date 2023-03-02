@@ -35,7 +35,7 @@ namespace api.Controllers
 
         [HttpPost("Add")]
         public async Task<IActionResult> Post(AddGroceryRequest addrequest)
-        {
+        {            
             try
             {
                 var items = await _context.Items.ToListAsync();

@@ -4,7 +4,6 @@ namespace api.Models
     public class GroceryItemResponse
     {
         public int Id { get; set; }
-        // Do I need ItemID here?
         public string Name { get; set; }
         public bool isChecked { get; set; }
         public string UserEmail { get; set; }
