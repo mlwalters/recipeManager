@@ -72,3 +72,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### If you're on Windows and getting line-break errors, add this to the `.eslintrc.js` rules:
 `rules: { "linebreak-style" : 0 }`
+
+## Important
+Make sure your .env file is set up and has the following variables set:
+REACT_APP_BASE_API=http://localhost:7000 (or the port the API is currently set to)
+REACT_APP_AUTH0_DOMAIN=<Auth0 Domain> (Check Auth0 for this)
+REACT_APP_AUTH0_CLIENT_ID=<Auth0 ClientID>

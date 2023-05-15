@@ -5,7 +5,7 @@
 
 ### Project Dependencies
 
-Install the .Net Core 6.0 SDK (<https://www.microsoft.com/net>)
+Install the .Net Core 7.0 SDK (<https://www.microsoft.com/net>)
 
 (Homebrew: `brew install --cask dotnet-sdk`)
 
@@ -146,6 +146,5 @@ Resources:
 
   `dotnet ef database update MyTargetMigration`
 
-
-  ### Using SQLite
+### Using SQLite
 Download and use DBeaver Community (free version) as GUI
