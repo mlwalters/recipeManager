@@ -125,7 +125,7 @@ const NavBar = () => {
                     <Typography component="span" variant="body">Favorites</Typography>
                   </Link>
                 </Button>
-                <Tooltip title="Upcoming feature!" placement="top">
+                <Tooltip title="Grocery List" placement="top">
                   <Button
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: '#313438', display: 'block' }}

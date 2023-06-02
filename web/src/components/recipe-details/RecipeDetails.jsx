@@ -12,7 +12,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import BackToHomeBtn from '../sharedComponents/BackToHomeBtn';
 import SwitchImageCard from '../sharedComponents/SwitchImageCard';
 import './RecipeDetails.css';
-import NotFound from '../sharedComponents/error/NotFound';
+import NotFoundErrorMsg from '../sharedComponents/error/NotFound';
 import Toast, { variants } from '../sharedComponents/toast/Toast';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -23,11 +23,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const RecipeDetails = () => {
-  const [details, setDetails] = useState({
+  const [recipe, setRecipe] = useState({
     id: 0, name: '', userEmail: '', category: '', imageUrl: '', description: '', notes: '', servingSize: 0, instructions: [], ingredients: [],
   });
-  const [fetchError, setFetchError] = useState(null);
-  // const [addError, setAddError] = useState(null);
+  const [fetchRecipeError, setFetchRecipeError] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
   const [toastVariant, setToastVariant] = useState(variants.info);
   const navigate = useNavigate();
@@ -35,22 +34,22 @@ const RecipeDetails = () => {
   const print = () => window.print();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRecipe = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`);
-        setDetails(data);
+        setRecipe(data);
       } catch (err) {
-        setFetchError(err);
+        setFetchRecipeError(err);
       }
     };
-    fetchData();
+    fetchRecipe();
   }, []);
 
-  if (fetchError) {
+  if (fetchRecipeError) {
     return (
       <Container maxWidth="xl">
         <BackToHomeBtn />
-        <NotFound />
+        <NotFoundErrorMsg />
       </Container>
     );
   }
@@ -60,7 +59,6 @@ const RecipeDetails = () => {
       await axios.post(`${process.env.REACT_APP_BASE_API}/api/GroceryItems/Add/${id}`);
       navigate('/grocerylist');
     } catch (err) {
-      // setAddError(err);
       setToastMessage('Oops! Could not add ingredients to grocery list, try again');
       setToastVariant(variants.error);
     }
@@ -73,29 +71,29 @@ const RecipeDetails = () => {
         <Grid container spacing={3} className="section-to-print">
           <Grid item xs={10}>
             <Item id="hide-print">
-              {details.imageUrl === '' ? <img src={SwitchImageCard(details.category)} alt={details.name} height="250" id="details-image" />
-                : <img src={details.imageUrl} alt={details.name} height="250" id="details-image" />}
+              {recipe.imageUrl === '' ? <img src={SwitchImageCard(recipe.category)} alt={recipe.name} height="250" id="details-image" />
+                : <img src={recipe.imageUrl} alt={recipe.name} height="250" id="details-image" />}
             </Item>
             <Item>
-              <Typography variant="h5" color="#263238" mt={1}>{details.name}</Typography>
+              <Typography variant="h5" color="#263238" mt={1}>{recipe.name}</Typography>
               <br />
               <Typography variant="body1" color="text.secondary">
                 <RestaurantIcon sx={{ width: 20 }} />
                 {' '}
-                {details.category}
+                {recipe.category}
               </Typography>
               <br />
-              <Typography variant="body2" color="text.secondary" fontStyle="italic">{details.description}</Typography>
+              <Typography variant="body2" color="text.secondary" fontStyle="italic">{recipe.description}</Typography>
               <br />
               <Typography variant="body2" color="text.secondary">
                 Serving size:
                 {' '}
-                {details.servingSize}
+                {recipe.servingSize}
               </Typography>
             </Item>
             <Item>
               <Typography variant="body1" color="#263238">Ingredients</Typography>
-              {details.ingredients.map((ingredient) => (
+              {recipe.ingredients.map((ingredient) => (
                 <div key={ingredient.id}>
                   <p variant="body2" color="text.secondary">
                     <span>{ingredient.amount}</span>
@@ -107,7 +105,7 @@ const RecipeDetails = () => {
             </Item>
             <Item>
               <Typography variant="body1" color="#263238">Instructions</Typography>
-              {details.instructions.map((instruction) => (
+              {recipe.instructions.map((instruction) => (
                 <div key={instruction.id}>
                   <p variant="body2" color="text.secondary">
                     <span>
@@ -121,7 +119,7 @@ const RecipeDetails = () => {
             </Item>
             <Item>
               <Typography variant="body1" color="#263238">Notes</Typography>
-              <Typography variant="body2" color="text.secondary">{details.notes}</Typography>
+              <Typography variant="body2" color="text.secondary">{recipe.notes}</Typography>
             </Item>
 
             <Item>
@@ -129,7 +127,7 @@ const RecipeDetails = () => {
                 Print Recipe
                 {' '}
               </Fab>
-              <Fab color="primary" variant="extended" onClick={() => addToGroceryList(details.id)}>
+              <Fab color="primary" variant="extended" onClick={() => addToGroceryList(recipe.id)}>
                 Add to Grocery List
                 {' '}
               </Fab>

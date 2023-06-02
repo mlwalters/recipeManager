@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import { Box, Typography } from '@mui/material';
 import notfound from '../../../assets/shared-images/notfound.jpg';
 
-const NotFound = () => (
+const NotFoundErrorMsg = () => (
   <Container maxWidth="md">
     <Box sx={{
       display: 'flex', alignItems: 'center', width: '100%', marginTop: 5, marginBottom: 5,
@@ -15,4 +15,4 @@ const NotFound = () => (
   </Container>
 );
 
-export default NotFound;
+export default NotFoundErrorMsg;

@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import { Box, Typography } from '@mui/material';
 import forbidden from '../../../assets/shared-images/403.jpg';
 
-const Forbidden = () => (
+const ForbiddenErrorMsg = () => (
   <Container maxWidth="md">
     <Box sx={{
       display: 'flex', alignItems: 'center', width: '100%', marginTop: 5, marginBottom: 5,
@@ -15,4 +15,4 @@ const Forbidden = () => (
   </Container>
 );
 
-export default Forbidden;
+export default ForbiddenErrorMsg;

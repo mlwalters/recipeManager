@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-// import userEvent from '@testing-library/user-event';
 import {
   render, screen,
 } from '@testing-library/react';
 import AddRecipeForm from './AddRecipeForm';
 
-const testCategory = [
+const testCategories = [
   {
     id: 0,
     name: 'Seafood',
@@ -56,18 +55,16 @@ const handleCloseFn = jest.fn();
 describe('AddRecipeForm: When add recipe form is rendered', () => {
   beforeEach(async () => {
     const mockApi = new MockAdapter(axios);
-    mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategory);
+    mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategories);
     mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/Recipe`).reply(201, addedRecipe);
 
     render(
       <AddRecipeForm onAddRecipeFormSubmit={onSubmitFn} handleClose={handleCloseFn} />,
     );
-    expect(await screen.findByText('Add recipe')).toBeInTheDocument();
-    // screen.debug();
+    expect(await screen.findByText('Add Recipe')).toBeInTheDocument();
   });
 
   test('input fields to add a new recipe are displayed', async () => {
-    expect(await screen.findByText(/add recipe/i)).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /recipe name/i })).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /description/i })).toBeInTheDocument();
     expect(await screen.findByRole('textbox', { name: /image url/i })).toBeInTheDocument();
@@ -84,7 +81,7 @@ describe('AddRecipeForm: When add recipe form is rendered', () => {
   });
 
   test('buttons to add a new recipe and reset form are displayed', async () => {
-    expect(await screen.findByRole('button', { name: /add recipe/i })).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: /save recipe/i })).toBeInTheDocument();
     expect(await screen.findByRole('button', { name: /reset/i })).toBeInTheDocument();
   });
 

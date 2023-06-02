@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 import Toast, { variants } from './toast/Toast';
 import AddRecipeForm from './forms/AddRecipeForm';
-import NotFound from './error/NotFound';
+import NotFoundErrorMsg from './error/NotFound';
 import ListView from '../recipe-list/list-view/ListView';
 import RecipeCard from '../recipe-list/new-recipe-card/RecipeCard';
 import LoadingDisplay from './LoadingDisplay';
@@ -20,7 +20,7 @@ export default function ToggleButtonView() {
   const [view, setView] = useState('card');
   const [loadingState, setLoadingState] = useState(true);
   const [categories, setCategories] = useState([{}]);
-  const [fetchCategoryError, setFetchCategoryError] = useState(null);
+  const [fetchCategoriesError, setFetchCategoriesError] = useState(null);
   const [recipes, setRecipes] = useState([]);
   const [fetchRecipesError, setFetchRecipesError] = useState(null);
   const [saveRecipeError, setSaveRecipeError] = useState(null);
@@ -40,7 +40,7 @@ export default function ToggleButtonView() {
         setCategories(data);
         setLoadingState(false);
       } catch (err) {
-        setFetchCategoryError(err);
+        setFetchCategoriesError(err);
         setToastMessage('Oops! There was an error, try again');
         setToastVariant(variants.error);
       }
@@ -49,7 +49,7 @@ export default function ToggleButtonView() {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAllRecipes = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Recipe/All/${user.email}`);
         setRecipes(data);
@@ -58,7 +58,7 @@ export default function ToggleButtonView() {
       }
       setLoadingState(false);
     };
-    fetchData();
+    fetchAllRecipes();
   }, []);
 
   const handleCloseAddRecipeModal = () => {
@@ -134,10 +134,10 @@ export default function ToggleButtonView() {
     );
   }
 
-  if (fetchRecipesError || fetchCategoryError) {
+  if (fetchRecipesError || fetchCategoriesError) {
     return (
       <Container maxWidth="lg">
-        <NotFound />
+        <NotFoundErrorMsg />
       </Container>
     );
   }

@@ -22,7 +22,7 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
-const details = {
+const recipe = {
   id: 2,
   name: 'Lentil Soup',
   userEmail: 'hello@me.com',
@@ -51,9 +51,9 @@ const details = {
   ],
 };
 
-const mockGetDetails = () => {
+const mockFetchRecipe = () => {
   const mockApi = new MockAdapter(axios);
-  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`).reply(200, details);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Recipe/${id}`).reply(200, recipe);
   render(
     <BrowserRouter>
       <RecipeDetails />
@@ -62,12 +62,12 @@ const mockGetDetails = () => {
 };
 
 test('renders details on the recipe details page', async () => {
-  mockGetDetails();
+  mockFetchRecipe();
   const title = await screen.findByRole('heading', {
     name: /lentil soup/i,
   });
   expect(title).toBeInTheDocument();
-  expect(await screen.findByText(details.category)).toBeInTheDocument();
+  expect(await screen.findByText(recipe.category)).toBeInTheDocument();
 });
 
 test('renders error if fetching recipe card fails', async () => {
@@ -82,11 +82,11 @@ test('renders error if fetching recipe card fails', async () => {
 });
 
 test('renders button to print the recipe', async () => {
-  mockGetDetails();
+  mockFetchRecipe();
   expect(await screen.findByText(/print recipe/i)).toBeInTheDocument();
 });
 
 test('renders button to add ingredients to grocery list', async () => {
-  mockGetDetails();
+  mockFetchRecipe();
   expect(await screen.findByText(/add to grocery list/i)).toBeInTheDocument();
 });

@@ -22,7 +22,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-// import DialogTitle from '@mui/material/DialogTitle';
 
 const initialValues = {
   name: '',
@@ -67,22 +66,6 @@ const AddRecipeForm = ({
         </Button>
       </Toolbar>
     </AppBar>
-    {/* <DialogTitle id="alert-dialog-title" sx={{ paddingTop: 5, paddingLeft: 5 }}>
-        Add Recipe
-        <IconButton
-          aria-label="close"
-          alt="close"
-          sx={{
-            position: 'relative',
-            left: 4,
-            top: -2,
-            color: (theme) => theme.palette.grey[500],
-          }}
-          onClick={handleClose}
-        >
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle> */}
 
     <DialogContent>
       <Formik
@@ -323,7 +306,7 @@ const AddRecipeForm = ({
                   size="large"
                   disabled={!isValid || !dirty || isSubmitting}
                 >
-                  Add Recipe
+                  Save Recipe
                 </Button>
               </Box>
               <Box sx={{ paddingLeft: 1 }}>
