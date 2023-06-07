@@ -4,6 +4,7 @@ import MockAdapter from 'axios-mock-adapter';
 import {
   render, screen,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import AddRecipeForm from './AddRecipeForm';
 
 const testCategories = [
@@ -33,6 +34,12 @@ const testCategories = [
   },
 ];
 
+const testRecipe = {
+  name: 'Amatriciana',
+  description: 'Roman traditional food',
+  category: 2,
+};
+
 const addedRecipe = {
   id: 213,
   name: 'Mushroom Risotto',
@@ -52,7 +59,7 @@ const addedRecipe = {
 const onSubmitFn = jest.fn();
 const handleCloseFn = jest.fn();
 
-describe('AddRecipeForm: When add recipe form is rendered', () => {
+describe('AddRecipeForm: When add recipe form is rendered and used', () => {
   beforeEach(async () => {
     const mockApi = new MockAdapter(axios);
     mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Category`).reply(200, testCategories);
@@ -85,16 +92,39 @@ describe('AddRecipeForm: When add recipe form is rendered', () => {
     expect(await screen.findByRole('button', { name: /reset/i })).toBeInTheDocument();
   });
 
-  // test('if a required field is missing, the add recipe button stays disabled', async () => {
-  //   expect(await screen.findByRole('button', { name: /add recipe/i })).toBeDisabled();
-  //   userEvent.type(await screen.findByRole('textbox', { name: /recipe name/i }),
-  // 'Sample Recipe');
-  //   // const selectElement = screen.getByTestId('category-dropdown').parentElement;
-  //   // userEvent.click(selectElement);
-  //   // userEvent.click(screen.getByText('Beef'));
-  //   // const saveButton = await screen.findByRole('button', { name: /add recipe/i });
-  //   expect(await screen.findByRole('button', { name: /add recipe/i })).toBeDisabled();
-  //   // await waitFor(() => expect(saveButton).toBeEnabled());
-  //   // expect(onSubmitFn).toHaveBeenCalled();
+  test('if a required field is missing, the add recipe button stays disabled', async () => {
+    userEvent.type(await screen.findByRole('textbox', { name: /recipe name/i }), testRecipe.name);
+    expect(await screen.findByRole('button', { name: /save recipe/i })).toBeDisabled();
+  });
+
+  // test.only('if all required fields are filled out, the add recipe button should be enabled', async () => {
+  //   const recipeNameField = await screen.findByRole('textbox', { name: /recipe name/i });
+  //   const categoryDropdown = await screen.findByRole('button', { name: /category */i });
+  //   userEvent.type(recipeNameField, testRecipe.name);
+  //   userEvent.click(categoryDropdown);
+  //   const option = screen.getByRole('listbox', 'Category *');
+  //   // userEvent.selectOptions(screen.getByLabelText('Category'), 'Seafood');
+  //   userEvent.selectOptions(option, 'Seafood');
+  //   expect(await screen.findByRole('button', { name: /save recipe/i })).toBeEnabled();
   // });
+
+  test('if the form fields are not empty, the reset button should be enabled', async () => {
+    userEvent.type(await screen.findByRole('textbox', { name: /recipe name/i }), testRecipe.name);
+    expect(await screen.findByRole('button', { name: /reset/i })).toBeEnabled();
+  });
+
+  test('if the reset button is clicked, the form fields should be empty', async () => {
+    const descriptionField = await screen.findByRole('textbox', { name: /description/i });
+    userEvent.type(descriptionField, testRecipe.description);
+    const resetBtn = await screen.findByRole('button', { name: /reset/i });
+    userEvent.click(resetBtn);
+    expect(descriptionField).toHaveValue('');
+    expect(await screen.findByRole('button', { name: /reset/i })).toBeDisabled();
+  });
+
+  test('add recipe form closes when the close button is clicked', async () => {
+    const closeBtn = screen.getAllByRole('button', { name: /close/i });
+    userEvent.click(closeBtn[0]);
+    expect(handleCloseFn).toHaveBeenCalledTimes(1);
+  });
 });

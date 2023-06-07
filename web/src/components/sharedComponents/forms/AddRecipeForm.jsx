@@ -61,8 +61,8 @@ const AddRecipeForm = ({
         <Typography sx={{ ml: 2, flex: 1 }} variant="h6">
           Add Recipe
         </Typography>
-        <Button autoFocus color="inherit" onClick={handleClose}>
-          save
+        <Button autoFocus color="inherit" onClick={handleClose} aria-label="close">
+          Close
         </Button>
       </Toolbar>
     </AppBar>
