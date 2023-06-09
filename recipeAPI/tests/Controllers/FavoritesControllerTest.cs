@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Controllers;
 using api.Models;
-using backend.Tests.Utils;
+using tests.Utils;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
-namespace backend.Tests.Controllers
+namespace tests.Controllers
 {
     public class FavoritesControllerTest : IAsyncLifetime
     {

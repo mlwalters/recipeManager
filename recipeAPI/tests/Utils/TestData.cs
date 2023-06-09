@@ -5,7 +5,7 @@ using api.Models;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.Tests.Utils
+namespace tests.Utils
 {
     public static class TestData
     {
