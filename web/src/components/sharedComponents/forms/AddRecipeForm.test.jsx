@@ -97,14 +97,16 @@ describe('AddRecipeForm: When add recipe form is rendered and used', () => {
     expect(await screen.findByRole('button', { name: /save recipe/i })).toBeDisabled();
   });
 
-  // test.only('if all required fields are filled out, the add recipe button should be enabled', async () => {
+  // test('if all required fields are filled out, the add recipe button should be enabled',
+  // async () => {
   //   const recipeNameField = await screen.findByRole('textbox', { name: /recipe name/i });
   //   const categoryDropdown = await screen.findByRole('button', { name: /category */i });
   //   userEvent.type(recipeNameField, testRecipe.name);
   //   userEvent.click(categoryDropdown);
-  //   const option = screen.getByRole('listbox', 'Category *');
-  //   // userEvent.selectOptions(screen.getByLabelText('Category'), 'Seafood');
-  //   userEvent.selectOptions(option, 'Seafood');
+  //   console.log(categoryDropdown);
+  //   userEvent.click(await screen.findByRole('option', { name: /seafood/i }));
+  //   const category = await screen.findByText(/seafood/i);
+  //   expect(category).toBeInTheDocument();
   //   expect(await screen.findByRole('button', { name: /save recipe/i })).toBeEnabled();
   // });
 

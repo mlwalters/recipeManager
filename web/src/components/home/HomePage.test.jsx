@@ -5,6 +5,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import HomePage from './HomePage';
 import ToggleButtonView from '../sharedComponents/ToggleButtonView';
+import { Container } from '@mui/material';
 
 const userEmail = 'google@yahoo.com';
 const recipeCards = [{
@@ -98,11 +99,14 @@ describe('Home Page: When the page is rendered', () => {
     render(
       <BrowserRouter>
         <HomePage>
-          <ToggleButtonView />
+          <Container>
+
+            <ToggleButtonView />
+          </Container>
         </HomePage>
       </BrowserRouter>,
     );
-    expect(await screen.findByText('View All')).toBeInTheDocument();
+    expect(await screen.findByText('All Recipes')).toBeInTheDocument();
   });
 
   test('it should display add recipe button', async () => {
