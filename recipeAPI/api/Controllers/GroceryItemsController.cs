@@ -99,5 +99,23 @@ namespace api.Controllers
                 throw;
             }
         }
+
+
+        [HttpDelete]
+        [Route("All/{email}")]
+        public async Task<IActionResult> Delete(string email)
+        {
+            try
+            {
+                var groceryList = await _context.GroceryItems.Where(g => g.UserEmail == email).ToListAsync();
+                var groceryListResponse = groceryList.Select(gi => new GroceryItemResponse(gi));
+                return Ok(groceryListResponse);
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
+                throw;
+            }
+        }
     }
 }
