@@ -60,6 +60,11 @@ describe('Grocery List Page: When the page is rendered', () => {
     expect(screen.getByText(/milk/i)).toBeInTheDocument();
     expect(screen.getByText(/honey/i)).toBeInTheDocument();
   });
+
+  test('it should display the delete button for every grocery item', async () => {
+    const noOfClearIcons = screen.getAllByTestId('ClearIcon');
+    expect(noOfClearIcons.length).toBe(2);
+  });
 });
 
 describe('Grocery List Page: When the add an item form is rendered', () => {

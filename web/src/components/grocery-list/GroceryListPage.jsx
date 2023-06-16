@@ -12,9 +12,24 @@ import LoadingDisplay from '../sharedComponents/LoadingDisplay';
 import BackToHomeBtn from '../sharedComponents/BackToHomeBtn';
 import Toast, { variants } from '../sharedComponents/toast/Toast';
 import NotFound from '../sharedComponents/error/NotFound';
+import DeletedGroceryList from './DeletedGroceryList';
 
 const GroceryListPage = () => {
-  const [groceryItems, setGroceryItems] = useState([]);
+  const items = [{
+    id: 111,
+    name: 'item 1',
+    checked: true,
+    userEmail: 'user@dummy.com',
+  },
+  {
+    id: 222,
+    name: 'item 2',
+    checked: true,
+    userEmail: 'user2@dummy.com',
+  },
+  ];
+  const [groceryItems, setGroceryItems] = useState(items);
+  // const [deletedGroceryItems, setDeletedGroceryItems] = useState([]);
   const [loadingState, setLoadingState] = useState(true);
   const [fetchError, setFetchError] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -50,7 +65,7 @@ const GroceryListPage = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchGroceryItems = async () => {
       try {
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/GroceryItems/All/${user.email}`);
         setGroceryItems(data);
@@ -59,8 +74,22 @@ const GroceryListPage = () => {
       }
       setLoadingState(false);
     };
-    fetchData();
+    fetchGroceryItems();
   }, []);
+
+  // useEffect(() => {
+  //   const fetchDeletedItems = async () => {
+  //     try {
+  //       const { data } =
+  // await axios.get(`${process.env.REACT_APP_BASE_API}/api/GroceryItems/All/${user.email}`);
+  //       setDeletedGroceryItems(data);
+  //     } catch (err) {
+  //       setFetchError(err);
+  //     }
+  //     setLoadingState(false);
+  //   };
+  //   fetchDeletedItems();
+  // }, []);
 
   if (loadingState) {
     return (
@@ -113,6 +142,15 @@ const GroceryListPage = () => {
         <GroceryList
           items={groceryItems.sort((a, b) => a.name.localeCompare(b.name))}
         />
+        <Box sx={{
+          width: '100%', maxWidth: 500, paddingTop: 2, paddingBottom: 2, border: 1, borderColor: 'red.200',
+        }}
+        >
+          <Typography variant="button">Deleted Items</Typography>
+          <DeletedGroceryList
+            deletedItems={items.sort((a, b) => a.name.localeCompare(b.name))}
+          />
+        </Box>
         <Toast
           onClose={() => setToastMessage('')}
           message={toastMessage}

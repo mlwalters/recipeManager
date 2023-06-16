@@ -12,7 +12,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ClearIcon from '@mui/icons-material/Clear';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
-const GroceryList = ({ items }) => {
+const DeletedGroceryList = ({ deletedItems }) => {
   const [checked, setChecked] = useState([0]);
 
   const handleToggle = (value) => () => {
@@ -32,8 +32,11 @@ const GroceryList = ({ items }) => {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {items.map(({ id, name }) => (
+    <List sx={{
+      width: '100%', maxWidth: 360, bgcolor: 'background.paper', color: 'grey.500',
+    }}
+    >
+      {deletedItems.map(({ id, name }) => (
         // const labelId = `<checkbox-list-label-1>${id}</checkbox-list-label-1>`;
         <ListItem
           key={id}
@@ -64,12 +67,12 @@ const GroceryList = ({ items }) => {
   );
 };
 
-GroceryList.defaultProps = {
-  items: [],
+DeletedGroceryList.defaultProps = {
+  deletedItems: [],
 };
 
-GroceryList.propTypes = {
-  items: PropTypes.arrayOf(
+DeletedGroceryList.propTypes = {
+  deletedItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string.isRequired,
@@ -79,4 +82,4 @@ GroceryList.propTypes = {
   ),
 };
 
-export default GroceryList;
+export default DeletedGroceryList;
