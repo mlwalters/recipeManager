@@ -63,7 +63,7 @@ describe('Grocery List Page: When the page is rendered', () => {
 
   test('it should display the delete button for every grocery item', async () => {
     const noOfClearIcons = screen.getAllByTestId('ClearIcon');
-    expect(noOfClearIcons.length).toBe(2);
+    expect(noOfClearIcons.length).toBe(4);
   });
 });
 
@@ -96,5 +96,28 @@ describe('Grocery List Page: When the add an item form is rendered', () => {
     const saveBtn = screen.getByRole('button', { name: /save/i });
     userEvent.click(saveBtn);
     expect(onSubmitFn).toHaveBeenCalled();
+  });
+});
+
+describe('Grocery List Page: When an item is deleted', () => {
+  beforeEach(async () => {
+    const mockApi = new MockAdapter(axios);
+    // mockApi.onPost(`${process.env.REACT_APP_BASE_API}/api/GroceryItems/Add`)
+    // .reply(200, groceryItems);
+    mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/GroceryItems/All/${userEmail}`).reply(200, groceryItems);
+    render(
+      <BrowserRouter>
+        <GroceryListPage />
+      </BrowserRouter>,
+    );
+    expect(await screen.findByText(`Grocery List (${noOfItems})`)).toBeInTheDocument();
+  });
+
+  test('it should display the deleted items title', async () => {
+    expect(screen.getByText(/deleted items/i)).toBeInTheDocument();
+  });
+
+  test('it should display the deleted items list in gray text', async () => {
+    expect(screen.getByTestId('deleted-items')).toHaveStyle('color: rgb(158, 158, 158)');
   });
 });

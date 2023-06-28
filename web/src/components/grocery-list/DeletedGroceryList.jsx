@@ -32,9 +32,11 @@ const DeletedGroceryList = ({ deletedItems }) => {
   };
 
   return (
-    <List sx={{
-      width: '100%', maxWidth: 360, bgcolor: 'background.paper', color: 'grey.500',
-    }}
+    <List
+      sx={{
+        width: '100%', maxWidth: 360, bgcolor: 'background.paper', color: 'grey.500',
+      }}
+      data-testid="deleted-items"
     >
       {deletedItems.map(({ id, name }) => (
         // const labelId = `<checkbox-list-label-1>${id}</checkbox-list-label-1>`;
